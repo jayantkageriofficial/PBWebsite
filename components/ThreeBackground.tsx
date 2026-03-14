@@ -3,15 +3,16 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const UNIT = 3.6; // world units per key
-const GAP = 0.1; // visual gap
-const KEY_H = 1.65; // key thickness (Y)
-const LIFT = 2.5; // max hover elevation
+const UNIT = 14.4; // world units per key
+const GAP = 0.35; // visual gap between blocks
+const KEY_H = UNIT - GAP; // cube: thickness matches width/depth
+const LIFT = 5.5; // max hover elevation
+const BASE_SPREAD = 1.2; // random height spread in base state
 
 const NEON = 0x37ff00;
 
 // Ripple table - index = rounded Euclidean distance from hovered key
-const RIPPLE_LIFT = [LIFT, LIFT * 0.55, LIFT * 0.22, LIFT * 0.07];
+const RIPPLE_LIFT = [LIFT, LIFT * 0.55, LIFT * 0.28, LIFT * 0.1];
 const RIPPLE_OPACITY = [1.0, 0.75, 0.42, 0.16];
 const MAX_RIPPLE = RIPPLE_LIFT.length - 1;
 
@@ -73,10 +74,8 @@ export default function ThreeBackground() {
     const KBW = COLS * UNIT;
     const KBD = ROWS * UNIT;
     const keys: Key[] = [];
-    const solidMat = new THREE.MeshBasicMaterial({
-      color: 0x414141,
-      transparent: true,
-    });
+
+    const solidMat = new THREE.MeshBasicMaterial({ color: 0x414141 });
 
     for (let r = 0; r < ROWS; r++) {
       for (let c = 0; c < COLS; c++) {
@@ -84,7 +83,6 @@ export default function ThreeBackground() {
         const kd = UNIT - GAP;
         const geo = new THREE.BoxGeometry(kw, KEY_H, kd);
 
-        // Invisible solid body (keeps depth correct)
         const mesh = new THREE.Mesh(geo, solidMat);
 
         // NEON hover outline — invisible until hovered
@@ -119,7 +117,7 @@ export default function ThreeBackground() {
 
         const px = -KBW / 2 + (c + 0.5) * UNIT;
         const pz = -KBD / 2 + (r + 0.5) * UNIT;
-        const baseY = KEY_H / 2;
+        const baseY = KEY_H / 2 + Math.random() * BASE_SPREAD;
         group.position.set(px, baseY, pz);
         scene.add(group);
 
