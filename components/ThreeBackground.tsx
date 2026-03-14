@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const UNIT = 1.2; // world units per key
+const UNIT = 3.6; // world units per key
 const GAP = 0.1; // visual gap
-const KEY_H = 0.55; // key thickness (Y)
+const KEY_H = 1.65; // key thickness (Y)
 const LIFT = 2.5; // max hover elevation
 
 const NEON = 0x37ff00;
