@@ -59,7 +59,7 @@ export default function Navbar() {
                     key={page.name}
                     href={page.href}
                     target={page.ext ? "_blank" : "_self"}
-                    className={`px-3 py-2 rounded-3xl text-sm font-medium hover:bg-pbgreen hover:text-black transition-all`}
+                    className={`px-3 py-2 rounded-3xl text-sm font-medium hover:bg-pbgreen hover:text-black transition-all ${pathname === page.href ? "bg-pbgreen text-black" : ""}`}
                   >
                     {page.name}
                   </Link>

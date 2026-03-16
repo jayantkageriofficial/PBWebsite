@@ -14,11 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en_IN">
-      <body className="bg-bggray">
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <Navbar />
-          {children}
-        </div>
+      <body className="bg-black">
+        <Navbar />
+        {children}
       </body>
     </html>
   );

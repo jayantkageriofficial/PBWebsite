@@ -5,11 +5,10 @@ export default function Home() {
     <>
       <section
         id="home"
-        style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}
-        className="relative min-h-screen overflow-hidden"
+        className="relative min-h-screen overflow-hidden cursor-grab text-white"
       >
         <ThreeBackground />
-        {/* page content goes here, sits above the canvas */}
+        Point Blank
       </section>
     </>
   );

@@ -2,24 +2,28 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
+import { LineSegments2 } from "three/examples/jsm/lines/LineSegments2.js";
+import { LineSegmentsGeometry } from "three/examples/jsm/lines/LineSegmentsGeometry.js";
 
-const UNIT = 14.4; // world units per key
-const GAP = 0.35; // visual gap between blocks
+const UNIT = 500; // world units per key
+const GAP = 110.75; // visual gap between blocks
 const KEY_H = UNIT - GAP; // cube: thickness matches width/depth
-const LIFT = 5.5; // max hover elevation
+const LIFT = 1200.5; // max hover elevation
 const BASE_SPREAD = 1.2; // random height spread in base state
+const BORDER_THICKNESS = 2.6; // 1.5x outline thickness
 
 const NEON = 0x37ff00;
 
 // Ripple table - index = rounded Euclidean distance from hovered key
-const RIPPLE_LIFT = [LIFT, LIFT * 0.55, LIFT * 0.28, LIFT * 0.1];
-const RIPPLE_OPACITY = [1.0, 0.75, 0.42, 0.16];
+const RIPPLE_LIFT = [LIFT * 0.7, LIFT * 0.45, LIFT * 0.28];
+const RIPPLE_OPACITY = [0.55, 1.0, 0.3];
 const MAX_RIPPLE = RIPPLE_LIFT.length - 1;
 
 interface Key {
   group: THREE.Group;
-  edgeMat: THREE.LineBasicMaterial;
-  haloMat: THREE.LineBasicMaterial;
+  edgeMat: LineMaterial;
+  haloMat: LineMaterial;
   row: number;
   col: number;
   y: number;
@@ -36,20 +40,24 @@ export default function ThreeBackground() {
     const container = ref.current;
     if (!container) return;
 
-    const W0 = container.clientWidth || window.innerWidth;
-    const H0 = container.clientHeight || window.innerHeight;
+    const rect0 = container.getBoundingClientRect();
+    const W0 = rect0.width || window.innerWidth;
+    const H0 = rect0.height || window.innerHeight;
     const asp = W0 / H0;
 
-    // Frustum - locked to the original 22×8 key density
-    // This preserves exactly the same box size on screen as the original.
-    const REF_KBW = 22 * UNIT; // 26.4
-    const REF_KBD = 8 * UNIT; //  9.6
+    // Frustum - fixed reference so changing UNIT makes blocks appear larger/smaller on screen
+    const REF_UNIT = 200.4;
+    const REF_GAP = 25.75;
+    const REF_KEY_H = REF_UNIT - REF_GAP;
+    const REF_LIFT = 180.5;
+    const REF_KBW = 22 * REF_UNIT;
+    const REF_KBD = 8 * REF_UNIT;
 
     const computeFrustum = (a: number) => {
       const hw = (REF_KBW + REF_KBD) / (2 * Math.SQRT2);
       const hh =
         (REF_KBW + REF_KBD) / (2 * Math.sqrt(6)) +
-        (LIFT + KEY_H) * (2 / Math.sqrt(6)) +
+        (REF_LIFT + REF_KEY_H) * (2 / Math.sqrt(6)) +
         1.0;
       const viewH = Math.max(hw / a, hh) * 1.12;
       return { viewH, viewW: viewH * a };
@@ -68,14 +76,14 @@ export default function ThreeBackground() {
 
     // Scene
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x414141);
+    scene.background = new THREE.Color(0x000000);
 
     // Build key grid
     const KBW = COLS * UNIT;
     const KBD = ROWS * UNIT;
     const keys: Key[] = [];
 
-    const solidMat = new THREE.MeshBasicMaterial({ color: 0x414141 });
+    const solidMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
 
     for (let r = 0; r < ROWS; r++) {
       for (let c = 0; c < COLS; c++) {
@@ -86,29 +94,37 @@ export default function ThreeBackground() {
         const mesh = new THREE.Mesh(geo, solidMat);
 
         // NEON hover outline — invisible until hovered
-        const edgeMat = new THREE.LineBasicMaterial({
+        const edgeMat = new LineMaterial({
           color: NEON,
           transparent: true,
           opacity: 0,
+          linewidth: BORDER_THICKNESS,
         });
-        const edges = new THREE.LineSegments(
-          new THREE.EdgesGeometry(geo),
+        edgeMat.resolution.set(W0, H0);
+        const edges = new LineSegments2(
+          new LineSegmentsGeometry().fromEdgesGeometry(
+            new THREE.EdgesGeometry(geo),
+          ),
           edgeMat,
         );
 
         // Soft glow halo on the directly hovered key
         const haloGeo = new THREE.BoxGeometry(
-          kw + 0.08,
-          KEY_H + 0.08,
-          kd + 0.08,
+          kw + 0.08 * BORDER_THICKNESS,
+          KEY_H + 0.08 * BORDER_THICKNESS,
+          kd + 0.08 * BORDER_THICKNESS,
         );
-        const haloMat = new THREE.LineBasicMaterial({
+        const haloMat = new LineMaterial({
           color: NEON,
           transparent: true,
           opacity: 0,
+          linewidth: BORDER_THICKNESS,
         });
-        const halo = new THREE.LineSegments(
-          new THREE.EdgesGeometry(haloGeo),
+        haloMat.resolution.set(W0, H0);
+        const halo = new LineSegments2(
+          new LineSegmentsGeometry().fromEdgesGeometry(
+            new THREE.EdgesGeometry(haloGeo),
+          ),
           haloMat,
         );
 
@@ -145,25 +161,35 @@ export default function ThreeBackground() {
     hitPlane.position.y = KEY_H / 2;
     scene.add(hitPlane);
 
-    // Isometric orthographic camera (same frustum as original)
+    // Isometric orthographic camera
+    // Place camera far enough along (1,1,1) that every grid block is in FRONT of it.
+    // The "south" corner at (maxExtent, 0, maxExtent) needs camera_z < 0:
+    //   camera_z = maxExtent*2/√3 - camDist  →  camDist > maxExtent*2/√3
+    const camDist = maxExtent * Math.sqrt(3) * 1.5;
     const camera = new THREE.OrthographicCamera(
       -viewW,
       viewW,
       viewH,
       -viewH,
-      -100,
-      100,
+      1,
+      camDist * 4,
     );
     camera.position.set(1, 1, 1);
     camera.position.normalize();
-    camera.position.multiplyScalar(60);
+    camera.position.multiplyScalar(camDist);
     camera.lookAt(0, 0, 0);
 
     // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(W0, H0);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    container.appendChild(renderer.domElement);
+    const el = renderer.domElement;
+    el.style.position = "absolute";
+    el.style.top = "0";
+    el.style.left = "0";
+    el.style.width = "100%";
+    el.style.height = "100%";
+    container.appendChild(el);
 
     // Raycasting helpers
     const raycaster = new THREE.Raycaster();
@@ -201,6 +227,10 @@ export default function ThreeBackground() {
       cam.bottom = -vh;
       cam.updateProjectionMatrix();
       renderer.setSize(width, height);
+      keys.forEach((k) => {
+        k.edgeMat.resolution.set(width, height);
+        k.haloMat.resolution.set(width, height);
+      });
     });
     resizeObs.observe(container);
 
@@ -269,7 +299,5 @@ export default function ThreeBackground() {
     };
   }, []);
 
-  return (
-    <div ref={ref} className="absolute inset-0 z-0 cursor-grab bg-bggray" />
-  );
+  return <div ref={ref} className="absolute inset-0 -z-10 cursor-grab" />;
 }
