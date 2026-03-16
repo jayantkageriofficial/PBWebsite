@@ -4,7 +4,10 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Lexend } from "next/font/google";
 import logo from "@/public/logo.svg";
+
+const lexend = Lexend({ subsets: ["latin"] });
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -46,20 +49,26 @@ export default function Navbar() {
   ];
   return (
     <>
-      <nav className="text-textgray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav
+        className={`bg-[#D9D9D9]/11 rounded-4xl mt-5 mx-5 text-white overflow-hidden z-10 ${lexend.className}`}
+      >
+        <div className="mx-auto px-12">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <Image src={logo} alt="Logo" className="" />
-            </div>
-            <div className="hidden md:block">
+            <Link href={"/"} className="flex items-center">
+              <Image
+                src={logo}
+                alt="Logo - Point Blank"
+                className="scale-150"
+              />
+            </Link>
+            <div className="hidden lg:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 {pages.map((page) => (
                   <Link
                     key={page.name}
                     href={page.href}
                     target={page.ext ? "_blank" : "_self"}
-                    className={`px-3 py-2 rounded-3xl text-sm font-medium hover:bg-pbgreen hover:text-black transition-all ${pathname === page.href ? "bg-pbgreen text-black" : ""}`}
+                    className={`px-3 py-2 rounded-3xl text-sm hover:bg-pbgreen hover:text-black transition-all ${pathname === page.href ? "bg-pbgreen text-black" : ""}`}
                   >
                     {page.name}
                   </Link>

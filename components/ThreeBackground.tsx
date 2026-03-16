@@ -16,14 +16,15 @@ const BORDER_THICKNESS = 2.6; // 1.5x outline thickness
 const NEON = 0x37ff00;
 
 // Ripple table - index = rounded Euclidean distance from hovered key
-const RIPPLE_LIFT = [LIFT * 0.7, LIFT * 0.45, LIFT * 0.28];
-const RIPPLE_OPACITY = [0.55, 1.0, 0.3];
+const RIPPLE_LIFT = [LIFT * 0.6, LIFT * 0.45, LIFT * 0.28];
+const RIPPLE_OPACITY = [0.55 / 2, 1.0 / 2, 0.3 / 2];
 const MAX_RIPPLE = RIPPLE_LIFT.length - 1;
 
 interface Key {
   group: THREE.Group;
   edgeMat: LineMaterial;
   haloMat: LineMaterial;
+  gapMat: LineMaterial;
   row: number;
   col: number;
   y: number;
@@ -31,6 +32,8 @@ interface Key {
   targetY: number;
   opacity: number;
   targetOpacity: number;
+  gapOpacity: number;
+  targetGapOpacity: number;
 }
 
 export default function ThreeBackground() {
@@ -137,10 +140,32 @@ export default function ThreeBackground() {
         group.position.set(px, baseY, pz);
         scene.add(group);
 
+        // Flat neon outline at floor level — covers full UNIT×UNIT cell (gap visible)
+        const halfU = UNIT / 2;
+        const gapPositions = [
+          -halfU, 0, -halfU,  halfU, 0, -halfU,
+           halfU, 0, -halfU,  halfU, 0,  halfU,
+           halfU, 0,  halfU, -halfU, 0,  halfU,
+          -halfU, 0,  halfU, -halfU, 0, -halfU,
+        ];
+        const gapGeo = new LineSegmentsGeometry();
+        gapGeo.setPositions(gapPositions);
+        const gapMat = new LineMaterial({
+          color: NEON,
+          transparent: true,
+          opacity: 0,
+          linewidth: BORDER_THICKNESS * 0.7,
+        });
+        gapMat.resolution.set(W0, H0);
+        const gapLines = new LineSegments2(gapGeo, gapMat);
+        gapLines.position.set(px, 1, pz);
+        scene.add(gapLines);
+
         keys.push({
           group,
           edgeMat,
           haloMat,
+          gapMat,
           row: r,
           col: c,
           y: baseY,
@@ -148,6 +173,8 @@ export default function ThreeBackground() {
           targetY: baseY,
           opacity: 0,
           targetOpacity: 0,
+          gapOpacity: 0,
+          targetGapOpacity: 0,
         });
       }
     }
@@ -158,7 +185,7 @@ export default function ThreeBackground() {
       new THREE.MeshBasicMaterial({ visible: false, side: THREE.DoubleSide }),
     );
     hitPlane.rotation.x = -Math.PI / 2;
-    hitPlane.position.y = KEY_H / 2;
+    hitPlane.position.y = KEY_H + RIPPLE_LIFT[0];
     scene.add(hitPlane);
 
     // Isometric orthographic camera
@@ -230,6 +257,7 @@ export default function ThreeBackground() {
       keys.forEach((k) => {
         k.edgeMat.resolution.set(width, height);
         k.haloMat.resolution.set(width, height);
+        k.gapMat.resolution.set(width, height);
       });
     });
     resizeObs.observe(container);
@@ -240,6 +268,7 @@ export default function ThreeBackground() {
         if (!hov) {
           k.targetY = k.baseY;
           k.targetOpacity = 0;
+          k.targetGapOpacity = 0;
           k.haloMat.opacity = 0;
           return;
         }
@@ -249,10 +278,12 @@ export default function ThreeBackground() {
         if (dist <= MAX_RIPPLE) {
           k.targetY = k.baseY + RIPPLE_LIFT[dist];
           k.targetOpacity = RIPPLE_OPACITY[dist];
+          k.targetGapOpacity = dist >= 1 ? RIPPLE_OPACITY[dist] : 0;
           k.haloMat.opacity = dist === 0 ? 0.4 : 0;
         } else {
           k.targetY = k.baseY;
           k.targetOpacity = 0;
+          k.targetGapOpacity = 0;
           k.haloMat.opacity = 0;
         }
       });
@@ -281,6 +312,9 @@ export default function ThreeBackground() {
 
         k.opacity += (k.targetOpacity - k.opacity) * 0.11;
         k.edgeMat.opacity = k.opacity;
+
+        k.gapOpacity += (k.targetGapOpacity - k.gapOpacity) * 0.11;
+        k.gapMat.opacity = k.gapOpacity;
       });
 
       renderer.render(scene, camera);
@@ -299,5 +333,5 @@ export default function ThreeBackground() {
     };
   }, []);
 
-  return <div ref={ref} className="absolute inset-0 -z-10 cursor-grab" />;
+  return <div ref={ref} className="absolute inset-0 -z-50 cursor-grab" />;
 }
