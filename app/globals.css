@@ -2,5 +2,9 @@
 
 @theme {
   --color-pbgreen: #37ff00;
-  --color-textgray: #d9d9d9;
+  --color-pbgray: #1c1c1c;
+}
+
+img {
+  @apply select-none;
 }

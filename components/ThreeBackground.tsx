@@ -14,17 +14,17 @@ const BASE_SPREAD = 1.2; // random height spread in base state
 const BORDER_THICKNESS = 2.6; // 1.5x outline thickness
 
 const NEON = 0x37ff00;
+const GAP_NEON = 0x37ff00;
 
 // Ripple table - index = rounded Euclidean distance from hovered key
-const RIPPLE_LIFT = [LIFT * 0.6, LIFT * 0.45, LIFT * 0.28];
-const RIPPLE_OPACITY = [0.55 / 2, 1.0 / 2, 0.3 / 2];
+const RIPPLE_LIFT = [LIFT * 0.6, LIFT * 0.4];
+const RIPPLE_OPACITY = [0.55 / 2, 1.0 / 2];
 const MAX_RIPPLE = RIPPLE_LIFT.length - 1;
 
 interface Key {
   group: THREE.Group;
   edgeMat: LineMaterial;
   haloMat: LineMaterial;
-  gapMat: LineMaterial;
   row: number;
   col: number;
   y: number;
@@ -32,8 +32,6 @@ interface Key {
   targetY: number;
   opacity: number;
   targetOpacity: number;
-  gapOpacity: number;
-  targetGapOpacity: number;
 }
 
 export default function ThreeBackground() {
@@ -68,11 +66,6 @@ export default function ThreeBackground() {
 
     const { viewH, viewW } = computeFrustum(asp);
 
-    // Compute grid size to cover every viewport corner
-    // Under isometric projection the screen corner (±viewW, ±viewH) maps to
-    // world XZ:  x = (±vW·√2 ± vH·√6)/2,  z = (∓vW·√2 ± vH·√6)/2
-    // The farthest required reach in X or Z is (vW·√2 + vH·√6)/2.
-    // Camera is at (1,1,1) so X and Z spread are equal → COLS = ROWS.
     const maxExtent = (viewW * Math.SQRT2 + viewH * Math.sqrt(6)) / 2;
     const COLS = Math.ceil((maxExtent * 2) / UNIT) + 2;
     const ROWS = COLS;
@@ -81,7 +74,6 @@ export default function ThreeBackground() {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x000000);
 
-    // Build key grid
     const KBW = COLS * UNIT;
     const KBD = ROWS * UNIT;
     const keys: Key[] = [];
@@ -140,32 +132,45 @@ export default function ThreeBackground() {
         group.position.set(px, baseY, pz);
         scene.add(group);
 
-        // Flat neon outline at floor level — covers full UNIT×UNIT cell (gap visible)
+        // Cross-shaped gap fill: 4 arms only, no corner squares — no overlap between adjacent cells
         const halfU = UNIT / 2;
-        const gapPositions = [
-          -halfU, 0, -halfU,  halfU, 0, -halfU,
-           halfU, 0, -halfU,  halfU, 0,  halfU,
-           halfU, 0,  halfU, -halfU, 0,  halfU,
-          -halfU, 0,  halfU, -halfU, 0, -halfU,
-        ];
-        const gapGeo = new LineSegmentsGeometry();
-        gapGeo.setPositions(gapPositions);
-        const gapMat = new LineMaterial({
-          color: NEON,
-          transparent: true,
-          opacity: 0,
-          linewidth: BORDER_THICKNESS * 0.7,
+        const hw = kw / 2;
+        const hd = kd / 2;
+        const gapShape = new THREE.Shape();
+        gapShape.moveTo(-hw, -halfU);
+        gapShape.lineTo( hw, -halfU);
+        gapShape.lineTo( hw,    -hd);
+        gapShape.lineTo( halfU, -hd);
+        gapShape.lineTo( halfU,  hd);
+        gapShape.lineTo( hw,     hd);
+        gapShape.lineTo( hw,  halfU);
+        gapShape.lineTo(-hw,  halfU);
+        gapShape.lineTo(-hw,     hd);
+        gapShape.lineTo(-halfU,  hd);
+        gapShape.lineTo(-halfU, -hd);
+        gapShape.lineTo(-hw,    -hd);
+        gapShape.closePath();
+        const gapHole = new THREE.Path();
+        gapHole.moveTo(-hw, -hd);
+        gapHole.lineTo( hw, -hd);
+        gapHole.lineTo( hw,  hd);
+        gapHole.lineTo(-hw,  hd);
+        gapHole.closePath();
+        gapShape.holes.push(gapHole);
+        const frameGeo = new THREE.ShapeGeometry(gapShape);
+        const frameMat = new THREE.MeshBasicMaterial({
+          color: GAP_NEON,
+          side: THREE.DoubleSide,
         });
-        gapMat.resolution.set(W0, H0);
-        const gapLines = new LineSegments2(gapGeo, gapMat);
-        gapLines.position.set(px, 1, pz);
-        scene.add(gapLines);
+        const frame = new THREE.Mesh(frameGeo, frameMat);
+        frame.rotation.x = -Math.PI / 2;
+        frame.position.set(px, 1, pz);
+        scene.add(frame);
 
         keys.push({
           group,
           edgeMat,
           haloMat,
-          gapMat,
           row: r,
           col: c,
           y: baseY,
@@ -173,8 +178,6 @@ export default function ThreeBackground() {
           targetY: baseY,
           opacity: 0,
           targetOpacity: 0,
-          gapOpacity: 0,
-          targetGapOpacity: 0,
         });
       }
     }
@@ -189,9 +192,6 @@ export default function ThreeBackground() {
     scene.add(hitPlane);
 
     // Isometric orthographic camera
-    // Place camera far enough along (1,1,1) that every grid block is in FRONT of it.
-    // The "south" corner at (maxExtent, 0, maxExtent) needs camera_z < 0:
-    //   camera_z = maxExtent*2/√3 - camDist  →  camDist > maxExtent*2/√3
     const camDist = maxExtent * Math.sqrt(3) * 1.5;
     const camera = new THREE.OrthographicCamera(
       -viewW,
@@ -257,7 +257,6 @@ export default function ThreeBackground() {
       keys.forEach((k) => {
         k.edgeMat.resolution.set(width, height);
         k.haloMat.resolution.set(width, height);
-        k.gapMat.resolution.set(width, height);
       });
     });
     resizeObs.observe(container);
@@ -268,7 +267,6 @@ export default function ThreeBackground() {
         if (!hov) {
           k.targetY = k.baseY;
           k.targetOpacity = 0;
-          k.targetGapOpacity = 0;
           k.haloMat.opacity = 0;
           return;
         }
@@ -278,12 +276,10 @@ export default function ThreeBackground() {
         if (dist <= MAX_RIPPLE) {
           k.targetY = k.baseY + RIPPLE_LIFT[dist];
           k.targetOpacity = RIPPLE_OPACITY[dist];
-          k.targetGapOpacity = dist >= 1 ? RIPPLE_OPACITY[dist] : 0;
           k.haloMat.opacity = dist === 0 ? 0.4 : 0;
         } else {
           k.targetY = k.baseY;
           k.targetOpacity = 0;
-          k.targetGapOpacity = 0;
           k.haloMat.opacity = 0;
         }
       });
@@ -304,7 +300,6 @@ export default function ThreeBackground() {
         setTargets(hovKey);
       }
 
-      // Smooth lerp - same constants as original
       keys.forEach((k) => {
         const ps = k.targetY > k.y ? 0.14 : 0.09;
         k.y += (k.targetY - k.y) * ps;
@@ -312,9 +307,6 @@ export default function ThreeBackground() {
 
         k.opacity += (k.targetOpacity - k.opacity) * 0.11;
         k.edgeMat.opacity = k.opacity;
-
-        k.gapOpacity += (k.targetGapOpacity - k.gapOpacity) * 0.11;
-        k.gapMat.opacity = k.gapOpacity;
       });
 
       renderer.render(scene, camera);

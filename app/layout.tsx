@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { Lexend } from "next/font/google";
+
+const lexand = Lexend({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en_IN">
-      <body className="bg-black">
+      <body className={`bg-black ${lexand.className}`}>
         <Navbar />
         {children}
       </body>
