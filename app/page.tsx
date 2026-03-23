@@ -33,14 +33,14 @@ export default function Home() {
       </section>
 
       <section
-        id="mission-vission"
-        className="bg-pbgray text-white overflow-hidden"
+        id="mission-vision"
+        className="bg-pbgray text-white overflow-hidden px-3"
       >
-        <div className="pt-14 px-10 lg:px-20">
-          <h2 className="text-4xl font-semibold text-pbgreen">
+        <div className="pt-14 px-6 sm:px-10 lg:px-20">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-pbgreen">
             Our Mission, together.
           </h2>
-          <p className="pt-3 text-[#B3B3B3] max-w-3xl text-base leading-relaxed">
+          <p className="pt-3 text-[#B3B3B3] max-w-3xl text-sm sm:text-base leading-relaxed">
             In Point Blank, we believe in the concept of no spoon-feeding. We
             are here to help you learn and grow together. We are a community of
             coders, hackers, developers, and tech enthusiasts passionate about
@@ -49,20 +49,21 @@ export default function Home() {
         </div>
 
         {/* Mission - Image Left */}
-        <div className="flex flex-col lg:flex-row items-center py-20 px-10 lg:px-20 space-x-0">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center py-14 sm:py-20 px-6 sm:px-10 lg:px-20">
           <div className="relative w-full lg:w-1/2 shrink-0">
-            <div className={`relative rounded-4xl overflow-hidden`}>
+            <div className="relative w-full max-w-140 mx-auto lg:mx-0 aspect-4/3 sm:aspect-16/10 lg:aspect-5/4 rounded-4xl overflow-hidden">
               <Image
                 src={mission}
                 alt="Mission"
-                className="h-99 object-cover"
+                fill
+                className="object-cover w-full lg:w-1/2"
               />
             </div>
           </div>
 
-          <div className="w-full lg:w-1/2 border-l-2 border-pbgreen pl-10 lg:pl-20">
-            <h3 className="text-4xl mb-6">Mission</h3>
-            <p className="text-[#B3B3B3] leading-relaxed">
+          <div className="w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-l-2 border-pbgreen pt-6 lg:pt-0 lg:pl-12">
+            <h3 className="text-3xl sm:text-4xl mb-4 sm:mb-6">Mission</h3>
+            <p className="text-[#B3B3B3] text-sm sm:text-base leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
               vehicula, nunc id varius fermentum, justo erat facilisis nunc, a
               dictum sapien lorem at elit. Sed tincidunt, nisl at convallis
@@ -75,10 +76,10 @@ export default function Home() {
         </div>
 
         {/* Vision - Image Right */}
-        <div className="flex flex-col lg:flex-row items-center py-20 px-10 lg:px-20 space-x-0">
-          <div className="w-full lg:w-1/2 border-r-2 border-pbgreen pl-10 lg:pl-20">
-            <h3 className="text-4xl mb-6">Vision</h3>
-            <p className="text-[#B3B3B3] leading-relaxed">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center md:py-14 sm:py-20 px-6 sm:px-10 lg:px-20">
+          <div className="w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-r-2 border-pbgreen pt-6 lg:pt-0 lg:pr-12">
+            <h3 className="text-3xl sm:text-4xl mb-4 sm:mb-6">Vision</h3>
+            <p className="text-[#B3B3B3] text-sm sm:text-base leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
               vehicula, nunc id varius fermentum, justo erat facilisis nunc, a
               dictum sapien lorem at elit. Sed tincidunt, nisl at convallis
@@ -90,8 +91,13 @@ export default function Home() {
           </div>
 
           <div className="relative w-full lg:w-1/2 shrink-0">
-            <div className={`relative rounded-4xl overflow-hidden`}>
-              <Image src={vision} alt="Vision" className="h-99 object-cover" />
+            <div className="relative w-full max-w-140 mx-auto lg:ml-auto aspect-4/3 sm:aspect-16/10 lg:aspect-5/4 rounded-4xl overflow-hidden">
+              <Image
+                src={vision}
+                alt="Vision"
+                fill
+                className="object-cover w-full lg:w-1/2"
+              />
             </div>
           </div>
         </div>
