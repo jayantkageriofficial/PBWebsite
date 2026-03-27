@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { Lexend } from "next/font/google";
+import { Lexend, Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const lexand = Lexend({
   subsets: ["latin"],
@@ -19,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en_IN">
+    <html lang="en_IN" className={cn("font-sans", geist.variable)}>
       <body className={`bg-black ${lexand.className}`}>
         <Navbar />
         {children}
