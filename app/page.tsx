@@ -3,6 +3,7 @@ import { Lexend_Tera } from "next/font/google";
 import ThreeBackground from "@/components/ThreeBackground";
 import mission from "@/public/mission.webp";
 import vision from "@/public/vision.webp";
+import { Skiper16 } from "@/components/ui/skiper-ui/skiper40";
 
 const lexendTera = Lexend_Tera({
   subsets: ["latin"],
@@ -55,8 +56,8 @@ export default function Home() {
               <Image
                 src={mission}
                 alt="Mission"
-                fill
-                className="object-cover w-full lg:w-1/2"
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="eager"
               />
             </div>
           </div>
@@ -95,12 +96,16 @@ export default function Home() {
               <Image
                 src={vision}
                 alt="Vision"
-                fill
-                className="object-cover w-full lg:w-1/2"
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="eager"
               />
             </div>
           </div>
         </div>
+      </section>
+
+      <section id="cards">
+        <Skiper16 />
       </section>
     </>
   );
