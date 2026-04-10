@@ -4,7 +4,7 @@ import ThreeBackground from "@/components/ThreeBackground";
 import mission from "@/public/mission.webp";
 import vision from "@/public/vision.webp";
 import connectImg from "@/public/connect.webp";
-import { Skiper16 } from "@/components/ui/skiper-ui/skiper40";
+import { CardStack } from "@/components/CardStack";
 import {
   Terminal,
   Cpu,
@@ -123,7 +123,7 @@ export default function Home() {
       </section>
 
       <section id="cards">
-        <Skiper16 />
+        <CardStack />
       </section>
 
       <section id="domains" className="bg-pbgray text-white py-20 px-6">
@@ -316,10 +316,7 @@ export default function Home() {
       </section>
 
       {/* Stay Connected */}
-      <section
-        id="stay-connected"
-        className="bg-pbdark text-white py-20 px-6"
-      >
+      <section id="stay-connected" className="bg-pbdark text-white py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white">

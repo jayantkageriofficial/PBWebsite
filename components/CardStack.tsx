@@ -51,7 +51,7 @@ const cards: Card[] = [
   },
 ];
 
-const StickyCard_001 = ({
+const StickyCard = ({
   i,
   card,
   progress,
@@ -137,7 +137,7 @@ const StickyCard_001 = ({
   );
 };
 
-const Skiper16 = () => {
+export const CardStack = () => {
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -154,7 +154,7 @@ const Skiper16 = () => {
         {cards.map((card, i) => {
           const targetScale = Math.max(0.75, 1 - (cards.length - i - 1) * 0.08);
           return (
-            <StickyCard_001
+            <StickyCard
               key={i}
               i={i}
               card={card}
@@ -168,5 +168,3 @@ const Skiper16 = () => {
     </ReactLenis>
   );
 };
-
-export { Skiper16, StickyCard_001 };
