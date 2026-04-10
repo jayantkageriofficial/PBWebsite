@@ -28,7 +28,7 @@ const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
 
     useImperativeHandle(ref, () => localRef.current!);
 
-    // Automatic scroll into view when opened
+    
     useEffect(() => {
       if (isOpen && localRef.current) {
         const offset = 150;

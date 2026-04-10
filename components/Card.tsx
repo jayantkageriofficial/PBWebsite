@@ -12,7 +12,7 @@ const lexend = Lexend({ subsets: ["latin"] ,weight:["200","300","400","500"]});
 const Card: React.FC<CardProps> = ({ name, role, company, linkedInUrl, imageUrl }) => {
      
      return(
-       <div className={`flex flex-col ${imageUrl && linkedInUrl ? 'w-103.5  h-116.5 rounded-[40px] border-[1.25px] border-[#262626]' : 'w-66.5 h-fit rounded-[20px] '}  p-6  ${!imageUrl && !linkedInUrl ? 'border-0 bg-[#1C1C1C]':''} mt-5 mb-5 gap-5`}>
+       <div className={`flex flex-col ${imageUrl && linkedInUrl ? 'w-103.5  h-116.5 rounded-[40px] border-[1.25px] border-[#262626]' : 'w-66.5 h-fit rounded-[20px] '}  p-6  ${!imageUrl && !linkedInUrl ? 'border-0 bg-[#1C1C1C]':''} gap-5`}>
             {imageUrl && linkedInUrl && (
                 <a
                     href={linkedInUrl}
