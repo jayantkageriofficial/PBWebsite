@@ -49,7 +49,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`bg-pbgray rounded-4xl mt-5 mx-5 text-white overflow-hidden z-10 ${lexend.className}`}
+        className={`bg-pbgray border-2 border-[#262626] rounded-4xl mt-5 mx-5 text-white overflow-hidden z-10 ${lexend.className}`}
       >
         <div className="mx-auto px-12">
           <div className="flex items-center justify-between h-16">

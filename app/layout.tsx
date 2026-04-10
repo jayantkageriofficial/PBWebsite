@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en_IN" className={cn("font-sans", geist.variable)}>
-      <body className={`bg-black ${lexand.className}`}>
+      <body className={`bg-[#111111] ${lexand.className}`}>
         <Navbar />
         {children}
         <Footer />

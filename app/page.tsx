@@ -23,9 +23,9 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-const lexendTera = Lexend_Tera({
+export const lexendTera = Lexend_Tera({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300","400", "500", "600", "700"],
 });
 
 export default function Home() {
