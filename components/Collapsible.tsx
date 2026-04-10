@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { BiSolidChevronsUp,BiSolidChevronsDown } from "react-icons/bi";
 import { Lexend } from "next/font/google";
 
 interface CollapsibleSectionProps {
@@ -48,9 +48,9 @@ const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
                     </h2>
 
                     {isOpen ? (
-                        <FaChevronUp className="h-5 w-5 text-white" />
+                        <BiSolidChevronsUp className="w-14 h-14 text-pbgreen" />
                     ) : (
-                        <FaChevronDown className="h-5 w-5 text-white" />
+                        <BiSolidChevronsDown className="w-14 h-14 text-white" />
                     )}
                 </div>
                 {isOpen && (
