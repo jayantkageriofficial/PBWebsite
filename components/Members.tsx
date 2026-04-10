@@ -1,4 +1,9 @@
+"use client"
+
+import { useState } from "react";
 import Card from "./Card";
+import CollapsibleSection from "./Collapsible";
+import { FaEllipsisV, FaRegBell } from "react-icons/fa";
 
 interface Member {
   id?: string;
@@ -20,11 +25,59 @@ const headings = [
   "First Year",
 ]
 
-export default function Members(){
-    return(<main className="flex gap-4">
-   
-    <Card name="Dhruv Puri" linkedInUrl="http" imageUrl="https://www.pointblank.club/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fpbsite%2Fimage%2Fupload%2Ff_webp%2Fv1746357814%2Fpbmembers%2FDhruv%2520Puri-1746357812673.jpg&w=1920&q=75" role="Devops" company="Aspora" />
-    <Card name="Yuvraj Shorewala"  linkedInUrl='http' imageUrl="https://www.pointblank.club/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fpbsite%2Fimage%2Fupload%2Ff_webp%2Fv1768917424%2Fpbmembers%2FYuvraj%2520Shorewala-1768917421428.jpg&w=1920&q=75" role="Devops" company="Aspora" />
-     </main>
-    )
+export default function Members() {
+  const [openIndex, setOpenIndex] = useState<number>(
+    headings.indexOf("Current Leads")
+  );
+  
+  const [data, setData] = useState<{ [key: string]: Member[] }>({});
+  
+  const [menuVisible, setMenuVisible] = useState<{ [key: string]: boolean }>({});
+
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? -1 : index);
+  };
+
+  const toggleMenu = (id: string) => {
+    setMenuVisible((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  return (
+    <div className="flex flex-col justify-center items-center w-full space-y-4 mt-24 bg-black">
+      <div className="space-y-2 w-full max-w-7xl px-4 ">
+        {headings.map((heading, index) => (
+          <CollapsibleSection
+            key={index}
+            heading={heading}
+            isOpen={openIndex === index}
+            onToggle={() => handleToggle(index)}
+            content={
+              <div className="flex flex-col items-center space-y-6 w-full pt-4 ">
+                <div className={`grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-20 justify-items-center">
+                 ${
+            heading.toLowerCase().includes("alumni")
+              ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-15" 
+              : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          }`}>
+                  {data[heading]?.map((profile, cardIndex) => (
+                    <div key={cardIndex} className="relative">
+                      <Card
+                        name={profile.name}
+                        role={profile.role}
+                        company={profile.company || ""}
+                        linkedInUrl={profile.linkedInUrl || ""}
+                        imageUrl={profile.imageUrl || ""}
+                      />
+                    </div>
+                  ))}
+
+                </div>
+              </div>
+            }
+          />
+        ))}
+      </div>
+      <div className="h-24 w-full flex-shrink-0"></div>
+    </div>
+  );
 }
