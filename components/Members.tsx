@@ -201,7 +201,7 @@ export default function Members() {
                 index !== 0
                   ? isAnyOpen
                     ? "border-t border-transparent"
-                    : "border-t border-[#B3B3B3]"
+                    : "border-t border-pbtext"
                   : "border-t border-transparent"
               }`}
             >
