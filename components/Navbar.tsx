@@ -5,12 +5,15 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Lexend } from "next/font/google";
 import logo from "@/public/logo.svg";
+import { useAuthStore } from "@/lib/store/auth";
+import { logout } from "@/app/admin/actions";
 
 const lexend = Lexend({ subsets: ["latin"] });
 
 export default function Navbar() {
   const pathname = usePathname();
-  //   const [isOpen, setIsOpen] = React.useState(false);
+  const { authenticated, email } = useAuthStore();
+  // const [isOpen, setIsOpen] = React.useState(false);
   const pages: { name: string; href: string; ext?: boolean }[] = [
     {
       name: "GitHub",
@@ -60,7 +63,7 @@ export default function Navbar() {
                 className="scale-150"
               />
             </Link>
-            <div className="hidden lg:block">
+            <div className="hidden lg:flex items-center gap-2">
               <div className="ml-10 flex items-baseline space-x-4">
                 {pages.map((page) => (
                   <Link
@@ -73,6 +76,17 @@ export default function Navbar() {
                   </Link>
                 ))}
               </div>
+              {authenticated && (
+                <form action={logout}>
+                  <button
+                    type="submit"
+                    title={email ?? undefined}
+                    className="px-3 py-2 rounded-3xl text-sm hover:bg-red-500/20 hover:text-red-400 text-white/60 transition-all cursor-pointer"
+                  >
+                    Logout
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
