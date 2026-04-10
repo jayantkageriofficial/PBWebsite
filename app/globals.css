@@ -7,6 +7,9 @@
 @theme {
   --color-pbgreen: #37ff00;
   --color-pbgray: #1c1c1c;
+  --color-pbdark: #0d0d0d;
+  --color-pbcard: #141414;
+  --color-pbsurface: #191919;
 }
 
 img {

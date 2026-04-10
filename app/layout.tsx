@@ -3,8 +3,9 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Lexend, Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import Footer from "@/components/Footer";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const lexand = Lexend({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body className={`bg-black ${lexand.className}`}>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
