@@ -13,7 +13,7 @@ interface CollapsibleSectionProps {
   heading: string;
   content: React.JSX.Element;
   isOpen: boolean;
-  isAnySectionOpen: boolean; // New prop for global background toggle
+  isAnySectionOpen: boolean; 
   onToggle: () => void;
 }
 
