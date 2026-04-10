@@ -124,7 +124,6 @@ export async function verifyToken(token: string): Promise<JwtPayload | null> {
       token,
       process.env.SESSION_SECRET as string,
     ) as JwtPayload | null;
-    console.log(user);
     if (!user) return null;
     return user;
   } catch (error) {
