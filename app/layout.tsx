@@ -33,6 +33,7 @@ export default async function RootLayout({
         <AuthInitializer
           authenticated={!!user}
           email={user?.email ?? null}
+          name={user?.name ?? null}
           token={sessionCookie?.value ?? null}
         />
         <Navbar />

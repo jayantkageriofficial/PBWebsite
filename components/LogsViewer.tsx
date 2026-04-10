@@ -168,11 +168,11 @@ export default function LogsViewer({
                     <th className="px-6 py-4 font-medium">Title / ID</th>
                   </tr>
                 </thead>
-                <tbody className="font-mono divide-y divide-white/[0.04]">
+                <tbody className="font-mono divide-y divide-white/4">
                   {filtered.map((log) => (
                     <tr
                       key={log._id}
-                      className="hover:bg-white/[0.03] transition-colors"
+                      className="hover:bg-white/3 transition-colors"
                     >
                       <td className="px-6 py-3 text-white/30 whitespace-nowrap">
                         {formatTs(log.timestamp)}
@@ -204,42 +204,6 @@ export default function LogsViewer({
             </div>
           )}
         </div>
-
-        {/* Raw log format */}
-        {filtered.length > 0 && (
-          <details className="group">
-            <summary className="text-xs text-white/20 hover:text-white/50 cursor-pointer select-none transition-colors">
-              Show raw log format
-            </summary>
-            <div className="mt-3 rounded-4xl bg-pbcard border border-white/5 p-6 overflow-x-auto">
-              <pre className="text-[11px] font-mono text-white/40 leading-6">
-                {filtered.map((log) => (
-                  <div key={log._id}>
-                    <span className="text-white/20">
-                      [{formatTs(log.timestamp)}]
-                    </span>{" "}
-                    <span className="text-pbgreen font-semibold uppercase">
-                      [{log.module}]
-                    </span>
-                    {" - "}
-                    <span className="text-pbgreen/60">{log.email}</span>
-                    {" - "}
-                    <span className={ACTION_COLOR[log.action]}>
-                      [{log.action}]
-                    </span>
-                    {log.title && (
-                      <span className="text-white/60"> {log.title}</span>
-                    )}
-                  </div>
-                ))}
-              </pre>
-            </div>
-          </details>
-        )}
-
-        <p className="text-white/15 text-xs">
-          Showing {filtered.length} of {initialLogs.length} total entries
-        </p>
       </div>
     </div>
   );

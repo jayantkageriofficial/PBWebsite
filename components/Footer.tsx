@@ -50,6 +50,7 @@ export default function Footer() {
             width={117}
             height={30}
             className="scale-150"
+            draggable={false}
           />
         </Link>
 

@@ -5,6 +5,7 @@ import { createTransport } from "nodemailer";
 
 export type JwtPayload = {
   email: string;
+  name: string;
 };
 
 export async function sendVerificationEmail(to: string): Promise<boolean> {
@@ -38,7 +39,8 @@ export async function sendVerificationEmail(to: string): Promise<boolean> {
 
   const token = jwt.sign(
     {
-      email: to,
+      email: data.users.nodes[0].email,
+      name: data.users.nodes[0].name,
     },
     process.env.JWT_SECRET as string,
     { expiresIn: "15m" },
@@ -70,13 +72,13 @@ export async function sendVerificationEmail(to: string): Promise<boolean> {
         to,
         from: `Webadmin - Point Blank <${process.env.MAIL_USER}>`,
         subject: "Point Blank - Login Link",
-        html: `<p>Hello,</p>
+        html: `<p>Hello ${data.users.nodes[0].name},</p>
 <p>Click the link below to sign in to the admin panel:</p>
 <a href="${verificationLink}">Sign In to Admin Panel</a>
-<p>This link will expire in 15 minutes.</p>
+<p>This link will expire in 15 minutes (i.e., ${new Date(Date.now() + 15 * 60 * 1000).toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" })} IST).</p>
 <p>If you did not request this, please ignore this email.</p>
 <p>Best regards,<br/>Team Point Blank</p>`,
-        text: `Hello,\n\nClick the link below to sign in to the admin panel:\n\n${verificationLink}\n\nThis link will expire in 15 minutes.\n\nIf you did not request this, please ignore this email.\n\nBest regards,\nTeam Point Blank`,
+        text: `Hello ${data.users.nodes[0].name},\n\nClick the link below to sign in to the admin panel:\n\n${verificationLink}\n\nThis link will expire in 15 minutes (i.e., ${new Date(Date.now() + 15 * 60 * 1000).toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" })} IST).\n\nIf you did not request this, please ignore this email.\n\nBest regards,\nTeam Point Blank`,
       },
       (error: any, info: any) => {
         if (error) console.error("Error sending email:", error);
@@ -103,6 +105,7 @@ export async function verifyLoginToken(
     return jwt.sign(
       {
         email: user.email,
+        name: user.name,
       },
       process.env.SESSION_SECRET as string,
       {

@@ -16,8 +16,18 @@ const adminLinks: { name: string; href: string; icon: React.ReactNode }[] = [
     name: "Activity Logs",
     href: "/admin/logs",
     icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      <svg
+        className="w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+        />
       </svg>
     ),
   },
@@ -26,41 +36,52 @@ const adminLinks: { name: string; href: string; icon: React.ReactNode }[] = [
 function AdminSidebar({
   isOpen,
   onClose,
+  name,
   email,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  name: string | null;
   email: string | null;
 }) {
   const pathname = usePathname();
 
   return (
     <>
-      {/* Backdrop */}
       <div
         className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-200 ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          isOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
         onClick={onClose}
       />
 
-      {/* Sidebar panel */}
       <div
         className={`fixed top-0 right-0 h-full w-72 bg-pbgray z-50 flex flex-col shadow-2xl transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full bg-pbgreen flex items-center justify-center">
-              <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-4 h-4 text-black"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
               </svg>
             </div>
             <div>
-              <p className="text-xs font-semibold text-white">Admin Panel</p>
-              {email && <p className="text-xs text-white/40 truncate max-w-[140px]">{email}</p>}
+              <p className="text-xs font-semibold text-white">
+                {name ?? "Admin Panel"}
+              </p>
+              {email && (
+                <p className="text-xs text-white/40 truncate max-w-35">
+                  {email}
+                </p>
+              )}
             </div>
           </div>
           <button
@@ -68,15 +89,26 @@ function AdminSidebar({
             className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-all"
             aria-label="Close admin panel"
           >
-            <svg className="w-4 h-4 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="w-4 h-4 text-white/60"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
 
-        {/* Links */}
         <div className="flex-1 px-4 py-4 flex flex-col gap-1 overflow-y-auto">
-          <p className="text-xs text-white/30 uppercase tracking-widest px-2 mb-1">Pages</p>
+          <p className="text-xs text-white/30 uppercase tracking-widest px-2 mb-1">
+            Pages
+          </p>
           {adminLinks.map((link) => (
             <Link
               key={link.href}
@@ -94,15 +126,24 @@ function AdminSidebar({
           ))}
         </div>
 
-        {/* Logout */}
         <div className="px-4 py-4 border-t border-white/10">
           <form action={logout}>
             <button
               type="submit"
               className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-red-400 hover:bg-red-500/10 transition-all cursor-pointer"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
               </svg>
               Logout
             </button>
@@ -115,7 +156,7 @@ function AdminSidebar({
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { authenticated, email } = useAuthStore();
+  const { authenticated, email, name } = useAuthStore();
   const [isOpen, setIsOpen] = React.useState(false);
   const [isAdminOpen, setIsAdminOpen] = React.useState(false);
   const navRef = React.useRef<HTMLElement>(null);
@@ -181,6 +222,7 @@ export default function Navbar() {
                 src={logo}
                 alt="Logo - Point Blank"
                 className="scale-150"
+                draggable={false}
               />
             </Link>
             <div className="hidden lg:flex items-center gap-2">
@@ -203,16 +245,19 @@ export default function Navbar() {
                   className="flex items-center gap-2 px-3 py-2 rounded-3xl text-sm hover:bg-white/10 text-white/70 hover:text-white transition-all cursor-pointer"
                 >
                   <div className="w-5 h-5 rounded-full bg-pbgreen flex items-center justify-center">
-                    <svg className="w-3 h-3 text-black" fill="currentColor" viewBox="0 0 24 24">
+                    <svg
+                      className="w-3 h-3 text-black"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
                     </svg>
                   </div>
-                  Admin
+                  {name?.split(" ")[0] ?? "Admin"}
                 </button>
               )}
             </div>
 
-            {/* Mobile right side: admin icon + hamburger */}
             <div className="lg:hidden flex items-center gap-2">
               {authenticated && (
                 <button
@@ -221,7 +266,11 @@ export default function Navbar() {
                   className="w-10 h-10 flex items-center justify-center rounded-full bg-pbgreen/20 hover:bg-pbgreen/30 transition-all"
                   aria-label="Admin panel"
                 >
-                  <svg className="w-5 h-5 text-pbgreen" fill="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-5 h-5 text-pbgreen"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
                   </svg>
                 </button>
@@ -259,10 +308,11 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile dropdown — absolutely positioned so it overlays content below */}
         <div
           className={`lg:hidden absolute left-0 right-0 top-full mt-2 bg-pbgray rounded-2xl overflow-hidden transition-all duration-200 ${
-            isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none"
+            isOpen
+              ? "opacity-100 translate-y-0 pointer-events-auto"
+              : "opacity-0 -translate-y-2 pointer-events-none"
           }`}
         >
           <div className="flex flex-col px-6 py-4 gap-1">
@@ -281,10 +331,10 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Admin sidebar — rendered outside nav so it covers full viewport */}
       <AdminSidebar
         isOpen={isAdminOpen}
         onClose={() => setIsAdminOpen(false)}
+        name={name}
         email={email}
       />
     </>
