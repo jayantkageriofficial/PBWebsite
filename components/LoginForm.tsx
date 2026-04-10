@@ -28,7 +28,7 @@ export default function LoginForm({ error }: { error?: string }) {
       else {
         setState("error");
         setErrorMsg(
-          "This email is not associated with an active team member account.",
+          "Failed to send sign-in link. Please check the email address and try again.",
         );
       }
     } catch {
@@ -38,13 +38,12 @@ export default function LoginForm({ error }: { error?: string }) {
   }
 
   return (
-    <div className="min-h-[calc(100vh-7rem)] bg-pbdark flex items-center justify-center px-4 py-12">
+    <div className="bg-pbdark flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         <div>
           <h1 className="text-3xl font-bold text-white mb-2">Sign In</h1>
           <p className="text-white/50 mb-6">
-            Enter your email to receive a sign-in link. Access is limited to
-            active Point Blank team members.
+            Enter your email to receive a sign-in link.
           </p>
         </div>
         {/* Card */}
@@ -105,7 +104,7 @@ export default function LoginForm({ error }: { error?: string }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@pointblank.club"
-                    className="w-full bg-pbsurface border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-pbgreen/50 focus:ring-1 focus:ring-pbgreen/20 transition-colors"
+                    className="w-full bg-pbsurface border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-pbgreen/50 focus:ring-1 focus:ring-pbgreen/20 transition-colors placeholder:select-none"
                   />
                 </div>
               </div>
@@ -113,7 +112,7 @@ export default function LoginForm({ error }: { error?: string }) {
               <button
                 type="submit"
                 disabled={state === "loading" || !email}
-                className="w-full bg-pbgreen text-black font-semibold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-pbgreen/90 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm"
+                className="w-full bg-pbgreen text-black font-semibold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-pbgreen/90 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm select-none"
               >
                 {state === "loading" ? (
                   <>
@@ -129,6 +128,10 @@ export default function LoginForm({ error }: { error?: string }) {
               </button>
             </form>
           )}
+
+          <p className="text-white/50 text-xs text-center mt-4">
+            Access is limited to active Point Blank team members.
+          </p>
         </div>
       </div>
     </div>
