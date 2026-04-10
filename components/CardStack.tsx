@@ -4,9 +4,9 @@ import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import ReactLenis from "lenis/react";
 import Image, { StaticImageData } from "next/image";
 import React, { useRef } from "react";
-import connect from "@/public/connect.webp";
-import learn from "@/public/learn.webp";
-import bored from "@/public/bored.webp";
+import connect from "@/public/images/connect.webp";
+import learn from "@/public/images/learn.webp";
+import bored from "@/public/images/bored.webp";
 
 type Card = {
   title: React.ReactNode;
@@ -76,6 +76,7 @@ const StickyCard = ({
         alt=""
         className="inset-0 w-full h-full object-cover grayscale"
         loading={isLCP ? "eager" : "lazy"}
+        draggable={false}
       />
     </div>
   );
@@ -119,7 +120,7 @@ const StickyCard = ({
           scale,
           top: `calc(-5vh + ${i * 24}px)`,
         }}
-        className="relative w-full max-w-5xl mx-4 sm:mx-8 bg-[#1a1a1a] rounded-3xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-5xl mx-4 sm:mx-8 bg-pbcard rounded-3xl overflow-hidden shadow-2xl"
       >
         <div
           className={`flex flex-col ${
@@ -149,7 +150,7 @@ export const CardStack = () => {
       <div
         ref={container}
         style={{ height: `${(cards.length + 1) * 100}vh` }}
-        className="relative w-full bg-pbgray/15"
+        className="relative w-full bg-pbgray"
       >
         {cards.map((card, i) => {
           const targetScale = Math.max(0.75, 1 - (cards.length - i - 1) * 0.08);

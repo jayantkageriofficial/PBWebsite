@@ -1,26 +1,32 @@
 import Image from "next/image";
 import { Lexend_Tera } from "next/font/google";
 import ThreeBackground from "@/components/ThreeBackground";
-import mission from "@/public/mission.webp";
-import vision from "@/public/vision.webp";
-import connectImg from "@/public/connect.webp";
 import { CardStack } from "@/components/CardStack";
+import { Users, Share2, BookOpen, FileText, Play, Code2 } from "lucide-react";
+
+// Images
+import mission from "@/public/images/mission.webp";
+import vision from "@/public/images/vision.webp";
+import hustleImg from "@/public/images/hustle.webp";
+import chroniclesImg from "@/public/images/chronicles.webp";
+import sihImg from "@/public/images/sih.webp";
+import opensrcImg from "@/public/images/opensource.webp";
+import cybersecImg from "@/public/images/cybersec.webp";
+import innovationImg from "@/public/images/innovation.webp";
+import mohitImg from "@/public/images/mohit.webp";
+import soumyaImg from "@/public/images/soumya.webp";
+import ashutoshImg from "@/public/images/ashutosh.webp";
+
 import {
-  Terminal,
-  Cpu,
-  BarChart2,
-  Brain,
-  Computer,
-  Atom,
-  Trophy,
-  Layers,
-  Users,
-  Share2,
-  BookOpen,
-  FileText,
-  Play,
-  Code2,
-} from "lucide-react";
+  DevOps,
+  Flutter,
+  ICPC,
+  IOT,
+  Kaggle,
+  ML,
+  OpenSource,
+  ReactIcon,
+} from "@/components/Icons";
 import Link from "next/link";
 
 export const lexendTera = Lexend_Tera({
@@ -76,6 +82,7 @@ export default function Home() {
                 alt="Mission"
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
+                draggable={false}
               />
             </div>
           </div>
@@ -116,6 +123,7 @@ export default function Home() {
                 alt="Vision"
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
+                draggable={false}
               />
             </div>
           </div>
@@ -155,14 +163,14 @@ export default function Home() {
           ))}
           <div className="grid grid-cols-2 sm:grid-cols-4">
             {[
-              { name: "DevOps", Icon: Terminal },
-              { name: "IOT-ML", Icon: Cpu },
-              { name: "Kaggle", Icon: BarChart2 },
-              { name: "ML-Research", Icon: Brain },
-              { name: "Open Source Hackathon", Icon: Computer },
-              { name: "React Development", Icon: Atom },
-              { name: "ACM - ICPC", Icon: Trophy },
-              { name: "Flutter Development", Icon: Layers },
+              { name: "DevOps", Icon: DevOps },
+              { name: "IOT-ML", Icon: IOT },
+              { name: "Kaggle", Icon: Kaggle },
+              { name: "ML-Research", Icon: ML },
+              { name: "Open Source Hackathon", Icon: OpenSource },
+              { name: "React Development", Icon: ReactIcon },
+              { name: "ACM - ICPC", Icon: ICPC },
+              { name: "Flutter Development", Icon: Flutter },
             ].map(({ name, Icon }, i) => (
               <div
                 key={i}
@@ -191,7 +199,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="activities" className="bg-pbdark text-white py-20 px-6">
+      <section id="activities" className="bg-pbgray text-white py-20 px-6">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-pbgreen">Activities</h2>
         </div>
@@ -200,49 +208,56 @@ export default function Home() {
             {
               title: "CP Contests",
               tag: "PB Hustle",
+              img: hustleImg,
               description:
                 "Since 2019, Point Blank has built a strong competitive programming culture. Participation scaled rapidly, with teams qualifying for ICPC Regionals.",
             },
             {
               title: "Development",
               tag: "PB Chronicles",
+              img: chroniclesImg,
               description:
                 "We host hands-on workshops across web, mobile, DevOps, machine learning, and open source, focused on real skills rather than slides.",
             },
             {
               title: "Hackathons",
               tag: "Smart India Hackathon",
+              img: sihImg,
               description:
                 "Point Blank organizes the internal Smart India Hackathon annually, with consistent national qualifications, finals, and wins.",
             },
             {
               title: "Open Source",
               tag: "GSoC",
+              img: opensrcImg,
               description:
                 "Our open-source community has produced GSoC contributors, LFX scholars, and GitHub Externs across global organizations.",
             },
             {
               title: "Cybersecurity",
               tag: "PBCTF",
+              img: cybersecImg,
               description:
                 "We run hands-on cybersecurity sessions and host PBCTF, an in-house Capture The Flag event with wide campus participation.",
             },
             {
               title: "Innovation",
+              img: innovationImg,
               tag: "Research",
               description:
                 "From hardware prototypes to published research, we foster a culture of experimentation and innovation beyond the classroom.",
             },
-          ].map(({ title, tag, description }, i) => (
+          ].map(({ title, tag, img, description }, i) => (
             <div
               key={i}
               className="bg-pbcard rounded-3xl overflow-hidden border border-white/16 flex flex-col"
             >
               <div className="relative h-44 overflow-hidden">
                 <Image
-                  src={connectImg}
+                  src={img}
                   alt={title}
                   className="w-full h-full object-cover grayscale"
+                  draggable={false}
                 />
               </div>
 
@@ -282,25 +297,29 @@ export default function Home() {
               {
                 name: "Mohit Agarwal",
                 bio: "Mohit, SDE2 at Glance, is the driving force behind Point Blank's Competitive Programming culture. He has won several contests, including the Nokia Collegiate Code Rally, and qualified for ACM-ICPC Regionals.",
+                img: mohitImg,
               },
               {
                 name: "Soumya Pattanayak",
                 bio: "A top coder at Point Blank, Soumya has worked at Amazon and Verse Innovation. He's an ACM-ICPC regionalist known for his problem-solving skills and innovative projects.",
+                img: soumyaImg,
               },
               {
                 name: "Ashutosh Pandey",
                 bio: "Ashutosh, Compiler Engineer at AMD, excelled in Open Source and Hackathons. As a student, he did GSoC with Arduino, won the Smart India Hackathon, and mentored students for prestigious programs.",
+                img: ashutoshImg,
               },
-            ].map(({ name, bio }, i) => (
+            ].map(({ name, bio, img }, i) => (
               <div
                 key={i}
                 className="bg-pbcard border border-white/16 rounded-3xl p-5 flex flex-col items-center text-center gap-4"
               >
-                <div className="relative w-full aspect-square rounded-2xl overflow-hidden">
+                <div className="relative w-full aspect-square rounded-4xl overflow-hidden">
                   <Image
-                    src={connectImg}
+                    src={img}
                     alt={name}
                     className="w-full h-full object-cover object-top grayscale"
+                    draggable={false}
                   />
                 </div>
                 <span className="px-4 py-1 rounded-full border border-gray-900 bg-pbsurface text-pbgreen text-sm font-medium">
@@ -316,7 +335,7 @@ export default function Home() {
       </section>
 
       {/* Stay Connected */}
-      <section id="stay-connected" className="bg-pbdark text-white py-20 px-6">
+      <section id="stay-connected" className="bg-pbgray text-white py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white">
