@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI!;
 
-if (!MONGODB_URI && process.env.NODE_ENV === "development") {
-  console.warn("⚠️ MONGODB_URI is not defined. Database features will not work.");
+if (!MONGODB_URI) {
+  throw new Error("MONGODB_URI environment variable is not defined");
 }
 
 let cached = global as typeof global & {
@@ -23,12 +23,8 @@ async function connectDB() {
     return cached.mongoose!.conn;
   }
 
-  if (!cached.mongoose!.promise) {
-    if (!MONGODB_URI) {
-      throw new Error("MONGODB_URI environment variable is not defined");
-    }
+  if (!cached.mongoose!.promise)
     cached.mongoose!.promise = mongoose.connect(MONGODB_URI).then((m) => m);
-  }
 
   cached.mongoose!.conn = await cached.mongoose!.promise;
 
@@ -36,7 +32,7 @@ async function connectDB() {
   return cached.mongoose!.conn;
 }
 
-if (process.env.NEXT_RUNTIME === "nodejs" && MONGODB_URI) {
+if (process.env.NEXT_RUNTIME === "nodejs") {
   connectDB().catch((err) => {
     console.error("Failed to connect to MongoDB:", err);
   });
