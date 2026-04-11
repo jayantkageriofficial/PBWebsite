@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { exportLogs } from "@/lib/operations/logs";
-import type { LogEntry, LogModule, LogAction } from "@/lib/operations/logs";
+import { exportLogs } from "@/lib/server/logs";
+import type { LogEntry, LogModule, LogAction } from "@/lib/server/logs";
 
 const TABS = [
   "all",

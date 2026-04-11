@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { sendVerificationEmail } from "@/lib/operations/auth";
 import {
   Loader2,
   Mail,
@@ -23,12 +22,16 @@ export default function LoginForm({ error }: { error?: string }) {
     setErrorMsg("");
 
     try {
-      const success = await sendVerificationEmail(email);
-      if (success) setState("success");
+      const res = await fetch(
+        `/api/auth/login?email=${encodeURIComponent(email)}`,
+      );
+      const data = await res.json();
+      if (res.ok && data.success) setState("success");
       else {
         setState("error");
         setErrorMsg(
-          "Failed to send sign-in link. Please check the email address and try again.",
+          data.error ??
+            "Failed to send sign-in link. Please check the email address and try again.",
         );
       }
     } catch {
