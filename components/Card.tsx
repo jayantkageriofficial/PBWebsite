@@ -36,14 +36,13 @@ const Card: React.FC<CardProps> = ({ name, role, company, linkedInUrl, imageUrl 
                 
                 <div className={`
                     ${isFlipEnabled ? '[backface-visibility:hidden]' : ''} 
-                    ${isFlipped ? 'z-0' : 'z-10'} 
                     flex flex-col 
                     ${imageUrl && linkedInUrl 
                         ? 'md:w-103.5 w-75 md:h-116.5 rounded-[40px] border-[1.25px] border-[#262626]' 
                         : 'md:w-66.5 h-fit rounded-[20px]'
                     } 
                     p-6 
-                    ${!imageUrl && !linkedInUrl ? 'border-0 bg-[#1C1C1C]' : 'bg-black'} 
+                    ${!imageUrl && !linkedInUrl ? 'border-0 bg-[#1C1C1C]' : 'bg-[#111111]'} 
                     gap-5
                 `}>
                     {imageUrl && linkedInUrl && (
@@ -63,7 +62,7 @@ const Card: React.FC<CardProps> = ({ name, role, company, linkedInUrl, imageUrl 
                                 {name}
                             </span>
                             {!isFlipEnabled && (
-                                <p className={`text-[#B3B3B3] ${lexend.className} font-light text-[17px] text-center leading-[1.4] md:w-34.75 h-6`}>
+                                <p className={`text-[#B3B3B3] text-lexend font-light  text-center text-[17px] text-center leading-[1.4] md:w-34.75 h-7`}>
                                     {role}
                                 </p>
                             )}
@@ -74,8 +73,7 @@ const Card: React.FC<CardProps> = ({ name, role, company, linkedInUrl, imageUrl 
                 
                 {isFlipEnabled && (
                     <div className={`
-                        absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] 
-                        ${isFlipped ? 'z-10' : 'z-0'} 
+                        absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)]  
                         rounded-[40px] border-[1.25px] border-pbgreen bg-[#111111] p-6 
                         flex flex-col items-center justify-center text-center
                     `}>
