@@ -1,0 +1,68 @@
+export default function LoreCard({
+  title,
+  date,
+  location,
+  preview,
+  images,
+}: any) {
+  return (
+    <div className="w-full flex justify-center min-h-93 mb-10 bg-[#111111]">
+      <div className="w-280 flex bg-[#1C1C1C] min-h-93">
+        <div className="h-full w-[50%]">
+          <div className="min-h-18 w-full pt-8 pl-12.5 ">
+            <h1 className="text-5xl text-[#37FF00] font-medium">{title}</h1>
+          </div>
+
+          <div className="h-7.5 mt-4 flex w-full pl-12.5 ">
+            <div className="bg-[#1A1A1A] mr-6 border border-[#262626] rounded-4xl px-3 flex items-center ">
+              <img src="/lores/DateIcon.svg" className="mr-2" />
+              <p className={`text-[#B3B3B3] font-light text-xs`}>
+                {new Date(date).toLocaleDateString("en-US", {
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
+            </div>
+
+            <div className="bg-[#1A1A1A] border border-[#262626] rounded-4xl px-3 flex items-center ">
+              <img src="/lores/location.svg" className="mr-2" />
+              <p className={`text-[#B3B3B3] font-light text-xs`}>{location}</p>
+            </div>
+          </div>
+
+          <div className="min-h-18 w-full pl-12.5 pt-4">
+            <p className="text-[1.1rem] min-h-18 max-w-116 text-[#B3B3B3] font-light">
+              {preview}
+            </p>
+          </div>
+
+          <div className="pl-12.5 h-14 w-full mt-11 mb-5">
+            <button className="bg-pbsurface border border-[#37ff0014] cursor-pointer h-14  w-49.5 rounded-2xl text-center select-none text-white text-[1.1rem]">
+              Read More
+            </button>
+          </div>
+        </div>
+
+        <div className="flex justify-center overflow-hidden items-center relative h-full w-[50%]">
+          {/* Dotted Background */}
+          <div
+            className="absolute top-0 translate-y-[-50%] translate-x-[50%] right-0 w-170 h-200 z-0 pointer-events-none 
+            bg-[radial-gradient(circle,rgba(55,255,0,0.6)_1px,transparent_2px)] 
+            bg-size-[11px_11px] 
+            mask-[radial-gradient(circle,transparent_15%,black_40%,transparent_50%)]
+            [-webkit-mask-image:radial-gradient(circle,transparent_15%,black_40%,transparent_60%)]"
+          />
+          {/* Dotted Background */}
+
+          <div className="h-83 w-lg overflow-hidden rounded-sm bg-cover bg-center grayscale-100">
+            <img
+              src={images[0]}
+              alt={location}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
