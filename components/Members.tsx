@@ -186,13 +186,13 @@ export default function Members() {
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-full space-y-4 mt-24 bg-pbpages">
-      <div className="flex items-center justify-center gap-4 mb-12">
-        <h1 className="text-lexend font-normal md:text-[64px] text-[40px] leading-tight">
+      <div className="flex items-center justify-center gap-4 mb-8 md:mb-12">
+        <h1 className="text-lexend font-normal text-[40px] md:text-[64px] leading-tight">
           <span className="text-[#37FF00]">{"<. > "}</span>
           <span className="text-white">Members</span>
         </h1>
       </div>
-      <div className="w-full max-w-8xl px-4  md:mt-24 mt-8">
+      <div className="w-full max-w-8xl px-4 md:px-6 lg:px-8 md:mt-24 mt-8">
         <div className="rounded-[20px] overflow-hidden">
           {headings.map((heading, index) => (
             <div
@@ -213,22 +213,21 @@ export default function Members() {
                 content={
                   <div className="flex flex-col items-center space-y-6 w-full pt-4 pb-8 bg-pbpages">
                     <div
-                      className={`grid justify-items-center gap-y-12 gap-x-9 w-full ${
+                      className={`grid justify-items-center gap-y-12 gap-x-6 md:gap-x-8 lg:gap-x-10 w-full max-w-7xl mx-auto ${
                         heading.toLowerCase().includes("alumni")
                           ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-                          : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                          : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                       }`}
                     >
                       {data[heading]?.map((profile, cardIndex) => (
-                        <div key={cardIndex} className="relative">
-                          <Card
-                            name={profile.name}
-                            role={profile.role}
-                            company={profile.company || ""}
-                            linkedInUrl={profile.linkedInUrl || ""}
-                            imageUrl={profile.imageUrl || ""}
-                          />
-                        </div>
+                        <Card
+                          key={cardIndex}
+                          name={profile.name}
+                          role={profile.role}
+                          company={profile.company || ""}
+                          linkedInUrl={profile.linkedInUrl || ""}
+                          imageUrl={profile.imageUrl || ""}
+                        />
                       ))}
                     </div>
                   </div>
