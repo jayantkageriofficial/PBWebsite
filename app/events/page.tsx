@@ -1,6 +1,7 @@
 "use client";
 
 import { Star } from "lucide-react";
+import { useState } from "react";
 import EventCard from "@/components/EventCard";
 
 const upcomingEvents = [
@@ -49,16 +50,21 @@ function StarRating({ count }: { count: number }) {
 }
 
 function ReviewCard({ name, review, rating }: { name: string; review: string; rating: number }) {
+    const [hovered, setHovered] = useState(false);
+
     return (
         <div
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
             style={{
                 backgroundColor: "#191919",
                 borderRadius: "20px",
-                border: "1px solid rgba(55,255,0,0.3)",
+                border: hovered ? "1px solid rgba(55,255,0,0.5)" : "1px solid transparent",
                 padding: "20px 18px",
                 display: "flex",
                 flexDirection: "column",
                 gap: "12px",
+                transition: "border-color 0.3s ease",
             }}
         >
             <StarRating count={rating} />
