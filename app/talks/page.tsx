@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Chocolate_Classical_Sans, Lexend } from "next/font/google";
+import { Lexend } from "next/font/google";
 import Image, { StaticImageData } from "next/image";
 import talks1 from "@/public/talks1.jpg";
 
