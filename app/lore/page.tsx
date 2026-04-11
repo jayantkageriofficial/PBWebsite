@@ -16,7 +16,7 @@ export default async function Lore() {
       >
         Our Lore
       </div>
-      <div className="bg-pbpages flex justify-center w-full mb-25  text-center">
+      <div className="bg-pbpages flex px-5 justify-center w-full mb-25  text-center">
         <p className={`text-pbtext font-light text-3xl max-w-300`}>
           Every line of code tells a story, but our greatest tales are written
           in the adventures we share. Here are the chronicles of our coding
