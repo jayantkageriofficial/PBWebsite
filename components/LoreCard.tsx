@@ -1,3 +1,6 @@
+"use client";
+import { useState } from "react";
+
 export default function LoreCard({
   title,
   date,
@@ -5,6 +8,8 @@ export default function LoreCard({
   preview,
   images,
 }: any) {
+  const [currentImg, setCurrentImg] = useState<number>(0);
+  const [imageActive, setImageActive] = useState<boolean>(false);
   return (
     <div className="w-full flex justify-center min-h-93 mb-10 bg-[#111111]">
       <div className="w-280 flex bg-[#1C1C1C] min-h-93">
@@ -54,11 +59,29 @@ export default function LoreCard({
           />
           {/* Dotted Background */}
 
-          <div className="h-83 w-lg overflow-hidden rounded-sm bg-cover bg-center grayscale-100">
+          <div
+            className="h-83 w-lg overflow-hidden relative rounded-sm bg-cover bg-center"
+            onMouseLeave={() => {
+              setImageActive(false);
+            }}
+            onMouseEnter={() => {
+              setImageActive(true);
+            }}
+          >
+            <div className={`w-full h-full absolute ${imageActive?"":"hidden"}`}>
+              <button className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl top-[50%] flex justify-center items-center translate-y-[-50%] left-2 z-10 ">
+                <img src="/lores/left_arrow.svg" className="h-4 w-4" />
+              </button>
+
+              <button className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl right-2 top-[50%] flex justify-center items-center translate-y-[-50%] z-10 ">
+                <img src="/lores/right_arrow.svg" className="h-4 w-4" />
+              </button>
+            </div>
+
             <img
-              src={images[0]}
+              src={images[currentImg]}
               alt={location}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover grayscale-100"
             />
           </div>
         </div>
