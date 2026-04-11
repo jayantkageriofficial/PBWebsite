@@ -216,7 +216,7 @@ export default function Navbar() {
         className={`${pathname === "/" ? "bg-black" : "bg-pbpages"} pt-5 px-5 ${lexend.className}`}
       >
         <div className="relative bg-pbgray rounded-4xl text-white z-30">
-          <div className="mx-auto px-12">
+          <div className="mx-auto pl-12 pr-5">
             <div className="flex items-center justify-between h-16">
               <Link href={"/"} className="flex items-center">
                 <Image
