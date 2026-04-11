@@ -47,7 +47,7 @@ const Card: React.FC<CardProps> = ({
             w-full
             ${
               imageUrl && linkedInUrl
-                ? "max-w-75 sm:max-w-85 md:max-w-90 lg:max-w-95 xl:max-w-103.25 aspect-413/466 rounded-[40px] border border-[#262626]"
+                ? "max-w-75 sm:max-w-85 md:max-w-90 lg:max-w-95 xl:max-w-103.25 aspect-413/466 rounded-[40px] border border-pbborder"
                 : "max-w-60 h-fit rounded-[20px]"
             } 
             mx-auto
@@ -69,12 +69,12 @@ const Card: React.FC<CardProps> = ({
           )}
           <div className="flex justify-center">
             <div className="flex flex-col items-center justify-center gap-1.5 w-full h-fit">
-              <span className="text-pbgreen font-light whitespace-nowrap bg-[#1A1A1A] w-fit h-fit text-center rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base border border-[#262626]">
+              <span className="text-pbgreen font-light whitespace-nowrap bg-pbdarkgray w-fit h-fit text-center rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base border border-pbborder">
                 {name}
               </span>
               {!isFlipEnabled && (
                 <p
-                  className={`text-[#B3B3B3] text-lexend font-light text-center text-[15px] sm:text-[17px] leading-[1.4] h-7`}
+                  className={`text-pbtext text-lexend font-light text-center text-[15px] sm:text-[17px] leading-[1.4] h-7`}
                 >
                   {role}
                 </p>
@@ -105,7 +105,7 @@ const Card: React.FC<CardProps> = ({
               </p>
             )}
 
-            <div className="mt-6 sm:mt-8 pt-4 border-t border-[#262626] w-full flex justify-center">
+            <div className="mt-6 sm:mt-8 pt-4 border-t border-pbborder w-full flex justify-center">
               <a
                 href={linkedInUrl}
                 target="_blank"

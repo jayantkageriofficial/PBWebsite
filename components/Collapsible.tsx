@@ -71,7 +71,7 @@ const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
 
         {isOpen && (
           <div
-            className={`p-6 bg-pbpages ${isAnySectionOpen ? "" : "border-t border-[#B3B3B3]"}`}
+            className={`p-6 bg-pbpages ${isAnySectionOpen ? "" : "border-t border-pbtext"}`}
           >
             {content}
           </div>
