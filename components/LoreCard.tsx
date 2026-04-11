@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Lore } from "@/types/lore/loreType";
 import Image from "next/image";
-import { useState } from "react";
+
 
 export default function LoreCard({
   title,
@@ -16,7 +16,6 @@ export default function LoreCard({
 
 
   return (
-    <div className="w-full flex justify-center min-h-93 mb-10 bg-pbpages">
     <div className="w-full flex justify-center min-h-93 mb-10 bg-pbpages">
       <div className="w-280 flex bg-[#1C1C1C] min-h-93">
         <div className="h-full w-[50%]">
