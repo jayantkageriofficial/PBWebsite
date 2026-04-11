@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { lexendTera } from "../page";
 import LoreCard from "@/components/LoreCard";
+import { Lores } from "./data/data";
 
 export const metadata: Metadata = {
   title: "Lore",
@@ -22,8 +23,21 @@ export default async function Lore() {
           club's journeys, where friendship and innovation intertwine.
         </p>
       </div>
-      <LoreCard/>
-      
+
+      {Lores.map((lore) => {
+        return (
+          <LoreCard
+            key={lore.id}
+            title={lore.title}
+            date={lore.date}
+            location={lore.location}
+            preview={lore.preview}
+            images={lore.images}
+          />
+        );
+      })}
+
+      <div className="h-40"></div>
     </>
   );
 }
