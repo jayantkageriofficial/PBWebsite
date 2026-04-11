@@ -31,10 +31,16 @@ const pastEvents = [
 ];
 
 const reviews = [
-    { name: "Last name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud", rating: 0 },
-    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolori n reprehenderit in voluptate", rating: 0 },
-    { name: "Your name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud", rating: 0 },
-    { name: "Reviewer", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 0 },
+    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
+    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
+    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
+    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
+    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 4 },
+    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
+    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
+    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
+    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 3 },
+    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
 ];
 
 function EventCard({ title, description, image }: { title: string; description: string; image?: string }) {
@@ -45,13 +51,14 @@ function EventCard({ title, description, image }: { title: string; description: 
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             style={{
-                backgroundColor: "#1a1a1a",
+                backgroundColor: "#111",
                 borderRadius: "20px",
-                border: hovered ? "1px solid rgba(55,255,0,0.5)" : "1px solid rgba(255,255,255,0.18)",
+                border: hovered ? "1px solid rgba(55,255,0,0.5)" : "1px solid transparent",
                 padding: "9px 10px",
                 display: "flex",
                 flexDirection: "column",
                 gap: "8px",
+                maxWidth: "396px",
                 transition: "box-shadow 0.3s ease, border-color 0.3s ease",
                 boxShadow: hovered
                     ? "0 0 15px rgba(55,255,0,0.25), 0 0 30px rgba(55,255,0,0.10), inset 0 0 15px rgba(55,255,0,0.05)"
@@ -64,8 +71,7 @@ function EventCard({ title, description, image }: { title: string; description: 
                 style={{
                     borderRadius: "14px",
                     overflow: "hidden",
-                    backgroundColor: "#3a3a3a",
-                    border: "1px solid rgba(255,255,255,0.10)",
+                    backgroundColor: "#222",
                     width: "100%",
                     aspectRatio: "4/3",
                     position: "relative",
@@ -88,7 +94,7 @@ function EventCard({ title, description, image }: { title: string; description: 
             <div style={{ display: "flex", flexDirection: "column", gap: "4px", padding: "4px 6px 6px" }}>
                 <span
                     style={{
-                        fontFamily: "'Clash Display Variable', 'Clash Display', sans-serif",
+                        fontFamily: "'Lexend', sans-serif",
                         fontSize: "28px",
                         fontWeight: 500,
                         lineHeight: "140%",
@@ -104,9 +110,9 @@ function EventCard({ title, description, image }: { title: string; description: 
                 </span>
                 <span
                     style={{
-                        fontFamily: "'Clash Display Variable', 'Clash Display', sans-serif",
-                        fontSize: "17px",
-                        fontWeight: 500,
+                        fontFamily: "'Lexend', sans-serif",
+                        fontSize: "14px",
+                        fontWeight: 400,
                         lineHeight: "140%",
                         letterSpacing: "0%",
                         color: "rgba(255,255,255,0.65)",
@@ -123,7 +129,7 @@ function StarRating({ count }: { count: number }) {
     return (
         <div className="flex gap-0.5">
             {[0, 1, 2, 3, 4].map((i) => (
-                <Star key={i} className={`w-3.5 h-3.5 ${i < count ? "text-pbgreen fill-pbgreen" : "text-white/30"}`} />
+            <Star key={i} className={`w-4 h-4 ${i < count ? "text-pbgreen fill-pbgreen" : "text-white/30"}`} />
             ))}
         </div>
     );
@@ -133,22 +139,19 @@ function ReviewCard({ name, review, rating }: { name: string; review: string; ra
     return (
         <div
             style={{
-                backgroundColor: "#2a2a2a",
+                backgroundColor: "#111",
                 borderRadius: "16px",
-                border: "1px solid rgba(255,255,255,0.18)",
+                border: "1px solid rgba(55,255,0,0.3)",
                 padding: "20px 18px",
                 display: "flex",
                 flexDirection: "column",
                 gap: "12px",
-                minWidth: "240px",
-                maxWidth: "260px",
-                flexShrink: 0,
             }}
         >
             <StarRating count={rating} />
             <p
                 style={{
-                    fontFamily: "'Clash Display Variable', 'Clash Display', sans-serif",
+                    fontFamily: "'Lexend', sans-serif",
                     fontSize: "13px",
                     fontWeight: 400,
                     lineHeight: "1.6",
@@ -160,7 +163,7 @@ function ReviewCard({ name, review, rating }: { name: string; review: string; ra
             </p>
             <span
                 style={{
-                    fontFamily: "'Clash Display Variable', 'Clash Display', sans-serif",
+                    fontFamily: "'Lexend', sans-serif",
                     fontSize: "14px",
                     fontWeight: 500,
                     color: "#37FF00",
@@ -172,23 +175,58 @@ function ReviewCard({ name, review, rating }: { name: string; review: string; ra
     );
 }
 
-function ReviewCarousel() {
-    const trackRef = useRef<HTMLDivElement>(null);
-    const [isDragging, setIsDragging] = useState(false);
-    const [startX, setStartX] = useState(0);
-    const [scrollLeft, setScrollLeft] = useState(0);
+function ReviewMarquee() {
+    const topRow = reviews.slice(0, 5);
+    const bottomRow = reviews.slice(5, 10);
 
     return (
-        <div
-            ref={trackRef}
-            className="flex gap-4 overflow-x-auto pb-4 cursor-grab active:cursor-grabbing select-none"
-            style={{ scrollbarWidth: "none" }}
-            onMouseDown={(e) => { setIsDragging(true); setStartX(e.pageX - (trackRef.current?.offsetLeft ?? 0)); setScrollLeft(trackRef.current?.scrollLeft ?? 0); }}
-            onMouseLeave={() => setIsDragging(false)}
-            onMouseUp={() => setIsDragging(false)}
-            onMouseMove={(e) => { if (!isDragging) return; e.preventDefault(); const x = e.pageX - (trackRef.current?.offsetLeft ?? 0); if (trackRef.current) trackRef.current.scrollLeft = scrollLeft - (x - startX) * 1.5; }}
-        >
-            {[...reviews, ...reviews].map((r, i) => <ReviewCard key={i} {...r} />)}
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px", overflow: "hidden" }}>
+            <style>{`
+                @keyframes scrollLeft {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+                @keyframes scrollRight {
+                    0% { transform: translateX(-50%); }
+                    100% { transform: translateX(0); }
+                }
+            `}</style>
+
+            {/* Top row — scrolls left */}
+            <div style={{ overflow: "hidden", width: "100%" }}>
+                <div
+                    style={{
+                        display: "flex",
+                        gap: "16px",
+                        width: "max-content",
+                        animation: "scrollLeft 30s linear infinite",
+                    }}
+                >
+                    {[...topRow, ...topRow, ...topRow, ...topRow].map((r, i) => (
+                        <div key={i} style={{ minWidth: "260px", maxWidth: "260px" }}>
+                            <ReviewCard {...r} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Bottom row — scrolls right */}
+            <div style={{ overflow: "hidden", width: "100%" }}>
+                <div
+                    style={{
+                        display: "flex",
+                        gap: "16px",
+                        width: "max-content",
+                        animation: "scrollRight 30s linear infinite",
+                    }}
+                >
+                    {[...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow].map((r, i) => (
+                        <div key={i} style={{ minWidth: "260px", maxWidth: "260px" }}>
+                            <ReviewCard {...r} />
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 }
@@ -205,53 +243,61 @@ export default function EventsPage() {
                 </div>
             </section>
 
-            <section className="bg-black text-white py-14 px-6 sm:px-10 lg:px-20">
-                <h2
-                    style={{
-                        fontFamily: "'Clash Display Variable', 'Clash Display', sans-serif",
-                        fontSize: "clamp(28px, 4vw, 40px)",
-                        fontWeight: 500,
-                        color: "#ffffff",
-                        marginBottom: "32px",
-                    }}
-                >
-                    Upcoming Events
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {upcomingEvents.map((ev) => <EventCard key={ev.title} title={ev.title} description={ev.description} image={ev.image} />)}
+            <section style={{ backgroundColor: "black", color: "white", padding: "56px 24px" }}>
+                <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
+                    <h2
+                        style={{
+                            fontFamily: "'Lexend', sans-serif",
+                            fontSize: "clamp(28px, 4vw, 40px)",
+                            fontWeight: 500,
+                            color: "#ffffff",
+                            marginBottom: "32px",
+                        }}
+                    >
+                        Upcoming Events
+                    </h2>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+                        {upcomingEvents.map((ev) => <EventCard key={ev.title} title={ev.title} description={ev.description} image={ev.image} />)}
+                    </div>
                 </div>
             </section>
 
-            <section className="bg-black text-white py-14 px-6 sm:px-10 lg:px-20">
-                <h2
-                    style={{
-                        fontFamily: "'Clash Display Variable', 'Clash Display', sans-serif",
-                        fontSize: "clamp(28px, 4vw, 40px)",
-                        fontWeight: 500,
-                        color: "#ffffff",
-                        marginBottom: "32px",
-                    }}
-                >
-                    Past Events
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {pastEvents.map((ev, i) => <EventCard key={i} title={ev.title} description={ev.description} image={ev.image} />)}
+            <section style={{ backgroundColor: "black", color: "white", padding: "56px 24px" }}>
+                <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
+                    <h2
+                        style={{
+                            fontFamily: "'Lexend', sans-serif",
+                            fontSize: "clamp(28px, 4vw, 40px)",
+                            fontWeight: 500,
+                            color: "#ffffff",
+                            marginBottom: "32px",
+                        }}
+                    >
+                        Past Events
+                    </h2>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+                        {pastEvents.map((ev, i) => <EventCard key={i} title={ev.title} description={ev.description} image={ev.image} />)}
+                    </div>
                 </div>
             </section>
 
-            <section className="bg-black text-white py-14 px-6 sm:px-10 lg:px-20 overflow-hidden">
-                <h2
-                    style={{
-                        fontFamily: "'Clash Display Variable', 'Clash Display', sans-serif",
-                        fontSize: "clamp(28px, 4vw, 40px)",
-                        fontWeight: 500,
-                        color: "#ffffff",
-                        marginBottom: "32px",
-                    }}
-                >
-                    Events experience
-                </h2>
-                <ReviewCarousel />
+            <section style={{ backgroundColor: "black", color: "white", padding: "56px 24px", overflow: "hidden" }}>
+                <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
+                    <h2
+                        style={{
+                            fontFamily: "'Lexend', sans-serif",
+                            fontSize: "clamp(28px, 4vw, 40px)",
+                            fontWeight: 500,
+                            color: "#ffffff",
+                            marginBottom: "32px",
+                            fontStyle: "italic",
+                            textAlign: "center",
+                        }}
+                    >
+                        Events experience
+                    </h2>
+                    <ReviewMarquee />
+                </div>
             </section>
         </>
     );
