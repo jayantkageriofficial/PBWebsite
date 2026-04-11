@@ -1,24 +1,29 @@
+"use client"
+
 import React, { forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
-import { BiSolidChevronsUp,BiSolidChevronsDown } from "react-icons/bi";
-import { Lexend } from "next/font/google";
+import { BiChevronsDown } from "react-icons/bi";
+import { Lexend } from 'next/font/google';
 
 interface CollapsibleSectionProps {
     heading: string;
     content: JSX.Element;
     isOpen: boolean;
+    isAnySectionOpen: boolean; // New prop for global background toggle
     onToggle: () => void;
 }
-const lexend = Lexend({ subsets: ["latin"] ,weight:["300","400","500"]});
+
+const lexend = Lexend({ subsets: ["latin"], weight: ["200", "300", "400", "500"] });
+
 const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
-    ({ heading, content, isOpen, onToggle }, ref) => {
+    ({ heading, content, isOpen, isAnySectionOpen, onToggle }, ref) => {
         const localRef = useRef<HTMLDivElement | null>(null);
 
         useImperativeHandle(ref, () => localRef.current!);
 
+        // Automatic scroll into view when opened
         useEffect(() => {
             if (isOpen && localRef.current) {
-
-                const offset = 200; // Adjust this value to match the height of your navbar
+                const offset = 150; 
                 const bodyRect = document.body.getBoundingClientRect().top;
                 const elementRect = localRef.current.getBoundingClientRect().top;
                 const elementPosition = elementRect - bodyRect;
@@ -28,33 +33,36 @@ const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
                     top: offsetPosition,
                     behavior: 'smooth',
                 });
-
             }
         }, [isOpen]);
 
-
         return (
-            <div className="" ref={localRef}>
+            <div className="w-full" ref={localRef}>
                 <div
-                    onClick={(e) => {
-                        e.preventDefault();
-                        onToggle();
-                    }}
-                    tabIndex={-1}
-                    className="flex items-center justify-between p-4 cursor-pointer bg-[#111111] text-white"
+                    onClick={() => onToggle()}
+                   
+                    className={`flex items-center justify-between p-6 cursor-pointer transition-all duration-300 select-none ${
+                        isAnySectionOpen ? 'bg-[#111111]' : 'bg-[#1C1C1C]'
+                    }`}
                 >
-                    <h2 className={`${isOpen ? ' text-[#37FF00]' : 'text-[#FFFFFF]'} whitespace-nowrap md:text-[64px] text-[30px] font-lexend font-normal leading-[150%]`}>
+                   
+                    <h2 className={`font-normal md:text-[42px] text-[24px] transition-colors duration-300 ${
+                        isOpen ? 'text-[#37FF00]' : 'text-white'
+                    } ${lexend.className}`}>
                         {heading}
                     </h2>
 
-                    {isOpen ? (
-                        <BiSolidChevronsUp className="md:w-14 md:h-14 w-9 h-9 text-pbgreen" />
-                    ) : (
-                        <BiSolidChevronsDown className="md:w-14 md:h-14 w-12 h-12 text-white" />
-                    )}
+                    
+                    <div className={`transition-all duration-300 transform ${
+                        isOpen ? 'text-[#37FF00] rotate-180' : 'text-white'
+                    }`}>
+                        <BiChevronsDown className="md:h-12 md:w-12 w-8 h-8" />
+                    </div>
                 </div>
+
+                
                 {isOpen && (
-                    <div className="p-4 bg-[#111111]">
+                    <div className={`p-6 bg-[#111111] ${isAnySectionOpen? '' :'border-t border-[#B3B3B3]'}`}>
                         {content}
                     </div>
                 )}

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Card from "./Card";
 import CollapsibleSection from "./Collapsible";
-import { FaEllipsisV, FaRegBell } from "react-icons/fa";
 
 interface Member {
   id?: string;
@@ -24,30 +23,12 @@ const headings = [
   "Second Year",
   "First Year",
 ]
+
 const sampleMembersData: { [key: string]: Member[] } = {
   "Current Leads": [
-    {
-      name: "Aisha Khan",
-      role: "President",
-      year: "Fourth Year",
-      company:"Google",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill,g_face/v1615582317/docs/models.jpg",
-    },
-    {
-      name: "Rahul Gupta",
-      role: "Technical Lead",
-      year: "Third Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg",
-    },
-    {
-      name: "Neha Sharma",
-      role: "Design Lead",
-      year: "Third Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/v1652343874/docs/demo_image2.jpg",
-    },
+    { name: "Aisha Khan", role: "President", year: "Fourth Year", company: "Google", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill,g_face/v1615582317/docs/models.jpg" },
+    { name: "Rahul Gupta", role: "Technical Lead", year: "Third Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg" },
+    { name: "Neha Sharma", role: "Design Lead", year: "Third Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/v1652343874/docs/demo_image2.jpg" },
   ],
   "Alumni Leads": [
     { name: "Priya Patel", role: "Former President", year: "Alumni" },
@@ -72,142 +53,86 @@ const sampleMembersData: { [key: string]: Member[] } = {
     { name: "Shreya Ghoshal", role: "Member", year: "Alumni" },
   ],
   "Fourth Year": [
-    { 
-      name: "Aditya Jain", 
-      role: "Executive", 
-      year: "Fourth Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill/v1652366604/docs/demo_image3.jpg"
-    },
-    { 
-      name: "Sanya Arora", 
-      role: "Executive", 
-      year: "Fourth Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill,g_face/v1615582317/docs/models.jpg"
-    },
+    { name: "Aditya Jain", role: "Executive", year: "Fourth Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill/v1652366604/docs/demo_image3.jpg" },
+    { name: "Sanya Arora", role: "Executive", year: "Fourth Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill,g_face/v1615582317/docs/models.jpg" },
   ],
   "Third Year": [
-    { 
-      name: "Rohan Mehta", 
-      role: "Core Member", 
-      year: "Third Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg" 
-    },
-    { 
-      name: "Ishaan Reddy", 
-      role: "Core Member", 
-      year: "Third Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/v1652343874/docs/demo_image2.jpg" 
-    },
-    { 
-      name: "Kritika Das", 
-      role: "Core Member", 
-      year: "Third Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill/v1652366604/docs/demo_image3.jpg" 
-    },
+    { name: "Rohan Mehta", role: "Core Member", year: "Third Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg" },
+    { name: "Ishaan Reddy", role: "Core Member", year: "Third Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/v1652343874/docs/demo_image2.jpg" },
+    { name: "Kritika Das", role: "Core Member", year: "Third Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill/v1652366604/docs/demo_image3.jpg" },
   ],
   "Second Year": [
-    { 
-      name: "Dev Joshi", 
-      role: "Junior Member", 
-      year: "Second Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill,g_face/v1615582317/docs/models.jpg" 
-    },
-    { 
-      name: "Meera Nair", 
-      role: "Junior Member", 
-      year: "Second Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg" 
-    },
+    { name: "Dev Joshi", role: "Junior Member", year: "Second Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill,g_face/v1615582317/docs/models.jpg" },
+    { name: "Meera Nair", role: "Junior Member", year: "Second Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg" },
   ],
   "First Year": [
-    { 
-      name: "Arjun Bhat", 
-      role: "Fresher", 
-      year: "First Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/v1652343874/docs/demo_image2.jpg" 
-    },
-    { 
-      name: "Tara Menon", 
-      role: "Fresher", 
-      year: "First Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill/v1652366604/docs/demo_image3.jpg" 
-    },
-    { 
-      name: "Kabir Sen", 
-      role: "Fresher", 
-      year: "First Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill,g_face/v1615582317/docs/models.jpg" 
-    },
-    { 
-      name: "Zara Ali", 
-      role: "Fresher", 
-      year: "First Year",
-      linkedInUrl: "https://linkedin.com",
-      imageUrl: "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg" 
-    },
+    { name: "Arjun Bhat", role: "Fresher", year: "First Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/v1652343874/docs/demo_image2.jpg" },
+    { name: "Tara Menon", role: "Fresher", year: "First Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill/v1652366604/docs/demo_image3.jpg" },
+    { name: "Kabir Sen", role: "Fresher", year: "First Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/w_400,h_400,c_fill,g_face/v1615582317/docs/models.jpg" },
+    { name: "Zara Ali", role: "Fresher", year: "First Year", linkedInUrl: "https://linkedin.com", imageUrl: "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg" },
   ],
 };
+
 export default function Members() {
-  const [openIndex, setOpenIndex] = useState<number>(
-    headings.indexOf("Current Leads")
-  );
-  
-  const [data, setData] = useState<{ [key: string]: Member[] }>(sampleMembersData);
-  
-  const [menuVisible, setMenuVisible] = useState<{ [key: string]: boolean }>({});
+  const [openIndex, setOpenIndex] = useState<number>(headings.indexOf("Current Leads"));
+  const [data] = useState(sampleMembersData);
 
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? -1 : index);
   };
 
-  const toggleMenu = (id: string) => {
-    setMenuVisible((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
+  const isAnyOpen = openIndex !== -1;
 
   return (
-    <div className="flex flex-col justify-center items-center w-full space-y-4 mt-24 bg-[#111111]">
-      <div className="space-y-2 w-full max-w-[1400px] px-4 ">
-        {headings.map((heading, index) => (
-          <CollapsibleSection
-            key={index}
-            heading={heading}
-            isOpen={openIndex === index}
-            onToggle={() => handleToggle(index)}
-            content={
-              <div className="flex flex-col items-center space-y-6 w-full pt-4 ">
-                <div className={`grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-y-16 gap-y-12 gap-x-9 lg:gap-x-12 justify-items-center">
-                 ${
-            heading.toLowerCase().includes("alumni")
-              ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12" 
-              : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-          }`}>
-                  {data[heading]?.map((profile, cardIndex) => (
-                    <div key={cardIndex} className="relative">
-                      <Card
-                        name={profile.name}
-                        role={profile.role}
-                        company={profile.company || ""}
-                        linkedInUrl={profile.linkedInUrl || ""}
-                        imageUrl={profile.imageUrl || ""}
-                      />
-                    </div>
-                  ))}
+    <div className="flex flex-col justify-center items-center w-full h-full space-y-4 mt-24 bg-[#111111]">
+      <div className="flex items-center justify-center gap-4 mb-12">
+    <h1 className="text-lexend font-normal md:text-[64px] text-[40px] leading-tight">
+        <span className="text-[#37FF00]">{"<. > "}</span>
+        <span className="text-white">Members</span>
+    </h1>
+</div>
+      <div className="w-full max-w-347 px-4  md:mt-24 mt-8">
+        <div className="rounded-[20px] overflow-hidden">
 
-                </div>
-              </div>
-            }
-          />
-        ))}
+          {headings.map((heading, index) => (
+            <div
+              key={index}
+
+              className={`transition-colors duration-500 ${index !== 0
+                  ? (isAnyOpen ? 'border-t border-transparent' : 'border-t border-[#B3B3B3]')
+                  : 'border-t border-transparent'
+                }`}
+            >
+              <CollapsibleSection
+                heading={heading}
+                isOpen={openIndex === index}
+                isAnySectionOpen={isAnyOpen}
+                onToggle={() => handleToggle(index)}
+                content={
+                  <div className="flex flex-col items-center space-y-6 w-full pt-4 pb-8 bg-[#111111]">
+                    <div className={`grid justify-items-center gap-y-12 gap-x-9 w-full ${heading.toLowerCase().includes("alumni")
+                        ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                        : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                      }`}>
+                      {data[heading]?.map((profile, cardIndex) => (
+                        <div key={cardIndex} className="relative">
+                          <Card
+                            name={profile.name}
+                            role={profile.role}
+                            company={profile.company || ""}
+                            linkedInUrl={profile.linkedInUrl || ""}
+                            imageUrl={profile.imageUrl || ""}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                }
+              />
+            </div>
+          ))}
+        </div>
+
       </div>
       <div className="h-24 w-full flex-shrink-0"></div>
     </div>
