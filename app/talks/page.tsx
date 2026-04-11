@@ -120,7 +120,7 @@ export default function TalksSection() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-7 py-4 rounded-full text-xl capitalize
+              className={`px-7 py-4 rounded-full text-xl uppercase
                 ${
                   activeTab === tab
                     ? "bg-pbgreen text-black"
