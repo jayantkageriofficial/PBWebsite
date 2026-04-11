@@ -1,8 +1,7 @@
 "use client";
 
-import ThreeBackground from "@/components/ThreeBackground";
 import { Star } from "lucide-react";
-import { useRef, useState } from "react";
+import EventCard from "@/components/EventCard";
 
 const upcomingEvents = [
     { title: "PBCTF 5.0", description: "Jeopardy Style CTF", image: "/images/cybersec.webp" },
@@ -37,87 +36,7 @@ const reviews = [
     { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
 ];
 
-function EventCard({ title, description, image }: { title: string; description: string; image?: string }) {
-    const [hovered, setHovered] = useState(false);
 
-    return (
-        <div
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            style={{
-                backgroundColor: "#111",
-                borderRadius: "20px",
-                border: hovered ? "1px solid rgba(55,255,0,0.5)" : "1px solid transparent",
-                padding: "9px 10px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "8px",
-                maxWidth: "396px",
-                transition: "box-shadow 0.3s ease, border-color 0.3s ease",
-                boxShadow: hovered
-                    ? "0 0 15px rgba(55,255,0,0.25), 0 0 30px rgba(55,255,0,0.10), inset 0 0 15px rgba(55,255,0,0.05)"
-                    : "none",
-                cursor: "pointer",
-            }}
-        >
-            {/* Image area */}
-            <div
-                style={{
-                    borderRadius: "14px",
-                    overflow: "hidden",
-                    backgroundColor: "#222",
-                    width: "100%",
-                    aspectRatio: "4/3",
-                    position: "relative",
-                }}
-            >
-                {image && (
-                    <img
-                        src={image}
-                        alt={title}
-                        style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                        }}
-                    />
-                )}
-            </div>
-
-            {/* Text */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "4px", padding: "4px 6px 6px" }}>
-                <span
-                    style={{
-                        fontFamily: "'Lexend', sans-serif",
-                        fontSize: "28px",
-                        fontWeight: 500,
-                        lineHeight: "140%",
-                        letterSpacing: "0%",
-                        verticalAlign: "middle",
-                        background: "linear-gradient(135deg, #37FF00, #37FF00)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                    }}
-                >
-                    {title}
-                </span>
-                <span
-                    style={{
-                        fontFamily: "'Lexend', sans-serif",
-                        fontSize: "14px",
-                        fontWeight: 400,
-                        lineHeight: "140%",
-                        letterSpacing: "0%",
-                        color: "rgba(255,255,255,0.65)",
-                    }}
-                >
-                    {description}
-                </span>
-            </div>
-        </div>
-    );
-}
 
 function StarRating({ count }: { count: number }) {
     return (
@@ -193,7 +112,7 @@ function ReviewMarquee() {
                         display: "flex",
                         gap: "16px",
                         width: "max-content",
-                        animation: "scrollLeft 30s linear infinite",
+                        animation: "scrollLeft 60s linear infinite",
                     }}
                 >
                     {[...topRow, ...topRow, ...topRow, ...topRow].map((r, i) => (
@@ -211,7 +130,7 @@ function ReviewMarquee() {
                         display: "flex",
                         gap: "16px",
                         width: "max-content",
-                        animation: "scrollRight 30s linear infinite",
+                        animation: "scrollRight 60s linear infinite",
                     }}
                 >
                     {[...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow].map((r, i) => (
@@ -228,8 +147,7 @@ function ReviewMarquee() {
 export default function EventsPage() {
     return (
         <>
-            <section className="relative min-h-[30vh] overflow-hidden text-white flex items-center justify-center">
-                <ThreeBackground />
+            <section className="relative min-h-[30vh] overflow-hidden bg-black text-white flex items-center justify-center">
                 <div className="relative z-10 flex flex-col items-center justify-center py-20">
                     <h1
                         className="text-center text-white tracking-tight select-none"
