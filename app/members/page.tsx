@@ -6,12 +6,16 @@ export const metadata = {
 };
 export default function Events() {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4d65e1b (formatting)
   return (
     <section className="bg-pbpages w-full h-full" id="members">
       <Members />
     </section>
   );
 }
+<<<<<<< HEAD
 =======
     return (
         <main className="bg-[#111111] w-full h-full">
@@ -20,3 +24,5 @@ export default function Events() {
     )
 }
 >>>>>>> ad08cb6 (minor changes)
+=======
+>>>>>>> 4d65e1b (formatting)
