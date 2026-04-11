@@ -20,7 +20,7 @@ export default function ReviewMarquee() {
     const bottomRow = reviews.slice(5, 10);
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px", overflow: "hidden" }}>
+        <div className="flex flex-col gap-4 overflow-hidden">
             <style>{`
                 @keyframes scrollLeft {
                     0% { transform: translateX(0); }
@@ -33,17 +33,10 @@ export default function ReviewMarquee() {
             `}</style>
 
             {/* Top row — scrolls left */}
-            <div style={{ overflow: "hidden", width: "100%" }}>
-                <div
-                    style={{
-                        display: "flex",
-                        gap: "16px",
-                        width: "max-content",
-                        animation: "scrollLeft 60s linear infinite",
-                    }}
-                >
+            <div className="overflow-hidden w-full">
+                <div className="flex gap-4 w-max [animation:scrollLeft_60s_linear_infinite]">
                     {[...topRow, ...topRow, ...topRow, ...topRow].map((r, i) => (
-                        <div key={i} style={{ minWidth: "324px", maxWidth: "324px" }}>
+                        <div key={i} className="min-w-[324px] max-w-[324px]">
                             <ReviewCard {...r} />
                         </div>
                     ))}
@@ -51,17 +44,10 @@ export default function ReviewMarquee() {
             </div>
 
             {/* Bottom row — scrolls right */}
-            <div style={{ overflow: "hidden", width: "100%" }}>
-                <div
-                    style={{
-                        display: "flex",
-                        gap: "16px",
-                        width: "max-content",
-                        animation: "scrollRight 60s linear infinite",
-                    }}
-                >
+            <div className="overflow-hidden w-full">
+                <div className="flex gap-4 w-max [animation:scrollRight_60s_linear_infinite]">
                     {[...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow].map((r, i) => (
-                        <div key={i} style={{ minWidth: "324px", maxWidth: "324px" }}>
+                        <div key={i} className="min-w-[324px] max-w-[324px]">
                             <ReviewCard {...r} />
                         </div>
                     ))}

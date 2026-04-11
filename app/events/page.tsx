@@ -19,16 +19,7 @@ export default function EventsPage() {
         <>
             <section className="relative min-h-[30vh] overflow-hidden bg-black text-white flex items-center justify-center">
                 <div className="relative z-10 flex flex-col items-center justify-center py-20">
-                    <h1
-                        className="text-center text-white tracking-tight select-none"
-                        style={{
-                            fontFamily: "'Lexend', sans-serif",
-                            fontSize: "64px",
-                            fontWeight: 400,
-                            lineHeight: "150%",
-                            letterSpacing: "0%",
-                        }}
-                    >
+                    <h1 className="text-center text-white tracking-normal select-none font-['Lexend',sans-serif] text-[64px] font-normal leading-[1.5]">
                         Events
                     </h1>
                 </div>
@@ -37,20 +28,8 @@ export default function EventsPage() {
             <EventsSection title="Upcoming Events" events={upcomingEvents} flippedId={flippedId} onToggle={handleToggle} />
             <EventsSection title="Past Events" events={pastEvents} flippedId={flippedId} onToggle={handleToggle} />
 
-            <section style={{ backgroundColor: "black", color: "white", paddingTop: "56px", paddingBottom: "56px", overflow: "hidden" }}>
-                <h2
-                    style={{
-                        fontFamily: "'Lexend', sans-serif",
-                        fontSize: "64px",
-                        fontWeight: 400,
-                        lineHeight: "150%",
-                        letterSpacing: "0%",
-                        color: "#ffffff",
-                        marginBottom: "32px",
-                        textAlign: "center",
-                        padding: "0 24px",
-                    }}
-                >
+            <section className="bg-black text-white py-14 overflow-hidden">
+                <h2 className="font-['Lexend',sans-serif] text-[64px] font-normal leading-[1.5] text-white tracking-normal mb-8 text-center px-6">
                     Events experience
                 </h2>
                 <ReviewMarquee />

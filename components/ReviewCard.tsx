@@ -20,38 +20,13 @@ export default function ReviewCard({ name, review, rating }: { name: string; rev
         <div
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            style={{
-                backgroundColor: "#191919",
-                borderRadius: "20px",
-                border: hovered ? "1px solid rgba(55,255,0,0.5)" : "1px solid transparent",
-                padding: "20px 18px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-                transition: "border-color 0.3s ease",
-            }}
+            className={`bg-[#191919] rounded-[20px] p-[20px_18px] flex flex-col gap-3 transition-colors duration-300 border ${hovered ? "border-pbgreen/50" : "border-transparent"}`}
         >
             <StarRating count={rating} />
-            <p
-                style={{
-                    fontFamily: "'Lexend', sans-serif",
-                    fontSize: "13px",
-                    fontWeight: 400,
-                    lineHeight: "1.6",
-                    color: "rgba(255,255,255,0.6)",
-                    margin: 0,
-                }}
-            >
+            <p className="font-['Lexend',sans-serif] text-[13px] font-normal leading-[1.6] text-white/60 m-0">
                 {review}
             </p>
-            <span
-                style={{
-                    fontFamily: "'Lexend', sans-serif",
-                    fontSize: "14px",
-                    fontWeight: 500,
-                    color: "#37FF00",
-                }}
-            >
+            <span className="font-['Lexend',sans-serif] text-[14px] font-medium text-pbgreen">
                 {name}
             </span>
         </div>

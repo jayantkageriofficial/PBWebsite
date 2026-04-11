@@ -17,22 +17,12 @@ interface EventsSectionProps {
 
 export default function EventsSection({ title, events, flippedId, onToggle }: EventsSectionProps) {
     return (
-        <section style={{ backgroundColor: "black", color: "white", padding: "56px 24px" }}>
-            <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
-                <h2
-                    style={{
-                        fontFamily: "'Lexend', sans-serif",
-                        fontSize: "38px",
-                        fontWeight: 400,
-                        lineHeight: "150%",
-                        letterSpacing: "0%",
-                        color: "#ffffff",
-                        marginBottom: "32px",
-                    }}
-                >
+        <section className="bg-black text-white py-14 px-6">
+            <div className="max-w-[1240px] mx-auto">
+                <h2 className="font-['Lexend',sans-serif] text-[38px] font-normal leading-[1.5] tracking-normal text-white mb-8">
                     {title}
                 </h2>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+                <div className="grid grid-cols-3 gap-5">
                     {events.map((ev, i) => {
                         const id = `${title}-${i}`;
                         return (

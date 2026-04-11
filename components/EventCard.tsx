@@ -11,120 +11,50 @@ export default function EventCard({
     const [hovered, setHovered] = useState(false);
 
     return (
-        <div style={{ perspective: "1000px", maxWidth: "396px", cursor: "pointer", position: "relative" }} onClick={onToggle}>
+        <div className="[perspective:1000px] max-w-[396px] cursor-pointer relative h-full" onClick={onToggle}>
             <div
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
-                style={{
-                    backgroundColor: "#111",
-                    borderRadius: "20px",
-                    border: hovered ? "1px solid rgba(55,255,0,0.5)" : "1px solid transparent",
-                    padding: "9px 10px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "8px",
-                    transition: "transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease",
-                    transformStyle: "preserve-3d",
-                    transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-                    boxShadow: hovered && !isFlipped
-                        ? "0 0 15px rgba(55,255,0,0.25), 0 0 30px rgba(55,255,0,0.10), inset 0 0 15px rgba(55,255,0,0.05)"
-                        : "none",
-                    height: "100%",
-                }}
+                className={`bg-[#111] rounded-[20px] p-[9px_10px] flex flex-col gap-2 transition-all duration-300 [transform-style:preserve-3d] h-full ${
+                    isFlipped ? "[transform:rotateY(180deg)]" : "[transform:rotateY(0deg)]"
+                } ${
+                    hovered && !isFlipped
+                        ? "border border-pbgreen/50 shadow-[0_0_15px_rgba(55,255,0,0.25),0_0_30px_rgba(55,255,0,0.10),inset_0_0_15px_rgba(55,255,0,0.05)]"
+                        : "border border-transparent shadow-none"
+                }`}
             >
                 {/* Front */}
-                <div style={{ backfaceVisibility: "hidden", display: "flex", flexDirection: "column", gap: "8px", height: "100%" }}>
+                <div className="backface-hidden flex flex-col gap-2 h-full">
                     {/* Image area */}
-                    <div
-                        style={{
-                            borderRadius: "14px",
-                            overflow: "hidden",
-                            backgroundColor: "#222",
-                            width: "100%",
-                            aspectRatio: "4/3",
-                            position: "relative",
-                        }}
-                    >
+                    <div className="rounded-[14px] overflow-hidden bg-[#222] w-full aspect-[4/3] relative">
                         {image && (
-                            <img
-                                src={image}
-                                alt={title}
-                                style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover",
-                                }}
-                            />
+                            <img src={image} alt={title} className="w-full h-full object-cover" />
                         )}
                     </div>
 
                     {/* Text */}
-                    <div style={{ display: "flex", flexDirection: "column", gap: "4px", padding: "4px 6px 6px" }}>
-                        <span
-                            style={{
-                                fontFamily: "'Lexend', sans-serif",
-                                fontSize: "28px",
-                                fontWeight: 500,
-                                lineHeight: "140%",
-                                letterSpacing: "0%",
-                                verticalAlign: "middle",
-                                background: "linear-gradient(135deg, #37FF00, #37FF00)",
-                                WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent",
-                                backgroundClip: "text",
-                            }}
-                        >
+                    <div className="flex flex-col gap-1 p-[4px_6px_6px]">
+                        <span className="font-['Lexend',sans-serif] text-[28px] font-medium leading-[140%] align-middle bg-gradient-to-br from-[#37FF00] to-[#37FF00] bg-clip-text text-transparent">
                             {title}
                         </span>
-                        <span
-                            style={{
-                                fontFamily: "'Lexend', sans-serif",
-                                fontSize: "14px",
-                                fontWeight: 400,
-                                lineHeight: "140%",
-                                letterSpacing: "0%",
-                                color: "rgba(255,255,255,0.65)",
-                            }}
-                        >
+                        <span className="font-['Lexend',sans-serif] text-[14px] font-normal leading-[140%] text-white/65">
                             {description}
                         </span>
                     </div>
                 </div>
 
                 {/* Back */}
-                <div style={{
-                    backfaceVisibility: "hidden",
-                    transform: "rotateY(180deg)",
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    padding: "24px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "12px",
-                    backgroundColor: "#111",
-                    borderRadius: "20px",
-                }}>
-                    <span
-                        style={{
-                            fontFamily: "'Lexend', sans-serif",
-                            fontSize: "24px",
-                            fontWeight: 500,
-                            lineHeight: "140%",
-                            color: "#37FF00",
-                        }}
-                    >
+                <div className="backface-hidden [transform:rotateY(180deg)] absolute inset-0 p-6 flex flex-col gap-3 bg-[#111] rounded-[20px]">
+                    <span className="font-['Lexend',sans-serif] text-[24px] font-medium leading-[140%] text-[#37FF00]">
                         {title}
                     </span>
-                    <div style={{ fontFamily: "'Lexend', sans-serif", color: "rgba(255,255,255,0.8)", fontSize: "14px" }}>
+                    <div className="font-['Lexend',sans-serif] text-white/80 text-[14px]">
                         <strong>Date:</strong> 15th August 2024
                     </div>
-                    <div style={{ fontFamily: "'Lexend', sans-serif", color: "rgba(255,255,255,0.8)", fontSize: "14px" }}>
+                    <div className="font-['Lexend',sans-serif] text-white/80 text-[14px]">
                         <strong>Location:</strong> Main Auditorium
                     </div>
-                    <p style={{ fontFamily: "'Lexend', sans-serif", color: "rgba(255,255,255,0.6)", fontSize: "14px", lineHeight: "1.5", marginTop: "8px", overflowY: "auto" }}>
+                    <p className="font-['Lexend',sans-serif] text-white/60 text-[14px] leading-relaxed mt-2 overflow-y-auto">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </p>
                 </div>
