@@ -57,15 +57,20 @@ const StickyCard = ({
   progress,
   range,
   targetScale,
+  isLast,
 }: {
   i: number;
   card: Card;
   progress: MotionValue<number>;
   range: [number, number];
   targetScale: number;
+  isLast: boolean;
 }) => {
   const container = useRef<HTMLDivElement>(null);
   const scale = useTransform(progress, range, [1, targetScale]);
+  const blurRange: [number, number] = [range[0] + 1 / cards.length, 1];
+  const blurAmount = useTransform(progress, isLast ? range : blurRange, [0, isLast ? 0 : 5]);
+  const blur = useTransform(blurAmount, (v) => `blur(${v}px)`);
 
   const isLCP = card.image === bored;
 
@@ -86,7 +91,7 @@ const StickyCard = ({
       <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-white leading-tight mb-4">
         {card.title}
       </h2>
-      <p className="text-[#B3B3B3] text-sm sm:text-base leading-relaxed">
+      <p className="text-pbtext text-sm sm:text-base leading-relaxed">
         {card.description}
       </p>
     </div>
@@ -118,6 +123,7 @@ const StickyCard = ({
       <motion.div
         style={{
           scale,
+          filter: blur,
           top: `calc(-5vh + ${i * 24}px)`,
         }}
         className="relative w-full max-w-5xl mx-4 sm:mx-8 bg-pbcard rounded-3xl overflow-hidden shadow-2xl"
@@ -162,6 +168,7 @@ export const CardStack = () => {
               progress={scrollYProgress}
               range={[i / cards.length, 1]}
               targetScale={targetScale}
+              isLast={i === cards.length - 1}
             />
           );
         })}
