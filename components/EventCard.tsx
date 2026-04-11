@@ -2,12 +2,16 @@
 
 import { useState } from "react";
 
-export default function EventCard({ title, description, image }: { title: string; description: string; image?: string }) {
+export default function EventCard({ 
+    title, description, image, isFlipped, onToggle 
+}: { 
+    title: string; description: string; image?: string;
+    isFlipped?: boolean; onToggle?: () => void; 
+}) {
     const [hovered, setHovered] = useState(false);
-    const [flipped, setFlipped] = useState(false);
 
     return (
-        <div style={{ perspective: "1000px", maxWidth: "396px", cursor: "pointer", position: "relative" }} onClick={() => setFlipped(!flipped)}>
+        <div style={{ perspective: "1000px", maxWidth: "396px", cursor: "pointer", position: "relative" }} onClick={onToggle}>
             <div
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
@@ -21,8 +25,8 @@ export default function EventCard({ title, description, image }: { title: string
                     gap: "8px",
                     transition: "transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease",
                     transformStyle: "preserve-3d",
-                    transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
-                    boxShadow: hovered && !flipped
+                    transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+                    boxShadow: hovered && !isFlipped
                         ? "0 0 15px rgba(55,255,0,0.25), 0 0 30px rgba(55,255,0,0.10), inset 0 0 15px rgba(55,255,0,0.05)"
                         : "none",
                     height: "100%",

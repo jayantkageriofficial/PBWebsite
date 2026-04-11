@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import EventCard from "@/components/EventCard";
 import ReviewMarquee from "@/components/ReviewMarquee";
 
@@ -26,6 +28,12 @@ const pastEvents = [
 
 
 export default function EventsPage() {
+    const [flippedId, setFlippedId] = useState<string | null>(null);
+
+    const handleToggle = (id: string) => {
+        setFlippedId(prev => prev === id ? null : id);
+    };
+
     return (
         <>
             <section className="relative min-h-[30vh] overflow-hidden bg-black text-white flex items-center justify-center">
@@ -61,7 +69,16 @@ export default function EventsPage() {
                         Upcoming Events
                     </h2>
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-                        {upcomingEvents.map((ev) => <EventCard key={ev.title} title={ev.title} description={ev.description} image={ev.image} />)}
+                        {upcomingEvents.map((ev, i) => (
+                            <EventCard 
+                                key={`upcoming-${i}`} 
+                                title={ev.title} 
+                                description={ev.description} 
+                                image={ev.image} 
+                                isFlipped={flippedId === `upcoming-${i}`}
+                                onToggle={() => handleToggle(`upcoming-${i}`)}
+                            />
+                        ))}
                     </div>
                 </div>
             </section>
@@ -82,7 +99,16 @@ export default function EventsPage() {
                         Past Events
                     </h2>
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-                        {pastEvents.map((ev, i) => <EventCard key={i} title={ev.title} description={ev.description} image={ev.image} />)}
+                        {pastEvents.map((ev, i) => (
+                            <EventCard 
+                                key={`past-${i}`} 
+                                title={ev.title} 
+                                description={ev.description} 
+                                image={ev.image} 
+                                isFlipped={flippedId === `past-${i}`}
+                                onToggle={() => handleToggle(`past-${i}`)}
+                            />
+                        ))}
                     </div>
                 </div>
             </section>
