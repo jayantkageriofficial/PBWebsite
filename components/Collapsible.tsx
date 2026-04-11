@@ -43,14 +43,14 @@ const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
                     tabIndex={-1}
                     className="flex items-center justify-between p-4 cursor-pointer bg-black text-white"
                 >
-                    <h2 className={`${isOpen ? ' text-[#37FF00]' : 'text-[#FFFFFF]'} text-[64px] font-lexend font-normal leading-[150%]`}>
+                    <h2 className={`${isOpen ? ' text-[#37FF00]' : 'text-[#FFFFFF]'} whitespace-nowrap md:text-[64px] text-[30px] font-lexend font-normal leading-[150%]`}>
                         {heading}
                     </h2>
 
                     {isOpen ? (
-                        <BiSolidChevronsUp className="w-14 h-14 text-pbgreen" />
+                        <BiSolidChevronsUp className="md:w-14 md:h-14 w-9 h-9 text-pbgreen" />
                     ) : (
-                        <BiSolidChevronsDown className="w-14 h-14 text-white" />
+                        <BiSolidChevronsDown className="md:w-14 md:h-14 w-12 h-12 text-white" />
                     )}
                 </div>
                 {isOpen && (
