@@ -40,7 +40,6 @@ const Card: React.FC<CardProps> = ({
           isFlipEnabled && isFlipped ? "transform-[rotateY(180deg)]" : ""
         }`}
       >
-        {/* Front Face */}
         <div
           className={`
             ${isFlipEnabled ? "backface-hidden" : ""} 
@@ -84,7 +83,6 @@ const Card: React.FC<CardProps> = ({
           </div>
         </div>
 
-        
         {isFlipEnabled && (
           <div
             className={`
@@ -95,8 +93,12 @@ const Card: React.FC<CardProps> = ({
               flex flex-col items-center justify-center text-center
             `}
           >
-            <h3 className="text-pbgreen text-xl sm:text-2xl font-medium mb-2">{name}</h3>
-            <p className="text-white text-base sm:text-lg font-light mb-1">{role}</p>
+            <h3 className="text-pbgreen text-xl sm:text-2xl font-medium mb-2">
+              {name}
+            </h3>
+            <p className="text-white text-base sm:text-lg font-light mb-1">
+              {role}
+            </p>
             {company && (
               <p className="text-gray-400 text-xs sm:text-sm font-light mb-4 italic">
                 @{company}
