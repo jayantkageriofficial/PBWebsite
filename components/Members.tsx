@@ -1,8 +1,9 @@
 "use client";
-
+import { MemberForm } from "./ui/form";
 import { useState } from "react";
 import Card from "@/components/MembersCard";
 import CollapsibleSection from "@/components/Collapsible";
+import { Button } from "./ui/button";
 
 interface Member {
   id?: string;
@@ -176,21 +177,43 @@ export default function Members() {
   const [openIndex, setOpenIndex] = useState<number>(
     headings.indexOf("Current Leads"),
   );
+  const [isAuthenticated, setisAuthenticated] = useState<boolean>(true);
+  const [isAdding, setisAdding] = useState<boolean>(false);
   const [data] = useState(sampleMembersData);
 
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? -1 : index);
+  };
+  const handleAddMenu = () => {
+    setisAdding((prev) => !prev);
   };
 
   const isAnyOpen = openIndex !== -1;
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-full space-y-4 mt-24 bg-pbpages">
-      <div className="flex items-center justify-center gap-4 mb-8 md:mb-12">
+      <div
+        className={`flex items-center justify-center ${isAuthenticated ? `mb-4` : "mb-8 md:mb-12"}gap-4 `}
+      >
         <h1 className="text-lexend font-normal text-4xl md:text-6xl leading-tight">
           <span className="text-pbgreen">{"<. > "}</span>
           <span className="text-white">Members</span>
         </h1>
+      </div>
+      <div className="flex flex-col gap-5 min-h-fit w-full items-center justify-center p-6 md:p-10">
+        {isAuthenticated && (
+          <Button
+            className="bg-pbgray text-pbgreen h-12 p-2"
+            onClick={() => handleAddMenu()}
+          >
+            {isAdding ? 'Close Form':'Add Member'}
+          </Button>
+        )}
+        {isAdding && (
+          <div className="w-full max-w-sm">
+            <MemberForm />
+          </div>
+        )}
       </div>
       <div className="w-full max-w-8xl px-4 md:px-6 lg:px-8 md:mt-24 mt-8">
         <div className="rounded-2xl overflow-hidden">
