@@ -28,11 +28,13 @@ export default async function Lore() {
         return (
           <LoreCard
             key={lore.id}
+            id = {lore.id}
             title={lore.title}
             date={lore.date}
             location={lore.location}
             preview={lore.preview}
             images={lore.images}
+            story={lore.story}
           />
         );
       })}
