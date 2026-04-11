@@ -1,5 +1,6 @@
 "use client";
 import { Lore } from "@/types/lore/loreType";
+import Image from "next/image";
 import { useState } from "react";
 
 
@@ -109,10 +110,12 @@ export default function LoreCard({
               </button>
             </div>
 
-            <img
+            <Image
               src={images[currentImg]}
               alt={location}
+              fill
               className="w-full h-full object-cover grayscale-100"
+              priority   
             />
           </div>
         </div>
