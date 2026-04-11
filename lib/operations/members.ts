@@ -24,8 +24,7 @@ export const createMember = async (
   memberData: Omit<Members, "_id">,
 ): Promise<Members | null> => {
   try {
-    const newMember = new MembersModel(memberData);
-    const savedMember = await newMember.save();
+    const savedMember = await new MembersModel(memberData).save();
     return savedMember as Members;
   } catch (error) {
     console.error("Error creating member:", error);
