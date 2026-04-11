@@ -188,12 +188,12 @@ export default function Members() {
     <div className="flex flex-col justify-center items-center w-full h-full space-y-4 mt-24 bg-pbpages">
       <div className="flex items-center justify-center gap-4 mb-8 md:mb-12">
         <h1 className="text-lexend font-normal text-4xl md:text-6xl leading-tight">
-          <span className="text-[#37FF00]">{"<. > "}</span>
+          <span className="text-pbgreen">{"<. > "}</span>
           <span className="text-white">Members</span>
         </h1>
       </div>
       <div className="w-full max-w-8xl px-4 md:px-6 lg:px-8 md:mt-24 mt-8">
-        <div className="rounded-[20px] overflow-hidden">
+        <div className="rounded-2xl overflow-hidden">
           {headings.map((heading, index) => (
             <div
               key={index}

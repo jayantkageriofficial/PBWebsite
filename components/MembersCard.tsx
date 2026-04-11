@@ -47,23 +47,23 @@ const Card: React.FC<CardProps> = ({
             w-full
             ${
               imageUrl && linkedInUrl
-                ? "max-w-75 sm:max-w-85 md:max-w-90 lg:max-w-95 xl:max-w-103.25 aspect-413/466 rounded-[40px] border border-pbborder"
-                : "max-w-60 h-fit rounded-[20px]"
+                ? "max-w-75 sm:max-w-85 md:max-w-90 lg:max-w-95 xl:max-w-103.25 aspect-413/466 rounded-4xl border border-pbborder"
+                : "max-w-60 h-fit rounded-2xl"
             } 
             mx-auto
             p-4 sm:p-5 md:p-6
-            ${!imageUrl && !linkedInUrl ? "border-0 bg-[#1C1C1C]" : "bg-pbpages"} 
+            ${!imageUrl && !linkedInUrl ? "border-0 bg-pbgray" : "bg-pbpages"} 
             gap-4 sm:gap-5
           `}
         >
           {imageUrl && linkedInUrl && (
-            <div className="relative w-full aspect-square rounded-[30px] overflow-hidden shrink-0">
+            <div className="relative w-full aspect-square rounded-4xl overflow-hidden shrink-0">
               <Image
                 src={imageUrl}
                 alt={name}
                 fill
                 style={{ objectFit: "cover" }}
-                className="rounded-[30px]"
+                className="rounded-4xl"
               />
             </div>
           )}
@@ -74,7 +74,7 @@ const Card: React.FC<CardProps> = ({
               </span>
               {!isFlipEnabled && (
                 <p
-                  className={`text-pbtext text-lexend font-light text-center text-[15px] sm:text-[17px] leading-[1.4] h-7`}
+                  className={`text-pbtext text-lexend font-light text-center text-lg sm:text-lg leading-[1.4] h-7`}
                 >
                   {role}
                 </p>
