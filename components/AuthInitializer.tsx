@@ -10,7 +10,12 @@ type Props = {
   token: string | null;
 };
 
-export default function AuthInitializer({ authenticated, email, name, token }: Props) {
+export default function AuthInitializer({
+  authenticated,
+  email,
+  name,
+  token,
+}: Props) {
   const setAuth = useAuthStore((s) => s.setAuth);
 
   useEffect(() => {
