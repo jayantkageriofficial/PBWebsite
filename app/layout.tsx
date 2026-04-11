@@ -36,7 +36,7 @@ export default async function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`bg-black ${lexand.className}`}>
+      <body className={`bg-[#111111] ${lexand.className}`}>
         <AuthInitializer
           authenticated={!!user}
           email={user?.email ?? null}
