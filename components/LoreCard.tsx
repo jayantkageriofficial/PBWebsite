@@ -3,7 +3,6 @@ import { Lore } from "@/types/lore/loreType";
 import Image from "next/image";
 import { useState } from "react";
 
-
 export default function LoreCard({
   title,
   date,
@@ -13,17 +12,6 @@ export default function LoreCard({
 }: Lore) {
   const [currentImg, setCurrentImg] = useState<number>(0);
   const [imageActive, setImageActive] = useState<boolean>(false);
-  
-  const imageLeftHandler = ()=>{
-    setCurrentImg((curr)=>{
-      return (curr-1+images.length)%images.length
-    })
-  }
-  const imageRightHandler = ()=>{
-    setCurrentImg((curr)=>{
-      return (curr+1)%images.length
-    })
-  }
 
 
   return (
@@ -97,14 +85,24 @@ export default function LoreCard({
                   );
                 })}
               </div>
-              <button className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl top-[50%] flex justify-center items-center translate-y-[-50%] left-2 z-10 "
-              onClick={imageLeftHandler}
+              <button
+                className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl top-[50%] flex justify-center items-center translate-y-[-50%] left-2 z-10 "
+                onClick={() => {
+                  setCurrentImg((curr) => {
+                    return (curr - 1 + images.length) % images.length;
+                  });
+                }}
               >
                 <img src="/lores/left_arrow.svg" className="h-4 w-4" />
               </button>
 
-              <button className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl right-2 top-[50%] flex justify-center items-center translate-y-[-50%] z-10 "
-              onClick={imageRightHandler}
+              <button
+                className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl right-2 top-[50%] flex justify-center items-center translate-y-[-50%] z-10 "
+                onClick={() => {
+                  setCurrentImg((curr) => {
+                    return (curr + 1) % images.length;
+                  });
+                }}
               >
                 <img src="/lores/right_arrow.svg" className="h-4 w-4" />
               </button>
@@ -115,7 +113,7 @@ export default function LoreCard({
               alt={location}
               fill
               className="w-full h-full object-cover grayscale-100"
-              priority   
+              priority
             />
           </div>
         </div>
