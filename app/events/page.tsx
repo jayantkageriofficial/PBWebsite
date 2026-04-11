@@ -1,14 +1,8 @@
 "use client";
 
-import { Lexend_Tera } from "next/font/google";
 import ThreeBackground from "@/components/ThreeBackground";
 import { Star } from "lucide-react";
 import { useRef, useState } from "react";
-
-const lexendTera = Lexend_Tera({
-    subsets: ["latin"],
-    weight: ["400", "700"],
-});
 
 const upcomingEvents = [
     { title: "PBCTF 5.0", description: "Jeopardy Style CTF", image: "/images/cybersec.webp" },
@@ -139,8 +133,8 @@ function ReviewCard({ name, review, rating }: { name: string; review: string; ra
     return (
         <div
             style={{
-                backgroundColor: "#111",
-                borderRadius: "16px",
+                backgroundColor: "#191919",
+                borderRadius: "20px",
                 border: "1px solid rgba(55,255,0,0.3)",
                 padding: "20px 18px",
                 display: "flex",
@@ -203,7 +197,7 @@ function ReviewMarquee() {
                     }}
                 >
                     {[...topRow, ...topRow, ...topRow, ...topRow].map((r, i) => (
-                        <div key={i} style={{ minWidth: "260px", maxWidth: "260px" }}>
+                        <div key={i} style={{ minWidth: "324px", maxWidth: "324px" }}>
                             <ReviewCard {...r} />
                         </div>
                     ))}
@@ -221,7 +215,7 @@ function ReviewMarquee() {
                     }}
                 >
                     {[...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow].map((r, i) => (
-                        <div key={i} style={{ minWidth: "260px", maxWidth: "260px" }}>
+                        <div key={i} style={{ minWidth: "324px", maxWidth: "324px" }}>
                             <ReviewCard {...r} />
                         </div>
                     ))}
@@ -237,7 +231,16 @@ export default function EventsPage() {
             <section className="relative min-h-[30vh] overflow-hidden text-white flex items-center justify-center">
                 <ThreeBackground />
                 <div className="relative z-10 flex flex-col items-center justify-center py-20">
-                    <h1 className={`text-6xl sm:text-7xl text-center text-white tracking-tight select-none ${lexendTera.className}`}>
+                    <h1
+                        className="text-center text-white tracking-tight select-none"
+                        style={{
+                            fontFamily: "'Lexend', sans-serif",
+                            fontSize: "64px",
+                            fontWeight: 400,
+                            lineHeight: "150%",
+                            letterSpacing: "0%",
+                        }}
+                    >
                         Events
                     </h1>
                 </div>
@@ -248,8 +251,10 @@ export default function EventsPage() {
                     <h2
                         style={{
                             fontFamily: "'Lexend', sans-serif",
-                            fontSize: "clamp(28px, 4vw, 40px)",
-                            fontWeight: 500,
+                            fontSize: "38px",
+                            fontWeight: 400,
+                            lineHeight: "150%",
+                            letterSpacing: "0%",
                             color: "#ffffff",
                             marginBottom: "32px",
                         }}
@@ -267,8 +272,10 @@ export default function EventsPage() {
                     <h2
                         style={{
                             fontFamily: "'Lexend', sans-serif",
-                            fontSize: "clamp(28px, 4vw, 40px)",
-                            fontWeight: 500,
+                            fontSize: "38px",
+                            fontWeight: 400,
+                            lineHeight: "150%",
+                            letterSpacing: "0%",
                             color: "#ffffff",
                             marginBottom: "32px",
                         }}
@@ -281,23 +288,23 @@ export default function EventsPage() {
                 </div>
             </section>
 
-            <section style={{ backgroundColor: "black", color: "white", padding: "56px 24px", overflow: "hidden" }}>
-                <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
-                    <h2
-                        style={{
-                            fontFamily: "'Lexend', sans-serif",
-                            fontSize: "clamp(28px, 4vw, 40px)",
-                            fontWeight: 500,
-                            color: "#ffffff",
-                            marginBottom: "32px",
-                            fontStyle: "italic",
-                            textAlign: "center",
-                        }}
-                    >
-                        Events experience
-                    </h2>
-                    <ReviewMarquee />
-                </div>
+            <section style={{ backgroundColor: "black", color: "white", paddingTop: "56px", paddingBottom: "56px", overflow: "hidden" }}>
+                <h2
+                    style={{
+                        fontFamily: "'Lexend', sans-serif",
+                        fontSize: "64px",
+                        fontWeight: 400,
+                        lineHeight: "150%",
+                        letterSpacing: "0%",
+                        color: "#ffffff",
+                        marginBottom: "32px",
+                        textAlign: "center",
+                        padding: "0 24px",
+                    }}
+                >
+                    Events experience
+                </h2>
+                <ReviewMarquee />
             </section>
         </>
     );
