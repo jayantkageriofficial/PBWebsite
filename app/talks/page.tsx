@@ -103,24 +103,24 @@ export default function TalksSection() {
     activeTab === "all" ? data : data.filter((item) => item.type === activeTab);
 
   return (
-    <section className="bg-pbblack rounded-xl text-white py-16 text-lexend-300  min-h-xl">
+    <section className="bg-pbblack rounded-xl text-white py-10 md:py-16 text-lexend-300  min-h-xl">
       <div className="max-w-8xl mx-auto py-20 text-center">
         {/* Heading */}
-        <h1 className="text-7xl  font-medium mb-8 px-10">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl  font-medium mb-8 px-4 md:px-10">
           We Speak. We Share. We Lead.
         </h1>
-        <p className="text-gray-400 text-3xl text-lexend-300 font-light mb-8">
-          A showcase of talks and conferences by the talented members of{" "}
+        <p className="text-gray-400 md:text-2xl lg:text-3xl text-lexend-300 font-light mb-8 ">
+          A showcase of talks and conferences by the talented members of
           <br></br>Point Blank.
         </p>
 
         {/* Tabs */}
-        <div className="flex justify-center  gap-3 mb-12 py-10">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12 py-6 md:py-10">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-7 py-4 rounded-full text-xl uppercase
+              className={`px-4 md:px-7 py-2 md:py-4 rounded-full text-sm md:text-xl uppercase
                 ${
                   activeTab === tab
                     ? "bg-pbgreen text-black"
@@ -137,11 +137,11 @@ export default function TalksSection() {
       {filteredData.map((item) => (
         <div
           key={item.id}
-          className="bg-pbgray rounded-xl max-w-330  mx-auto   flex justify-center mb-6 "
+          className="bg-pbgray rounded-xl max-w-330 mx-auto flex justify-center mb-6 px-3 md:px-0 "
         >
-          <div className="flex py-4">
+          <div className="flex flex-col lg:flex-row py-4">
             <div className="flex flex-col items-center">
-              <div className="w-150 h-100 overflow-hidden rounded-xl">
+              <div className="w-full lg:w-150 h-60 md:h-80 lg:h-100 overflow-hidden rounded-xl">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -155,25 +155,24 @@ export default function TalksSection() {
               </span>
             </div>
 
-            <div className="flex flex-col flex-1 px-12 py-8">
+            <div className="flex flex-col  px-4 md:px-8 lg:px-12 py-6 lg:py-8">
               <div className="mb-4">
-                <h2 className="text-pbgreen  font-medium text-4xl leading-snug mb-2 max-w-150">
+                <h2 className="text-pbgreen  font-medium text-2xl md:text-3xl lg:text-4xl leading-snug mb-2 max-w-150">
                   {item.title}
                 </h2>
 
-                <p className="text-gray-400 text-4xs leading-relaxed max-w-110">
+                <p className="text-gray-400 text-lg md:text-xl lg:text-2xl leading-snug max-w-110">
                   {item.description}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between py-5 px-4">
+              <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between py-4 md:py-5 px-2 md:px-4">
                 <div className="flex gap-3">
-                  <span className="bg-[#191919] px-4 py-6 text-light rounded-2xl text-lg">
+                  <span className="bg-[#191919] py-4 md:py-4 text-sm md:text-lg text-light rounded-2xl text-lg self-start">
                     {item.venue}
                   </span>
                 </div>
-
-                <span className="bg-[#191919] px-4 py-6 text-light text- rounded-2xl text-lg ">
+                <span className="bg-[#191919] py-4 md:py-4 text-sm md:text-lg text-light rounded-2xl text-lg self-start">
                   {item.date}
                 </span>
               </div>
