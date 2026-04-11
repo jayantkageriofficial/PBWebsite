@@ -12,7 +12,7 @@ export default async function Lore() {
   return (
     <>
       <div
-        className={`flex justify-center mt-10 items-center ${lexendTera.className} tracking-[-17%]  w-full h-60 p-5 text-6xl bg-[#111111] text-white`}
+        className={`flex justify-center mt-10 items-end pb-10  w-full h-55 p-5 text-6xl bg-[#111111] text-white`}
       >
         Our Lore
       </div>
