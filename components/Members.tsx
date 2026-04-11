@@ -187,7 +187,7 @@ export default function Members() {
   return (
     <div className="flex flex-col justify-center items-center w-full h-full space-y-4 mt-24 bg-pbpages">
       <div className="flex items-center justify-center gap-4 mb-8 md:mb-12">
-        <h1 className="text-lexend font-normal text-[40px] md:text-[64px] leading-tight">
+        <h1 className="text-lexend font-normal text-4xl md:text-6xl leading-tight">
           <span className="text-[#37FF00]">{"<. > "}</span>
           <span className="text-white">Members</span>
         </h1>
