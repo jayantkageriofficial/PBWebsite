@@ -18,7 +18,7 @@ export default function AchievementsPage() {
           We Build.We Ship.We Win.
         </h1>
 
-        <p className="font-['Lexend'] font-light text-[28px] leading-[140%] tracking-normal text-center text-[#a0a0a0] m-0 mb-12">
+        <p className="font-['Lexend'] font-light text-[28px] leading-[140%] tracking-normal text-center text-pbtext m-0 mb-12">
           A showcase of achievements by the talented members of PointBlank
         </p>
 
@@ -31,13 +31,13 @@ export default function AchievementsPage() {
               className={`px-4 py-2 rounded-full text-xs font-semibold tracking-widest transition-all duration-200 cursor-pointer
                 ${activeCategory === cat
                   ? "bg-pbgreen text-black"
-                  : "bg-pbgray text-[#ccc] hover:bg-pbgreen hover:text-black"
+                  : "bg-pbgray text-pbtext hover:bg-pbgreen hover:text-black"
                 }`}
             >
               {cat}
             </button>
           ))}
-          <button className="flex items-center justify-center w-9 h-9 rounded-full bg-pbgray text-[#ccc] hover:bg-pbgreen hover:text-black transition-all duration-200 cursor-pointer">
+          <button className="flex items-center justify-center w-9 h-9 rounded-full bg-pbgray text-pbtext hover:bg-pbgreen hover:text-black transition-all duration-200 cursor-pointer">
             <Search size={16} />
           </button>
         </div>
@@ -45,9 +45,18 @@ export default function AchievementsPage() {
 
       {/* Cards */}
       <div className="flex flex-wrap gap-6 px-20 pb-20">
-        {members.map((member, i) => (
-          <AchievementCard key={i} member={member} />
-        ))}
+        {members
+          .filter((member) =>
+            activeCategory === "ALL" ||
+            member.achievements.some(
+              (row) =>
+                row.leftCategory === activeCategory ||
+                row.rightCategory === activeCategory
+            )
+          )
+          .map((member, i) => (
+            <AchievementCard key={i} member={member} filterCategory={activeCategory} />
+          ))}
       </div>
 
     </main>
