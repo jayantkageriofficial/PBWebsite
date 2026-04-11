@@ -6,8 +6,8 @@ export const metadata = {
 }
 export default function Events() {
     return (
-        <>
+        <main className="bg-[#111111] w-full h-full">
         <Members />
-        </>
+        </main>
     )
 }

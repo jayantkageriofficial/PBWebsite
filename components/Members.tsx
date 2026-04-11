@@ -54,7 +54,7 @@ const sampleMembersData: { [key: string]: Member[] } = {
     { name: "Vikram Singh", role: "Former Tech Lead", year: "Alumni" },
     { name: "Sneha Rao", role: "Former Design Lead", year: "Alumni" },
     { name: "Arvind Kumar", role: "Former Events Head", year: "Alumni" },
-    { name: "Rishabh Jain", role: "Former PR Lead", year: "Alumni" },
+    { name: "Rishabh Jain", role: "Former CP Lead", year: "Alumni" },
     { name: "Pooja Hegde", role: "Former Operations Lead", year: "Alumni" },
   ],
   "Alumni": [
@@ -175,7 +175,7 @@ export default function Members() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center w-full space-y-4 mt-24 bg-black">
+    <div className="flex flex-col justify-center items-center w-full space-y-4 mt-24 bg-[#111111]">
       <div className="space-y-2 w-full max-w-[1400px] px-4 ">
         {headings.map((heading, index) => (
           <CollapsibleSection

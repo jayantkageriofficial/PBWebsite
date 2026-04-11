@@ -41,7 +41,7 @@ const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
                         onToggle();
                     }}
                     tabIndex={-1}
-                    className="flex items-center justify-between p-4 cursor-pointer bg-black text-white"
+                    className="flex items-center justify-between p-4 cursor-pointer bg-[#111111] text-white"
                 >
                     <h2 className={`${isOpen ? ' text-[#37FF00]' : 'text-[#FFFFFF]'} whitespace-nowrap md:text-[64px] text-[30px] font-lexend font-normal leading-[150%]`}>
                         {heading}
@@ -54,7 +54,7 @@ const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
                     )}
                 </div>
                 {isOpen && (
-                    <div className="p-4 bg-black">
+                    <div className="p-4 bg-[#111111]">
                         {content}
                     </div>
                 )}
