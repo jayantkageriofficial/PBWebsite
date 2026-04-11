@@ -91,7 +91,7 @@ export default function Members() {
         <span className="text-white">Members</span>
     </h1>
 </div>
-      <div className="w-full max-w-347 px-4  md:mt-24 mt-8">
+      <div className="w-full max-w-8xl px-4  md:mt-24 mt-8">
         <div className="rounded-[20px] overflow-hidden">
 
           {headings.map((heading, index) => (

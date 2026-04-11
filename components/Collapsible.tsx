@@ -46,9 +46,9 @@ const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
                     }`}
                 >
                    
-                    <h2 className={`font-normal md:text-[42px] text-[24px] transition-colors duration-300 ${
+                    <h2 className={`font-normal md:text-[38px] text-[24px] transition-colors duration-300 ${
                         isOpen ? 'text-[#37FF00]' : 'text-white'
-                    } ${lexend.className}`}>
+                    } text-lexend`}>
                         {heading}
                     </h2>
 
