@@ -30,7 +30,7 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      className={`relative touch-manipulation ${
+      className={`relative touch-manipulation w-full ${
         isFlipEnabled ? "perspective-[1000px] cursor-pointer" : ""
       }`}
       onClick={() => isFlipEnabled && setIsFlipped(!isFlipped)}
@@ -42,37 +42,39 @@ const Card: React.FC<CardProps> = ({
       >
         <div
           className={`
-                    ${isFlipEnabled ? "backface-hidden" : ""} 
-                    flex flex-col 
-                    ${
-                      imageUrl && linkedInUrl
-                        ? "md:w-103.5 w-75 md:h-116.5 rounded-[40px] border-[1.25px] border-[#262626]"
-                        : "md:w-66.5 h-fit rounded-[20px]"
-                    } 
-                    p-6 
-                    ${!imageUrl && !linkedInUrl ? "border-0 bg-[#1C1C1C]" : "bg-pbpages"} 
-                    gap-5
-                `}
+            ${isFlipEnabled ? "backface-hidden" : ""} 
+            flex flex-col 
+            w-full
+            ${
+              imageUrl && linkedInUrl
+                ? "max-w-75 sm:max-w-85 md:max-w-90 lg:max-w-95 xl:max-w-103.25 aspect-413/466 rounded-4xl border border-pbborder"
+                : "max-w-60 h-fit rounded-2xl"
+            } 
+            mx-auto
+            p-4 sm:p-5 md:p-6
+            ${!imageUrl && !linkedInUrl ? "border-0 bg-pbgray" : "bg-pbpages"} 
+            gap-4 sm:gap-5
+          `}
         >
           {imageUrl && linkedInUrl && (
-            <div className="relative w-full aspect-square rounded-[30px] overflow-hidden shrink-0">
+            <div className="relative w-full aspect-square rounded-4xl overflow-hidden shrink-0">
               <Image
                 src={imageUrl}
                 alt={name}
                 fill
                 style={{ objectFit: "cover" }}
-                className="rounded-[30px]"
+                className="rounded-4xl"
               />
             </div>
           )}
           <div className="flex justify-center">
-            <div className="flex flex-col items-center justify-center gap-1.5 md:w-41.75 h-fit">
-              <span className="text-pbgreen font-light whitespace-nowrap bg-[#1A1A1A] w-fit h-fit text-center rounded-full px-6 py-2 border border-[#262626]">
+            <div className="flex flex-col items-center justify-center gap-1.5 w-full h-fit">
+              <span className="text-pbgreen font-light whitespace-nowrap bg-pbdarkgray w-fit h-fit text-center rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base border border-pbborder">
                 {name}
               </span>
               {!isFlipEnabled && (
                 <p
-                  className={`text-[#B3B3B3] text-lexend font-light  text-center text-[17px]  leading-[1.4] md:w-34.75 h-7`}
+                  className={`text-pbtext text-lexend font-light text-center text-lg sm:text-lg leading-[1.4] h-7`}
                 >
                   {role}
                 </p>
@@ -84,20 +86,26 @@ const Card: React.FC<CardProps> = ({
         {isFlipEnabled && (
           <div
             className={`
-                        absolute inset-0 w-full h-full backface-hidden transform-[rotateY(180deg)]  
-                        rounded-[40px] border-[1.25px] border-pbgreen bg-pbpages p-6 
-                        flex flex-col items-center justify-center text-center
-                    `}
+              absolute inset-0 w-full h-full backface-hidden transform-[rotateY(180deg)]  
+              max-w-75 sm:max-w-85 md:max-w-90 lg:max-w-95 xl:max-w-103.25
+              mx-auto
+              rounded-[40px] border border-pbgreen bg-pbpages p-4 sm:p-5 md:p-6
+              flex flex-col items-center justify-center text-center
+            `}
           >
-            <h3 className="text-pbgreen text-2xl font-medium mb-2">{name}</h3>
-            <p className="text-white text-lg font-light mb-1">{role}</p>
+            <h3 className="text-pbgreen text-xl sm:text-2xl font-medium mb-2">
+              {name}
+            </h3>
+            <p className="text-white text-base sm:text-lg font-light mb-1">
+              {role}
+            </p>
             {company && (
-              <p className="text-gray-400 text-sm font-light mb-4 italic">
+              <p className="text-gray-400 text-xs sm:text-sm font-light mb-4 italic">
                 @{company}
               </p>
             )}
 
-            <div className="mt-8 pt-4 border-t border-[#262626] w-full flex justify-center">
+            <div className="mt-6 sm:mt-8 pt-4 border-t border-pbborder w-full flex justify-center">
               <a
                 href={linkedInUrl}
                 target="_blank"

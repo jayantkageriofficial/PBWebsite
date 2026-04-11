@@ -86,7 +86,7 @@ const StickyCard = ({
       <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-white leading-tight mb-4">
         {card.title}
       </h2>
-      <p className="text-[#B3B3B3] text-sm sm:text-base leading-relaxed">
+      <p className="text-pbtext text-sm sm:text-base leading-relaxed">
         {card.description}
       </p>
     </div>
