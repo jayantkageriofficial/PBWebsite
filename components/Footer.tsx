@@ -50,6 +50,7 @@ export default function Footer() {
             width={117}
             height={30}
             className="scale-150"
+            draggable={false}
           />
         </Link>
 
@@ -70,7 +71,7 @@ export default function Footer() {
         <div className="w-full border-t border-white/16" />
 
         {/* Bottom row */}
-        <div className="w-full flex items-center justify-between flex-wrap gap-4 bg-pbsurface rounded-full px-5 py-3 border border-white/22">
+        <div className="w-full flex flex-col items-center gap-4 md:flex-row md:justify-between bg-pbsurface rounded-2xl md:rounded-full px-5 py-3 border border-white/22">
           {/* Social icons */}
           <div className="flex items-center gap-2">
             {socials.map(({ path, href, label }) => (
@@ -95,14 +96,14 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <p className="text-white/70 text-sm">
+          <p className="text-white/70 text-sm text-center">
             © 2026 Point Blank. All Rights Reserved
           </p>
 
           {/* Privacy Policy */}
           <Link
             href="/privacy"
-            className="text-white/70 text-sm hover:text-white transition-colors"
+            className="text-white/70 text-sm hover:text-white transition-colors text-center"
           >
             Privacy Policy
           </Link>

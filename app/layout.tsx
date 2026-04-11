@@ -29,10 +29,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en_IN">
-      <body className={`bg-black ${lexand.className}`}>
+      <body className={`bg-[#111111] ${lexand.className}`}>
         <AuthInitializer
           authenticated={!!user}
           email={user?.email ?? null}
+          name={user?.name ?? null}
+          token={sessionCookie?.value ?? null}
         />
         <Navbar />
         {children}
