@@ -1,6 +1,7 @@
 "use client";
-import { Lore } from "@/types/lore/loreType";
 import { useState } from "react";
+import { Lore } from "@/types/lore/loreType";
+import Image from "next/image";
 
 
 export default function LoreCard({
@@ -12,21 +13,10 @@ export default function LoreCard({
 }: Lore) {
   const [currentImg, setCurrentImg] = useState<number>(0);
   const [imageActive, setImageActive] = useState<boolean>(false);
-  
-  const imageLeftHandler = ()=>{
-    setCurrentImg((curr)=>{
-      return (curr-1+images.length)%images.length
-    })
-  }
-  const imageRightHandler = ()=>{
-    setCurrentImg((curr)=>{
-      return (curr+1)%images.length
-    })
-  }
 
 
   return (
-    <div className="w-full flex justify-center min-h-93 mb-10 bg-[#111111]">
+    <div className="w-full flex justify-center min-h-93 mb-10 bg-pbpages">
       <div className="w-280 flex bg-[#1C1C1C] min-h-93">
         <div className="h-full w-[50%]">
           <div className="min-h-18 w-full pt-8 pl-12.5 ">
@@ -34,9 +24,9 @@ export default function LoreCard({
           </div>
 
           <div className="h-7.5 mt-4 flex w-full pl-12.5 ">
-            <div className="bg-[#1A1A1A] mr-6 border border-[#262626] rounded-4xl px-3 flex items-center ">
+            <div className="bg-pbdarkgray mr-6 border border-pbborder rounded-4xl px-3 flex items-center ">
               <img src="/lores/DateIcon.svg" className="mr-2" />
-              <p className={`text-[#B3B3B3] font-light text-xs`}>
+              <p className={`text-pbtext font-light text-xs`}>
                 {new Date(date).toLocaleDateString("en-US", {
                   month: "long",
                   year: "numeric",
@@ -44,14 +34,14 @@ export default function LoreCard({
               </p>
             </div>
 
-            <div className="bg-[#1A1A1A] border border-[#262626] rounded-4xl px-3 flex items-center ">
+            <div className="bg-pbdarkgray border border-pbborder rounded-4xl px-3 flex items-center ">
               <img src="/lores/location.svg" className="mr-2" />
-              <p className={`text-[#B3B3B3] font-light text-xs`}>{location}</p>
+              <p className={`text-pbtext font-light text-xs`}>{location}</p>
             </div>
           </div>
 
           <div className="min-h-18 w-full pl-12.5 pt-4">
-            <p className="text-[1.1rem] min-h-18 max-w-116 text-[#B3B3B3] font-light">
+            <p className="text-[1.1rem] min-h-18 max-w-116 text-pbtext font-light">
               {preview}
             </p>
           </div>
@@ -91,28 +81,40 @@ export default function LoreCard({
                   return (
                     <div
                       key={idx}
-                      className={`h-4 w-4 rounded-4xl ${currentImg == idx ? "bg-pbgreen" : "bg-[#B3B3B3]"} mr-2`}
+                      className={`h-4 w-4 rounded-4xl ${currentImg == idx ? "bg-pbgreen" : "bg-pbtext"} mr-2`}
                     ></div>
                   );
                 })}
               </div>
-              <button className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl top-[50%] flex justify-center items-center translate-y-[-50%] left-2 z-10 "
-              onClick={imageLeftHandler}
+              <button
+                className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl top-[50%] flex justify-center items-center translate-y-[-50%] left-2 z-10 "
+                onClick={() => {
+                  setCurrentImg((curr) => {
+                    return (curr - 1 + images.length) % images.length;
+                  });
+                }}
               >
                 <img src="/lores/left_arrow.svg" className="h-4 w-4" />
               </button>
 
-              <button className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl right-2 top-[50%] flex justify-center items-center translate-y-[-50%] z-10 "
-              onClick={imageRightHandler}
+              <button
+                className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl right-2 top-[50%] flex justify-center items-center translate-y-[-50%] z-10 "
+                onClick={() => {
+                  setCurrentImg((curr) => {
+                    return (curr + 1) % images.length;
+                  });
+                }}
               >
                 <img src="/lores/right_arrow.svg" className="h-4 w-4" />
               </button>
             </div>
 
-            <img
+            <Image
               src={images[currentImg]}
               alt={location}
+              fill
               className="w-full h-full object-cover grayscale-100"
+              priority
             />
           </div>
         </div>

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Lexend } from "next/font/google";
-import { FaLinkedin } from "react-icons/fa";
+import { LinkedIn } from "@/components/Icons";
 
 interface CardProps {
   name: string;
@@ -105,7 +105,7 @@ const Card: React.FC<CardProps> = ({
                 onClick={(e) => e.stopPropagation()}
                 className="hover:scale-110 transition-transform"
               >
-                <FaLinkedin className="h-10 w-10 text-white hover:text-pbgreen" />
+                <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
               </a>
             </div>
           </div>

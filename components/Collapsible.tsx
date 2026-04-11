@@ -1,76 +1,86 @@
-"use client"
+"use client";
 
-import React, { forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
-import { BiChevronsDown } from "react-icons/bi";
-import { Lexend } from 'next/font/google';
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useEffect,
+} from "react";
+import { ChevronsDown } from "@/components/Icons";
+import { Lexend } from "next/font/google";
 
 interface CollapsibleSectionProps {
-    heading: string;
-    content: JSX.Element;
-    isOpen: boolean;
-    isAnySectionOpen: boolean; // New prop for global background toggle
-    onToggle: () => void;
+  heading: string;
+  content: React.JSX.Element;
+  isOpen: boolean;
+  isAnySectionOpen: boolean; // New prop for global background toggle
+  onToggle: () => void;
 }
 
-const lexend = Lexend({ subsets: ["latin"], weight: ["200", "300", "400", "500"] });
+const lexend = Lexend({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500"],
+});
 
 const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
-    ({ heading, content, isOpen, isAnySectionOpen, onToggle }, ref) => {
-        const localRef = useRef<HTMLDivElement | null>(null);
+  ({ heading, content, isOpen, isAnySectionOpen, onToggle }, ref) => {
+    const localRef = useRef<HTMLDivElement | null>(null);
 
-        useImperativeHandle(ref, () => localRef.current!);
+    useImperativeHandle(ref, () => localRef.current!);
 
-        // Automatic scroll into view when opened
-        useEffect(() => {
-            if (isOpen && localRef.current) {
-                const offset = 150; 
-                const bodyRect = document.body.getBoundingClientRect().top;
-                const elementRect = localRef.current.getBoundingClientRect().top;
-                const elementPosition = elementRect - bodyRect;
-                const offsetPosition = elementPosition - offset;
+    // Automatic scroll into view when opened
+    useEffect(() => {
+      if (isOpen && localRef.current) {
+        const offset = 150;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = localRef.current.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth',
-                });
-            }
-        }, [isOpen]);
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }, [isOpen]);
 
-        return (
-            <div className="w-full" ref={localRef}>
-                <div
-                    onClick={() => onToggle()}
-                   
-                    className={`flex items-center justify-between p-6 cursor-pointer transition-all duration-300 select-none ${
-                        isAnySectionOpen ? 'bg-[#111111]' : 'bg-[#1C1C1C]'
-                    }`}
-                >
-                   
-                    <h2 className={`font-normal md:text-[38px] text-[24px] transition-colors duration-300 ${
-                        isOpen ? 'text-[#37FF00]' : 'text-white'
-                    } text-lexend`}>
-                        {heading}
-                    </h2>
+    return (
+      <div className="w-full" ref={localRef}>
+        <div
+          onClick={() => onToggle()}
+          className={`flex items-center justify-between p-6 cursor-pointer transition-all duration-300 select-none ${
+            isAnySectionOpen ? "bg-pbpages" : "bg-[#1C1C1C]"
+          }`}
+        >
+          <h2
+            className={`font-normal md:text-[38px] text-[24px] transition-colors duration-300 ${
+              isOpen ? "text-pbgreen" : "text-white"
+            } text-lexend`}
+          >
+            {heading}
+          </h2>
 
-                    
-                    <div className={`transition-all duration-300 transform ${
-                        isOpen ? 'text-[#37FF00] rotate-180' : 'text-white'
-                    }`}>
-                        <BiChevronsDown className="md:h-12 md:w-12 w-8 h-8" />
-                    </div>
-                </div>
+          <div
+            className={`transition-all duration-300 transform ${
+              isOpen ? "text-pbgreen rotate-180" : "text-white"
+            }`}
+          >
+            <ChevronsDown className="md:h-12 md:w-12 w-8 h-8" />
+          </div>
+        </div>
 
-                
-                {isOpen && (
-                    <div className={`p-6 bg-[#111111] ${isAnySectionOpen? '' :'border-t border-[#B3B3B3]'}`}>
-                        {content}
-                    </div>
-                )}
-            </div>
-        );
-    }
+        {isOpen && (
+          <div
+            className={`p-6 bg-pbpages ${isAnySectionOpen ? "" : "border-t border-[#B3B3B3]"}`}
+          >
+            {content}
+          </div>
+        )}
+      </div>
+    );
+  },
 );
 
-CollapsibleSection.displayName = 'CollapsibleSection';
+CollapsibleSection.displayName = "CollapsibleSection";
 
 export default CollapsibleSection;
