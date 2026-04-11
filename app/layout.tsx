@@ -29,7 +29,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en_IN">
-      <body className={`bg-[#111111] ${lexand.className}`}>
+      <body className={`bg-pbpages ${lexand.className}`}>
         <AuthInitializer
           authenticated={!!user}
           email={user?.email ?? null}
