@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import ReviewMarquee from "@/components/ReviewMarquee";
 import EventsSection from "@/components/EventsSection";
-import { upcomingEvents, pastEvents } from "@/lib/eventsData";
+import { upcomingEvents, pastEvents } from "@/components/eventsData";
 
 
 
