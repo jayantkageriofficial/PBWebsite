@@ -1,13 +1,13 @@
-import Members from "@/components/Members"
+import Members from "@/components/Members";
 
 export const metadata = {
-    title: 'Members',
-    description: 'Members page',
-}
+  title: "Members",
+  description: "Members page",
+};
 export default function Events() {
-    return (
-        <main className="bg-[#111111] w-full h-full">
-        <Members />
-        </main>
-    )
+  return (
+    <section className="bg-pbpages w-full h-full" id="members">
+      <Members />
+    </section>
+  );
 }
