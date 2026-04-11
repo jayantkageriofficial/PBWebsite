@@ -1,8 +1,7 @@
 "use client";
 
-import { Star } from "lucide-react";
-import { useState } from "react";
 import EventCard from "@/components/EventCard";
+import ReviewMarquee from "@/components/ReviewMarquee";
 
 const upcomingEvents = [
     { title: "PBCTF 5.0", description: "Jeopardy Style CTF", image: "/images/cybersec.webp" },
@@ -24,131 +23,7 @@ const pastEvents = [
     { title: "Advaith 2021", description: "Advaith 2021 is a tech extravaganza hosted by Point Blank and DSCE ACM......", image: "/images/connect.webp" },
 ];
 
-const reviews = [
-    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
-    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
-    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
-    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
-    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 4 },
-    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
-    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
-    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
-    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 3 },
-    { name: "First name", review: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 5 },
-];
 
-
-
-function StarRating({ count }: { count: number }) {
-    return (
-        <div className="flex gap-0.5">
-            {[0, 1, 2, 3, 4].map((i) => (
-            <Star key={i} className={`w-4 h-4 ${i < count ? "text-pbgreen fill-pbgreen" : "text-white/30"}`} />
-            ))}
-        </div>
-    );
-}
-
-function ReviewCard({ name, review, rating }: { name: string; review: string; rating: number }) {
-    const [hovered, setHovered] = useState(false);
-
-    return (
-        <div
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            style={{
-                backgroundColor: "#191919",
-                borderRadius: "20px",
-                border: hovered ? "1px solid rgba(55,255,0,0.5)" : "1px solid transparent",
-                padding: "20px 18px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-                transition: "border-color 0.3s ease",
-            }}
-        >
-            <StarRating count={rating} />
-            <p
-                style={{
-                    fontFamily: "'Lexend', sans-serif",
-                    fontSize: "13px",
-                    fontWeight: 400,
-                    lineHeight: "1.6",
-                    color: "rgba(255,255,255,0.6)",
-                    margin: 0,
-                }}
-            >
-                {review}
-            </p>
-            <span
-                style={{
-                    fontFamily: "'Lexend', sans-serif",
-                    fontSize: "14px",
-                    fontWeight: 500,
-                    color: "#37FF00",
-                }}
-            >
-                {name}
-            </span>
-        </div>
-    );
-}
-
-function ReviewMarquee() {
-    const topRow = reviews.slice(0, 5);
-    const bottomRow = reviews.slice(5, 10);
-
-    return (
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px", overflow: "hidden" }}>
-            <style>{`
-                @keyframes scrollLeft {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-50%); }
-                }
-                @keyframes scrollRight {
-                    0% { transform: translateX(-50%); }
-                    100% { transform: translateX(0); }
-                }
-            `}</style>
-
-            {/* Top row — scrolls left */}
-            <div style={{ overflow: "hidden", width: "100%" }}>
-                <div
-                    style={{
-                        display: "flex",
-                        gap: "16px",
-                        width: "max-content",
-                        animation: "scrollLeft 60s linear infinite",
-                    }}
-                >
-                    {[...topRow, ...topRow, ...topRow, ...topRow].map((r, i) => (
-                        <div key={i} style={{ minWidth: "324px", maxWidth: "324px" }}>
-                            <ReviewCard {...r} />
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Bottom row — scrolls right */}
-            <div style={{ overflow: "hidden", width: "100%" }}>
-                <div
-                    style={{
-                        display: "flex",
-                        gap: "16px",
-                        width: "max-content",
-                        animation: "scrollRight 60s linear infinite",
-                    }}
-                >
-                    {[...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow].map((r, i) => (
-                        <div key={i} style={{ minWidth: "324px", maxWidth: "324px" }}>
-                            <ReviewCard {...r} />
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
-}
 
 export default function EventsPage() {
     return (
