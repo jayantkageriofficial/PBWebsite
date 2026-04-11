@@ -1,5 +1,7 @@
 "use client";
+import { Lore } from "@/types/lore/loreType";
 import { useState } from "react";
+
 
 export default function LoreCard({
   title,
@@ -7,9 +9,22 @@ export default function LoreCard({
   location,
   preview,
   images,
-}: any) {
+}: Lore) {
   const [currentImg, setCurrentImg] = useState<number>(0);
   const [imageActive, setImageActive] = useState<boolean>(false);
+  
+  const imageLeftHandler = ()=>{
+    setCurrentImg((curr)=>{
+      return (curr-1+images.length)%images.length
+    })
+  }
+  const imageRightHandler = ()=>{
+    setCurrentImg((curr)=>{
+      return (curr+1)%images.length
+    })
+  }
+
+
   return (
     <div className="w-full flex justify-center min-h-93 mb-10 bg-[#111111]">
       <div className="w-280 flex bg-[#1C1C1C] min-h-93">
@@ -68,12 +83,28 @@ export default function LoreCard({
               setImageActive(true);
             }}
           >
-            <div className={`w-full h-full absolute ${imageActive?"":"hidden"}`}>
-              <button className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl top-[50%] flex justify-center items-center translate-y-[-50%] left-2 z-10 ">
+            <div
+              className={`w-full h-full absolute ${imageActive ? "" : "hidden"}`}
+            >
+              <div className="absolute w-full bottom-0 flex justify-center items-center h-13 z-10">
+                {images.map((_, idx) => {
+                  return (
+                    <div
+                      key={idx}
+                      className={`h-4 w-4 rounded-4xl ${currentImg == idx ? "bg-pbgreen" : "bg-[#B3B3B3]"} mr-2`}
+                    ></div>
+                  );
+                })}
+              </div>
+              <button className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl top-[50%] flex justify-center items-center translate-y-[-50%] left-2 z-10 "
+              onClick={imageLeftHandler}
+              >
                 <img src="/lores/left_arrow.svg" className="h-4 w-4" />
               </button>
 
-              <button className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl right-2 top-[50%] flex justify-center items-center translate-y-[-50%] z-10 ">
+              <button className="absolute hover:bg-pbgreen/80 cursor-pointer bg-pbgreen/70 h-6 w-6 rounded-4xl right-2 top-[50%] flex justify-center items-center translate-y-[-50%] z-10 "
+              onClick={imageRightHandler}
+              >
                 <img src="/lores/right_arrow.svg" className="h-4 w-4" />
               </button>
             </div>
