@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Card from "./MembersCard";
-import CollapsibleSection from "./Collapsible";
+import Card from "@/components/MembersCard";
+import CollapsibleSection from "@/components/Collapsible";
 
 interface Member {
   id?: string;
