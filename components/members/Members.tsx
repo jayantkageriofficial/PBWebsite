@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Card from "@/components/members/MembersCard";
 import CollapsibleSection from "@/components/members/Collapsible";
@@ -249,7 +250,13 @@ export default function Members(props: { members: Member[] }) {
   return (
     <div className="flex flex-col justify-center items-center w-full h-full space-y-4 mt-24 bg-pbpages">
       {/* Heading */}
-      <div className="flex flex-col items-center justify-center gap-4 mb-8 md:mb-12">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="flex flex-col items-center justify-center gap-4 mb-8 md:mb-12"
+      >
         <h1 className="text-lexend font-normal text-4xl md:text-6xl leading-tight">
           <span className="text-pbgreen">{"<. > "}</span>
           <span className="text-white">Members</span>
@@ -262,15 +269,19 @@ export default function Members(props: { members: Member[] }) {
             + Add Member
           </button>
         )}
-      </div>
+      </motion.div>
 
       {/* Member sections */}
 
       <div className="w-full max-w-8xl px-4 md:px-6 lg:px-8 md:mt-24 mt-8">
         <div className="rounded-2xl overflow-hidden">
           {headings.map((heading, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
               className={`transition-colors duration-500 ${
                 index !== 0
                   ? isAnyOpen
@@ -322,7 +333,7 @@ export default function Members(props: { members: Member[] }) {
                   </div>
                 }
               />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

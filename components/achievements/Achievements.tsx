@@ -439,15 +439,17 @@ export default function Achievements({
       </div>
 
       {/* Achievement Cards */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-8 lg:px-15 pb-8 sm:pb-12 lg:pb-15"
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-8 lg:px-15 pb-8 sm:pb-12 lg:pb-15">
         {filteredDocs.length > 0 ? (
-          filteredDocs.map((doc) => (
-            <div key={doc._id} className="relative group">
+          filteredDocs.map((doc, i) => (
+            <motion.div
+              key={doc._id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.55, delay: (i % 3) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative group"
+            >
               <AchievementCard
                 member={docToDisplayMember(doc)}
                 filterCategory="ALL"
@@ -470,14 +472,14 @@ export default function Achievements({
                   </button>
                 </div>
               )}
-            </div>
+            </motion.div>
           ))
         ) : (
           <p className="col-span-full text-center text-gray-400 py-12 text-lg">
             No members found{searchQuery ? ` for "${searchQuery}"` : ""}.
           </p>
         )}
-      </motion.div>
+      </div>
 
       <Dialog open={addOpen} onOpenChange={setAddOpen}>
         <DialogContent className="dark bg-pbpages border-pbborder text-white max-w-md max-h-[90vh] overflow-y-auto">

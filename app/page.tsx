@@ -3,6 +3,7 @@ import { Lexend_Tera } from "next/font/google";
 import ThreeBackground from "@/components/ui/ThreeBackground";
 import { CardStack } from "@/components/ui/CardStack";
 import { Users, Share2, BookOpen, FileText, Play, Code2 } from "lucide-react";
+import FadeIn from "@/components/FadeIn";
 
 // Images
 import mission from "@/public/images/mission.webp";
@@ -61,7 +62,7 @@ export default function Home() {
         id="mission-vision"
         className="bg-pbgray text-white overflow-hidden px-3"
       >
-        <div className="pt-14 px-6 sm:px-10 lg:px-20">
+        <FadeIn className="pt-14 px-6 sm:px-10 lg:px-20">
           <h2 className="text-3xl sm:text-4xl font-semibold text-pbgreen">
             Our Mission, together.
           </h2>
@@ -71,11 +72,11 @@ export default function Home() {
             coders, hackers, developers, and tech enthusiasts passionate about
             technology and learning.
           </p>
-        </div>
+        </FadeIn>
 
         {/* Mission - Image Left */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center py-14 sm:py-20 px-6 sm:px-10 lg:px-20">
-          <div className="relative w-full lg:w-1/2 shrink-0">
+          <FadeIn className="relative w-full lg:w-1/2 shrink-0">
             <div className="relative w-full max-w-140 mx-auto lg:mx-0 aspect-4/3 sm:aspect-16/10 lg:aspect-5/4 rounded-4xl overflow-hidden">
               <Image
                 src={mission}
@@ -85,9 +86,9 @@ export default function Home() {
                 draggable={false}
               />
             </div>
-          </div>
+          </FadeIn>
 
-          <div className="w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-l-2 border-pbgreen pt-6 lg:pt-0 lg:pl-12">
+          <FadeIn delay={0.15} className="w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-l-2 border-pbgreen pt-6 lg:pt-0 lg:pl-12">
             <h3 className="text-3xl sm:text-4xl mb-4 sm:mb-6">Mission</h3>
             <p className="text-white/70 text-sm sm:text-base leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
@@ -98,12 +99,12 @@ export default function Home() {
               efficitur, sapien non tristique luctus, eros libero gravida
               tortor, at facilisis augue est vel metus. Proin at turpis.
             </p>
-          </div>
+          </FadeIn>
         </div>
 
         {/* Vision - Image Right */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center md:py-14 sm:py-20 px-6 sm:px-10 lg:px-20">
-          <div className="w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-r-2 border-pbgreen pt-6 lg:pt-0 lg:pr-12">
+          <FadeIn className="w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-r-2 border-pbgreen pt-6 lg:pt-0 lg:pr-12">
             <h3 className="text-3xl sm:text-4xl mb-4 sm:mb-6">Vision</h3>
             <p className="text-white/70 text-sm sm:text-base leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
@@ -114,9 +115,9 @@ export default function Home() {
               efficitur, sapien non tristique luctus, eros libero gravida
               tortor, at facilisis augue est vel metus. Proin at turpis.
             </p>
-          </div>
+          </FadeIn>
 
-          <div className="relative w-full lg:w-1/2 shrink-0">
+          <FadeIn delay={0.15} className="relative w-full lg:w-1/2 shrink-0">
             <div className="relative w-full max-w-140 mx-auto lg:ml-auto aspect-4/3 sm:aspect-16/10 lg:aspect-5/4 rounded-4xl overflow-hidden">
               <Image
                 src={vision}
@@ -126,7 +127,7 @@ export default function Home() {
                 draggable={false}
               />
             </div>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -135,74 +136,75 @@ export default function Home() {
       </section>
 
       <section id="domains" className="bg-pbgray text-white py-20 px-6">
-        <div className="text-center mb-12">
+        <FadeIn className="text-center mb-12">
           <h2 className="text-4xl font-bold text-pbgreen mb-3">
             Domains we Love
           </h2>
           <p className="text-white/70 text-sm">
             we will write some sub heading here
           </p>
-        </div>
-        <div className="relative max-w-5xl mx-auto bg-pbcard rounded-3xl overflow-hidden border border-white/16">
-          {/* Corner dot gradients */}
-          {[
-            "top-0 left-0 [mask-image:radial-gradient(ellipse_at_top_left,black_30%,transparent_70%)]",
-            // "top-0 right-0 [mask-image:radial-gradient(ellipse_at_top_right,black_30%,transparent_70%)]",
-            // "bottom-0 left-0 [mask-image:radial-gradient(ellipse_at_bottom_left,black_30%,transparent_70%)]",
-            "bottom-0 right-0 [mask-image:radial-gradient(ellipse_at_bottom_right,black_30%,transparent_70%)]",
-          ].map((pos, i) => (
-            <div
-              key={i}
-              className={`absolute ${pos} w-40 h-40 opacity-40 pointer-events-none`}
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle, var(--color-pbgreen) 1px, transparent 1px)",
-                backgroundSize: "8px 8px",
-              }}
-            />
-          ))}
-          <div className="grid grid-cols-2 sm:grid-cols-4">
+        </FadeIn>
+
+        <FadeIn delay={0.1}>
+          <div className="relative max-w-5xl mx-auto bg-pbcard rounded-3xl overflow-hidden border border-white/16">
+            {/* Corner dot gradients */}
             {[
-              { name: "DevOps", Icon: DevOps },
-              { name: "IOT-ML", Icon: IOT },
-              { name: "Kaggle", Icon: Kaggle },
-              { name: "ML-Research", Icon: ML },
-              { name: "Open Source Hackathon", Icon: OpenSource },
-              { name: "React Development", Icon: ReactIcon },
-              { name: "ACM - ICPC", Icon: ICPC },
-              { name: "Flutter Development", Icon: Flutter },
-            ].map(({ name, Icon }, i) => (
+              "top-0 left-0 [mask-image:radial-gradient(ellipse_at_top_left,black_30%,transparent_70%)]",
+              "bottom-0 right-0 [mask-image:radial-gradient(ellipse_at_bottom_right,black_30%,transparent_70%)]",
+            ].map((pos, i) => (
               <div
                 key={i}
-                className={`flex flex-col items-center justify-center py-10 px-4 gap-4 border-white/16
-                  not-nth-[2n]:border-r sm:not-nth-[2n]:border-r-0
-                  sm:not-nth-[4n]:border-r
-                  border-b nth-last-[-n+2]:border-b-0 sm:nth-last-[-n+2]:border-b sm:nth-last-[-n+4]:border-b-0`}
-              >
-                <div
-                  className="relative w-24 h-24 rounded-full flex items-center justify-center"
-                  style={{
-                    background:
-                      "radial-gradient(circle, rgba(55,255,0,0.22) 0%, rgba(55,255,0,0.08) 45%, transparent 70%)",
-                  }}
-                >
-                  <div className="w-14 h-14 rounded-full bg-pbdark border border-pbgreen/20 flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-white" strokeWidth={1.5} />
-                  </div>
-                </div>
-                <span className="text-sm text-white text-center leading-tight">
-                  {name}
-                </span>
-              </div>
+                className={`absolute ${pos} w-40 h-40 opacity-40 pointer-events-none`}
+                style={{
+                  backgroundImage:
+                    "radial-gradient(circle, var(--color-pbgreen) 1px, transparent 1px)",
+                  backgroundSize: "8px 8px",
+                }}
+              />
             ))}
+            <div className="grid grid-cols-2 sm:grid-cols-4">
+              {[
+                { name: "DevOps", Icon: DevOps },
+                { name: "IOT-ML", Icon: IOT },
+                { name: "Kaggle", Icon: Kaggle },
+                { name: "ML-Research", Icon: ML },
+                { name: "Open Source Hackathon", Icon: OpenSource },
+                { name: "React Development", Icon: ReactIcon },
+                { name: "ACM - ICPC", Icon: ICPC },
+                { name: "Flutter Development", Icon: Flutter },
+              ].map(({ name, Icon }, i) => (
+                <div
+                  key={i}
+                  className={`flex flex-col items-center justify-center py-10 px-4 gap-4 border-white/16
+                    not-nth-[2n]:border-r sm:not-nth-[2n]:border-r-0
+                    sm:not-nth-[4n]:border-r
+                    border-b nth-last-[-n+2]:border-b-0 sm:nth-last-[-n+2]:border-b sm:nth-last-[-n+4]:border-b-0`}
+                >
+                  <div
+                    className="relative w-24 h-24 rounded-full flex items-center justify-center"
+                    style={{
+                      background:
+                        "radial-gradient(circle, rgba(55,255,0,0.22) 0%, rgba(55,255,0,0.08) 45%, transparent 70%)",
+                    }}
+                  >
+                    <div className="w-14 h-14 rounded-full bg-pbdark border border-pbgreen/20 flex items-center justify-center">
+                      <Icon className="w-6 h-6 text-white" strokeWidth={1.5} />
+                    </div>
+                  </div>
+                  <span className="text-sm text-white text-center leading-tight">
+                    {name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </FadeIn>
       </section>
 
       <section id="activities" className="bg-pbgray text-white py-20 px-6">
-        <div className="text-center mb-12">
+        <FadeIn className="text-center mb-12">
           <h2 className="text-4xl font-bold text-pbgreen">Activities</h2>
-        </div>
+        </FadeIn>
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
             {
@@ -248,31 +250,30 @@ export default function Home() {
                 "From hardware prototypes to published research, we foster a culture of experimentation and innovation beyond the classroom.",
             },
           ].map(({ title, tag, img, description }, i) => (
-            <div
-              key={i}
-              className="bg-pbcard rounded-3xl overflow-hidden border border-white/16 flex flex-col"
-            >
-              <div className="relative h-44 overflow-hidden">
-                <Image
-                  src={img}
-                  alt={title}
-                  className="w-full h-full object-cover grayscale"
-                  draggable={false}
-                />
-              </div>
-
-              <div className="p-5 flex flex-col gap-2 flex-1">
-                <div className="flex items-baseline gap-2 flex-wrap">
-                  <h3 className="font-bold text-white text-base">{title}</h3>
-                  <span className="text-pbgreen text-xs border border-pbgreen/20 p-2 rounded-xl">
-                    {tag}
-                  </span>
+            <FadeIn key={i} delay={(i % 3) * 0.1}>
+              <div className="bg-pbcard rounded-3xl overflow-hidden border border-white/16 flex flex-col h-full">
+                <div className="relative h-44 overflow-hidden">
+                  <Image
+                    src={img}
+                    alt={title}
+                    className="w-full h-full object-cover grayscale"
+                    draggable={false}
+                  />
                 </div>
-                <p className="text-white/70 text-sm leading-relaxed">
-                  {description}
-                </p>
+
+                <div className="p-5 flex flex-col gap-2 flex-1">
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <h3 className="font-bold text-white text-base">{title}</h3>
+                    <span className="text-pbgreen text-xs border border-pbgreen/20 p-2 rounded-xl">
+                      {tag}
+                    </span>
+                  </div>
+                  <p className="text-white/70 text-sm leading-relaxed">
+                    {description}
+                  </p>
+                </div>
               </div>
-            </div>
+            </FadeIn>
           ))}
         </div>
       </section>
@@ -282,16 +283,18 @@ export default function Home() {
         className="bg-pbgray text-white py-20 px-6"
       >
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-4">
+          <FadeIn className="text-center mb-4">
             <h2 className="text-4xl font-bold text-white">
               Our <span className="text-pbgreen">Founding</span> Members
             </h2>
-          </div>
-          <p className="text-center text-white/70 text-sm max-w-xl mx-auto mb-12">
-            Point Blank is a passion project, born from a shared excitement to
-            build and lead a platform for like-minded, driven students to come
-            together and learn from each other.
-          </p>
+          </FadeIn>
+          <FadeIn delay={0.1} className="text-center text-white/70 text-sm max-w-xl mx-auto mb-12">
+            <p>
+              Point Blank is a passion project, born from a shared excitement to
+              build and lead a platform for like-minded, driven students to come
+              together and learn from each other.
+            </p>
+          </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mx-auto">
             {[
               {
@@ -310,25 +313,24 @@ export default function Home() {
                 img: ashutoshImg,
               },
             ].map(({ name, bio, img }, i) => (
-              <div
-                key={i}
-                className="bg-pbcard border border-white/16 rounded-3xl p-5 flex flex-col items-center text-center gap-4"
-              >
-                <div className="relative w-full aspect-square rounded-4xl overflow-hidden">
-                  <Image
-                    src={img}
-                    alt={name}
-                    className="w-full h-full object-cover object-top grayscale"
-                    draggable={false}
-                  />
+              <FadeIn key={i} delay={i * 0.12}>
+                <div className="bg-pbcard border border-white/16 rounded-3xl p-5 flex flex-col items-center text-center gap-4 h-full">
+                  <div className="relative w-full aspect-square rounded-4xl overflow-hidden">
+                    <Image
+                      src={img}
+                      alt={name}
+                      className="w-full h-full object-cover object-top grayscale"
+                      draggable={false}
+                    />
+                  </div>
+                  <span className="px-4 py-1 rounded-full border border-gray-900 bg-pbsurface text-pbgreen text-sm font-medium">
+                    {name}
+                  </span>
+                  <p className="text-white/70 text-xs leading-relaxed pb-2">
+                    {bio}
+                  </p>
                 </div>
-                <span className="px-4 py-1 rounded-full border border-gray-900 bg-pbsurface text-pbgreen text-sm font-medium">
-                  {name}
-                </span>
-                <p className="text-white/70 text-xs leading-relaxed pb-2">
-                  {bio}
-                </p>
-              </div>
+              </FadeIn>
             ))}
           </div>
         </div>
@@ -337,11 +339,11 @@ export default function Home() {
       {/* Stay Connected */}
       <section id="stay-connected" className="bg-pbgray text-white py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
+          <FadeIn className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white">
               Stay <span className="text-pbgreen">Connected</span>
             </h2>
-          </div>
+          </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               {
@@ -387,25 +389,26 @@ export default function Home() {
                 link: "https://github.com/pointblank-club",
               },
             ].map(({ Icon, title, description, link }, i) => (
-              <Link
-                key={i}
-                className="bg-pbcard rounded-2xl border border-white/16 p-5 flex flex-col gap-3 cursor-pointer hover:border-pbgreen/30 transition-colors"
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="w-9 h-9 rounded-lg bg-pbgreen/10 border border-pbgreen/20 flex items-center justify-center">
-                  <Icon className="w-4 h-4 text-pbgreen" strokeWidth={1.5} />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white text-sm mb-1">
-                    {title}
-                  </h3>
-                  <p className="text-white/70 text-xs leading-relaxed">
-                    {description}
-                  </p>
-                </div>
-              </Link>
+              <FadeIn key={i} delay={(i % 3) * 0.1}>
+                <Link
+                  className="bg-pbcard rounded-2xl border border-white/16 p-5 flex flex-col gap-3 cursor-pointer hover:border-pbgreen/30 transition-colors h-full"
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-pbgreen/10 border border-pbgreen/20 flex items-center justify-center">
+                    <Icon className="w-4 h-4 text-pbgreen" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white text-sm mb-1">
+                      {title}
+                    </h3>
+                    <p className="text-white/70 text-xs leading-relaxed">
+                      {description}
+                    </p>
+                  </div>
+                </Link>
+              </FadeIn>
             ))}
           </div>
         </div>

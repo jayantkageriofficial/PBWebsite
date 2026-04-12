@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { Latest, Leaderboard } from "@/lib/db/models/hustle";
 
 interface HustleProps {
@@ -85,14 +86,20 @@ export default function Hustle({ latest, leaderboard }: HustleProps) {
   return (
     <div className="bg-pbpages text-white min-h-screen flex flex-col">
       <div className="grow">
-        <div className="text-center mt-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mt-16"
+        >
           <h1 className="text-6xl font-bold tracking-tight text-white">
             PB Hustle
           </h1>
           <p className="text-pbmuted mt-4 text-lg">
             Track latest results and overall rankings in real-time
           </p>
-        </div>
+        </motion.div>
 
         <div className="max-w-295 mx-auto mt-10 px-6 flex gap-3">
           <button
@@ -196,7 +203,13 @@ export default function Hustle({ latest, leaderboard }: HustleProps) {
           </div>
         </div>
 
-        <div className="max-w-295 mx-auto mt-6 px-6 mb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-295 mx-auto mt-6 px-6 mb-20"
+        >
           <div
             ref={tableRef}
             className="bg-pbcard border border-white/70 rounded-2xl overflow-hidden"
@@ -277,7 +290,7 @@ export default function Hustle({ latest, leaderboard }: HustleProps) {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

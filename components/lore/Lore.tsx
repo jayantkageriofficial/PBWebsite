@@ -14,95 +14,74 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
-import { UploadCloudIcon, XIcon } from "lucide-react";
-import { type Talk } from "@/lib/db/models/talks";
+import { PlusIcon, Trash2Icon, UploadCloudIcon, XIcon } from "lucide-react";
+import LoreCard from "@/components/lore/LoreCard";
+import LoreType from "@/types/lore/loreType";
 import { serializeId } from "@/lib/utils";
 
-type TalkForm = {
+type LoreForm = {
   title: string;
-  description: string;
-  images: string[];
-  type: "conference" | "talks" | "other";
-  name: string;
   date: string;
-  speakers: string;
+  location: string;
+  preview: string;
+  story: string[];
+  images: string[];
 };
 
-type TabType = "all" | "conference" | "talks" | "other";
-
-const blankForm: TalkForm = {
+const blankForm: LoreForm = {
   title: "",
-  description: "",
-  images: [],
-  type: "conference",
-  name: "",
   date: "",
-  speakers: "",
+  location: "",
+  preview: "",
+  story: [""],
+  images: [],
 };
 
 const TEXT_FIELDS: {
   label: string;
-  key: keyof TalkForm;
+  key: keyof LoreForm;
   type: string;
   required?: boolean;
 }[] = [
   { label: "Title", key: "title", type: "text", required: true },
-  { label: "Description", key: "description", type: "text", required: true },
-  { label: "Venue / Event Name", key: "name", type: "text", required: true },
-  { label: "Speakers", key: "speakers", type: "text", required: true },
+  { label: "Location", key: "location", type: "text", required: true },
   { label: "Date", key: "date", type: "date", required: true },
+  { label: "Preview", key: "preview", type: "text", required: true },
 ];
 
-const TABS: TabType[] = ["all", "conference", "talks", "other"];
-
-const headingText = "We Speak. We Share. We Lead.";
-const phrases = headingText.split(". ");
-
-export default function Talks(props: { talks: Talk[] }) {
-  const [talks, setTalks] = useState<Talk[]>(props.talks);
-  const [activeTab, setActiveTab] = useState<TabType>("all");
+export default function Lore(props: { lores: LoreType[] }) {
+  const [lores, setLores] = useState<LoreType[]>(props.lores);
   const { authenticated, token } = useAuthStore();
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [editTalk, setEditTalk] = useState<Talk | null>(null);
-  const [form, setForm] = useState<TalkForm>(blankForm);
+  const [editLore, setEditLore] = useState<LoreType | null>(null);
+  const [form, setForm] = useState<LoreForm>(blankForm);
   const [saving, setSaving] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
 
-  const [deleteTarget, setDeleteTarget] = useState<Talk | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<LoreType | null>(null);
   const [deleting, setDeleting] = useState(false);
 
-  const filteredTalks =
-    activeTab === "all" ? talks : talks.filter((t) => t.type === activeTab);
-
   const openAdd = () => {
-    setEditTalk(null);
+    setEditLore(null);
     setForm(blankForm);
     setUploadError(null);
     setModalOpen(true);
   };
 
-  const openEdit = (talk: Talk) => {
-    setEditTalk(talk);
+  const openEdit = (lore: LoreType) => {
+    setEditLore(lore);
     setForm({
-      title: talk.title,
-      description: talk.description,
-      images: talk.images,
-      type: talk.type,
-      name: talk.name,
-      date: talk.date ? new Date(talk.date).toISOString().slice(0, 10) : "",
-      speakers: talk.speakers,
+      title: lore.title,
+      date: lore.date ? new Date(lore.date).toISOString().slice(0, 10) : "",
+      location: lore.location,
+      preview: lore.preview,
+      story: lore.story.length > 0 ? lore.story : [""],
+      images: lore.images,
     });
     setUploadError(null);
     setModalOpen(true);
@@ -116,7 +95,7 @@ export default function Talks(props: { talks: Talk[] }) {
     setUploading(true);
 
     const formData = new FormData();
-    formData.append("module", "talks");
+    formData.append("module", "lore");
     formData.append("file", file);
 
     try {
@@ -146,43 +125,67 @@ export default function Talks(props: { talks: Talk[] }) {
     }));
   };
 
+  const updateStory = (index: number, value: string) => {
+    setForm((prev) => {
+      const story = [...prev.story];
+      story[index] = value;
+      return { ...prev, story };
+    });
+  };
+
+  const addStoryParagraph = () => {
+    setForm((prev) => ({ ...prev, story: [...prev.story, ""] }));
+  };
+
+  const removeStoryParagraph = (index: number) => {
+    setForm((prev) => ({
+      ...prev,
+      story: prev.story.filter((_, i) => i !== index),
+    }));
+  };
+
   const handleSave = async () => {
     setSaving(true);
+    const payload = {
+      ...form,
+      story: form.story.filter((s) => s.trim() !== ""),
+    };
+
     try {
-      if (editTalk) {
-        const res = await fetch("/api/talks", {
+      if (editLore) {
+        const res = await fetch("/api/lore", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ ...form, _id: editTalk._id }),
+          body: JSON.stringify({ ...payload, _id: editLore._id }),
         });
         const data = await res.json();
         if (data.success) {
-          setTalks((prev) =>
-            prev.map((t) =>
-              t._id === editTalk._id
-                ? (serializeId(data.talk) as unknown as Talk)
-                : t,
+          setLores((prev) =>
+            prev.map((l) =>
+              l._id === editLore._id
+                ? (serializeId(data.lore) as unknown as LoreType)
+                : l,
             ),
           );
           setModalOpen(false);
         }
       } else {
-        const res = await fetch("/api/talks", {
+        const res = await fetch("/api/lore", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(form),
+          body: JSON.stringify(payload),
         });
         const data = await res.json();
         if (data.success) {
-          setTalks((prev) => [
+          setLores((prev) => [
+            serializeId(data.lore) as unknown as LoreType,
             ...prev,
-            serializeId(data.talk) as unknown as Talk,
           ]);
           setModalOpen(false);
         }
@@ -196,13 +199,13 @@ export default function Talks(props: { talks: Talk[] }) {
     if (!deleteTarget) return;
     setDeleting(true);
     try {
-      const res = await fetch(`/api/talks?id=${deleteTarget._id}`, {
+      const res = await fetch(`/api/lore?id=${deleteTarget._id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
       if (data.success) {
-        setTalks((prev) => prev.filter((t) => t._id !== deleteTarget._id));
+        setLores((prev) => prev.filter((l) => l._id !== deleteTarget._id));
         setDeleteTarget(null);
       }
     } finally {
@@ -210,177 +213,95 @@ export default function Talks(props: { talks: Talk[] }) {
     }
   };
 
+  const filledStory = form.story.filter((s) => s.trim() !== "");
   const isSaveDisabled =
     saving ||
     uploading ||
     !form.title ||
-    !form.description ||
-    !form.name ||
+    !form.location ||
     !form.date ||
-    !form.speakers ||
+    !form.preview ||
+    filledStory.length === 0 ||
     form.images.length === 0;
 
   return (
-    <section className="bg-pbblack rounded-xl text-white py-8 md:py-12 text-lexend-300 min-h-xl">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-12 text-center">
-        {/* Heading */}
-        <div className="text-3xl md:text-5xl lg:text-6xl font-medium mb-6 px-4 md:px-10 flex flex-wrap justify-center gap-2">
-          {phrases.map((phrase, idx) => (
-            <motion.span
-              key={idx}
-              initial={{ opacity: 0, y: 6, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{
-                duration: 1,
-                delay: idx * 0.4,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              {phrase}
-              {idx < phrases.length - 1 ? "." : ""}
-            </motion.span>
-          ))}
-        </div>
+    <>
+      {/* Header */}
+      <div className="flex justify-center mt-10 items-end pb-10 w-full h-55 p-5 text-5xl md:text-6xl bg-pbpages text-white">
+        <motion.span
+          initial={{ opacity: 0, y: 6, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Our Lore
+        </motion.span>
+      </div>
 
+      <div className="bg-pbpages flex px-5 justify-center w-full mb-10 md:mb-16 text-center">
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="text-gray-400 text-base md:text-lg lg:text-xl text-lexend-300 font-light mb-6"
+          transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="text-pbtext font-light text-xl md:text-2xl lg:text-3xl max-w-300"
         >
-          A showcase of talks and conferences by the talented members of
-          <br />
-          Point Blank.
+          Every line of code tells a story, but our greatest tales are written
+          in the adventures we share. Here are the chronicles of our coding
+          club&apos;s journeys, where friendship and innovation intertwine.
         </motion.p>
+      </div>
 
-        {authenticated && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1.8 }}
-            className="flex justify-center mb-4"
-          >
-            <button
-              onClick={openAdd}
-              className="px-6 py-2 bg-pbgreen text-black font-medium rounded-full hover:opacity-90 transition-opacity text-sm cursor-pointer"
-            >
-              + Add Talk
-            </button>
-          </motion.div>
-        )}
-
-        {/* Tabs */}
+      {authenticated && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 py-4 md:py-6"
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="w-full flex justify-center mb-8"
         >
-          {TABS.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-sm md:text-base uppercase cursor-pointer ${
-                activeTab === tab
-                  ? "bg-pbgreen text-black"
-                  : "bg-white/5 text-white/60"
-              }`}
-            >
-              {tab === "all" ? "All" : tab}
-            </button>
-          ))}
+          <button
+            onClick={openAdd}
+            className="px-8 py-3 bg-pbgreen text-black font-medium rounded-full hover:opacity-90 transition-opacity text-base cursor-pointer"
+          >
+            + Add Lore
+          </button>
         </motion.div>
+      )}
 
-        {/* Talks list */}
-        <div>
-          {filteredTalks.length === 0 && (
-            <p className="text-gray-400 text-lg mt-8">No talks found.</p>
-          )}
+      {/* Lore list */}
+      <div>
+        {lores.length === 0 && (
+          <p className="text-pbtext text-lg text-center mt-8 mb-16">
+            No lore found.
+          </p>
+        )}
 
-          {filteredTalks.map((talk) => (
-            <motion.div
-              key={String(talk._id)}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="bg-pbgray rounded-xl max-w-7xl mx-auto flex justify-center mb-6 px-2 md:px-6 lg:px-8"
-            >
-              <div className="flex flex-col lg:flex-row items-center py-4 w-full">
-                <div className="flex flex-col items-center">
-                  {talk.images[0] && (
-                    <div className="w-full max-w-full lg:w-150 aspect-3/2 overflow-hidden rounded-xl">
-                      <Image
-                        src={talk.images[0]}
-                        alt={talk.title}
-                        width={600}
-                        height={400}
-                        className="object-cover rounded-xl w-full h-full grayscale"
-                      />
-                    </div>
-                  )}
-                  <span className="text-pbgreen text-light font-lexend-300 mt-3 bg-black/40 rounded-full px-3 p-3">
-                    {talk.speakers}
-                  </span>
-                </div>
-
-                <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-12 py-6 lg:py-8">
-                  <div className="mb-4">
-                    <h2 className="text-pbgreen font-medium text-2xl md:text-3xl lg:text-3xl leading-snug mb-2 max-w-2xl text-left wrap-break-word">
-                      {talk.title}
-                    </h2>
-                    <p className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
-                      {talk.description}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-3 md:px-2">
-                    <div className="flex gap-3">
-                      <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
-                        {talk.name}
-                      </span>
-                    </div>
-                    <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
-                      {new Date(talk.date).toLocaleDateString("en-US", {
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </span>
-                  </div>
-
-                  {authenticated && (
-                    <div className="flex gap-2 mt-2">
-                      <button
-                        onClick={() => openEdit(talk)}
-                        className="px-3 py-1 text-xs bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors cursor-pointer"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => setDeleteTarget(talk)}
-                        className="px-3 py-1 text-xs bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-full transition-colors cursor-pointer"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {lores.map((lore) => (
+          <motion.div
+            key={lore._id}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <LoreCard
+              {...lore}
+              onEdit={authenticated ? () => openEdit(lore) : undefined}
+              onDelete={authenticated ? () => setDeleteTarget(lore) : undefined}
+            />
+          </motion.div>
+        ))}
       </div>
 
       {/* Add / Edit Dialog */}
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="dark bg-pbpages border-pbborder text-white max-w-md max-h-[90vh] overflow-y-auto">
+        <DialogContent className="dark bg-pbpages border-pbborder text-white max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-white text-base">
-              {editTalk ? "Edit Talk" : "Add Talk"}
+              {editLore ? "Edit Lore" : "Add Lore"}
             </DialogTitle>
           </DialogHeader>
 
           <div className="flex flex-col gap-4 py-2">
+            {/* Simple text fields */}
             {TEXT_FIELDS.map(({ label, key, type, required }) => (
               <div key={key} className="flex flex-col gap-1.5">
                 <Label className="text-pbtext text-xs">
@@ -398,25 +319,41 @@ export default function Talks(props: { talks: Talk[] }) {
               </div>
             ))}
 
+            {/* Story paragraphs */}
             <div className="flex flex-col gap-1.5">
               <Label className="text-pbtext text-xs">
-                Type<span className="text-pbgreen ml-0.5">*</span>
+                Story<span className="text-pbgreen ml-0.5">*</span>
               </Label>
-              <Select
-                value={form.type}
-                onValueChange={(v) =>
-                  setForm((prev) => ({ ...prev, type: v as Talk["type"] }))
-                }
+
+              {form.story.map((paragraph, idx) => (
+                <div key={idx} className="flex items-center gap-2">
+                  <Input
+                    type="text"
+                    value={paragraph}
+                    placeholder={`Paragraph ${idx + 1}`}
+                    onChange={(e) => updateStory(idx, e.target.value)}
+                    className="bg-pbgray border-pbborder text-white placeholder:text-pbtext/50 focus-visible:border-pbgreen focus-visible:ring-pbgreen/20 h-8 flex-1"
+                  />
+                  {form.story.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => removeStoryParagraph(idx)}
+                      className="p-1 rounded-full hover:bg-red-500/20 text-red-400 transition-colors"
+                    >
+                      <Trash2Icon className="h-3.5 w-3.5" />
+                    </button>
+                  )}
+                </div>
+              ))}
+
+              <button
+                type="button"
+                onClick={addStoryParagraph}
+                className="flex items-center gap-1.5 text-pbgreen text-xs hover:opacity-80 transition-opacity mt-1 self-start"
               >
-                <SelectTrigger className="w-full bg-pbgray border-pbborder text-white h-8 focus:ring-pbgreen/20 focus:border-pbgreen">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="dark bg-pbgray border-pbborder text-white">
-                  <SelectItem value="conference">Conference</SelectItem>
-                  <SelectItem value="talks">Talk</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
+                <PlusIcon className="h-3.5 w-3.5" />
+                Add paragraph
+              </button>
             </div>
 
             {/* Images */}
@@ -519,7 +456,7 @@ export default function Talks(props: { talks: Talk[] }) {
         <DialogContent className="dark bg-pbpages border-pbborder text-white max-w-sm">
           <DialogHeader>
             <DialogTitle className="text-white text-base">
-              Delete Talk
+              Delete Lore
             </DialogTitle>
           </DialogHeader>
 
@@ -549,6 +486,6 @@ export default function Talks(props: { talks: Talk[] }) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </section>
+    </>
   );
 }

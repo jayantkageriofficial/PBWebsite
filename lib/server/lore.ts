@@ -1,12 +1,22 @@
 import LoreType from "@/types/lore/loreType";
 import Lore from "../db/models/lores";
 
-export async function uploadLore(loreData: LoreType) {
+export async function getAllLores(): Promise<LoreType[]> {
+  try {
+    const lores = await Lore.find();
+    return lores as unknown as LoreType[];
+  } catch (error) {
+    console.error("Error fetching lores:", error);
+    return [];
+  }
+}
+
+export async function uploadLore(loreData: Omit<LoreType, "_id">) {
   try {
     const savedLore = await new Lore(loreData).save();
-    return savedLore as LoreType;
+    return savedLore as unknown as LoreType;
   } catch (err) {
-    console.log("Error creating member:", err);
+    console.error("Error creating lore:", err);
     return null;
   }
 }
@@ -21,23 +31,23 @@ export async function getLoreById(id: string) {
   }
 }
 
-export async function updateLore(loreData: Lore) {
+export async function updateLore(loreData: LoreType) {
   try {
     const updatedLore = await Lore.findByIdAndUpdate(loreData._id, loreData, {
       new: true,
     });
-    return updatedLore;
+    return updatedLore as unknown as LoreType | null;
   } catch (error) {
     console.error(`Error updating lore with id ${loreData._id}:`, error);
     return null;
   }
 }
 
-export async function deleteLore(id:string){
-    try{
-        await Lore.findByIdAndDelete(id);
-        return true
-    }catch (error) {
+export async function deleteLore(id: string) {
+  try {
+    await Lore.findByIdAndDelete(id);
+    return true;
+  } catch (error) {
     console.error(`Error deleting lore with id ${id}:`, error);
     return false;
   }

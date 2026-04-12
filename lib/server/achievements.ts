@@ -25,7 +25,7 @@ export const getAchievementsById = async (
 };
 
 export const createAchievements = async (
-  data: Omit<Achievements, "_id">,
+  data: Pick<Achievements, "name" | "imageUrl" | "achivements">,
 ): Promise<Achievements | null> => {
   try {
     const saved = await new AchievementsModel(data).save();
