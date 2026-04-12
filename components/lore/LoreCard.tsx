@@ -30,7 +30,7 @@ export default function LoreCard({
       <div
         className={`w-full flex justify-center min-h-93 px-4 sm:px-6 ${expanded ? "" : "mb-6 md:mb-10"} bg-pbpages`}
       >
-        <div className="w-full max-w-280 flex flex-col-reverse md:flex-row bg-[#1C1C1C] min-h-93a rounded-2xl overflow-hidden">
+        <div className="w-full max-w-280 flex flex-col-reverse md:flex-row bg-[#1C1C1C] min-h-93a  overflow-hidden">
           <div className="w-full md:w-[50%]">
             <div className="min-h-18 w-full pt-8 pl-5 md:pl-12.5 ">
               <h1 className="text-3xl sm:text-4xl md:text-5xl text-[#37FF00] font-medium">
