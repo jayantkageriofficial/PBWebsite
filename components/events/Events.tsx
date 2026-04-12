@@ -239,8 +239,14 @@ export default function Events(props: { events: Event[] }) {
     }
   };
 
-  const upcoming = events.filter(isUpcoming).map(toEventItem);
-  const past = events.filter((e) => !isUpcoming(e)).map(toEventItem);
+  const upcoming = events
+    .filter(isUpcoming)
+    .sort((a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime())
+    .map(toEventItem);
+  const past = events
+    .filter((e) => !isUpcoming(e))
+    .sort((a, b) => new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime())
+    .map(toEventItem);
 
   const isSaveDisabled =
     saving ||

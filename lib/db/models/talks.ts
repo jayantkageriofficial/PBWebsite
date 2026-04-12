@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-interface Talk extends mongoose.Document {
+export interface Talk extends mongoose.Document {
   title: string;
   description: string;
   images: string[];
@@ -24,6 +24,6 @@ const TalkModel = new mongoose.Schema({
   speakers: { type: String, required: true },
 });
 
-const Talk = mongoose.models.Talk || mongoose.model("Talk", TalkModel);
+const TalkSchema = mongoose.models.Talk || mongoose.model("Talk", TalkModel);
 
-export default Talk;
+export default TalkSchema;
