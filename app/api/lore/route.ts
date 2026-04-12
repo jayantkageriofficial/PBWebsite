@@ -9,7 +9,7 @@ import Lore from "@/lib/db/models/lores";
  */
 
 export async function GET() {
-  connectDB();
+  await connectDB();
   const data = await Lore.find();
   if (!data || data.length == 0) {
     return NextResponse.json([],{status: 200})
