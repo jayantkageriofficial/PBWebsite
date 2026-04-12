@@ -1,12 +1,13 @@
 "use client";
-export type AchievementRow = {
-  leftEvent: string;
-  leftResult: string;
-  leftCategory: string;   // "GSOC" | "LFX" | "HACKATHONS" | "SIH" | "LIFT" | "ACM" | "CP"
-  rightEvent: string;
-  rightResult: string;
-  rightCategory: string;
+
+export type AchievementItem = {
+  event: string;
+  result: string;
+  category: string;   // "GSOC" | "LFX" | "HACKATHONS" | "SIH" | "LIFT" | "ACM" | "CP"
 };
+
+// Each row is an array of items — 1 item = full width, 2 = two columns, 3 = three columns, etc.
+export type AchievementRow = AchievementItem[];
 
 export type Member = {
   name: string;
@@ -21,37 +22,76 @@ export const members: Member[] = [
     name: "Akash Singh",
     avatar: "",
     achievements: [
-      { leftEvent: "GSoC '24", leftResult: "@Keploy", leftCategory: "GSOC", rightEvent: "LFX '25", rightResult: "@LitmusChaos", rightCategory: "LFX" },
-      { leftEvent: "SIH '25", leftResult: "Winner", leftCategory: "SIH", rightEvent: "LIFT '25", rightResult: "xyz", rightCategory: "LIFT" },
-      { leftEvent: "HackGlobal Singapore", leftResult: "Finalists", leftCategory: "HACKATHONS", rightEvent: "NITK '25", rightResult: "Grand Winner", rightCategory: "HACKATHONS" },
-      { leftEvent: "Warpspeed", leftResult: "Grand Winner", leftCategory: "HACKATHONS", rightEvent: "Hackbangalore '25", rightResult: "Winner", rightCategory: "HACKATHONS" },
-      { leftEvent: "JIT Hack '23", leftResult: "Runner up", leftCategory: "HACKATHONS", rightEvent: "ACM Winter School '24", rightResult: "AVV, Coimbatore", rightCategory: "ACM" },
+      [
+        { event: "GSoC '24", result: "@Keploy", category: "GSOC" },
+        { event: "LFX '25", result: "@LitmusChaos", category: "LFX" },
+      ],
+      [
+        { event: "SIH '25", result: "Winner", category: "SIH" },
+        { event: "LIFT '25", result: "xyz", category: "LIFT" },
+      ],
+      [
+        { event: "HackGlobal Singapore", result: "Finalists", category: "HACKATHONS" },
+        { event: "NITK '25", result: "Grand Winner", category: "HACKATHONS" },
+      ],
+      [
+        { event: "Warpspeed", result: "Grand Winner", category: "HACKATHONS" },
+        { event: "Hackbangalore '25", result: "Winner", category: "HACKATHONS" },
+      ],
+      [
+        { event: "JIT Hack '23", result: "Runner up", category: "HACKATHONS" },
+        { event: "ACM Winter School '24", result: "AVV, Coimbatore", category: "ACM" },
+      ],
     ],
   },
   {
     name: "Priya Sharma",
     avatar: "",
     achievements: [
-      { leftEvent: "GSoC '25", leftResult: "@Mozilla", leftCategory: "GSOC", rightEvent: "GSoC '24", rightResult: "@TensorFlow", rightCategory: "GSOC" },
-      { leftEvent: "SIH '24", leftResult: "Winner", leftCategory: "SIH", rightEvent: "ACM ICPC '24", rightResult: "Regionalist", rightCategory: "ACM" },
+      [
+        { event: "GSoC '25", result: "@Mozilla", category: "GSOC" },
+        { event: "GSoC '24", result: "@TensorFlow", category: "GSOC" },
+      ],
+      [
+        { event: "SIH '24", result: "Winner", category: "SIH" },
+        { event: "ACM ICPC '24", result: "Regionalist", category: "ACM" },
+      ],
     ],
   },
   {
     name: "Rohan Mehta",
     avatar: "",
     achievements: [
-      { leftEvent: "LFX '24", leftResult: "@CNCF", leftCategory: "LFX", rightEvent: "LFX '25", rightResult: "@Kubernetes", rightCategory: "LFX" },
-      { leftEvent: "Codeforces", leftResult: "Expert (1600+)", leftCategory: "CP", rightEvent: "Leetcode", rightResult: "Top 5%", rightCategory: "CP" },
-      { leftEvent: "Smart India Hack", leftResult: "Finalist", leftCategory: "SIH", rightEvent: "HackBVP '24", rightResult: "Winner", rightCategory: "HACKATHONS" },
+      [
+        { event: "LFX '24", result: "@CNCF", category: "LFX" },
+        { event: "LFX '25", result: "@Kubernetes", category: "LFX" },
+      ],
+      [
+        { event: "Codeforces", result: "Expert (1600+)", category: "CP" },
+        { event: "Leetcode", result: "Top 5%", category: "CP" },
+      ],
+      [
+        { event: "Smart India Hack", result: "Finalist", category: "SIH" },
+        { event: "HackBVP '24", result: "Winner", category: "HACKATHONS" },
+      ],
     ],
   },
   {
     name: "Sneha Patel",
     avatar: "",
     achievements: [
-      { leftEvent: "HackMIT '24", leftResult: "Top 10", leftCategory: "HACKATHONS", rightEvent: "DevFest Hack", rightResult: "Winner", rightCategory: "HACKATHONS" },
-      { leftEvent: "ACM-W '25", leftResult: "Scholar", leftCategory: "ACM", rightEvent: "GSoC '25", rightResult: "@NumFOCUS", rightCategory: "GSOC" },
-      { leftEvent: "CP Sheet", leftResult: "500 solved", leftCategory: "CP", rightEvent: "ICPC '24", rightResult: "Regionalist", rightCategory: "ACM" },
+      [
+        { event: "HackMIT '24", result: "Top 10", category: "HACKATHONS" },
+        { event: "DevFest Hack", result: "Winner", category: "HACKATHONS" },
+      ],
+      [
+        { event: "ACM-W '25", result: "Scholar", category: "ACM" },
+        { event: "GSoC '25", result: "@NumFOCUS", category: "GSOC" },
+      ],
+      [
+        { event: "CP Sheet", result: "500 solved", category: "CP" },
+        { event: "ICPC '24", result: "Regionalist", category: "ACM" },
+      ],
     ],
   },
 
@@ -106,37 +146,29 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
       {/* achievements */}
       <div className="bg-pbgray flex flex-col px-3 py-2.5 gap-2">
         {member.achievements
-          .filter((row) =>
-            filterCategory === "ALL" ||
-            row.leftCategory === filterCategory ||
-            row.rightCategory === filterCategory
+          .map((row) =>
+            filterCategory === "ALL"
+              ? row
+              : row.filter((item) => item.category === filterCategory)
           )
+          .filter((row) => row.length > 0)
           .map((row, i) => {
-            const showLeft = filterCategory === "ALL" || row.leftCategory === filterCategory;
-            const showRight = filterCategory === "ALL" || row.rightCategory === filterCategory;
+            const cols = row.length;
+            const gridClass =
+              cols === 1 ? "grid-cols-1" :
+              cols === 2 ? "grid-cols-2" :
+              cols === 3 ? "grid-cols-3" :
+              "grid-cols-4";
             return (
-              <div key={i} className={`grid gap-2 ${showLeft && showRight ? "grid-cols-2" : "grid-cols-1"}`}>
-
-
-                {showLeft && (
-                  <div className="bg-pbsurface rounded-lg px-3.5 py-2.5 min-w-0">
+              <div key={i} className={`grid gap-2 ${gridClass}`}>
+                {row.map((item, j) => (
+                  <div key={j} className="bg-pbsurface rounded-lg px-3.5 py-2.5 min-w-0">
                     <p className="text-sm font-normal text-[#39d353] m-0 break-words">
-                      {row.leftEvent}
+                      {item.event}
                     </p>
-                    <p className="text-xs text-pbtext m-0 mt-0.5 break-words">{row.leftResult}</p>
+                    <p className="text-xs text-pbtext m-0 mt-0.5 break-words">{item.result}</p>
                   </div>
-                )}
-
-
-                {showRight && (
-                  <div className="bg-pbsurface rounded-lg px-3.5 py-2.5 min-w-0">
-                    <p className="text-sm font-normal text-[#39d353] m-0 break-words">
-                      {row.rightEvent}
-                    </p>
-                    <p className="text-xs text-pbtext m-0 mt-0.5 break-words">{row.rightResult}</p>
-                  </div>
-                )}
-
+                ))}
               </div>
             );
           })}

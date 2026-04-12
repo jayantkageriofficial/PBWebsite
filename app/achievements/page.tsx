@@ -49,10 +49,8 @@ export default function AchievementsPage() {
         {members
           .filter((member) =>
             activeCategory === "ALL" ||
-            member.achievements.some(
-              (row) =>
-                row.leftCategory === activeCategory ||
-                row.rightCategory === activeCategory
+            member.achievements.some((row) =>
+              row.some((item) => item.category === activeCategory)
             )
           )
           .map((member, i) => (
