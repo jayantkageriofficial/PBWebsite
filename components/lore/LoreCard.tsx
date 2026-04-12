@@ -104,7 +104,7 @@ export default function LoreCard({
             [-webkit-mask-image:radial-gradient(circle,transparent_15%,black_40%,transparent_60%)]"
             />
 
-            <div className="h-64 md:h-83 w-[90%] md:w-lg overflow-hidden relative rounded-xl bg-cover bg-center">
+            <div className="h-64 md:h-83 w-[90%] md:w-lg overflow-hidden relative rounded-[5px] bg-cover bg-center">
               {/* Prev button */}
               {images.length > 1 && (
                 <button
