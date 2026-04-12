@@ -43,6 +43,7 @@ export default function AchievementsPage() {
         </div>
       </div>
 
+
       {/* member cards */}
       <div className="flex flex-wrap gap-6 px-15 pb-15">
         {members
