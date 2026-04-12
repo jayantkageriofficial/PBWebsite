@@ -62,7 +62,7 @@ export default function EventCard({
                         transform: "rotateY(180deg)",
                     }}
                 >
-                    <span className="text-lg lg:text-xl font-medium leading-snug text-[#37FF00]">
+                    <span className="text-lg lg:text-xl font-medium leading-snug text-[#37FF00] text-center w-full">
                         {title}
                     </span>
                     <div className="text-xs md:text-sm text-white/80">
