@@ -45,7 +45,7 @@ export default function AchievementsPage() {
 
 
       {/* member cards */}
-      <div className="flex flex-wrap gap-6 px-15 pb-15">
+      <div className="flex flex-wrap items-stretch gap-6 px-15 pb-15">
         {members
           .filter((member) =>
             activeCategory === "ALL" ||

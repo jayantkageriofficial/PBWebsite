@@ -107,7 +107,7 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
     .join("");
 
   return (
-    <div className="min-w-[360px] w-full rounded-[14px] border border-pbborder bg-pbgray flex flex-col overflow-hidden">
+    <div className="min-w-[360px] w-full h-full rounded-[14px] border border-pbborder bg-pbgray flex flex-col overflow-hidden">
 
       {/* profile */}
       <div className="flex items-center gap-4 px-6 py-5">
@@ -128,7 +128,7 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
 
 
           <div className="absolute -bottom-0.5 -right-0.5 w-[22px] h-[22px] rounded-full bg-[#FFB413] flex items-center justify-center text-[11px] border-2 border-pbgray">
-            <img src="/achievement.svg" alt="" />
+            <img src="/badge.svg" alt="badge" />
           </div>
         </div>
 
@@ -156,9 +156,9 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
             const cols = row.length;
             const gridClass =
               cols === 1 ? "grid-cols-1" :
-              cols === 2 ? "grid-cols-2" :
-              cols === 3 ? "grid-cols-3" :
-              "grid-cols-4";
+                cols === 2 ? "grid-cols-2" :
+                  cols === 3 ? "grid-cols-3" :
+                    "grid-cols-4";
             return (
               <div key={i} className={`grid gap-2 ${gridClass}`}>
                 {row.map((item, j) => (
