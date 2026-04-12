@@ -14,11 +14,11 @@ export default function AchievementsPage() {
 
       {/* heading */}
       <div className="flex flex-col items-center justify-center pt-20 pb-12 px-4 text-center">
-        <h1 className="font-sans font-normal text-[64px] leading-[150%] tracking-normal text-white m-0 mb-2">
+        <h1 className="font-sans font-normal text-[32px] sm:text-[48px] lg:text-[64px] leading-[150%] tracking-normal text-white m-0 mb-2">
           We Build.We Ship.We Win.
         </h1>
 
-        <p className="font-sans font-light text-2xl leading-relaxed text-center text-pbtext mb-12">
+        <p className="font-sans font-light text-base sm:text-xl lg:text-2xl leading-relaxed text-center text-pbtext mb-12">
           A showcase of achievements by the talented members of PointBlank
         </p>
 
@@ -45,7 +45,7 @@ export default function AchievementsPage() {
 
 
       {/* member cards */}
-      <div className="flex flex-wrap items-stretch gap-6 px-15 pb-15">
+      <div className="flex flex-wrap justify-center items-stretch gap-6 px-4 sm:px-8 lg:px-15 pb-8 sm:pb-12 lg:pb-15">
         {members
           .filter((member) =>
             activeCategory === "ALL" ||
@@ -54,7 +54,7 @@ export default function AchievementsPage() {
             )
           )
           .map((member, i) => (
-            <div key={i} className="w-[360px] shrink-0">
+            <div key={i} className="w-full sm:w-[360px] shrink-0">
               <AchievementCard member={member} filterCategory={activeCategory} />
             </div>
           ))}

@@ -107,7 +107,7 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
     .join("");
 
   return (
-    <div className="min-w-[360px] w-full h-full rounded-[14px] border border-pbborder bg-pbgray flex flex-col overflow-hidden">
+    <div className="w-full h-full rounded-[14px] border border-pbborder bg-pbgray flex flex-col overflow-hidden">
 
       {/* profile */}
       <div className="flex items-center gap-4 px-6 py-5">
