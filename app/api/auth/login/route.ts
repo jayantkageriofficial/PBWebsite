@@ -2,12 +2,11 @@ import { NextResponse } from "next/server";
 import { sendVerificationEmail, verifyToken } from "@/lib/server/auth";
 
 /*
- * GET /api/auth/login
- *   searchParams: { email: string }
+ * POST /api/auth/login
+ *   body: { email: string }
  */
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const email = searchParams.get("email");
+export async function POST(request: Request) {
+  const { email } = await request.json();
   if (!email)
     return NextResponse.json(
       { success: false, error: "Email is required" },

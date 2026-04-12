@@ -5,7 +5,7 @@ export default function EventsPage() {
   return (
     <>
       <section className="relative overflow-hidden bg-pbpages text-white flex items-center justify-center">
-        <div className="relative z-10 flex flex-col items-center justify-center pt-10">
+        <div className="relative z-10 flex flex-col items-center justify-center pt-24">
           <h1 className="text-center text-white tracking-tight select-none text-5xl md:text-6xl lg:text-7xl font-normal leading-tight md:leading-snug">
             Events
           </h1>

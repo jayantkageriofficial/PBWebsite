@@ -11,8 +11,6 @@ export default async function AdminLogsPage() {
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("session");
 
-  console.log("Session cookie:", sessionCookie);
-
   if (!sessionCookie || !(await verifyAuth(sessionCookie.value))) {
     redirect("/admin");
   }
@@ -22,8 +20,6 @@ export default async function AdminLogsPage() {
       Authorization: `Bearer ${sessionCookie.value}`,
     },
   });
-
-  console.log("Fetch logs response:", req);
 
   if (!req.ok) {
     console.error("Failed to fetch logs:", req.statusText);
