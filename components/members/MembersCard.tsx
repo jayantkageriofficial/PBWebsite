@@ -9,6 +9,7 @@ interface CardProps {
   company: string;
   linkedInUrl?: string;
   imageUrl?: string;
+  leadDesc?: string;
   isAdmin?: boolean;
   onEdit?: () => void;
   onDelete?: () => void;
@@ -20,13 +21,14 @@ const Card: React.FC<CardProps> = ({
   company,
   linkedInUrl,
   imageUrl,
+  leadDesc,
   isAdmin,
   onEdit,
   onDelete,
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const isFlipEnabled = !!(imageUrl && linkedInUrl);
+  const isFlipEnabled = !!imageUrl;
 
   return (
     <div
@@ -38,21 +40,45 @@ const Card: React.FC<CardProps> = ({
       {isAdmin && (
         <div className="absolute top-2 right-2 z-10 flex gap-1.5">
           <button
-            onClick={(e) => { e.stopPropagation(); onEdit?.(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit?.();
+            }}
             className="p-1.5 rounded-full bg-pbgray border border-pbborder hover:border-pbgreen transition-colors"
             title="Edit"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-pbtext hover:text-pbgreen" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-3.5 w-3.5 text-pbtext hover:text-pbgreen"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
               <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
             </svg>
           </button>
           <button
-            onClick={(e) => { e.stopPropagation(); onDelete?.(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete?.();
+            }}
             className="p-1.5 rounded-full bg-pbgray border border-pbborder hover:border-red-500 transition-colors"
             title="Delete"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-pbtext hover:text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-3.5 w-3.5 text-pbtext hover:text-red-500"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <polyline points="3 6 5 6 21 6" />
               <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
               <path d="M10 11v6M14 11v6" />
@@ -68,34 +94,25 @@ const Card: React.FC<CardProps> = ({
       >
         <div
           className={`
-            ${isFlipEnabled ? "backface-hidden" : ""} 
-            flex flex-col 
-            w-full
-            ${
-              imageUrl && linkedInUrl
-                ? "max-w-75 sm:max-w-85 md:max-w-90 lg:max-w-95 xl:max-w-103.25 aspect-413/466 rounded-4xl border border-pbborder"
-                : "max-w-60 h-fit rounded-2xl"
-            } 
-            mx-auto
-            p-4 sm:p-5 md:p-6
-            ${!imageUrl && !linkedInUrl ? "border-0 bg-pbgray" : "bg-pbpages"} 
-            gap-4 sm:gap-5
+            ${isFlipEnabled ? "backface-hidden" : ""}
+            flex flex-col items-center
+            w-full rounded-3xl border border-pbborder bg-pbpages p-3
           `}
         >
-          {imageUrl && linkedInUrl && (
-            <div className="relative w-full aspect-square rounded-4xl overflow-hidden shrink-0">
+          {imageUrl && (
+            <div className="relative w-full aspect-square rounded-2xl overflow-hidden shrink-0">
               <Image
                 src={imageUrl}
                 alt={name}
                 fill
                 style={{ objectFit: "cover" }}
-                className="rounded-4xl"
+                className="rounded-2xl"
               />
             </div>
           )}
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-3 mb-1">
             <div className="flex flex-col items-center justify-center gap-1.5 w-full h-fit">
-              <span className="text-pbgreen font-light whitespace-nowrap bg-pbdarkgray w-fit h-fit text-center rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base border border-pbborder">
+              <span className="text-pbgreen font-light whitespace-nowrap bg-pbdarkgray w-fit h-fit text-center rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base border border-pbborder capitalize">
                 {name}
               </span>
               {!isFlipEnabled && (
@@ -122,26 +139,36 @@ const Card: React.FC<CardProps> = ({
             <h3 className="text-pbgreen text-xl sm:text-2xl font-medium mb-2">
               {name}
             </h3>
-            <p className="text-white text-base sm:text-lg font-light mb-1">
-              {role}
-            </p>
-            {company && (
-              <p className="text-gray-400 text-xs sm:text-sm font-light mb-4 italic">
-                @{company}
+            {leadDesc ? (
+              <p className="text-white text-base sm:text-lg font-light mb-1">
+                {leadDesc}
               </p>
+            ) : (
+              <>
+                <p className="text-white text-base sm:text-lg font-light mb-1">
+                  {role}
+                </p>
+                {company && (
+                  <p className="text-gray-400 text-xs sm:text-sm font-light mb-4 italic">
+                    @{company}
+                  </p>
+                )}
+              </>
             )}
 
-            <div className="mt-6 sm:mt-8 pt-4 border-t border-pbborder w-full flex justify-center">
-              <a
-                href={linkedInUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="hover:scale-110 transition-transform"
-              >
-                <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
-              </a>
-            </div>
+            {linkedInUrl && (
+              <div className="mt-6 sm:mt-8 pt-4 border-t border-pbborder w-full flex justify-center">
+                <a
+                  href={linkedInUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="hover:scale-110 transition-transform"
+                >
+                  <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
+                </a>
+              </div>
+            )}
           </div>
         )}
       </div>
