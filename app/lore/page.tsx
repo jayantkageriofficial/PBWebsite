@@ -1,5 +1,5 @@
 "use client";
-import LoreCard from "@/components/LoreCard";
+import LoreCard from "@/components/lore/LoreCard";
 import { useEffect, useState } from "react";
 import LoreType from "@/types/lore/loreType";
 import LoadingBrackets from "../loading";
