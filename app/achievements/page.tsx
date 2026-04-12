@@ -1,13 +1,44 @@
 "use client";
 
-import { useState } from "react";
-import { Search } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Search, X } from "lucide-react";
 import { AchievementCard, members } from "@/components/Achievmentscard";
 
 const categories = ["ALL", "HACKATHONS", "GSOC", "LFX", "SIH", "LIFT", "ACM", "CP"];
 
 export default function AchievementsPage() {
   const [activeCategory, setActiveCategory] = useState("ALL");
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Auto-focus input when search opens
+  useEffect(() => {
+    if (searchOpen) {
+      inputRef.current?.focus();
+    }
+  }, [searchOpen]);
+
+  const handleSearchToggle = () => {
+    if (searchOpen) {
+      setSearchQuery("");
+      setSearchOpen(false);
+    } else {
+      setSearchOpen(true);
+    }
+  };
+
+  const filteredMembers = members.filter((member) => {
+    const matchesCategory =
+      activeCategory === "ALL" ||
+      member.achievements.some((row) =>
+        row.some((item) => item.category === activeCategory)
+      );
+    const matchesSearch =
+      searchQuery.trim() === "" ||
+      member.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <main className="min-h-screen bg-pbpages text-white">
@@ -37,25 +68,45 @@ export default function AchievementsPage() {
               {cat}
             </button>
           ))}
-          <button className="flex items-center justify-center w-9 h-9 rounded-full bg-pbgray text-pbtext hover:bg-pbgreen hover:text-black transition-all duration-200 cursor-pointer">
-            <Search size={16} />
-          </button>
+
+          {/* Search input + icon */}
+          <div className="flex items-center gap-2">
+            <div
+              className={`flex items-center overflow-hidden transition-all duration-300 ease-in-out bg-pbgray rounded-full ${
+                searchOpen ? "w-48 px-3" : "w-0 px-0"
+              }`}
+            >
+              <input
+                ref={inputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search members..."
+                className="bg-transparent text-white text-xs placeholder-pbtext outline-none w-full py-2"
+              />
+            </div>
+            <button
+              onClick={handleSearchToggle}
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-pbgray text-pbtext hover:bg-pbgreen hover:text-black transition-all duration-200 cursor-pointer shrink-0"
+              aria-label={searchOpen ? "Close search" : "Open search"}
+            >
+              {searchOpen ? <X size={16} /> : <Search size={16} />}
+            </button>
+          </div>
         </div>
       </div>
 
-
       {/* member cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-8 lg:px-15 pb-8 sm:pb-12 lg:pb-15">
-        {members
-          .filter((member) =>
-            activeCategory === "ALL" ||
-            member.achievements.some((row) =>
-              row.some((item) => item.category === activeCategory)
-            )
-          )
-          .map((member, i) => (
+        {filteredMembers.length > 0 ? (
+          filteredMembers.map((member, i) => (
             <AchievementCard key={i} member={member} filterCategory={activeCategory} />
-          ))}
+          ))
+        ) : (
+          <p className="col-span-full text-center text-pbtext py-12 text-lg">
+            No members found for &quot;{searchQuery}&quot;.
+          </p>
+        )}
       </div>
 
     </main>
