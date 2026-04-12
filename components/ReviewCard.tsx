@@ -1,7 +1,6 @@
 "use client";
 
 import { Star } from "lucide-react";
-import { useState } from "react";
 
 export function StarRating({ count }: { count: number }) {
     return (
@@ -14,19 +13,13 @@ export function StarRating({ count }: { count: number }) {
 }
 
 export default function ReviewCard({ name, review, rating }: { name: string; review: string; rating: number }) {
-    const [hovered, setHovered] = useState(false);
-
     return (
-        <div
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            className={`bg-[#191919] rounded-[20px] p-[20px_18px] flex flex-col gap-3 transition-colors duration-300 border ${hovered ? "border-pbgreen/50" : "border-transparent"}`}
-        >
+        <div className="bg-[#191919] rounded-[20px] p-[20px_18px] flex flex-col gap-3 transition-colors duration-300 border border-transparent hover:border-pbgreen/50">
             <StarRating count={rating} />
-            <p className="font-['Lexend',sans-serif] text-[13px] font-normal leading-[1.6] text-white/60 m-0">
+            <p className="text-[13px] font-normal leading-[1.6] text-white/60 m-0">
                 {review}
             </p>
-            <span className="font-['Lexend',sans-serif] text-[14px] font-medium text-pbgreen">
+            <span className="text-[14px] font-medium text-pbgreen">
                 {name}
             </span>
         </div>
