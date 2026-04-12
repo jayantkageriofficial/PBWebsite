@@ -107,14 +107,14 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
     .join("");
 
   return (
-    <div className="w-full h-full rounded-[14px] border border-pbborder bg-pbgray flex flex-col overflow-hidden">
+    <div className="w-full h-full rounded-xl border border-pbborder bg-pbgray flex flex-col overflow-hidden">
 
       {/* profile */}
       <div className="flex items-center gap-4 px-6 py-5">
 
 
         <div className="relative shrink-0">
-          <div className="w-[60px] h-[60px] rounded-full bg-gradient-to-br from-[#2a2a2a] to-[#3d3d3d] flex items-center justify-center text-lg font-bold text-[#888] overflow-hidden border-2 border-[#333]">
+          <div className="w-15 h-15 rounded-full bg-linear-to-br from-[#2a2a2a] to-[#3d3d3d] flex items-center justify-center text-lg font-bold text-pbtext overflow-hidden border-2 border-[#333]">
             {member.avatar ? (
               <img
                 src={member.avatar}
@@ -127,14 +127,14 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
           </div>
 
 
-          <div className="absolute -bottom-0.5 -right-0.5 w-[22px] h-[22px] rounded-full bg-[#FFB413] flex items-center justify-center text-[11px] border-2 border-pbgray">
+          <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-[#FFB413] flex items-center justify-center text-xs border-2 border-pbgray">
             <img src="/badge.svg" alt="badge" />
           </div>
         </div>
 
 
         <div className="min-w-0 flex-1 flex flex-col justify-center gap-0.5">
-          <span className="text-xl font-medium text-white tracking-tight leading-none break-words">
+          <span className="text-xl font-medium text-white tracking-tight leading-none wrap-break-word">
             {member.name}
           </span>
         </div>
@@ -163,10 +163,10 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
               <div key={i} className={`grid gap-2 ${gridClass}`}>
                 {row.map((item, j) => (
                   <div key={j} className="bg-pbsurface rounded-lg px-3.5 py-2.5 min-w-0">
-                    <p className="text-sm font-normal text-[#39d353] m-0 break-words">
+                    <p className="text-sm font-normal text-[#39d353] m-0 wrap-break-word">
                       {item.event}
                     </p>
-                    <p className="text-xs text-pbtext m-0 mt-0.5 break-words">{item.result}</p>
+                    <p className="text-xs text-pbtext m-0 mt-0.5 wrap-break-word">{item.result}</p>
                   </div>
                 ))}
               </div>
