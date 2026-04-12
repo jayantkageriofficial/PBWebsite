@@ -1,4 +1,4 @@
-export interface Lore {
+export default interface LoreType {
 	id: string;
 	title: string;
 	date: number;

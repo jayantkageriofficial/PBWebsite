@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Lore } from "@/types/lore/loreType";
+import LoreType from "@/types/lore/loreType";
 import Image from "next/image";
 import LoreStoryCard from "./LoreStoryCard";
 
@@ -12,7 +12,7 @@ export default function LoreCard({
   preview,
   images,
   story,
-}: Lore) {
+}: LoreType) {
   const [currentImg, setCurrentImg] = useState<number>(0);
   const [imageActive, setImageActive] = useState<boolean>(false);
   const [expanded, setExpanded] = useState<boolean>(false);

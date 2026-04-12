@@ -1,14 +1,21 @@
-import { Metadata } from "next";
-import { lexendTera } from "../page";
+"use client";
 import LoreCard from "@/components/LoreCard";
+import { useEffect, useState } from "react";
+import LoreType from "@/types/lore/loreType";
 import { Lores } from "./data/data";
 
-export const metadata: Metadata = {
-  title: "Lore",
-  description: "The Lores of Point Blank",
-};
+export default function Lore() {
+  const [loreData, setLoreData] = useState<LoreType[]>(Lores);
 
-export default async function Lore() {
+  useEffect(() => {
+    fetch("/api/lore")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setLoreData(data);
+        }
+      });
+  }, []);
   return (
     <>
       <div
@@ -17,14 +24,16 @@ export default async function Lore() {
         Our Lore
       </div>
       <div className="bg-pbpages flex px-5 justify-center w-full mb-10 md:mb-25  text-center">
-        <p className={`text-pbtext font-light text-xl md:text-2xl lg:text-3xl max-w-300`}>
+        <p
+          className={`text-pbtext font-light text-xl md:text-2xl lg:text-3xl max-w-300`}
+        >
           Every line of code tells a story, but our greatest tales are written
           in the adventures we share. Here are the chronicles of our coding
           club's journeys, where friendship and innovation intertwine.
         </p>
       </div>
 
-      {Lores.map((lore) => {
+      {loreData.map((lore) => {
         return (
           <LoreCard
             key={lore.id}

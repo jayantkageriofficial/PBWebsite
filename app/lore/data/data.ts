@@ -1,6 +1,6 @@
-import { Lore } from "@/types/lore/loreType";
+import LoreType from "@/types/lore/loreType";
 
-export const Lores: Lore[] = [
+export const Lores: LoreType[] = [
   {
     id: "coorg",
     title: "Escape to Coorg",
