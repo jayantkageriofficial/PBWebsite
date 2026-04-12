@@ -25,7 +25,7 @@ export async function GET() {
       description: ev.description,
       image: ev.imageURL,
       date: ev.eventDate,
-      location: ev.location || "TBA",
+      location: "Bangalore, Karnataka",
       registrationLink: ev.registrationLink || "",
     });
 
