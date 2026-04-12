@@ -37,7 +37,7 @@ export default function EventCard({
                     {/* Text */}
                     <div className="flex flex-col gap-1 p-[4px_6px_6px]">
                         <span
-                            className="text-[28px] font-medium leading-[140%] align-middle"
+                            className="text-xl lg:text-2xl font-medium leading-normal align-middle"
                             style={{
                                 background: "linear-gradient(135deg, #37FF00, #37FF00)",
                                 WebkitBackgroundClip: "text",
@@ -47,7 +47,7 @@ export default function EventCard({
                         >
                             {title}
                         </span>
-                        <span className="text-[14px] font-normal leading-[140%] text-white/65">
+                        <span className="text-sm font-normal leading-normal text-white/65">
                             {description}
                         </span>
                     </div>
@@ -61,16 +61,16 @@ export default function EventCard({
                         transform: "rotateY(180deg)",
                     }}
                 >
-                    <span className="text-[24px] font-medium leading-[140%] text-[#37FF00]">
+                    <span className="text-lg lg:text-xl font-medium leading-[140%] text-[#37FF00]">
                         {title}
                     </span>
-                    <div className="text-[14px] text-white/80">
+                    <div className="text-xs md:text-sm text-white/80">
                         <strong>Date:</strong> 15th August 2024
                     </div>
-                    <div className="text-[14px] text-white/80">
+                    <div className="text-xs md:text-sm text-white/80">
                         <strong>Location:</strong> Main Auditorium
                     </div>
-                    <p className="mt-2 text-[14px] leading-relaxed text-white/60 overflow-y-auto">
+                    <p className="mt-2 text-xs md:text-sm leading-relaxed text-white/60 overflow-y-auto">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </p>
                 </div>

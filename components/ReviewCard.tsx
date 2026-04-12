@@ -14,12 +14,12 @@ export function StarRating({ count }: { count: number }) {
 
 export default function ReviewCard({ name, review, rating }: { name: string; review: string; rating: number }) {
     return (
-        <div className="bg-[#191919] rounded-[20px] p-[20px_18px] flex flex-col gap-3 transition-colors duration-300 border border-transparent hover:border-pbgreen/50">
+        <div className="bg-[#191919] rounded-[20px] px-4 md:px-5 py-5 flex flex-col gap-3 transition-colors duration-300 border border-transparent hover:border-pbgreen/50">
             <StarRating count={rating} />
-            <p className="text-[13px] font-normal leading-[1.6] text-white/60 m-0">
+            <p className="text-xs md:text-sm font-normal leading-[1.6] text-white/60 m-0">
                 {review}
             </p>
-            <span className="text-[14px] font-medium text-pbgreen">
+            <span className="text-sm font-medium text-pbgreen">
                 {name}
             </span>
         </div>
