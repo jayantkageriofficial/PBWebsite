@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 interface Achievement {
   title: string;
-  description: string;
+  description?: string;
 }
 
 export interface Achievements extends mongoose.Document {
@@ -21,52 +21,56 @@ export interface Achievements extends mongoose.Document {
 }
 
 const AchievementsSchema = new mongoose.Schema({
-  id: { type: String, required: true },
+  name: { type: String, required: true },
+  imageUrl: { type: String, required: true },
   achivements: {
     GSoC: [
       {
         title: { type: String, required: true },
-        description: { type: String, required: true },
+        description: { type: String, required: false },
       },
     ],
     LFX: [
       {
         title: { type: String, required: true },
-        description: { type: String, required: true },
+        description: { type: String, required: false },
       },
     ],
     SIH: [
       {
         title: { type: String, required: true },
-        description: { type: String, required: true },
+        description: { type: String, required: false },
       },
     ],
     LIFT: [
       {
         title: { type: String, required: true },
-        description: { type: String, required: true },
+        description: { type: String, required: false },
       },
     ],
     Hackathons: [
       {
         title: { type: String, required: true },
-        description: { type: String, required: true },
+        description: { type: String, required: false },
       },
     ],
     CP: [
       {
         title: { type: String, required: true },
-        description: { type: String, required: true },
+        description: { type: String, required: false },
       },
     ],
     ACM: [
       {
         title: { type: String, required: true },
-        description: { type: String, required: true },
+        description: { type: String, required: false },
       },
     ],
   },
 });
 
-export default mongoose.models.Achievements ||
+const AchievementsModel =
+  mongoose.models.Achievements ||
   mongoose.model<Achievements>("Achievements", AchievementsSchema);
+
+export default AchievementsModel;

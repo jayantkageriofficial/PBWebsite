@@ -51,14 +51,6 @@ export default function Hustle({ latest, leaderboard }: HustleProps) {
     tableRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  function goToPreviousPage() {
-    if (currentPage > 1) changePage(currentPage - 1);
-  }
-
-  function goToNextPage() {
-    if (currentPage < totalPages) changePage(currentPage + 1);
-  }
-
   function getVisiblePages() {
     if (totalPages <= 3) {
       const arr = [];
@@ -255,7 +247,7 @@ export default function Hustle({ latest, leaderboard }: HustleProps) {
           <div className="mt-6 flex justify-center">
             <div className="flex items-center justify-center gap-3">
               <button
-                onClick={goToPreviousPage}
+                onClick={() => changePage(currentPage - 1)}
                 hidden={currentPage === 1}
                 className="w-14 h-14 rounded-2xl bg-white text-black text-xl font-semibold flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed"
               >
@@ -277,7 +269,7 @@ export default function Hustle({ latest, leaderboard }: HustleProps) {
               ))}
 
               <button
-                onClick={goToNextPage}
+                onClick={() => changePage(currentPage + 1)}
                 hidden={currentPage === totalPages || filtered.length === 0}
                 className="w-14 h-14 rounded-2xl bg-white text-black text-xl font-semibold flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed"
               >
