@@ -10,7 +10,7 @@ export default function AchievementsPage() {
   const [activeCategory, setActiveCategory] = useState("ALL");
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-pbpages text-white">
 
       {/* heading */}
       <div className="flex flex-col items-center justify-center pt-20 pb-12 px-4 text-center">
@@ -44,7 +44,7 @@ export default function AchievementsPage() {
       </div>
 
       {/* member cards */}
-      <div className="flex flex-wrap gap-6 px-20 pb-20">
+      <div className="flex flex-wrap gap-6 px-15 pb-15">
         {members
           .filter((member) =>
             activeCategory === "ALL" ||

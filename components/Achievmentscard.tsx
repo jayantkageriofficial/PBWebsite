@@ -94,7 +94,7 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
 
 
         <div className="min-w-0 flex-1 flex flex-col justify-center gap-0.5">
-          <span className="text-[22px] font-bold text-white tracking-tight leading-none break-words">
+          <span className="text-xl font-medium text-white tracking-tight leading-none break-words">
             {member.name}
           </span>
         </div>
@@ -120,7 +120,7 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
 
                 {showLeft && (
                   <div className="bg-pbsurface rounded-lg px-3.5 py-2.5 min-w-0">
-                    <p className="text-[13px] font-semibold text-[#39d353] m-0 break-words">
+                    <p className="text-sm font-normal text-[#39d353] m-0 break-words">
                       {row.leftEvent}
                     </p>
                     <p className="text-xs text-pbtext m-0 mt-0.5 break-words">{row.leftResult}</p>
@@ -130,7 +130,7 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
 
                 {showRight && (
                   <div className="bg-pbsurface rounded-lg px-3.5 py-2.5 min-w-0">
-                    <p className="text-[13px] font-semibold text-[#39d353] m-0 break-words">
+                    <p className="text-sm font-normal text-[#39d353] m-0 break-words">
                       {row.rightEvent}
                     </p>
                     <p className="text-xs text-pbtext m-0 mt-0.5 break-words">{row.rightResult}</p>
