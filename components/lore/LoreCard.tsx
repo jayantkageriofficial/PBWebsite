@@ -1,18 +1,18 @@
 "use client";
 import { useState } from "react";
-import { Lore } from "@/types/lore/loreType";
+import LoreType from "@/types/lore/loreType";
 import Image from "next/image";
 import LoreStoryCard from "./LoreStoryCard";
 
 export default function LoreCard({
-  id,
+  _id,
   title,
   date,
   location,
   preview,
   images,
   story,
-}: Lore) {
+}: LoreType) {
   const [currentImg, setCurrentImg] = useState<number>(0);
   const [imageActive, setImageActive] = useState<boolean>(false);
   const [expanded, setExpanded] = useState<boolean>(false);
@@ -125,6 +125,7 @@ export default function LoreCard({
                 fill
                 className="w-full h-full object-cover grayscale-100"
                 priority
+                sizes="w-full"
               />
             </div>
           </div>
@@ -132,7 +133,7 @@ export default function LoreCard({
       </div>
       {expanded && (
         <div className="animate-in slide-in-from-top-5  duration-700">
-          <LoreStoryCard key={id} stories={story} />
+          <LoreStoryCard key={_id} stories={story} />
         </div>
       )}
     </>
