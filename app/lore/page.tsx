@@ -2,18 +2,15 @@
 import LoreCard from "@/components/LoreCard";
 import { useEffect, useState } from "react";
 import LoreType from "@/types/lore/loreType";
-import { Lores } from "./data/data";
-
 export default function Lore() {
-  const [loreData, setLoreData] = useState<LoreType[]>(Lores);
+  const [loreData, setLoreData] = useState<LoreType[]>([]);
 
   useEffect(() => {
     fetch("/api/lore")
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) {
-          setLoreData(data);
-        }
+        setLoreData(data)
+        console.log(data)
       });
   }, []);
   return (
@@ -36,8 +33,8 @@ export default function Lore() {
       {loreData.map((lore) => {
         return (
           <LoreCard
-            key={lore.id}
-            id={lore.id}
+            key={lore._id}
+            _id ={lore._id}
             title={lore.title}
             date={lore.date}
             location={lore.location}

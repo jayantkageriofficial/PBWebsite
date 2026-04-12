@@ -1,5 +1,5 @@
 export default interface LoreType {
-	id: string;
+	_id: string;
 	title: string;
 	date: number;
 	location: string;

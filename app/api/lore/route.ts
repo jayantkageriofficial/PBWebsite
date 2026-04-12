@@ -5,13 +5,12 @@ import Lore from "@/lib/db/models/lores";
 /*
  * GET /api/lore
  */
-connectDB();
 
 export async function GET() {
+  connectDB();
   const data = await Lore.find();
-  console.log(data);
-  if (!data) {
-    return;
+  if (!data || data.length == 0) {
+    return NextResponse.json([],)
   }
-  return NextResponse.json({ statusL: "ALL FETCHED" }, { status: 200 });
+  return NextResponse.json(data, { status: 200 });
 }
