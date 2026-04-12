@@ -7,7 +7,7 @@ import {
   deleteTalk,
 } from "@/lib/server/talks";
 import { createLog } from "@/lib/server/logs";
-import { type TalkData as Talk } from "@/lib/db/models/talks";
+import { type Talk } from "@/lib/db/models/talks";
 import { verifyToken } from "@/lib/server/auth";
 
 /*
