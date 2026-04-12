@@ -1,45 +1,35 @@
-"use client";
-
-import { useState, useEffect } from "react";
-
 import ReviewMarquee from "@/components/ReviewMarquee";
-import EventsSection from "@/components/EventsSection";
-import type { EventItem } from "@/components/EventsSection";
+import EventsWrapper from "@/components/EventsWrapper";
+import connectDB from "@/lib/db/connection";
+import EventModel from "@/lib/db/models/events";
 
-export default function EventsPage() {
-    const [flippedId, setFlippedId] = useState<string | null>(null);
-    const [upcomingEvents, setUpcomingEvents] = useState<EventItem[]>([]);
-    const [pastEvents, setPastEvents] = useState<EventItem[]>([]);
-    const [loading, setLoading] = useState(true);
+export default async function EventsPage() {
+    await connectDB();
+    const events = await EventModel.find({}).lean();
 
-    useEffect(() => {
-        const fetchEvents = async () => {
-            try {
-                const res = await fetch("/api/events");
-                const data = await res.json();
-                setUpcomingEvents(data.upcomingEvents || []);
-                setPastEvents(data.pastEvents || []);
-            } catch (err) {
-                console.error("Failed to fetch events:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const now = new Date();
+    
+    const upcomingEventsData = events.filter((event) => {
+        const eventDate = new Date(event.eventDate);
+        return isNaN(eventDate.getTime()) || eventDate >= now;
+    });
 
-        fetchEvents();
-    }, []);
+    const pastEventsData = events.filter((event) => {
+        const eventDate = new Date(event.eventDate);
+        return !isNaN(eventDate.getTime()) && eventDate < now;
+    });
 
-    const handleToggle = (id: string) => {
-        setFlippedId(prev => prev === id ? null : id);
-    };
+    const mapEvent = (ev: any) => ({
+      title: ev.eventName,
+      description: ev.description,
+      image: ev.imageURL,
+      date: ev.eventDate,
+      location: "Bangalore, Karnataka",
+      registrationLink: ev.registrationLink || "",
+    });
 
-    if (loading) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center text-white">
-                <span className="text-xl">Loading events...</span>
-            </div>
-        );
-    }
+    const upcomingEvents = upcomingEventsData.map(mapEvent);
+    const pastEvents = pastEventsData.map(mapEvent);
 
     return (
         <>
@@ -51,8 +41,7 @@ export default function EventsPage() {
                 </div>
             </section>
 
-            <EventsSection title="Upcoming Events" events={upcomingEvents} flippedId={flippedId} onToggle={handleToggle} />
-            <EventsSection title="Past Events" events={pastEvents} flippedId={flippedId} onToggle={handleToggle} />
+            <EventsWrapper upcomingEvents={upcomingEvents} pastEvents={pastEvents} />
 
             <section className="bg-black text-white py-14 overflow-hidden">
                 <h2 className="text-4xl md:text-5xl lg:text-7xl font-normal leading-tight md:leading-snug text-white mb-8 text-center px-6">
