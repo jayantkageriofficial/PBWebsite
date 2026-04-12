@@ -125,6 +125,7 @@ export default function LoreCard({
                 fill
                 className="w-full h-full object-cover grayscale-100"
                 priority
+                sizes="w-full"
               />
             </div>
           </div>
