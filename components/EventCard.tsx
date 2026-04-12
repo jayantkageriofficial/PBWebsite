@@ -1,60 +1,76 @@
 "use client";
 
-import { useState } from "react";
-
 export default function EventCard({ 
     title, description, image, isFlipped, onToggle 
 }: { 
     title: string; description: string; image?: string;
     isFlipped?: boolean; onToggle?: () => void; 
 }) {
-    const [hovered, setHovered] = useState(false);
-
     return (
-        <div className="[perspective:1000px] max-w-[396px] cursor-pointer relative h-full" onClick={onToggle}>
+        <div 
+            className="group relative w-full cursor-pointer" 
+            style={{ perspective: "1000px" }} 
+            onClick={onToggle}
+        >
             <div
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-                className={`bg-[#111] rounded-[20px] p-[9px_10px] flex flex-col gap-2 transition-all duration-300 [transform-style:preserve-3d] h-full ${
-                    isFlipped ? "[transform:rotateY(180deg)]" : "[transform:rotateY(0deg)]"
-                } ${
-                    hovered && !isFlipped
-                        ? "border border-pbgreen/50 shadow-[0_0_15px_rgba(55,255,0,0.25),0_0_30px_rgba(55,255,0,0.10),inset_0_0_15px_rgba(55,255,0,0.05)]"
-                        : "border border-transparent shadow-none"
-                }`}
+                className={`flex flex-col gap-2 rounded-[20px] bg-[#111] p-[9px_10px] h-full transition-all duration-300 ease-in-out
+                ${isFlipped ? "rotate-y-180" : "rotate-y-0 shadow-none border border-transparent"}
+                ${!isFlipped ? "group-hover:border-[rgba(55,255,0,0.5)] group-hover:shadow-[0_0_15px_rgba(55,255,0,0.25),0_0_30px_rgba(55,255,0,0.10),inset_0_0_15px_rgba(55,255,0,0.05)]" : ""} `}
+                style={{
+                    transformStyle: "preserve-3d",
+                    transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+                }}
             >
                 {/* Front */}
-                <div className="backface-hidden flex flex-col gap-2 h-full">
+                <div style={{ backfaceVisibility: "hidden" }} className="flex flex-col gap-2 h-full">
                     {/* Image area */}
-                    <div className="rounded-[14px] overflow-hidden bg-[#222] w-full aspect-[4/3] relative">
+                    <div className="relative w-full overflow-hidden rounded-[14px] bg-[#222] aspect-[4/3]">
                         {image && (
-                            <img src={image} alt={title} className="w-full h-full object-cover" />
+                            <img
+                                src={image}
+                                alt={title}
+                                className="w-full h-full object-cover select-none"
+                            />
                         )}
                     </div>
 
                     {/* Text */}
                     <div className="flex flex-col gap-1 p-[4px_6px_6px]">
-                        <span className="font-['Lexend',sans-serif] text-[28px] font-medium leading-[140%] align-middle bg-gradient-to-br from-[#37FF00] to-[#37FF00] bg-clip-text text-transparent">
+                        <span
+                            className="text-[28px] font-medium leading-[140%] align-middle"
+                            style={{
+                                background: "linear-gradient(135deg, #37FF00, #37FF00)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                backgroundClip: "text",
+                            }}
+                        >
                             {title}
                         </span>
-                        <span className="font-['Lexend',sans-serif] text-[14px] font-normal leading-[140%] text-white/65">
+                        <span className="text-[14px] font-normal leading-[140%] text-white/65">
                             {description}
                         </span>
                     </div>
                 </div>
 
                 {/* Back */}
-                <div className="backface-hidden [transform:rotateY(180deg)] absolute inset-0 p-6 flex flex-col gap-3 bg-[#111] rounded-[20px]">
-                    <span className="font-['Lexend',sans-serif] text-[24px] font-medium leading-[140%] text-[#37FF00]">
+                <div 
+                    className="absolute inset-0 flex flex-col gap-3 rounded-[20px] bg-[#111] p-6"
+                    style={{
+                        backfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                    }}
+                >
+                    <span className="text-[24px] font-medium leading-[140%] text-[#37FF00]">
                         {title}
                     </span>
-                    <div className="font-['Lexend',sans-serif] text-white/80 text-[14px]">
+                    <div className="text-[14px] text-white/80">
                         <strong>Date:</strong> 15th August 2024
                     </div>
-                    <div className="font-['Lexend',sans-serif] text-white/80 text-[14px]">
+                    <div className="text-[14px] text-white/80">
                         <strong>Location:</strong> Main Auditorium
                     </div>
-                    <p className="font-['Lexend',sans-serif] text-white/60 text-[14px] leading-relaxed mt-2 overflow-y-auto">
+                    <p className="mt-2 text-[14px] leading-relaxed text-white/60 overflow-y-auto">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </p>
                 </div>
