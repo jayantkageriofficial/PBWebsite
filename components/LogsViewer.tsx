@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { exportLogs } from "@/lib/operations/logs";
-import type { LogEntry, LogModule, LogAction } from "@/lib/operations/logs";
+import { exportLogs } from "@/lib/server/logs";
+import type { LogEntry, LogModule, LogAction } from "@/lib/server/logs";
 
 const TABS = [
   "all",
@@ -76,7 +76,7 @@ export default function LogsViewer({
   };
 
   return (
-    <div className="min-h-screen bg-black text-white px-5 py-8 md:px-10 md:py-12">
+    <div className="min-h-screen bg-pbpages text-white px-5 py-8 md:px-10 md:py-12">
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-pbgray rounded-4xl px-8 py-6">
           <div>
