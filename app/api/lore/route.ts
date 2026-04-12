@@ -10,7 +10,7 @@ export async function GET() {
   connectDB();
   const data = await Lore.find();
   if (!data || data.length == 0) {
-    return NextResponse.json([],)
+    return NextResponse.json([],{status: 200})
   }
   return NextResponse.json(data, { status: 200 });
 }

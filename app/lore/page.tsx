@@ -9,8 +9,9 @@ export default function Lore() {
     fetch("/api/lore")
       .then((res) => res.json())
       .then((data) => {
-        setLoreData(data)
-        console.log(data)
+        if (data.length != 0){
+          setLoreData(data)
+        }
       });
   }, []);
   return (
