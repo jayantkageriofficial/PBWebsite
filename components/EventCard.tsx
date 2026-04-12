@@ -15,8 +15,8 @@ export default function EventCard({
         >
             <div
                 className={`flex flex-col gap-2 rounded-2xl bg-[#111] p-2 h-full transition-all duration-300 ease-in-out
-                ${isFlipped ? "rotate-y-180" : "rotate-y-0 shadow-none border border-transparent"}
-                ${!isFlipped ? "group-hover:border-[rgba(55,255,0,0.5)] group-hover:shadow-[0_0_15px_rgba(55,255,0,0.25),0_0_30px_rgba(55,255,0,0.10),inset_0_0_15px_rgba(55,255,0,0.05)]" : ""} `}
+                ${isFlipped ? "rotate-y-180 border border-[#37FF00] shadow-[0_0_15px_rgba(55,255,0,0.25)]" : "rotate-y-0 shadow-none border border-white/10"}
+                ${!isFlipped ? "group-hover:border-[rgba(55,255,0,0.5)] group-hover:shadow-[0_0_15px_rgba(55,255,0,0.25),0_0_30px_rgba(55,255,0,0.10),inset_0_0_15px_rgba(55,255,0,0.05)] group-hover:border-transparent" : ""} `}
                 style={{
                     transformStyle: "preserve-3d",
                     transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
