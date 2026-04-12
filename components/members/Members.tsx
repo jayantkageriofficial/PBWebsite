@@ -71,8 +71,13 @@ function groupMembers(members: Member[]): Record<string, Member[]> {
     "First Year": [],
   };
   for (const m of members) {
-    if (m.tags === "lead") groups["Current Leads"].push(m);
-    else if (m.tags === "alumni-lead") groups["Alumni Leads"].push(m);
+    if (m.tags === "lead") {
+      groups["Current Leads"].push(m);
+      if (m.year === "fourth") groups["Fourth Year"].push(m);
+      else if (m.year === "third") groups["Third Year"].push(m);
+      else if (m.year === "second") groups["Second Year"].push(m);
+      else if (m.year === "first") groups["First Year"].push(m);
+    } else if (m.tags === "alumni-lead") groups["Alumni Leads"].push(m);
     else if (m.year === "alumni") groups["Alumni"].push(m);
     else if (m.year === "fourth") groups["Fourth Year"].push(m);
     else if (m.year === "third") groups["Third Year"].push(m);
@@ -288,19 +293,31 @@ export default function Members(props: { members: Member[] }) {
                           : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                       }`}
                     >
-                      {grouped[heading]?.map((profile) => (
-                        <Card
-                          key={profile._id}
-                          name={profile.name}
-                          role={profile.role}
-                          company={profile.company ?? ""}
-                          linkedInUrl={profile.linkedInUrl ?? ""}
-                          imageUrl={profile.imageUrl ?? ""}
-                          isAdmin={authenticated}
-                          onEdit={() => openEdit(profile)}
-                          onDelete={() => setDeleteTarget(profile)}
-                        />
-                      ))}
+                      {grouped[heading]
+                        ?.slice()
+                        .sort((a, b) =>
+                          a.name.localeCompare(b.name, undefined, {
+                            sensitivity: "base",
+                          }),
+                        )
+                        .map((profile) => (
+                          <Card
+                            key={profile._id}
+                            name={profile.name}
+                            role={profile.role}
+                            company={profile.company ?? ""}
+                            linkedInUrl={profile.linkedInUrl ?? ""}
+                            imageUrl={profile.imageUrl ?? ""}
+                            leadDesc={
+                              heading === "Current Leads"
+                                ? (profile.leadDesc ?? "")
+                                : undefined
+                            }
+                            isAdmin={authenticated}
+                            onEdit={() => openEdit(profile)}
+                            onDelete={() => setDeleteTarget(profile)}
+                          />
+                        ))}
                     </div>
                   </div>
                 }
