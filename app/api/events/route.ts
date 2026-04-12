@@ -11,12 +11,12 @@ export async function GET() {
     // Categorize events based on eventDate parsed
     const upcomingEvents = events.filter((event) => {
         const eventDate = new Date(event.eventDate);
-        return eventDate >= now || isNaN(eventDate.getTime()) === false && eventDate > now;
+        return isNaN(eventDate.getTime()) || eventDate >= now;
     });
 
     const pastEvents = events.filter((event) => {
         const eventDate = new Date(event.eventDate);
-        return eventDate < now;
+        return !isNaN(eventDate.getTime()) && eventDate < now;
     });
 
     // We send everything down in mapped format to match frontend schema
