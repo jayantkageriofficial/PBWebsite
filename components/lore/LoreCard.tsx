@@ -30,7 +30,7 @@ export default function LoreCard({
 
             <div className="mt-4 flex flex-wrap gap-2 w-full pl-5 md:pl-12.5">
               <div className="bg-pbdarkgray py-1.5 mr-6 border border-pbborder rounded-4xl px-3 flex items-center ">
-                <img src="/lores/DateIcon.svg" className="mr-2" />
+                <Image src="/lores/DateIcon.svg" alt="" width={16} height={16} className="mr-2" />
                 <p className={`text-pbtext font-light text-xs`}>
                   {new Date(date).toLocaleDateString("en-US", {
                     month: "long",
@@ -40,7 +40,7 @@ export default function LoreCard({
               </div>
 
               <div className="bg-pbdarkgray py-1.5 border border-pbborder rounded-4xl px-3 flex items-center ">
-                <img src="/lores/location.svg" className="mr-2" />
+                <Image src="/lores/location.svg" alt="" width={16} height={16} className="mr-2" />
                 <p className={`text-pbtext font-light text-xs`}>{location}</p>
               </div>
             </div>
@@ -104,7 +104,7 @@ export default function LoreCard({
                     });
                   }}
                 >
-                  <img src="/lores/left_arrow.svg" className="h-4 w-4" />
+                  <Image src="/lores/left_arrow.svg" alt="" width={16} height={16} className="h-4 w-4" />
                 </button>
 
                 <button
@@ -115,7 +115,7 @@ export default function LoreCard({
                     });
                   }}
                 >
-                  <img src="/lores/right_arrow.svg" className="h-4 w-4" />
+                  <Image src="/lores/right_arrow.svg" alt="" width={16} height={16} className="h-4 w-4" />
                 </button>
               </div>
 

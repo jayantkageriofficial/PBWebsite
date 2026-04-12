@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { Lexend } from "next/font/google";
 import { LinkedIn } from "@/components/Icons";
 
 interface CardProps {
@@ -14,11 +13,6 @@ interface CardProps {
   onEdit?: () => void;
   onDelete?: () => void;
 }
-
-const lexend = Lexend({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500"],
-});
 
 const Card: React.FC<CardProps> = ({
   name,

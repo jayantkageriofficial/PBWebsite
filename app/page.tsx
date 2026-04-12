@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Lexend_Tera } from "next/font/google";
-import ThreeBackground from "@/components/ThreeBackground";
-import { CardStack } from "@/components/CardStack";
+import ThreeBackground from "@/components/ui/ThreeBackground";
+import { CardStack } from "@/components/ui/CardStack";
 import { Users, Share2, BookOpen, FileText, Play, Code2 } from "lucide-react";
 
 // Images
@@ -31,7 +31,7 @@ import Link from "next/link";
 
 export const lexendTera = Lexend_Tera({
   subsets: ["latin"],
-  weight: ["300","400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export default function Home() {

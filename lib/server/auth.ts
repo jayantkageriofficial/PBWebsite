@@ -1,7 +1,7 @@
 "use server";
 
 import jwt from "jsonwebtoken";
-import { createTransport } from "nodemailer";
+import { createTransport, type SentMessageInfo } from "nodemailer";
 
 export type JwtPayload = {
   email: string;
@@ -63,7 +63,7 @@ export async function sendVerificationEmail(to: string): Promise<boolean> {
       },
     });
 
-    transporter.verify((error: any) => {
+    transporter.verify((error: Error | null) => {
       if (error) console.log("Transporter verification error:", error);
     });
 
@@ -80,7 +80,7 @@ export async function sendVerificationEmail(to: string): Promise<boolean> {
 <p>Best regards,<br/>Team Point Blank</p>`,
         text: `Hello ${data.users.nodes[0].name},\n\nClick the link below to sign in to the admin panel:\n\n${verificationLink}\n\nThis link will expire in 15 minutes (i.e., ${new Date(Date.now() + 15 * 60 * 1000).toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" })} IST).\n\nIf you did not request this, please ignore this email.\n\nBest regards,\nTeam Point Blank`,
       },
-      (error: any, info: any) => {
+      (error: Error | null, info: SentMessageInfo) => {
         if (error) console.error("Error sending email:", error);
         return info.response.includes("received");
       },
