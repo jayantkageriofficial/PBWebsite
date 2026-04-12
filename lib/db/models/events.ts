@@ -8,6 +8,7 @@ export interface Events extends mongoose.Document {
   lastDateOfRegistration: string;
   imageURL: string;
   registrationLink: string;
+  location: string;
 }
 
 const Eventschema: mongoose.Schema<Events> = new mongoose.Schema({
@@ -36,6 +37,10 @@ const Eventschema: mongoose.Schema<Events> = new mongoose.Schema({
     required: true,
   },
   registrationLink: {
+    type: String,
+    required: true,
+  },
+  location: {
     type: String,
     required: true,
   },

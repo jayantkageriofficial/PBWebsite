@@ -1,9 +1,10 @@
 "use client";
 
 export default function EventCard({ 
-    title, description, image, isFlipped, onToggle 
+    title, description, image, date, location, registrationLink, isFlipped, onToggle 
 }: { 
     title: string; description: string; image?: string;
+    date?: string; location?: string; registrationLink?: string;
     isFlipped?: boolean; onToggle?: () => void; 
 }) {
     return (
@@ -65,13 +66,13 @@ export default function EventCard({
                         {title}
                     </span>
                     <div className="text-xs md:text-sm text-white/80">
-                        <strong>Date:</strong> 15th August 2024
+                        <strong>Date:</strong> {date || "TBA"}
                     </div>
                     <div className="text-xs md:text-sm text-white/80">
-                        <strong>Location:</strong> Main Auditorium
+                        <strong>Location:</strong> {location || "TBA"}
                     </div>
                     <p className="mt-2 text-xs md:text-sm leading-relaxed text-white/60 overflow-y-auto">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        {description}
                     </p>
                 </div>
             </div>

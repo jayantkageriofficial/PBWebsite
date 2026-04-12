@@ -2,10 +2,13 @@
 
 import EventCard from "@/components/EventCard";
 
-interface EventItem {
+export interface EventItem {
     title: string;
     description: string;
     image?: string;
+    date: string;
+    location: string;
+    registrationLink: string;
 }
 
 interface EventsSectionProps {
@@ -31,6 +34,9 @@ export default function EventsSection({ title, events, flippedId, onToggle }: Ev
                                 title={ev.title} 
                                 description={ev.description} 
                                 image={ev.image} 
+                                date={ev.date}
+                                location={ev.location}
+                                registrationLink={ev.registrationLink}
                                 isFlipped={flippedId === id}
                                 onToggle={() => onToggle(id)}
                             />
