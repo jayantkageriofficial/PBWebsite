@@ -3,22 +3,35 @@ import LoreCard from "@/components/lore/LoreCard";
 import { useEffect, useState } from "react";
 import LoreType from "@/types/lore/loreType";
 import LoadingBrackets from "../loading";
+import { useAuthStore } from "@/lib/store/auth";
 export default function Lore() {
   const [loreData, setLoreData] = useState<LoreType[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(false);
+  const { authenticated, token } = useAuthStore();
+
 
   useEffect(() => {
+    setLoading(true);
     fetch("/api/lore")
       .then((res) => res.json())
       .then((data: LoreType[]) => {
         if (data.length != 0) {
           data = data.sort((j, i) => {
-            return new Date(i.date).getTime() - new Date(j.date).getTime()
+            return new Date(i.date).getTime() - new Date(j.date).getTime();
           });
           setLoreData(data);
         }
+      })
+      .catch((err) => {
+        console.log("Error Fetching Lores :", err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
-  return (
+  return isLoading ? (
+    <LoadingBrackets />
+  ) : (
     <>
       <div
         className={`flex justify-center mt-10 items-end pb-10  w-full h-55 p-5 text-5xl md:text-6xl bg-pbpages text-white`}
@@ -35,10 +48,18 @@ export default function Lore() {
         </p>
       </div>
 
-      {loreData.length == 0 && (
-        <LoadingBrackets/>
-      )}
+      {true && (<>
+        <div className="w-full relative flex justify-center mb-6">
+          <button className="h-15 rounded-4xl w-90 text-2xl text-center text-white cursor-pointer bg-pbgray">
+            + Add Lore (Admin)
+          </button>
+        </div>
+        <div className="absolute">
 
+        </div>
+        </>
+
+      )}
       {loreData.map((lore) => {
         return (
           <LoreCard
