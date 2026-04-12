@@ -218,7 +218,7 @@ export default function Hustle({ latest, leaderboard }: HustleProps) {
               className={`${colsClass} px-4 md:px-6 py-4 text-sm font-semibold text-white border-b border-white/70`}
             >
               <span>Rank</span>
-              <span className="ml-4">User</span>
+              <span className="ml-2 md:ml-4">User</span>
               <span className="text-center">Score</span>
             </div>
 
@@ -234,12 +234,12 @@ export default function Hustle({ latest, leaderboard }: HustleProps) {
                 >
                   <span className="text-white">{entry.rank}</span>
 
-                  <div className="flex items-center gap-4 min-w-0 ml-4">
-                    <div className="w-12 h-12 rounded-full bg-pbgray shrink-0 flex items-center justify-center text-white font-semibold text-base select-none">
+                  <div className="flex items-center gap-2 md:gap-4 min-w-0 ml-2 md:ml-4">
+                    <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-pbgray shrink-0 flex items-center justify-center text-white font-semibold text-sm md:text-base select-none">
                       {entry.name.charAt(0).toUpperCase()}
                     </div>
-                    <div className="min-w-0">
-                      <div className="text-white text-sm leading-none truncate">
+                    <div className="min-w-0 flex-1">
+                      <div className="text-white text-xs md:text-sm leading-none truncate" title={entry.name}>
                         {entry.name}
                       </div>
                     </div>

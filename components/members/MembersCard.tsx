@@ -105,8 +105,7 @@ const Card: React.FC<CardProps> = ({
                 src={imageUrl}
                 alt={name}
                 fill
-                style={{ objectFit: "cover" }}
-                className="rounded-2xl"
+                className="rounded-2xl object-cover object-center grayscale"
               />
             </div>
           )}
