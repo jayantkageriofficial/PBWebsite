@@ -20,16 +20,16 @@ export default function LoreCard({
   return (
     <>
       <div
-        className={`w-full flex justify-center min-h-93 ${expanded ? "" : "mb-10"} bg-pbpages`}
+        className={`w-full flex justify-center min-h-93 px-4 sm:px-6 ${expanded ? "" : "mb-6 md:mb-10"} bg-pbpages`}
       >
-        <div className="w-280 flex bg-[#1C1C1C] min-h-93">
-          <div className="h-full w-[50%]">
-            <div className="min-h-18 w-full pt-8 pl-12.5 ">
-              <h1 className="text-5xl text-[#37FF00] font-medium">{title}</h1>
+        <div className="w-full max-w-280 flex flex-col-reverse md:flex-row bg-[#1C1C1C] min-h-93a">
+          <div className="w-full md:w-[50%]">
+            <div className="min-h-18 w-full pt-8 pl-5 md:pl-12.5 ">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl text-[#37FF00] font-medium">{title}</h1>
             </div>
 
-            <div className="h-7.5 mt-4 flex w-full pl-12.5 ">
-              <div className="bg-pbdarkgray mr-6 border border-pbborder rounded-4xl px-3 flex items-center ">
+            <div className="mt-4 flex flex-wrap gap-2 w-full pl-5 md:pl-12.5">
+              <div className="bg-pbdarkgray py-1.5 mr-6 border border-pbborder rounded-4xl px-3 flex items-center ">
                 <img src="/lores/DateIcon.svg" className="mr-2" />
                 <p className={`text-pbtext font-light text-xs`}>
                   {new Date(date).toLocaleDateString("en-US", {
@@ -39,19 +39,19 @@ export default function LoreCard({
                 </p>
               </div>
 
-              <div className="bg-pbdarkgray border border-pbborder rounded-4xl px-3 flex items-center ">
+              <div className="bg-pbdarkgray py-1.5 border border-pbborder rounded-4xl px-3 flex items-center ">
                 <img src="/lores/location.svg" className="mr-2" />
                 <p className={`text-pbtext font-light text-xs`}>{location}</p>
               </div>
             </div>
 
-            <div className="min-h-18 w-full pl-12.5 pt-4">
-              <p className="text-[1.1rem] min-h-18 max-w-116 text-pbtext font-light">
+            <div className="min-h-18 w-full pl-6 md:pl-12.5 pt-4">
+              <p className="text-[1.1rem] min-h-18 max-w-full md:max-w-116 text-pbtext font-light">
                 {preview}
               </p>
             </div>
 
-            <div className="pl-12.5 h-14 w-full mt-11 mb-5">
+            <div className="md:pl-12.5 p-0 h-14 w-full mt-11 mb-5 flex justify-center sm:justify-start">
               <button
                 className="bg-pbsurface border border-[#37ff0014] cursor-pointer h-14  w-49.5 rounded-2xl text-center select-none text-white text-[1.1rem]"
                 onClick={() => {
@@ -63,7 +63,7 @@ export default function LoreCard({
             </div>
           </div>
 
-          <div className="flex justify-center overflow-hidden items-center relative h-full w-[50%]">
+          <div className="flex justify-center mt-4 md:mt-0 overflow-hidden items-center relative min-h-64 md:h-full w-full md:w-[50%]">
             {/* Dotted Background */}
             <div
               className="absolute top-0 translate-y-[-50%] translate-x-[50%] right-0 w-170 h-200 z-0 pointer-events-none 
@@ -75,7 +75,7 @@ export default function LoreCard({
             {/* Dotted Background */}
 
             <div
-              className="h-83 w-lg overflow-hidden relative rounded-sm bg-cover bg-center"
+              className="h-64 md:h-83 w-[90%] md:w-lg overflow-hidden relative rounded-sm bg-cover bg-center"
               onMouseLeave={() => {
                 setImageActive(false);
               }}
