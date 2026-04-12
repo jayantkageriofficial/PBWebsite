@@ -1,4 +1,4 @@
 
-export async function getAllLores(){
+export async function uploadLore(){
     
 }
