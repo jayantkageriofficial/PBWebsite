@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/ui/Navbar";
 import AuthInitializer from "@/components/AuthInitializer";
 import { Lexend } from "next/font/google";
-import Footer from "@/components/Footer";
+import Footer from "@/components/ui/Footer";
 import { cookies } from "next/headers";
 import verifyAuth from "@/lib/verifyAuth";
 

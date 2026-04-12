@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Card from "@/components/MembersCard";
-import CollapsibleSection from "@/components/Collapsible";
+import Card from "@/components/members/MembersCard";
+import CollapsibleSection from "@/components/members/Collapsible";
 import { useAuthStore } from "@/lib/store/auth";
 import {
   Dialog,
