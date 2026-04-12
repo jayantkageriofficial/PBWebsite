@@ -13,7 +13,7 @@ export default function EventCard({
             onClick={onToggle}
         >
             <div
-                className={`flex flex-col gap-2 rounded-[20px] bg-[#111] p-[9px_10px] h-full transition-all duration-300 ease-in-out
+                className={`flex flex-col gap-2 rounded-2xl bg-[#111] p-2 h-full transition-all duration-300 ease-in-out
                 ${isFlipped ? "rotate-y-180" : "rotate-y-0 shadow-none border border-transparent"}
                 ${!isFlipped ? "group-hover:border-[rgba(55,255,0,0.5)] group-hover:shadow-[0_0_15px_rgba(55,255,0,0.25),0_0_30px_rgba(55,255,0,0.10),inset_0_0_15px_rgba(55,255,0,0.05)]" : ""} `}
                 style={{
@@ -24,7 +24,7 @@ export default function EventCard({
                 {/* Front */}
                 <div style={{ backfaceVisibility: "hidden" }} className="flex flex-col gap-2 h-full">
                     {/* Image area */}
-                    <div className="relative w-full overflow-hidden rounded-[14px] bg-[#222] aspect-[4/3]">
+                    <div className="relative w-full overflow-hidden rounded-xl bg-[#222] aspect-[4/3]">
                         {image && (
                             <img
                                 src={image}
@@ -35,7 +35,7 @@ export default function EventCard({
                     </div>
 
                     {/* Text */}
-                    <div className="flex flex-col gap-1 p-[4px_6px_6px]">
+                    <div className="flex flex-col gap-1 p-1">
                         <span
                             className="text-xl lg:text-2xl font-medium leading-normal align-middle"
                             style={{
@@ -55,13 +55,13 @@ export default function EventCard({
 
                 {/* Back */}
                 <div 
-                    className="absolute inset-0 flex flex-col gap-3 rounded-[20px] bg-[#111] p-6"
+                    className="absolute inset-0 flex flex-col gap-3 rounded-2xl bg-[#111] p-6"
                     style={{
                         backfaceVisibility: "hidden",
                         transform: "rotateY(180deg)",
                     }}
                 >
-                    <span className="text-lg lg:text-xl font-medium leading-[140%] text-[#37FF00]">
+                    <span className="text-lg lg:text-xl font-medium leading-snug text-[#37FF00]">
                         {title}
                     </span>
                     <div className="text-xs md:text-sm text-white/80">

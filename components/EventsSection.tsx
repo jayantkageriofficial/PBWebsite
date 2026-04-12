@@ -19,7 +19,7 @@ export default function EventsSection({ title, events, flippedId, onToggle }: Ev
     return (
         <section className="bg-black text-white px-6 py-14">
             <div className="mx-auto max-w-[1240px]">
-                <h2 className="mb-8 text-3xl md:text-4xl font-normal leading-[150%] text-white">
+                <h2 className="mb-8 text-3xl md:text-4xl font-normal leading-snug text-white">
                     {title}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
