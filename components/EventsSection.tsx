@@ -20,7 +20,7 @@ interface EventsSectionProps {
 
 export default function EventsSection({ title, events, flippedId, onToggle }: EventsSectionProps) {
     return (
-        <section className="bg-black text-white px-6 py-14">
+        <section className="bg-pbpages text-white px-6 py-14">
             <div className="mx-auto max-w-[1240px]">
                 <h2 className="mb-8 text-3xl md:text-4xl font-normal leading-snug text-white">
                     {title}
