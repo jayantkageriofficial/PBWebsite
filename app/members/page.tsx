@@ -1,4 +1,4 @@
-import Members from "@/components/Members";
+import Members from "@/components/members/Members";
 
 export const metadata = {
   title: "Members",

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/ui/Navbar";
 import AuthInitializer from "@/components/AuthInitializer";
 import { Lexend } from "next/font/google";
-import Footer from "@/components/Footer";
+import Footer from "@/components/ui/Footer";
 import { cookies } from "next/headers";
-import { verifyToken } from "@/lib/operations/auth";
+import verifyAuth from "@/lib/verifyAuth";
 
 const lexand = Lexend({
   subsets: ["latin"],
@@ -25,7 +25,7 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("session");
-  const user = sessionCookie ? await verifyToken(sessionCookie.value) : null;
+  const user = sessionCookie ? await verifyAuth(sessionCookie.value) : null;
 
   return (
     <html lang="en_IN">

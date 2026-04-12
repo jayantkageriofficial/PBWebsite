@@ -13,7 +13,7 @@ interface CollapsibleSectionProps {
   heading: string;
   content: React.JSX.Element;
   isOpen: boolean;
-  isAnySectionOpen: boolean; // New prop for global background toggle
+  isAnySectionOpen: boolean; 
   onToggle: () => void;
 }
 
@@ -28,7 +28,7 @@ const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
 
     useImperativeHandle(ref, () => localRef.current!);
 
-    // Automatic scroll into view when opened
+    
     useEffect(() => {
       if (isOpen && localRef.current) {
         const offset = 150;
@@ -71,7 +71,7 @@ const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
 
         {isOpen && (
           <div
-            className={`p-6 bg-pbpages ${isAnySectionOpen ? "" : "border-t border-[#B3B3B3]"}`}
+            className={`p-6 bg-pbpages ${isAnySectionOpen ? "" : "border-t border-pbtext"}`}
           >
             {content}
           </div>
