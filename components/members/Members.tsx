@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Card from "@/components/members/MembersCard";
 import CollapsibleSection from "@/components/members/Collapsible";
@@ -95,12 +95,11 @@ const TEXT_FIELDS: {
   { label: "Lead Description", key: "leadDesc", type: "text" },
 ];
 
-export default function Members() {
+export default function Members(props: { members: Member[] }) {
   const [openIndex, setOpenIndex] = useState<number>(
     headings.indexOf("Current Leads"),
   );
-  const [members, setMembers] = useState<Member[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [members, setMembers] = useState<Member[]>(props.members);
   const { authenticated, token } = useAuthStore();
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -114,15 +113,6 @@ export default function Members() {
 
   const [deleteTarget, setDeleteTarget] = useState<Member | null>(null);
   const [deleting, setDeleting] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/members")
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.success) setMembers(data.members);
-      })
-      .finally(() => setLoading(false));
-  }, []);
 
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? -1 : index);
@@ -270,58 +260,55 @@ export default function Members() {
       </div>
 
       {/* Member sections */}
-      {loading ? (
-        <div className="text-pbtext text-center py-12">Loading...</div>
-      ) : (
-        <div className="w-full max-w-8xl px-4 md:px-6 lg:px-8 md:mt-24 mt-8">
-          <div className="rounded-2xl overflow-hidden">
-            {headings.map((heading, index) => (
-              <div
-                key={index}
-                className={`transition-colors duration-500 ${
-                  index !== 0
-                    ? isAnyOpen
-                      ? "border-t border-transparent"
-                      : "border-t border-pbtext"
-                    : "border-t border-transparent"
-                }`}
-              >
-                <CollapsibleSection
-                  heading={heading}
-                  isOpen={openIndex === index}
-                  isAnySectionOpen={isAnyOpen}
-                  onToggle={() => handleToggle(index)}
-                  content={
-                    <div className="flex flex-col items-center space-y-6 w-full pt-4 pb-8 bg-pbpages">
-                      <div
-                        className={`grid justify-items-center gap-y-12 gap-x-6 md:gap-x-8 lg:gap-x-10 w-full max-w-7xl mx-auto ${
-                          heading.toLowerCase().includes("alumni")
-                            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-                            : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-                        }`}
-                      >
-                        {grouped[heading]?.map((profile) => (
-                          <Card
-                            key={profile._id}
-                            name={profile.name}
-                            role={profile.role}
-                            company={profile.company ?? ""}
-                            linkedInUrl={profile.linkedInUrl ?? ""}
-                            imageUrl={profile.imageUrl ?? ""}
-                            isAdmin={authenticated}
-                            onEdit={() => openEdit(profile)}
-                            onDelete={() => setDeleteTarget(profile)}
-                          />
-                        ))}
-                      </div>
+
+      <div className="w-full max-w-8xl px-4 md:px-6 lg:px-8 md:mt-24 mt-8">
+        <div className="rounded-2xl overflow-hidden">
+          {headings.map((heading, index) => (
+            <div
+              key={index}
+              className={`transition-colors duration-500 ${
+                index !== 0
+                  ? isAnyOpen
+                    ? "border-t border-transparent"
+                    : "border-t border-pbtext"
+                  : "border-t border-transparent"
+              }`}
+            >
+              <CollapsibleSection
+                heading={heading}
+                isOpen={openIndex === index}
+                isAnySectionOpen={isAnyOpen}
+                onToggle={() => handleToggle(index)}
+                content={
+                  <div className="flex flex-col items-center space-y-6 w-full pt-4 pb-8 bg-pbpages">
+                    <div
+                      className={`grid justify-items-center gap-y-12 gap-x-6 md:gap-x-8 lg:gap-x-10 w-full max-w-7xl mx-auto ${
+                        heading.toLowerCase().includes("alumni")
+                          ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                          : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                      }`}
+                    >
+                      {grouped[heading]?.map((profile) => (
+                        <Card
+                          key={profile._id}
+                          name={profile.name}
+                          role={profile.role}
+                          company={profile.company ?? ""}
+                          linkedInUrl={profile.linkedInUrl ?? ""}
+                          imageUrl={profile.imageUrl ?? ""}
+                          isAdmin={authenticated}
+                          onEdit={() => openEdit(profile)}
+                          onDelete={() => setDeleteTarget(profile)}
+                        />
+                      ))}
                     </div>
-                  }
-                />
-              </div>
-            ))}
-          </div>
+                  </div>
+                }
+              />
+            </div>
+          ))}
         </div>
-      )}
+      </div>
 
       <div className="h-24 w-full shrink-0"></div>
 

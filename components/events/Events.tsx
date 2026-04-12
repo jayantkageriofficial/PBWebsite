@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import EventsSection, {
   type EventItemWithId,
@@ -90,20 +90,10 @@ const TEXT_FIELDS: {
   },
 ];
 
-export default function Events() {
-  const [events, setEvents] = useState<Event[]>([]);
-  const [loading, setLoading] = useState(true);
+export default function Events(props: { events: Event[] }) {
+  const [events, setEvents] = useState<Event[]>(props.events || []);
   const [flippedId, setFlippedId] = useState<string | null>(null);
   const { authenticated, token } = useAuthStore();
-
-  useEffect(() => {
-    fetch("/api/events")
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.success) setEvents(data.events);
-      })
-      .finally(() => setLoading(false));
-  }, []);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [editEvent, setEditEvent] = useState<Event | null>(null);
@@ -261,13 +251,6 @@ export default function Events() {
     !form.lastDateOfRegistration ||
     !form.imageURL ||
     !form.registrationLink;
-
-  if (loading)
-    return (
-      <div className="flex items-center justify-center py-24 text-white/50 text-sm">
-        Loading events…
-      </div>
-    );
 
   return (
     <>
