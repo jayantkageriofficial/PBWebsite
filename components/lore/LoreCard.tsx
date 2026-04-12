@@ -1,18 +1,20 @@
 "use client";
+
 import { useState } from "react";
-import { Lore } from "@/types/lore/loreType";
+import LoreType from "@/types/lore/loreType";
 import Image from "next/image";
-import LoreStoryCard from "./LoreStoryCard";
+import LoreStoryCard from "@/components/lore/LoreStoryCard";
+import { CalendarDays, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 
 export default function LoreCard({
-  id,
+  _id,
   title,
   date,
   location,
   preview,
   images,
   story,
-}: Lore) {
+}: LoreType) {
   const [currentImg, setCurrentImg] = useState<number>(0);
   const [imageActive, setImageActive] = useState<boolean>(false);
   const [expanded, setExpanded] = useState<boolean>(false);
@@ -25,12 +27,17 @@ export default function LoreCard({
         <div className="w-full max-w-280 flex flex-col-reverse md:flex-row bg-[#1C1C1C] min-h-93a">
           <div className="w-full md:w-[50%]">
             <div className="min-h-18 w-full pt-8 pl-5 md:pl-12.5 ">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl text-[#37FF00] font-medium">{title}</h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl text-[#37FF00] font-medium">
+                {title}
+              </h1>
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2 w-full pl-5 md:pl-12.5">
               <div className="bg-pbdarkgray py-1.5 mr-6 border border-pbborder rounded-4xl px-3 flex items-center ">
-                <img src="/lores/DateIcon.svg" className="mr-2" />
+                <CalendarDays
+                  className="mr-2 h-4 w-4 text-pbtext"
+                  aria-hidden="true"
+                />
                 <p className={`text-pbtext font-light text-xs`}>
                   {new Date(date).toLocaleDateString("en-US", {
                     month: "long",
@@ -40,7 +47,10 @@ export default function LoreCard({
               </div>
 
               <div className="bg-pbdarkgray py-1.5 border border-pbborder rounded-4xl px-3 flex items-center ">
-                <img src="/lores/location.svg" className="mr-2" />
+                <MapPin
+                  className="mr-2 h-4 w-4 text-pbtext"
+                  aria-hidden="true"
+                />
                 <p className={`text-pbtext font-light text-xs`}>{location}</p>
               </div>
             </div>
@@ -58,7 +68,7 @@ export default function LoreCard({
                   setExpanded((prev) => !prev);
                 }}
               >
-                {expanded?"Read Less":"Read More"}
+                {expanded ? "Read Less" : "Read More"}
               </button>
             </div>
           </div>
@@ -104,7 +114,7 @@ export default function LoreCard({
                     });
                   }}
                 >
-                  <img src="/lores/left_arrow.svg" className="h-4 w-4" />
+                  <ChevronLeft className="h-4 w-4" aria-hidden="true" />
                 </button>
 
                 <button
@@ -115,7 +125,7 @@ export default function LoreCard({
                     });
                   }}
                 >
-                  <img src="/lores/right_arrow.svg" className="h-4 w-4" />
+                  <ChevronRight className="h-4 w-4" aria-hidden="true" />
                 </button>
               </div>
 
@@ -125,6 +135,7 @@ export default function LoreCard({
                 fill
                 className="w-full h-full object-cover grayscale-100"
                 priority
+                sizes="w-full"
               />
             </div>
           </div>
@@ -132,7 +143,7 @@ export default function LoreCard({
       </div>
       {expanded && (
         <div className="animate-in slide-in-from-top-5  duration-700">
-          <LoreStoryCard key={id} stories={story} />
+          <LoreStoryCard key={_id} stories={story} />
         </div>
       )}
     </>

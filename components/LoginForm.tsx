@@ -22,9 +22,10 @@ export default function LoginForm({ error }: { error?: string }) {
     setErrorMsg("");
 
     try {
-      const res = await fetch(
-        `/api/auth/login?email=${encodeURIComponent(email)}`,
-      );
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+      });
       const data = await res.json();
       if (res.ok && data.success) setState("success");
       else {

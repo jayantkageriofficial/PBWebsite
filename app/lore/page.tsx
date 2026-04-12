@@ -1,14 +1,23 @@
-import { Metadata } from "next";
-import { lexendTera } from "../page";
+"use client";
 import LoreCard from "@/components/lore/LoreCard";
-import { Lores } from "./data/data";
+import { useEffect, useState } from "react";
+import LoreType from "@/types/lore/loreType";
+import LoadingBrackets from "../loading";
+export default function Lore() {
+  const [loreData, setLoreData] = useState<LoreType[]>([]);
 
-export const metadata: Metadata = {
-  title: "Lore",
-  description: "The Lores of Point Blank",
-};
-
-export default async function Lore() {
+  useEffect(() => {
+    fetch("/api/lore")
+      .then((res) => res.json())
+      .then((data: LoreType[]) => {
+        if (data.length != 0) {
+          data = data.sort((j, i) => {
+            return new Date(i.date).getTime() - new Date(j.date).getTime()
+          });
+          setLoreData(data);
+        }
+      });
+  }, []);
   return (
     <>
       <div
@@ -22,15 +31,19 @@ export default async function Lore() {
         >
           Every line of code tells a story, but our greatest tales are written
           in the adventures we share. Here are the chronicles of our coding
-          club's journeys, where friendship and innovation intertwine.
+          club&apos;s journeys, where friendship and innovation intertwine.
         </p>
       </div>
 
-      {Lores.map((lore) => {
+      {loreData.length == 0 && (
+        <LoadingBrackets/>
+      )}
+
+      {loreData.map((lore) => {
         return (
           <LoreCard
-            key={lore.id}
-            id={lore.id}
+            key={lore._id}
+            _id={lore._id}
             title={lore.title}
             date={lore.date}
             location={lore.location}

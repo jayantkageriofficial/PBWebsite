@@ -1,0 +1,553 @@
+"use client";
+
+import { useState, useRef } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { useAuthStore } from "@/lib/store/auth";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Progress } from "@/components/ui/progress";
+import { UploadCloudIcon, XIcon } from "lucide-react";
+import { type Talk } from "@/lib/db/models/talks";
+
+type TalkForm = {
+  title: string;
+  description: string;
+  images: string[];
+  type: "conference" | "talks" | "other";
+  name: string;
+  date: string;
+  speakers: string;
+};
+
+type TabType = "all" | "conference" | "talks" | "other";
+
+const blankForm: TalkForm = {
+  title: "",
+  description: "",
+  images: [],
+  type: "conference",
+  name: "",
+  date: "",
+  speakers: "",
+};
+
+const TEXT_FIELDS: {
+  label: string;
+  key: keyof TalkForm;
+  type: string;
+  required?: boolean;
+}[] = [
+  { label: "Title", key: "title", type: "text", required: true },
+  { label: "Description", key: "description", type: "text", required: true },
+  { label: "Venue / Event Name", key: "name", type: "text", required: true },
+  { label: "Speakers", key: "speakers", type: "text", required: true },
+  { label: "Date", key: "date", type: "date", required: true },
+];
+
+const TABS: TabType[] = ["all", "conference", "talks", "other"];
+
+const headingText = "We Speak. We Share. We Lead.";
+const phrases = headingText.split(". ");
+
+export default function Talks(props: { talks: Talk[] }) {
+  const [talks, setTalks] = useState<Talk[]>(props.talks);
+  const [activeTab, setActiveTab] = useState<TabType>("all");
+  const { authenticated, token } = useAuthStore();
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editTalk, setEditTalk] = useState<Talk | null>(null);
+  const [form, setForm] = useState<TalkForm>(blankForm);
+  const [saving, setSaving] = useState(false);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+
+  const [deleteTarget, setDeleteTarget] = useState<Talk | null>(null);
+  const [deleting, setDeleting] = useState(false);
+
+  const filteredTalks =
+    activeTab === "all" ? talks : talks.filter((t) => t.type === activeTab);
+
+  const openAdd = () => {
+    setEditTalk(null);
+    setForm(blankForm);
+    setUploadError(null);
+    setModalOpen(true);
+  };
+
+  const openEdit = (talk: Talk) => {
+    setEditTalk(talk);
+    setForm({
+      title: talk.title,
+      description: talk.description,
+      images: talk.images,
+      type: talk.type,
+      name: talk.name,
+      date: talk.date ? new Date(talk.date).toISOString().slice(0, 10) : "",
+      speakers: talk.speakers,
+    });
+    setUploadError(null);
+    setModalOpen(true);
+  };
+
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadError(null);
+    setUploading(true);
+
+    const formData = new FormData();
+    formData.append("module", "talks");
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("/api/files", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (res.status === 201)
+        setForm((prev) => ({ ...prev, images: [...prev.images, data.url] }));
+      else setUploadError(data.error ?? "Upload failed");
+    } catch {
+      setUploadError("Network error during upload");
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  };
+
+  const removeImage = (index: number) => {
+    setForm((prev) => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      if (editTalk) {
+        const res = await fetch("/api/talks", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ ...form, _id: editTalk._id }),
+        });
+        const data = await res.json();
+        if (data.success) {
+          setTalks((prev) =>
+            prev.map((t) =>
+              t._id === editTalk._id
+                ? { ...data.talk, _id: data.talk._id.toString() }
+                : t,
+            ),
+          );
+          setModalOpen(false);
+        }
+      } else {
+        const res = await fetch("/api/talks", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(form),
+        });
+        const data = await res.json();
+        if (data.success) {
+          setTalks((prev) => [
+            ...prev,
+            { ...data.talk, _id: data.talk._id.toString() },
+          ]);
+          setModalOpen(false);
+        }
+      }
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/talks?id=${deleteTarget._id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (data.success) {
+        setTalks((prev) => prev.filter((t) => t._id !== deleteTarget._id));
+        setDeleteTarget(null);
+      }
+    } finally {
+      setDeleting(false);
+    }
+  };
+
+  const isSaveDisabled =
+    saving ||
+    uploading ||
+    !form.title ||
+    !form.description ||
+    !form.name ||
+    !form.date ||
+    !form.speakers ||
+    form.images.length === 0;
+
+  return (
+    <section className="bg-pbblack rounded-xl text-white py-8 md:py-12 text-lexend-300 min-h-xl">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-12 text-center">
+        {/* Heading */}
+        <div className="text-3xl md:text-5xl lg:text-6xl font-medium mb-6 px-4 md:px-10 flex flex-wrap justify-center gap-2">
+          {phrases.map((phrase, idx) => (
+            <motion.span
+              key={idx}
+              initial={{ opacity: 0, y: 6, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{
+                duration: 1,
+                delay: idx * 0.4,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              {phrase}
+              {idx < phrases.length - 1 ? "." : ""}
+            </motion.span>
+          ))}
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          className="text-gray-400 text-base md:text-lg lg:text-xl text-lexend-300 font-light mb-6"
+        >
+          A showcase of talks and conferences by the talented members of
+          <br />
+          Point Blank.
+        </motion.p>
+
+        {authenticated && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.8 }}
+            className="flex justify-center mb-4"
+          >
+            <button
+              onClick={openAdd}
+              className="px-6 py-2 bg-pbgreen text-black font-medium rounded-full hover:opacity-90 transition-opacity text-sm cursor-pointer"
+            >
+              + Add Talk
+            </button>
+          </motion.div>
+        )}
+
+        {/* Tabs */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 py-4 md:py-6"
+        >
+          {TABS.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-sm md:text-base uppercase cursor-pointer ${
+                activeTab === tab
+                  ? "bg-pbgreen text-black"
+                  : "bg-white/5 text-white/60"
+              }`}
+            >
+              {tab === "all" ? "All" : tab}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Talks list */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {filteredTalks.length === 0 && (
+            <p className="text-gray-400 text-lg mt-8">No talks found.</p>
+          )}
+
+          {filteredTalks.map((talk) => (
+            <div
+              key={String(talk._id)}
+              className="bg-pbgray rounded-xl max-w-7xl mx-auto flex justify-center mb-6 px-2 md:px-6 lg:px-8"
+            >
+              <div className="flex flex-col lg:flex-row items-center py-4 w-full">
+                <div className="flex flex-col items-center">
+                  {talk.images[0] && (
+                    <div className="w-full max-w-full lg:w-150 aspect-3/2 overflow-hidden rounded-xl">
+                      <Image
+                        src={talk.images[0]}
+                        alt={talk.title}
+                        width={600}
+                        height={400}
+                        className="object-cover rounded-xl w-full h-full grayscale"
+                      />
+                    </div>
+                  )}
+                  <span className="text-pbgreen text-light font-lexend-300 mt-3 bg-black/40 rounded-full px-3 p-3">
+                    {talk.speakers}
+                  </span>
+                </div>
+
+                <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-12 py-6 lg:py-8">
+                  <div className="mb-4">
+                    <h2 className="text-pbgreen font-medium text-2xl md:text-3xl lg:text-3xl leading-snug mb-2 max-w-2xl text-left wrap-break-word">
+                      {talk.title}
+                    </h2>
+                    <p className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
+                      {talk.description}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-3 md:px-2">
+                    <div className="flex gap-3">
+                      <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
+                        {talk.name}
+                      </span>
+                    </div>
+                    <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
+                      {new Date(talk.date).toLocaleDateString("en-US", {
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </div>
+
+                  {authenticated && (
+                    <div className="flex gap-2 mt-2">
+                      <button
+                        onClick={() => openEdit(talk)}
+                        className="px-3 py-1 text-xs bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors cursor-pointer"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => setDeleteTarget(talk)}
+                        className="px-3 py-1 text-xs bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-full transition-colors cursor-pointer"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Add / Edit Dialog */}
+      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+        <DialogContent className="dark bg-pbpages border-pbborder text-white max-w-md max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-white text-base">
+              {editTalk ? "Edit Talk" : "Add Talk"}
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="flex flex-col gap-4 py-2">
+            {TEXT_FIELDS.map(({ label, key, type, required }) => (
+              <div key={key} className="flex flex-col gap-1.5">
+                <Label className="text-pbtext text-xs">
+                  {label}
+                  {required && <span className="text-pbgreen ml-0.5">*</span>}
+                </Label>
+                <Input
+                  type={type}
+                  value={(form[key] as string) ?? ""}
+                  onChange={(e) =>
+                    setForm((prev) => ({ ...prev, [key]: e.target.value }))
+                  }
+                  className="bg-pbgray border-pbborder text-white placeholder:text-pbtext/50 focus-visible:border-pbgreen focus-visible:ring-pbgreen/20 h-8"
+                />
+              </div>
+            ))}
+
+            <div className="flex flex-col gap-1.5">
+              <Label className="text-pbtext text-xs">
+                Type<span className="text-pbgreen ml-0.5">*</span>
+              </Label>
+              <Select
+                value={form.type}
+                onValueChange={(v) =>
+                  setForm((prev) => ({ ...prev, type: v as Talk["type"] }))
+                }
+              >
+                <SelectTrigger className="w-full bg-pbgray border-pbborder text-white h-8 focus:ring-pbgreen/20 focus:border-pbgreen">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="dark bg-pbgray border-pbborder text-white">
+                  <SelectItem value="conference">Conference</SelectItem>
+                  <SelectItem value="talks">Talk</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Images */}
+            <div className="flex flex-col gap-1.5">
+              <Label className="text-pbtext text-xs">
+                Images<span className="text-pbgreen ml-0.5">*</span>
+              </Label>
+
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleFileSelect}
+              />
+
+              {form.images.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {form.images.map((url, idx) => (
+                    <div
+                      key={idx}
+                      className="relative w-20 h-20 rounded-xl overflow-hidden border border-pbborder group"
+                    >
+                      <Image
+                        src={url}
+                        alt={`Image ${idx + 1}`}
+                        fill
+                        style={{ objectFit: "cover" }}
+                        className="rounded-xl"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeImage(idx)}
+                        className="absolute top-0.5 right-0.5 p-0.5 rounded-full bg-black/70 hover:bg-black transition-colors opacity-0 group-hover:opacity-100"
+                      >
+                        <XIcon className="h-3 w-3 text-white" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                className="flex flex-col items-center justify-center gap-2 w-full py-4 rounded-xl border border-dashed border-pbborder hover:border-pbgreen transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <UploadCloudIcon className="h-5 w-5 text-pbtext" />
+                <span className="text-pbtext text-xs">
+                  {uploading ? "Uploading…" : "Click to upload image"}
+                </span>
+                <span className="text-pbtext/50 text-[10px]">
+                  PNG, JPG, WEBP — max 10 MB
+                </span>
+              </button>
+
+              {uploading && (
+                <div className="flex flex-col gap-1">
+                  <Progress
+                    value={null}
+                    className="h-1.5 bg-pbborder *:data-[slot=progress-indicator]:bg-pbgreen animate-pulse"
+                  />
+                  <span className="text-pbtext/60 text-[10px] text-right">
+                    Uploading…
+                  </span>
+                </div>
+              )}
+
+              {uploadError && (
+                <p className="text-red-400 text-xs">{uploadError}</p>
+              )}
+            </div>
+          </div>
+
+          <DialogFooter className="gap-2 pt-2">
+            <Button
+              variant="outline"
+              onClick={() => setModalOpen(false)}
+              className="border-pbborder text-pbtext hover:text-white hover:border-white bg-transparent flex-1"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSave}
+              disabled={isSaveDisabled}
+              className="bg-pbgreen text-black hover:bg-pbgreen/90 font-medium flex-1"
+            >
+              {saving ? "Saving…" : "Save"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirm Dialog */}
+      <Dialog
+        open={!!deleteTarget}
+        onOpenChange={(open) => !open && setDeleteTarget(null)}
+      >
+        <DialogContent className="dark bg-pbpages border-pbborder text-white max-w-sm">
+          <DialogHeader>
+            <DialogTitle className="text-white text-base">
+              Delete Talk
+            </DialogTitle>
+          </DialogHeader>
+
+          <p className="text-pbtext text-sm py-2">
+            Are you sure you want to delete{" "}
+            <span className="text-white font-medium">
+              {deleteTarget?.title}
+            </span>
+            ? This action cannot be undone.
+          </p>
+
+          <DialogFooter className="gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setDeleteTarget(null)}
+              className="border-pbborder text-pbtext hover:text-white hover:border-white bg-transparent flex-1"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleDelete}
+              disabled={deleting}
+              className="bg-red-500 hover:bg-red-600 text-white font-medium flex-1"
+            >
+              {deleting ? "Deleting…" : "Delete"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </section>
+  );
+}
