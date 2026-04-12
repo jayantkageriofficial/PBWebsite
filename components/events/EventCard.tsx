@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 export default function EventCard({
   title,
@@ -98,10 +99,11 @@ export default function EventCard({
           {/* Image area */}
           <div className="relative w-full overflow-hidden rounded-xl bg-[#222] aspect-4/3">
             {image && (
-              <img
+              <Image
                 src={image}
                 alt={title}
-                className="w-full h-full object-cover select-none"
+                fill
+                className="object-cover select-none"
               />
             )}
           </div>

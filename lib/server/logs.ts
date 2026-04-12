@@ -35,9 +35,10 @@ export async function createLog(params: {
 }
 
 export async function getLogs(module?: LogModule): Promise<LogEntry[]> {
+  type RawLog = { _id: { toString(): string }; timestamp: Date; module: string; email: string; action: string; title?: string };
   const filter = module ? { module } : {};
   const logs = await Log.find(filter).sort({ timestamp: -1 }).lean();
-  return (logs as any[]).map((log) => ({
+  return (logs as RawLog[]).map((log) => ({
     _id: log._id.toString(),
     timestamp: (log.timestamp as Date).toISOString(),
     module: log.module as LogModule,

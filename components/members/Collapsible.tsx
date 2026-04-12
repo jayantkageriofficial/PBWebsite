@@ -7,7 +7,6 @@ import React, {
   useEffect,
 } from "react";
 import { ChevronsDown } from "@/components/Icons";
-import { Lexend } from "next/font/google";
 
 interface CollapsibleSectionProps {
   heading: string;
@@ -16,11 +15,6 @@ interface CollapsibleSectionProps {
   isAnySectionOpen: boolean; 
   onToggle: () => void;
 }
-
-const lexend = Lexend({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500"],
-});
 
 const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
   ({ heading, content, isOpen, isAnySectionOpen, onToggle }, ref) => {

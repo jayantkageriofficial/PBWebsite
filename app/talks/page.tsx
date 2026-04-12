@@ -1,14 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Lexend } from "next/font/google";
 import Image, { StaticImageData } from "next/image";
 import talks1 from "@/public/talks1.jpg";
 import { motion } from "framer-motion";
-
-const lexend = Lexend({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
 
 type TabType = "all" | "conference" | "talks" | "other";
 

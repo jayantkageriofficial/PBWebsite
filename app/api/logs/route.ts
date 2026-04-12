@@ -24,8 +24,8 @@ export async function GET(request: Request) {
       { status: 401 },
     );
 
-  const module = (searchParams.get("module") as LogModule) || null;
-  const logs = await getLogs(module!);
+  const logModule = (searchParams.get("module") as LogModule) || null;
+  const logs = await getLogs(logModule!);
 
   return NextResponse.json({ success: true, logs });
 }

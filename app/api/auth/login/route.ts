@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { sendVerificationEmail, verifyToken } from "@/lib/server/auth";
+import { sendVerificationEmail } from "@/lib/server/auth";
 
 /*
  * POST /api/auth/login

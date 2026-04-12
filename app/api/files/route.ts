@@ -21,10 +21,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const formData = await request.formData();
-  const module = formData.get("module") as UploadModule;
+  const uploadModule = formData.get("module") as UploadModule;
   const file = formData.get("file") as File | null;
 
-  if (!module || !VALID_MODULES.includes(module))
+  if (!uploadModule || !VALID_MODULES.includes(uploadModule))
     return NextResponse.json(
       { error: `Invalid module. Must be one of: ${VALID_MODULES.join(", ")}` },
       { status: 400 },
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
   const buffer = Buffer.from(await file.arrayBuffer());
 
   try {
-    const url = await uploadImage(buffer, module);
+    const url = await uploadImage(buffer, uploadModule);
     return NextResponse.json({ url }, { status: 201 });
   } catch (error) {
     console.error("Cloudinary upload error:", error);
