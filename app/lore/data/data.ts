@@ -2,9 +2,9 @@ import LoreType from "@/types/lore/loreType";
 
 export const Lores: LoreType[] = [
   {
-    id: "coorg",
+    _id: "coorg",
     title: "Escape to Coorg",
-    date: Date.UTC(2025, 3),
+    date: new Date(Date.UTC(2025, 3)),
     location: "Coorg, Karnataka",
     preview: "What did Point Blank do after submitting their GSoC proposals?",
     story: [
@@ -27,9 +27,9 @@ export const Lores: LoreType[] = [
     ],
   },
   {
-    id: "nitk",
+    _id: "nitk",
     title: "Victory at NITK",
-    date: Date.UTC(2025, 0),
+    date: new Date(Date.UTC(2025, 0)),
     location: "Surathkal, Karnataka",
     preview:
       "How Point Blank claimed their position at the biggest NIT in India",
@@ -53,9 +53,9 @@ export const Lores: LoreType[] = [
     ],
   },
   {
-    id: "trek",
+    _id: "trek",
     title: "Shivagange Trek",
-    date: Date.UTC(2024, 8),
+    date: new Date(Date.UTC(2024, 8)),
     location: "Shivagange, Karnataka",
     preview: "Post SIH 2024 and IICT 2024, Point Blank deserved a break again.",
     story: [
@@ -76,9 +76,9 @@ export const Lores: LoreType[] = [
     ],
   },
   {
-    id: "indiafoss2025",
+    _id: "indiafoss2025",
     title: "IndiaFOSS",
-    date: Date.UTC(2025, 8),
+    date: new Date(Date.UTC(2025, 8)),
     location: "Nimhans Convention Centre, Karnataka",
     preview:
       "Point Blank got a front row seat to the magic of IndiaFOSS this year.",
@@ -95,9 +95,9 @@ export const Lores: LoreType[] = [
     ],
   },
   {
-    id: "chad",
+    _id: "chad",
     title: "Chad Whitacre on Open Source",
-    date: Date.UTC(2025, 8),
+    date: new Date(Date.UTC(2025, 8)),
     location: "Dayananda Sagar College of Engineering",
     preview:
       "Chad Whitacre, Head of Open Source at Sentry, shared his journey and insights on open source and its impact on tech.",
@@ -114,9 +114,9 @@ export const Lores: LoreType[] = [
     ],
   },
   {
-    id: "Anthargange2025",
+    _id: "Anthargange2025",
     title: "Anthargange Trek",
-    date: Date.UTC(2025, 10),
+    date: new Date(Date.UTC(2025, 10)),
     location: "Anthargange, Karnataka",
     preview:
       "After getting selected for SIH, the teams headed to Anthargange for a trek to celebrate the milestone and reset before the real grind began",
@@ -133,5 +133,5 @@ export const Lores: LoreType[] = [
     ],
   },
 ].sort((i, j) => {
-  return j.date - i.date;
+  return j.date.getTime() - i.date.getTime();
 });

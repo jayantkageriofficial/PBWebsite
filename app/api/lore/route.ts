@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db/connection";
 import Lore from "@/lib/db/models/lores";
 
+
+
 /*
  * GET /api/lore
  */

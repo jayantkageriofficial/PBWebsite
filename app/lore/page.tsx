@@ -2,15 +2,19 @@
 import LoreCard from "@/components/LoreCard";
 import { useEffect, useState } from "react";
 import LoreType from "@/types/lore/loreType";
+import LoadingBrackets from "../loading";
 export default function Lore() {
   const [loreData, setLoreData] = useState<LoreType[]>([]);
 
   useEffect(() => {
     fetch("/api/lore")
       .then((res) => res.json())
-      .then((data) => {
-        if (data.length != 0){
-          setLoreData(data)
+      .then((data: LoreType[]) => {
+        if (data.length != 0) {
+          data = data.sort((j, i) => {
+            return new Date(i.date).getTime() - new Date(j.date).getTime()
+          });
+          setLoreData(data);
         }
       });
   }, []);
@@ -31,11 +35,15 @@ export default function Lore() {
         </p>
       </div>
 
+      {loreData.length == 0 && (
+        <LoadingBrackets/>
+      )}
+
       {loreData.map((lore) => {
         return (
           <LoreCard
             key={lore._id}
-            _id ={lore._id}
+            _id={lore._id}
             title={lore.title}
             date={lore.date}
             location={lore.location}
