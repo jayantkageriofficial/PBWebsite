@@ -24,6 +24,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { UploadCloudIcon, XIcon } from "lucide-react";
 import { type Talk } from "@/lib/db/models/talks";
+import { serializeId } from "@/lib/utils";
 
 type TalkForm = {
   title: string;
@@ -162,7 +163,7 @@ export default function Talks(props: { talks: Talk[] }) {
           setTalks((prev) =>
             prev.map((t) =>
               t._id === editTalk._id
-                ? { ...data.talk, _id: data.talk._id.toString() }
+                ? (serializeId(data.talk) as unknown as Talk)
                 : t,
             ),
           );
@@ -181,7 +182,7 @@ export default function Talks(props: { talks: Talk[] }) {
         if (data.success) {
           setTalks((prev) => [
             ...prev,
-            { ...data.talk, _id: data.talk._id.toString() },
+            serializeId(data.talk) as unknown as Talk,
           ]);
           setModalOpen(false);
         }
