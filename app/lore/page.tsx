@@ -5,20 +5,30 @@ import LoreType from "@/types/lore/loreType";
 import LoadingBrackets from "../loading";
 export default function Lore() {
   const [loreData, setLoreData] = useState<LoreType[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch("/api/lore")
       .then((res) => res.json())
       .then((data: LoreType[]) => {
         if (data.length != 0) {
           data = data.sort((j, i) => {
-            return new Date(i.date).getTime() - new Date(j.date).getTime()
+            return new Date(i.date).getTime() - new Date(j.date).getTime();
           });
           setLoreData(data);
         }
+      })
+      .catch((err) => {
+        console.log("Error Fetching Lores :", err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
-  return (
+  return isLoading ? (
+    <LoadingBrackets />
+  ) : (
     <>
       <div
         className={`flex justify-center mt-10 items-end pb-10  w-full h-55 p-5 text-5xl md:text-6xl bg-pbpages text-white`}
@@ -35,9 +45,7 @@ export default function Lore() {
         </p>
       </div>
 
-      {loreData.length == 0 && (
-        <LoadingBrackets/>
-      )}
+      {loreData.length == 0 && <LoadingBrackets />}
 
       {loreData.map((lore) => {
         return (
