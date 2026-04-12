@@ -44,7 +44,7 @@ export default function HustlePage() {
 
   const searchInputRef = useRef(null);
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 20;
 
   const filteredMembers = members.filter((member) => {
     const search = searchTerm.toLowerCase();
@@ -263,9 +263,9 @@ export default function HustlePage() {
 
         <div className="max-w-[1180px] mx-auto mt-6 px-6 mb-20">
           <div className="bg-[#121212] border border-white/70 rounded-2xl overflow-hidden">
-            <div className="grid grid-cols-[70px_minmax(0,1fr)_100px_130px] md:grid-cols-[90px_minmax(0,1fr)_120px_150px] px-4 md:px-6 py-4 text-[15px] font-semibold text-white border-b border-white/70">
+            <div className="grid grid-cols-[70px_minmax(0,1fr)_100px_130px] md:grid-cols-[200px_minmax(0,1fr)_150px_350px] px-4 md:px-6 py-4 text-[15px] font-semibold text-white border-b border-white/70">
               <span>Rank</span>
-              <span>User</span>
+              <span className="ml-4">User</span>
               <span className="text-center">Score</span>
               <span className="text-center">Status</span>
             </div>
@@ -274,7 +274,7 @@ export default function HustlePage() {
               paginatedMembers.map((member, index) => (
                 <div
                   key={member.rank}
-                  className={`grid grid-cols-[70px_minmax(0,1fr)_100px_130px] md:grid-cols-[90px_minmax(0,1fr)_120px_150px] items-center px-4 md:px-6 py-4 text-[15px] ${
+                  className={`grid grid-cols-[70px_minmax(0,1fr)_100px_130px] md:grid-cols-[200px_minmax(0,1fr)_150px_350px] items-center px-4 md:px-6 py-4 text-[15px] ${
                     index !== paginatedMembers.length - 1 ? "border-b border-white/70" : ""
                   }`}
                 >
