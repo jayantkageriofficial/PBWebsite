@@ -117,8 +117,9 @@ export default function HustlePage() {
           <div className="flex items-start gap-4 relative">
             <div className="relative">
               <div
-                className={`flex items-center overflow-hidden rounded-xl bg-white text-black transition-all duration-300 ease-in-out ${showSearchBox ? "w-[320px] px-4 py-3" : "w-[126px] px-5 py-3"
-                  }`}
+                className={`flex items-center overflow-hidden rounded-xl bg-white text-black transition-all duration-300 ease-in-out ${
+                  showSearchBox ? "w-[320px] px-4 py-3" : "w-[126px] px-5 py-3"
+                }`}
               >
                 <button
                   onClick={() => {
@@ -156,10 +157,11 @@ export default function HustlePage() {
                   placeholder="Search"
                   value={searchTerm}
                   onChange={handleSearchChange}
-                  className={`bg-transparent outline-none text-sm text-black placeholder:text-black/50 transition-all duration-200 ${showSearchBox
+                  className={`bg-transparent outline-none text-sm text-black placeholder:text-black/50 transition-all duration-200 ${
+                    showSearchBox
                       ? "ml-3 w-full opacity-100"
                       : "ml-0 w-0 opacity-0 pointer-events-none"
-                    }`}
+                  }`}
                 />
 
                 {showSearchBox && (
@@ -221,10 +223,11 @@ export default function HustlePage() {
                     setCurrentPage(1);
                     setShowFilterBox(false);
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${statusFilter === "All"
+                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${
+                    statusFilter === "All"
                       ? "bg-pbgreen text-black"
                       : "text-white hover:bg-white/10"
-                    }`}
+                  }`}
                 >
                   All Status
                 </button>
@@ -235,10 +238,11 @@ export default function HustlePage() {
                     setCurrentPage(1);
                     setShowFilterBox(false);
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${statusFilter === "Active"
+                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${
+                    statusFilter === "Active"
                       ? "bg-pbgreen text-black"
                       : "text-white hover:bg-white/10"
-                    }`}
+                  }`}
                 >
                   Active
                 </button>
@@ -249,10 +253,11 @@ export default function HustlePage() {
                     setCurrentPage(1);
                     setShowFilterBox(false);
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${statusFilter === "Inactive"
+                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${
+                    statusFilter === "Inactive"
                       ? "bg-pbgreen text-black"
                       : "text-white hover:bg-white/10"
-                    }`}
+                  }`}
                 >
                   Inactive
                 </button>
@@ -275,7 +280,9 @@ export default function HustlePage() {
                 <div
                   key={member.rank}
                   className={`grid grid-cols-[70px_minmax(0,1fr)_100px_130px] md:grid-cols-[200px_minmax(0,1fr)_150px_350px] items-center px-4 md:px-6 py-4 text-[15px] ${
-                    index !== paginatedMembers.length - 1 ? "border-b border-white/70" : ""
+                    index !== paginatedMembers.length - 1
+                      ? "border-b border-white/70"
+                      : ""
                   }`}
                 >
                   <span className="text-white">{member.rank}</span>
@@ -299,8 +306,8 @@ export default function HustlePage() {
                     <span
                       className={`px-5 py-2 rounded-full text-sm ${
                         member.status === "Active"
-                          ? "bg-black text-pbgreen"
-                          : "bg-black text-white"
+                          ? "bg-pbsurface text-pbgreen"
+                          : "bg-pbsurface text-white"
                       }`}
                     >
                       {member.status}
@@ -317,34 +324,37 @@ export default function HustlePage() {
 
           <div className="mt-6 flex justify-center">
             <div className="flex items-center justify-center gap-3">
-              <button
-                onClick={goToPreviousPage}
-                disabled={currentPage === 1}
-                className="w-14 h-14 rounded-2xl bg-white text-black text-xl font-semibold flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                &lt;
-              </button>
+              {currentPage !== 1 && (
+                <button
+                  onClick={goToPreviousPage}
+                  className="w-14 h-14 rounded-2xl bg-white text-black text-xl font-semibold flex items-center justify-center"
+                >
+                  &lt;
+                </button>
+              )}
 
               {visiblePages.map((page) => (
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`w-14 h-14 rounded-2xl text-xl font-semibold flex items-center justify-center ${currentPage === page
+                  className={`w-14 h-14 rounded-2xl text-xl font-semibold flex items-center justify-center ${
+                    currentPage === page
                       ? "bg-pbgreen text-black"
                       : "bg-white text-black"
-                    }`}
+                  }`}
                 >
                   {page}
                 </button>
               ))}
 
-              <button
-                onClick={goToNextPage}
-                disabled={currentPage === totalPages || filteredMembers.length === 0}
-                className="w-14 h-14 rounded-2xl bg-white text-black text-xl font-semibold flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                &gt;
-              </button>
+              {currentPage !== totalPages && filteredMembers.length > 0 && (
+                <button
+                  onClick={goToNextPage}
+                  className="w-14 h-14 rounded-2xl bg-white text-black text-xl font-semibold flex items-center justify-center"
+                >
+                  &gt;
+                </button>
+              )}
             </div>
           </div>
         </div>
