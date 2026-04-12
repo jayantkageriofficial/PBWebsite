@@ -103,7 +103,7 @@ export default function EventCard({
                 src={image}
                 alt={title}
                 fill
-                className="object-cover select-none"
+                className="object-cover select-none grayscale"
               />
             )}
           </div>
