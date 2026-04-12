@@ -117,10 +117,10 @@ export default function TalksSection() {
   }, []);
 
   return (
-    <section className="bg-pbblack rounded-xl text-white py-10 md:py-16 text-lexend-300 min-h-xl">
-      <div className="max-w-8xl mx-auto px-4 md:px-6 lg:px-8 py-20 text-center">
+    <section className="bg-pbblack rounded-xl text-white py-8 md:py-12 text-lexend-300 min-h-xl">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-12 text-center">
         {/* Heading */}
-        <div className="text-4xl md:text-6xl lg:text-7xl font-medium mb-8 px-4 md:px-10 flex flex-wrap justify-center gap-2">
+        <div className="text-3xl md:text-5xl lg:text-6xl font-medium mb-6 px-4 md:px-10 flex flex-wrap justify-center gap-2">
           {phrases.map((phrase, idx) => (
             <motion.span
               key={idx}
@@ -145,7 +145,7 @@ export default function TalksSection() {
             delay: 1.5,
             ease: [0.16, 1, 0.3, 1],
           }}
-          className="text-gray-400 md:text-2xl lg:text-3xl text-lexend-300 font-light mb-8"
+          className="text-gray-400 text-base md:text-lg lg:text-xl text-lexend-300 font-light mb-6"
         >
           A showcase of talks and conferences by the talented members of
           <br />
@@ -158,12 +158,12 @@ export default function TalksSection() {
           }`}
         >
           {/* Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12 py-6 md:py-10">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 py-4 md:py-6">
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 md:px-7 py-2 md:py-4 rounded-full text-sm md:text-xl uppercase cursor-pointer
+                className={`px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-sm md:text-base uppercase cursor-pointer
                 ${
                   activeTab === tab
                     ? "bg-pbgreen text-black"
@@ -178,11 +178,11 @@ export default function TalksSection() {
           {filteredData.map((item) => (
             <div
               key={item.id}
-              className="bg-pbgray rounded-xl max-w-330 mx-auto flex justify-center mb-6 px-2 md:px-6 lg:px-8"
+              className="bg-pbgray rounded-xl max-w-7xl mx-auto flex justify-center mb-6 px-2 md:px-6 lg:px-8"
             >
               <div className="flex flex-col lg:flex-row items-center py-4">
                 <div className="flex flex-col items-center">
-                  <div className="w-full max-w-full lg:w-150 aspect-[3/2] overflow-hidden rounded-xl">
+                  <div className="w-full max-w-full lg:w-150 aspect-3/2 overflow-hidden rounded-xl">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -196,24 +196,24 @@ export default function TalksSection() {
                   </span>
                 </div>
 
-                <div className="flex flex-col items-start w-full px-4 md:px-8 lg:px-12 py-6 lg:py-8">
+                <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-12 py-6 lg:py-8">
                   <div className="mb-4">
-                    <h2 className="text-pbgreen font-medium text-2xl md:text-3xl lg:text-4xl leading-snug mb-2 max-w-150 text-left break-words">
+                    <h2 className="text-pbgreen font-medium text-2xl md:text-3xl lg:text-3xl leading-snug mb-2 max-w-2xl text-left wrap-break-word">
                       {item.title}
                     </h2>
 
-                    <p className="text-gray-400 text-lg md:text-xl lg:text-xl leading-snug max-w-110 md:leading-normal text-left break-words">
+                    <p className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
                       {item.description}
                     </p>
                   </div>
 
-                  <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-5 md:px-4">
+                  <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-3 md:px-2">
                     <div className="flex gap-3">
-                      <span className="bg-[#191919] py-2 px-2 md:px-4 md:py-4 text-sm md:text-lg text-light rounded-2xl text-lg self-start">
+                      <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
                         {item.venue}
                       </span>
                     </div>
-                    <span className="bg-[#191919] py-2 px-2 md:px-4 md:py-4 text-sm md:text-lg text-light rounded-2xl text-lg self-start">
+                    <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
                       {item.date}
                     </span>
                   </div>

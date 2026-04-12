@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import LoginForm from "@/components/LoginForm";
-import { verifyToken } from "@/lib/operations/auth";
+import { verifyToken } from "@/lib/server/auth";
 
 const ERROR_MESSAGES: Record<string, string> = {
   invalid_token:

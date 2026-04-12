@@ -46,7 +46,7 @@ export async function sendVerificationEmail(to: string): Promise<boolean> {
     { expiresIn: "15m" },
   );
 
-  const verificationLink = `${process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"}/api/auth/verify?token=${token}`;
+  const verificationLink = `${process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"}/api/auth/magic-link?token=${token}`;
 
   try {
     const transporter = createTransport({
