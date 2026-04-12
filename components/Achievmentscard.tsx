@@ -2,10 +2,10 @@
 export type AchievementRow = {
   leftEvent: string;
   leftResult: string;
-  leftCategory: string;   // e.g. "GSOC", "LFX", "HACKATHONS", "SIH", "LIFT", "ACM", "CP"
+  leftCategory: string;   // "GSOC" | "LFX" | "HACKATHONS" | "SIH" | "LIFT" | "ACM" | "CP"
   rightEvent: string;
   rightResult: string;
-  rightCategory: string;  // e.g. "GSOC", "LFX", "HACKATHONS", "SIH", "LIFT", "ACM", "CP"
+  rightCategory: string;
 };
 
 export type Member = {
@@ -15,7 +15,7 @@ export type Member = {
 };
 
 
-// EDIT YOUR MEMBERS & ACHIEVEMENTS HERE
+// add/edit members here
 export const members: Member[] = [
   {
     name: "Akash Singh",
@@ -55,18 +55,11 @@ export const members: Member[] = [
     ],
   },
 
-  // ── Add more members below ──
-  // {
-  //   name: "New Member",
-  //   avatar: "",
-  //   achievements: [
-  //     { leftEvent: "GSoC '25", leftResult: "@Google", leftCategory: "GSOC", rightEvent: "SIH '25", rightResult: "Winner", rightCategory: "SIH" },
-  //   ],
-  // },
+  // { name: "...", avatar: "", achievements: [...] },
 ];
 
 
-//  Card Component (no need to edit this part)
+// CARD LAYOUT
 export function AchievementCard({ member, filterCategory }: { member: Member; filterCategory: string }) {
   const initials = member.name
     .split(" ")
@@ -74,12 +67,12 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
     .join("");
 
   return (
-    <div className="w-[360px] rounded-[14px] border border-pbborder bg-pbgray flex flex-col overflow-hidden">
+    <div className="min-w-[360px] w-full rounded-[14px] border border-pbborder bg-pbgray flex flex-col overflow-hidden">
 
-      {/* ── Profile Section ── */}
+      {/* profile */}
       <div className="flex items-center gap-4 px-6 py-5">
 
-        {/* Avatar */}
+
         <div className="relative shrink-0">
           <div className="w-[60px] h-[60px] rounded-full bg-gradient-to-br from-[#2a2a2a] to-[#3d3d3d] flex items-center justify-center text-lg font-bold text-[#888] overflow-hidden border-2 border-[#333]">
             {member.avatar ? (
@@ -93,13 +86,13 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
             )}
           </div>
 
-          {/* Badge */}
+
           <div className="absolute -bottom-0.5 -right-0.5 w-[22px] h-[22px] rounded-full bg-[#FFB413] flex items-center justify-center text-[11px] border-2 border-pbgray">
             <img src="/achievement.svg" alt="" />
           </div>
         </div>
 
-        {/* Name */}
+
         <div className="min-w-0 flex-1 flex flex-col justify-center gap-0.5">
           <span className="text-[22px] font-bold text-white tracking-tight leading-none break-words">
             {member.name}
@@ -107,10 +100,10 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
         </div>
       </div>
 
-      {/* ── Divider ── */}
+      {/* divider */}
       <div className="h-px bg-white/25 mx-4" />
 
-      {/* ── Achievement Rows ── */}
+      {/* achievements */}
       <div className="bg-pbgray flex flex-col px-3 py-2.5 gap-2">
         {member.achievements
           .filter((row) =>
@@ -124,7 +117,7 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
             return (
               <div key={i} className={`grid gap-2 ${showLeft && showRight ? "grid-cols-2" : "grid-cols-1"}`}>
 
-                {/* Left achievement cell */}
+
                 {showLeft && (
                   <div className="bg-pbsurface rounded-lg px-3.5 py-2.5 min-w-0">
                     <p className="text-[13px] font-semibold text-[#39d353] m-0 break-words">
@@ -134,7 +127,7 @@ export function AchievementCard({ member, filterCategory }: { member: Member; fi
                   </div>
                 )}
 
-                {/* Right achievement cell */}
+
                 {showRight && (
                   <div className="bg-pbsurface rounded-lg px-3.5 py-2.5 min-w-0">
                     <p className="text-[13px] font-semibold text-[#39d353] m-0 break-words">

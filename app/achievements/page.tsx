@@ -12,17 +12,17 @@ export default function AchievementsPage() {
   return (
     <main className="min-h-screen bg-black text-white">
 
-      {/* Heading Section */}
+      {/* heading */}
       <div className="flex flex-col items-center justify-center pt-20 pb-12 px-4 text-center">
-        <h1 className="font-['Lexend'] font-normal text-[64px] leading-[150%] tracking-normal text-white m-0 mb-2">
+        <h1 className="font-sans font-normal text-[64px] leading-[150%] tracking-normal text-white m-0 mb-2">
           We Build.We Ship.We Win.
         </h1>
 
-        <p className="font-['Lexend'] font-light text-[28px] leading-[140%] tracking-normal text-center text-pbtext m-0 mb-12">
+        <p className="font-sans font-light text-2xl leading-relaxed text-center text-pbtext mb-12">
           A showcase of achievements by the talented members of PointBlank
         </p>
 
-        {/* Category Filter Bar */}
+        {/* filters */}
         <div className="flex flex-wrap items-center justify-center gap-2 px-4 py-2.5 rounded-full">
           {categories.map((cat) => (
             <button
@@ -43,7 +43,7 @@ export default function AchievementsPage() {
         </div>
       </div>
 
-      {/* Cards */}
+      {/* member cards */}
       <div className="flex flex-wrap gap-6 px-20 pb-20">
         {members
           .filter((member) =>
@@ -55,7 +55,9 @@ export default function AchievementsPage() {
             )
           )
           .map((member, i) => (
-            <AchievementCard key={i} member={member} filterCategory={activeCategory} />
+            <div key={i} className="w-[360px] shrink-0">
+              <AchievementCard member={member} filterCategory={activeCategory} />
+            </div>
           ))}
       </div>
 
