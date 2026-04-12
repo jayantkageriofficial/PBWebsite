@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import React from "react";
 
 const members = [
   { rank: 1, name: "User 1", handle: "@user1", score: 0, status: "Active" },
@@ -32,17 +32,17 @@ const members = [
   { rank: 27, name: "User 27", handle: "@user27", score: 0, status: "Active" },
   { rank: 28, name: "User 28", handle: "@user28", score: 0, status: "Active" },
   { rank: 29, name: "User 29", handle: "@user29", score: 0, status: "Active" },
-  { rank: 30, name: "User 30", handle: "@user30", score: 0, status: "Active" }
+  { rank: 30, name: "User 30", handle: "@user30", score: 0, status: "Active" },
 ];
 
 export default function HustlePage() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [statusFilter, setStatusFilter] = useState("All");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [showSearchBox, setShowSearchBox] = useState(false);
-  const [showFilterBox, setShowFilterBox] = useState(false);
+  const [searchTerm, setSearchTerm] = React.useState<string>("");
+  const [statusFilter, setStatusFilter] = React.useState<string>("All");
+  const [currentPage, setCurrentPage] = React.useState<number>(1);
+  const [showSearchBox, setShowSearchBox] = React.useState<boolean>(false);
+  const [showFilterBox, setShowFilterBox] = React.useState<boolean>(false);
 
-  const searchInputRef = useRef(null);
+  const searchInputRef = React.useRef<HTMLInputElement>(null);
 
   const itemsPerPage = 20;
 
@@ -59,19 +59,17 @@ export default function HustlePage() {
     return matchesSearch && matchesStatus;
   });
 
-  const totalPages = Math.max(1, Math.ceil(filteredMembers.length / itemsPerPage));
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredMembers.length / itemsPerPage),
+  );
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedMembers = filteredMembers.slice(startIndex, endIndex);
 
-  function handleSearchChange(e) {
+  function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchTerm(e.target.value);
-    setCurrentPage(1);
-  }
-
-  function handleFilterChange(e) {
-    setStatusFilter(e.target.value);
     setCurrentPage(1);
   }
 
@@ -95,7 +93,8 @@ export default function HustlePage() {
     }
 
     if (currentPage <= 2) return [1, 2, 3];
-    if (currentPage >= totalPages - 1) return [totalPages - 2, totalPages - 1, totalPages];
+    if (currentPage >= totalPages - 1)
+      return [totalPages - 2, totalPages - 1, totalPages];
     return [currentPage - 1, currentPage, currentPage + 1];
   }
 
@@ -103,22 +102,23 @@ export default function HustlePage() {
 
   return (
     <div className="bg-pbpages text-white min-h-screen flex flex-col">
-      <div className="flex-grow">
+      <div className="grow">
         <div className="text-center mt-16">
           <h1 className="text-6xl font-bold tracking-tight text-white">
             PB Hustle
           </h1>
-          <p className="text-[#8e8e93] mt-4 text-[15px]">
+          <p className="text-[#8e8e93] mt-4 text-lg">
             Track latest results and overall rankings in real-time
           </p>
         </div>
 
-        <div className="max-w-[1180px] mx-auto mt-16 px-6 flex items-start justify-between">
+        <div className="max-w-295 mx-auto mt-16 px-6 flex items-start justify-between">
           <div className="flex items-start gap-4 relative">
             <div className="relative">
               <div
-                className={`flex items-center overflow-hidden rounded-xl bg-white text-black transition-all duration-300 ease-in-out ${showSearchBox ? "w-[320px] px-4 py-3" : "w-[126px] px-5 py-3"
-                  }`}
+                className={`flex items-center overflow-hidden rounded-xl bg-white text-black transition-all duration-300 ease-in-out ${
+                  showSearchBox ? "w-xs px-4 py-3" : "w-31.5 px-5 py-3"
+                }`}
               >
                 <button
                   onClick={() => {
@@ -156,10 +156,11 @@ export default function HustlePage() {
                   placeholder="Search"
                   value={searchTerm}
                   onChange={handleSearchChange}
-                  className={`bg-transparent outline-none text-sm text-black placeholder:text-black/50 transition-all duration-200 ${showSearchBox
+                  className={`bg-transparent outline-none text-sm text-black placeholder:text-black/50 transition-all duration-200 ${
+                    showSearchBox
                       ? "ml-3 w-full opacity-100"
                       : "ml-0 w-0 opacity-0 pointer-events-none"
-                    }`}
+                  }`}
                 />
 
                 {showSearchBox && (
@@ -187,7 +188,7 @@ export default function HustlePage() {
               </div>
             </div>
 
-            <span className="text-sm text-[#7e7e84] mt-3">
+            <span className="text-sm text-pbtext mt-3">
               Last updated: Apr 12, 2026, 3:07 PM
             </span>
           </div>
@@ -214,17 +215,18 @@ export default function HustlePage() {
             </button>
 
             {showFilterBox && (
-              <div className="absolute top-16 right-0 w-[180px] bg-[#121212] border border-white/30 rounded-xl p-2 z-20">
+              <div className="absolute top-16 right-0 w-45 bg-pbgray border border-white/30 rounded-xl p-2 z-20">
                 <button
                   onClick={() => {
                     setStatusFilter("All");
                     setCurrentPage(1);
                     setShowFilterBox(false);
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${statusFilter === "All"
+                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${
+                    statusFilter === "All"
                       ? "bg-pbgreen text-black"
                       : "text-white hover:bg-white/10"
-                    }`}
+                  }`}
                 >
                   All Status
                 </button>
@@ -235,10 +237,11 @@ export default function HustlePage() {
                     setCurrentPage(1);
                     setShowFilterBox(false);
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${statusFilter === "Active"
+                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${
+                    statusFilter === "Active"
                       ? "bg-pbgreen text-black"
                       : "text-white hover:bg-white/10"
-                    }`}
+                  }`}
                 >
                   Active
                 </button>
@@ -249,10 +252,11 @@ export default function HustlePage() {
                     setCurrentPage(1);
                     setShowFilterBox(false);
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${statusFilter === "Inactive"
+                  className={`w-full text-left px-3 py-2 rounded-lg text-sm ${
+                    statusFilter === "Inactive"
                       ? "bg-pbgreen text-black"
                       : "text-white hover:bg-white/10"
-                    }`}
+                  }`}
                 >
                   Inactive
                 </button>
@@ -261,8 +265,8 @@ export default function HustlePage() {
           </div>
         </div>
 
-        <div className="max-w-[1180px] mx-auto mt-6 px-6 mb-20">
-          <div className="bg-[#121212] border border-white/70 rounded-2xl overflow-hidden">
+        <div className="max-w-295 mx-auto mt-6 px-6 mb-20">
+          <div className="bg-pbcard border border-white/70 rounded-2xl overflow-hidden">
             <div className="grid grid-cols-[70px_minmax(0,1fr)_100px_130px] md:grid-cols-[200px_minmax(0,1fr)_150px_350px] px-4 md:px-6 py-4 text-[15px] font-semibold text-white border-b border-white/70">
               <span>Rank</span>
               <span className="ml-4">User</span>
@@ -275,13 +279,15 @@ export default function HustlePage() {
                 <div
                   key={member.rank}
                   className={`grid grid-cols-[70px_minmax(0,1fr)_100px_130px] md:grid-cols-[200px_minmax(0,1fr)_150px_350px] items-center px-4 md:px-6 py-4 text-[15px] ${
-                    index !== paginatedMembers.length - 1 ? "border-b border-white/70" : ""
+                    index !== paginatedMembers.length - 1
+                      ? "border-b border-white/70"
+                      : ""
                   }`}
                 >
                   <span className="text-white">{member.rank}</span>
 
                   <div className="flex items-center gap-4 min-w-0">
-                    <div className="w-12 h-12 rounded-full bg-[#1c1c1c] shrink-0"></div>
+                    <div className="w-12 h-12 rounded-full bg-pbgray shrink-0"></div>
 
                     <div className="min-w-0">
                       <div className="text-white text-[15px] leading-none truncate">
@@ -299,8 +305,8 @@ export default function HustlePage() {
                     <span
                       className={`px-5 py-2 rounded-full text-sm ${
                         member.status === "Active"
-                          ? "bg-black text-pbgreen"
-                          : "bg-black text-white"
+                          ? "bg-pbsurface text-pbgreen"
+                          : "bg-pbsurface text-pbtext"
                       }`}
                     >
                       {member.status}
@@ -309,7 +315,7 @@ export default function HustlePage() {
                 </div>
               ))
             ) : (
-              <div className="px-6 py-10 text-center text-[#8a8a90]">
+              <div className="px-6 py-10 text-center text-pbtext">
                 No members found.
               </div>
             )}
@@ -319,7 +325,7 @@ export default function HustlePage() {
             <div className="flex items-center justify-center gap-3">
               <button
                 onClick={goToPreviousPage}
-                disabled={currentPage === 1}
+                hidden={currentPage === 1}
                 className="w-14 h-14 rounded-2xl bg-white text-black text-xl font-semibold flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 &lt;
@@ -329,10 +335,11 @@ export default function HustlePage() {
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`w-14 h-14 rounded-2xl text-xl font-semibold flex items-center justify-center ${currentPage === page
+                  className={`w-14 h-14 rounded-2xl text-xl font-semibold flex items-center justify-center ${
+                    currentPage === page
                       ? "bg-pbgreen text-black"
                       : "bg-white text-black"
-                    }`}
+                  }`}
                 >
                   {page}
                 </button>
@@ -340,7 +347,9 @@ export default function HustlePage() {
 
               <button
                 onClick={goToNextPage}
-                disabled={currentPage === totalPages || filteredMembers.length === 0}
+                hidden={
+                  currentPage === totalPages || filteredMembers.length === 0
+                }
                 className="w-14 h-14 rounded-2xl bg-white text-black text-xl font-semibold flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 &gt;
