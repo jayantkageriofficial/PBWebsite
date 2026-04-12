@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(){
     Lores.forEach((lore:LoreType)=>{
-    let data = new Lore();
+    const data = new Lore();
     data.images = lore.images
     data.title = lore.title
     data.date = lore.date
