@@ -5,7 +5,7 @@ import { serializeId } from "@/lib/utils";
 export const metadata = {
   title: "Lore",
   description:
-    "Chronicles of Point Blank's journeys, where friendship and innovation intertwine.",
+    "The many lores of Point Blank <. >",
 };
 
 export default async function LorePage() {
