@@ -1,39 +1,27 @@
-import { NextRequest, NextResponse } from "next/server";
-import { verifyLoginToken } from "@/lib/operations/auth";
+import { NextResponse } from "next/server";
+import { verifyToken } from "@/lib/server/auth";
+import connectDB from "@/lib/db/connection";
 
-export async function GET(request: NextRequest) {
-  const token = request.nextUrl.searchParams.get("token");
-
-  if (!token) {
-    return NextResponse.redirect(
-      new URL(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/admin?error=missing_token`,
-        request.url,
-      ),
+/*
+ * GET /api/auth/verify
+ *   searchParams: { token: string }
+ */
+export async function GET(request: Request) {
+  await connectDB()
+  const { searchParams } = new URL(request.url);
+  const token = searchParams.get("token");
+  if (!token)
+    return NextResponse.json(
+      { success: false, error: "Token is required" },
+      { status: 401 },
     );
-  }
 
-  const sessionToken = await verifyLoginToken(token);
-
-  if (!sessionToken || typeof sessionToken !== "string") {
-    return NextResponse.redirect(
-      new URL(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/admin?error=invalid_token`,
-        request.url,
-      ),
+  const user = await verifyToken(token);
+  if (!user?.email)
+    return NextResponse.json(
+      { success: false, error: "Invalid or expired token" },
+      { status: 401 },
     );
-  }
 
-  const response = NextResponse.redirect(
-    new URL(`${process.env.NEXT_PUBLIC_DOMAIN}/admin`, request.url),
-  );
-  response.cookies.set("session", sessionToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: 60 * 60 * 24, // 1 day
-    path: "/",
-  });
-
-  return response;
+  return NextResponse.json({ success: true, user });
 }

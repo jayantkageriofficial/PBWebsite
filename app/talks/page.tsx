@@ -1,115 +1,19 @@
-"use client";
-import { useEffect, useState } from "react";
+import Talks from "@/components/talks/Talks";
+import { type Talk } from "@/lib/db/models/talks";
+import { serializeId } from "@/lib/utils";
 
-import Image, { StaticImageData } from "next/image";
-import talks1 from "@/public/talks1.jpg";
-import { motion } from "framer-motion";
-
-type TabType = "all" | "conference" | "talks" | "other";
-
-type Talk = {
-  id: number;
-  title: string;
-  description: string;
-  type: TabType;
-  author: string;
-  date: string;
-  venue: string;
-  image: StaticImageData;
+export const metadata = {
+  title: "Talks",
+  description: "Talks and conferences by Point Blank members",
 };
 
-const data: Talk[] = [
-  {
-    id: 1,
-    title:
-      "Security-Aware Prompting Alone Does Not prevent Crashes in LLM-Generated C Code",
-    description:
-      "At the CSS Workshop co-located with the FSTTCS Conference in Goa, Ashutosh Pandey presented an experimental investigation into the reliability of LLM-generated C code. The talk demonstrated that....",
-    type: "conference",
-    author: "Ashutosh Pandey",
-    date: "December 2025",
-    venue: "FSTTCS Conference",
-    image: talks1,
-  },
-  {
-    id: 2,
-    title:
-      "Comparative Analysis of Intermediate Representations for Security Tasks",
-    description:
-      "During the CSS Workshop at the FSTTCS Conference, Kamini Banait, Madhur Kumar, and Prajwal K P delivered a research-focused talk exploring the behavior and analytical consequences of intermediate representations generated....",
-    type: "conference",
-    author: "Kamini Banait, Madhur Kumar, Prajwal KP",
-    date: "December 2025",
-    venue: "FSTTCS Conference",
-    image: talks1,
-  },
-  {
-    id: 3,
-    title: "Terraform Terrors Tamed: A GitOps Tale with KCL Magic",
-    description:
-      "Pratik Singh delivered a practical session on transforming common Terraform pitfalls into robust, policy-compliant Infrastructure as Code using GitOps and KCL (Kubernetes Configuration....",
-    type: "conference",
-    author: "Ashutosh Pandey",
-    date: "April 2025",
-    venue: "DevOpsDays Geneva",
-    image: talks1,
-  },
-  {
-    id: 4,
-    title: "The Future of CI/CD: Continuous Code Quality using AI",
-    description:
-      "Pratik Singh delivered a practical session on transforming common Terraform pitfalls into robust, policy-compliant Infrastructure as Code using GitOps and KCL (Kubernetes Configuration....",
-    type: "conference",
-    author: "Pratik Singh",
-    date: "April 2025",
-    venue: "FOSSASIA Summit 2025",
-    image: talks1,
-  },
-  {
-    id: 5,
-    title:
-      "Ease the Pain of Platform Engineers with Argo CD by Leveraging Kustomize Templates",
-    description:
-      "Pratik Singh delivered a talk on reducing the operational burden of platform engineers by leveraging Argo CD together with reusable Kustomize templates. He outlined how template....",
-    type: "conference",
-    author: "Pratik Singh",
-    date: "April 2025",
-    venue: "GitOps Con",
-    image: talks1,
-  },
-  {
-    id: 6,
-    title: "IndiaFOSS: Scaling a niche community to 1900 and beyond!",
-    description:
-      "Ashutosh Pandey delivered an engaging session on growing a specialized tech community around compilers, programming languages, and systems from small beginnings to nearly 2000 engaged....",
-    type: "conference",
-    author: "Ashutosh Pandey",
-    date: "October 2024",
-    venue: "IndiaFOSS 2024",
-    image: talks1,
-  },
-];
+export default async function TalksPage() {
+  const req = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/talks`);
+  const res = await req.json();
 
-export default function TalksSection() {
-  const [activeTab, setActiveTab] = useState<TabType>("all");
-
-  const tabs: TabType[] = ["all", "conference", "talks", "other"];
-
-  const filteredData =
-    activeTab === "all" ? data : data.filter((item) => item.type === activeTab);
-
-  const headingText = "We Speak. We Share. We Lead.";
-  const phrases = headingText.split(". ");
-
-  const [showContent, setShowContent] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowContent(true);
-    }, 2000); // match animation duration
-
-    return () => clearTimeout(timer);
-  }, []);
+  const talks = res.talks.map((talk: Talk & { _id: { toString(): string } }) =>
+    serializeId(talk),
+  );
 
   const [expanded, setExpanded] = useState<number | null>(null);
 

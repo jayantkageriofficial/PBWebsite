@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import LoginForm from "@/components/LoginForm";
-import { verifyToken } from "@/lib/operations/auth";
+import verifyAuth from "@/lib/verifyAuth";
 
 const ERROR_MESSAGES: Record<string, string> = {
   invalid_token:
@@ -18,7 +18,7 @@ export default async function AdminPage({
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("session");
 
-  if (sessionCookie && (await verifyToken(sessionCookie.value)))
+  if (sessionCookie && (await verifyAuth(sessionCookie.value)))
     return redirect("/");
 
   return <LoginForm error={error ? ERROR_MESSAGES[error] : undefined} />;

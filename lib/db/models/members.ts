@@ -1,20 +1,21 @@
-import mongoose, { Document } from "mongoose";
+import mongoose from "mongoose";
 
-export interface Members extends Document {
+export interface Members extends mongoose.Document {
   name: string;
-  linkedInUrl: string;
+  linkedInUrl?: string;
   role: string;
-  imageUrl: string;
+  imageUrl?: string;
   year: "first" | "second" | "third" | "fourth" | "alumni";
   company?: string;
   tags?: "lead" | "alumni-lead";
+  leadDesc?: string;
 }
 
 const MembersSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  linkedInUrl: { type: String, required: true },
+  linkedInUrl: { type: String, required: false },
   role: { type: String, required: true },
-  imageUrl: { type: String, required: true },
+  imageUrl: { type: String, required: false },
   company: { type: String, required: false },
   year: {
     type: String,
@@ -22,6 +23,7 @@ const MembersSchema = new mongoose.Schema({
     required: true,
   },
   tags: { type: String, enum: ["lead", "alumni-lead"], required: false },
+  leadDesc: { type: String, required: false },
 });
 
 const MembersModel =
