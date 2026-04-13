@@ -9,12 +9,14 @@ import {
 import { createLog } from "@/lib/server/logs";
 import { type Talk } from "@/lib/db/models/talks";
 import { verifyToken } from "@/lib/server/auth";
+import connectDB from "@/lib/db/connection";
 
 /*
  * GET /api/talks
  *   searchParams: { id?: string }
  */
 export async function GET(request: Request) {
+  await connectDB()
   const { searchParams } = new URL(request.url);
 
   if (searchParams.has("id")) {
@@ -39,6 +41,7 @@ export async function GET(request: Request) {
  *   Body { Talk }
  */
 export async function POST(request: Request) {
+  await connectDB()
   const authHeader = request.headers.get("Authorization");
   const token = authHeader?.split(" ")[1];
   if (!token)
@@ -99,6 +102,7 @@ export async function POST(request: Request) {
  *   Body { Talk & { _id: string } }
  */
 export async function PUT(request: Request) {
+  await connectDB()
   const authHeader = request.headers.get("Authorization");
   const token = authHeader?.split(" ")[1];
   if (!token)
@@ -165,6 +169,7 @@ export async function PUT(request: Request) {
  *   searchParams: { id: string }
  */
 export async function DELETE(request: Request) {
+  await connectDB()
   const authHeader = request.headers.get("Authorization");
   const token = authHeader?.split(" ")[1];
   if (!token)

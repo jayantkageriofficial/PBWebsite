@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/lib/server/auth";
 import { uploadImage, deleteImage, UploadModule } from "@/lib/cloudinary";
+import connectDB from "@/lib/db/connection";
 
 const VALID_MODULES: UploadModule[] = ["events", "members", "lore", "talks"];
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
@@ -11,6 +12,7 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
  *   Header: { Authorization: "Bearer <token>" }
  */
 export async function POST(request: Request) {
+  await connectDB()
   const authHeader = request.headers.get("Authorization");
   const token = authHeader?.split(" ")[1];
   if (!token)
@@ -65,6 +67,7 @@ export async function POST(request: Request) {
  *   Header: { Authorization: "Bearer <token>" }
  */
 export async function DELETE(request: Request) {
+  await connectDB()
   const authHeader = request.headers.get("Authorization");
   const token = authHeader?.split(" ")[1];
   if (!token)

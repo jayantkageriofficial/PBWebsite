@@ -8,11 +8,13 @@ import {
   updateLore,
   uploadLore,
 } from "@/lib/server/lore";
+import connectDB from "@/lib/db/connection";
 
 /*
  * GET /api/lore
  */
 export async function GET() {
+  await connectDB()
   const data = await getAllLores();
   return NextResponse.json(data, { status: 200 });
 }
@@ -21,6 +23,7 @@ export async function GET() {
  * POST /api/lore
  */
 export async function POST(request: NextRequest) {
+  await connectDB()
   const authHeader = request.headers.get("Authorization");
   const token = authHeader?.split(" ")[1];
   if (!token)
@@ -72,6 +75,7 @@ export async function POST(request: NextRequest) {
  * PUT /api/lore
  */
 export async function PUT(request: NextRequest) {
+  await connectDB()
   const authHeader = request.headers.get("Authorization");
   const token = authHeader?.split(" ")[1];
   if (!token)
@@ -140,6 +144,7 @@ export async function PUT(request: NextRequest) {
  * DELETE /api/lore
  */
 export async function DELETE(request: NextRequest) {
+  await connectDB()
   const authHeader = request.headers.get("Authorization");
   const token = authHeader?.split(" ")[1];
   if (!token)

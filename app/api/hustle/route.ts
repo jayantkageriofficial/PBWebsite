@@ -5,6 +5,7 @@ import { LatestModel, LeaderboardModel } from "@/lib/db/models/hustle";
 import FireCrawlApp from "@mendable/firecrawl-js";
 import { parseVJudgeContests, getLatestContestId } from "@/lib/vjudgeParser";
 import { parseContestData } from "@/lib/hustleLeaderboard";
+import connectDB from "@/lib/db/connection";
 
 interface ContestRanking {
   rank: number;
@@ -48,6 +49,7 @@ interface LeaderboardData {
 // }
 
 export async function POST(request: Request) {
+  await connectDB()
   try {
     // Check for force refresh parameter
     const url = new URL(request.url);
@@ -222,6 +224,7 @@ export async function POST(request: Request) {
  *         description: Error while fetching data from the database.
  */
 export async function GET() {
+  await connectDB()
   try {
     const latestDoc = await LatestModel.findOne({ name: "latest" });
     const leaderboardDoc = await LeaderboardModel.findOne({

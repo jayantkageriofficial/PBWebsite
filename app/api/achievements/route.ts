@@ -9,12 +9,14 @@ import {
 import { createLog } from "@/lib/server/logs";
 import { type Achievements } from "@/lib/db/models/achievements";
 import { verifyToken } from "@/lib/server/auth";
+import connectDB from "@/lib/db/connection";
 
 /*
  * GET /api/achievements
  *   searchParams: { id?: string }
  */
 export async function GET(request: Request) {
+  await connectDB()
   const { searchParams } = new URL(request.url);
 
   if (searchParams.has("id")) {

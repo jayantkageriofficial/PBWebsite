@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyLoginToken } from "@/lib/server/auth";
+import connectDB from "@/lib/db/connection";
 
 export async function GET(request: NextRequest) {
+  await connectDB()
   const token = request.nextUrl.searchParams.get("token");
 
   if (!token) {
