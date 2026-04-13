@@ -5,7 +5,7 @@ import { serializeId } from "@/lib/utils";
 export const metadata = {
   title: "Lore",
   description:
-    "Chronicles of Point Blank's journeys, where friendship and innovation intertwine.",
+    "The many lores of Point Blank <. >",
 };
 
 export default async function LorePage() {
@@ -15,7 +15,6 @@ export default async function LorePage() {
   const res: LoreType[] = await req.json();
 
   const lores = res
-    .map((lore) => serializeId(lore) as unknown as LoreType)
     .sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
     );

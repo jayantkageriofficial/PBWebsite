@@ -104,8 +104,8 @@ export default function LoreCard({
             [-webkit-mask-image:radial-gradient(circle,transparent_15%,black_40%,transparent_60%)]"
             />
 
-            <div className="h-64 md:h-83 w-[90%] md:w-lg overflow-hidden relative rounded-[5px] bg-cover bg-center">
-              {/* Prev button */}
+            <div className="h-64 md:h-83 w-[90%] md:w-lg overflow-hidden relative rounded-[5px] bg-cover bg-pbgray bg-center">
+              {/* Image nav prev */}
               {images.length > 1 && (
                 <button
                   className="absolute left-2 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center h-7 w-7 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-sm text-white transition-colors cursor-pointer"
@@ -117,7 +117,7 @@ export default function LoreCard({
                 </button>
               )}
 
-              {/* Next button */}
+              {/*Image nav next*/}
               {images.length > 1 && (
                 <button
                   className="absolute right-2 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center h-7 w-7 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-sm text-white transition-colors cursor-pointer"
@@ -129,7 +129,7 @@ export default function LoreCard({
                 </button>
               )}
 
-              {/* Pagination dots */}
+              {/*dots */}
               {images.length > 1 && (
                 <div className="absolute bottom-3 w-full flex justify-center items-center gap-1.5 z-10">
                   {images.map((_, idx) => (
@@ -138,7 +138,7 @@ export default function LoreCard({
                       onClick={() => setCurrentImg(idx)}
                       className={`rounded-full transition-all cursor-pointer ${
                         currentImg === idx
-                          ? "w-4 h-2 bg-white"
+                          ? "w-4 h-2 bg-pbgreen"
                           : "w-2 h-2 bg-white/40 hover:bg-white/60"
                       }`}
                     />
