@@ -1,14 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Lexend } from "next/font/google";
+
 import Image, { StaticImageData } from "next/image";
 import talks1 from "@/public/talks1.jpg";
 import { motion } from "framer-motion";
-
-const lexend = Lexend({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
 
 type TabType = "all" | "conference" | "talks" | "other";
 
@@ -116,8 +111,10 @@ export default function TalksSection() {
     return () => clearTimeout(timer);
   }, []);
 
+  const [expanded, setExpanded] = useState<number | null>(null);
+
   return (
-    <section className="bg-pbblack rounded-xl text-white py-10 md:py-16 text-lexend-300 min-h-xl">
+    <section className="bg-pbblack rounded-xl text-white py-10 md:py-16 text-lexend-300 min-h-xl ">
       <div className="max-w-8xl mx-auto px-4 md:px-6 lg:px-8 py-20 text-center">
         {/* Heading */}
         <div className="text-4xl md:text-6xl lg:text-7xl font-medium mb-8 px-4 md:px-10 flex flex-wrap justify-center gap-2">
@@ -202,20 +199,30 @@ export default function TalksSection() {
                       {item.title}
                     </h2>
 
-                    <p className="text-gray-400 text-lg md:text-xl lg:text-xl leading-snug max-w-110 md:leading-normal text-left break-words">
-                      {item.description}
+                    <p className="text-gray-400 text-lg md:text-xl lg:text-xl leading-snug max-w-110 md:leading-normal">
+                      {expanded === item.id
+                        ? item.description
+                        : item.description.slice(0, 120) + "..."}
                     </p>
                   </div>
 
                   <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-5 md:px-4">
                     <div className="flex gap-3">
-                      <span className="bg-[#191919] py-2 px-2 md:px-4 md:py-4 text-sm md:text-lg text-light rounded-2xl text-lg self-start">
+                      <span className="bg-[#191919] py-2 px-2 md:px-4 md:py-4 text-sm md:text-lg text-light rounded-2xl  self-start">
                         {item.venue}
                       </span>
                     </div>
-                    <span className="bg-[#191919] py-2 px-2 md:px-4 md:py-4 text-sm md:text-lg text-light rounded-2xl text-lg self-start">
+                    <span className="bg-[#191919] py-2 px-2 md:px-4 md:py-4 text-sm md:text-lg text-light rounded-2xl self-start">
                       {item.date}
                     </span>
+                    <button
+                      onClick={() =>
+                        setExpanded(expanded === item.id ? null : item.id)
+                      }
+                      className="bg-[#191919] py-2 px-2 md:px-4 md:py-4 text-sm md:text-lg text-light rounded-2xl curser-pointer self-start"
+                    >
+                      {expanded === item.id ? "Show Less" : "Read More"}
+                    </button>
                   </div>
                 </div>
               </div>
