@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { getLogs, LogModule } from "@/lib/server/logs";
 import { verifyToken } from "@/lib/server/auth";
-import connectDB from "../../../lib/db/connection";
+import connectDB from "@/lib/db/connection";
+
 
 /*
  * GET /api/logs
