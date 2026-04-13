@@ -67,9 +67,9 @@ export default function LoreCard({
               </p>
             </div>
 
-            <div className="md:pl-12.5 p-0 h-14 w-full mt-11 mb-5 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
+            <div className="md:pl-12.5 sm:pl-6 p-0 h-14 w-full mt-11 mb-5 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
               <button
-                className="bg-pbsurface border border-[#37ff0014] cursor-pointer h-14 w-49.5 rounded-2xl text-center select-none text-white text-[1.1rem]"
+                className="bg-pbsurface border border-[#37ff0014] cursor-pointer h-14 w-49.5 hover:border-pbgreen/70  ease-in-out duration-200 rounded-2xl text-center select-none text-white text-[1.1rem]"
                 onClick={() => setExpanded((prev) => !prev)}
               >
                 {expanded ? "Read Less" : "Read More"}
@@ -152,7 +152,7 @@ export default function LoreCard({
                   src={src}
                   alt={`${location} ${idx + 1}`}
                   fill
-                  className={`w-full h-full object-cover grayscale-100 transition-opacity duration-700 ease-in-out ${
+                  className={`w-full h-full object-cover grayscale-70 transition-opacity duration-700 ease-in-out ${
                     idx === currentImg ? "opacity-100" : "opacity-0"
                   }`}
                   priority={idx === 0}
