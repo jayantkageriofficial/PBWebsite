@@ -1,6 +1,5 @@
 import Lore from "@/components/lore/Lore";
 import LoreType from "@/types/lore/loreType";
-import { serializeId } from "@/lib/utils";
 
 export const metadata = {
   title: "Lore",
