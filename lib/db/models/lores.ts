@@ -1,15 +1,23 @@
 import mongoose from "mongoose";
 
+interface Lore extends mongoose.Document {
+  title: string;
+  date: Date;
+  location: string;
+  preview: string;
+  story: string[];
+  images: string[];
+}
+
 const LoreModel = new mongoose.Schema({
-  id: { type: String, unique: true, required: true },
   title: { type: String, required: true },
-  date: { type: Number, required: true },
+  date: { type: Date, required: true },
   location: { type: String, required: true },
   preview: { type: String, required: true },
   story: { type: [String], required: true },
   images: { type: [String], required: true },
 });
 
-const Lore = mongoose.models.lores || mongoose.model("Lore", LoreModel);
+const Lore = mongoose.models.Lore || mongoose.model("Lore", LoreModel);
 
 export default Lore;
