@@ -231,7 +231,7 @@ export default function Lore(props: { lores: LoreType[] }) {
         <motion.span
           initial={{ opacity: 0, y: 6, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         >
           Our Lore
         </motion.span>
@@ -241,7 +241,7 @@ export default function Lore(props: { lores: LoreType[] }) {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="text-pbtext font-light text-xl md:text-2xl lg:text-3xl max-w-300"
         >
           Every line of code tells a story, but our greatest tales are written
@@ -254,7 +254,7 @@ export default function Lore(props: { lores: LoreType[] }) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="w-full flex justify-center mb-8"
         >
           <button
@@ -274,13 +274,13 @@ export default function Lore(props: { lores: LoreType[] }) {
           </p>
         )}
 
-        {lores.map((lore) => (
+        {lores.map((lore, index) => (
           <motion.div
             key={lore._id}
-            initial={{ opacity: 0, y: 24 }}
+            initial={index == 0 ? { opacity: 0, y: 50 } : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
             <LoreCard
               {...lore}
