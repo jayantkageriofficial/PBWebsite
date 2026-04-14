@@ -305,7 +305,11 @@ export default function Talks(props: { talks: Talk[] }) {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.55,
+                delay: 2.0,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="bg-pbgray rounded-xl max-w-7xl mx-auto flex justify-center mb-6 px-2 md:px-6 lg:px-8"
             >
               <div className="flex flex-col lg:flex-row items-start py-4 w-full">
