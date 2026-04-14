@@ -69,7 +69,10 @@ const StickyCard = ({
   const container = useRef<HTMLDivElement>(null);
   const scale = useTransform(progress, range, [1, targetScale]);
   const blurRange: [number, number] = [range[0] + 1 / cards.length, 1];
-  const blurAmount = useTransform(progress, isLast ? range : blurRange, [0, isLast ? 0 : 5]);
+  const blurAmount = useTransform(progress, isLast ? range : blurRange, [
+    0,
+    isLast ? 0 : 5,
+  ]);
   const blur = useTransform(blurAmount, (v) => `blur(${v}px)`);
 
   const isLCP = card.image === bored;
@@ -102,7 +105,6 @@ const StickyCard = ({
       ref={container}
       className="sticky top-0 flex items-center justify-center h-screen"
     >
-
       <motion.div
         style={{
           scale,
@@ -139,7 +141,7 @@ export const CardStack = () => {
       <div
         ref={container}
         style={{ height: `${(cards.length + 1) * 100}vh` }}
-        className="relative w-full bg-pbgray"
+        className="relative w-full bg-pbpages"
       >
         {cards.map((card, i) => {
           const targetScale = Math.max(0.75, 1 - (cards.length - i - 1) * 0.08);
