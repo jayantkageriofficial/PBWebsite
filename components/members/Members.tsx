@@ -102,9 +102,7 @@ const TEXT_FIELDS: {
 ];
 
 export default function Members(props: { members: Member[] }) {
-  const [openIndex, setOpenIndex] = useState<number>(
-    headings.indexOf("Current Leads"),
-  );
+  const [openIndex, setOpenIndex] = useState<number>(-1);
   const [members, setMembers] = useState<Member[]>(props.members);
   const { authenticated, token } = useAuthStore();
 
@@ -119,6 +117,7 @@ export default function Members(props: { members: Member[] }) {
 
   const [deleteTarget, setDeleteTarget] = useState<Member | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [flippedId, setFlippedId] = useState<string | null>(null);
 
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? -1 : index);
@@ -145,6 +144,10 @@ export default function Members(props: { members: Member[] }) {
     });
     setUploadError(null);
     setModalOpen(true);
+  };
+
+  const handleFlip = (id: string) => {
+    setFlippedId(flippedId === id ? null : id);
   };
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -191,14 +194,17 @@ export default function Members(props: { members: Member[] }) {
       if (!payload.tags) delete payload.tags;
 
       if (editMember) {
-        const res = await fetch("/api/members", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_DOMAIN}/api/members`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ ...payload, _id: editMember._id }),
           },
-          body: JSON.stringify({ ...payload, _id: editMember._id }),
-        });
+        );
         const data = await res.json();
         if (data.success) {
           setMembers((prev) =>
@@ -207,14 +213,17 @@ export default function Members(props: { members: Member[] }) {
           setModalOpen(false);
         }
       } else {
-        const res = await fetch("/api/members", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_DOMAIN}/api/members`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(payload),
           },
-          body: JSON.stringify(payload),
-        });
+        );
         const data = await res.json();
         if (data.success) {
           setMembers((prev) => [...prev, data.member]);
@@ -230,10 +239,13 @@ export default function Members(props: { members: Member[] }) {
     if (!deleteTarget) return;
     setDeleting(true);
     try {
-      const res = await fetch(`/api/members?id=${deleteTarget._id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/members?id=${deleteTarget._id}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       const data = await res.json();
       if (data.success) {
         setMembers((prev) => prev.filter((m) => m._id !== deleteTarget._id));
@@ -249,7 +261,6 @@ export default function Members(props: { members: Member[] }) {
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-full space-y-4 mt-24 bg-pbpages">
-      {/* Heading */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -281,7 +292,11 @@ export default function Members(props: { members: Member[] }) {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.06,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className={`transition-colors duration-500 ${
                 index !== 0
                   ? isAnyOpen
@@ -299,7 +314,7 @@ export default function Members(props: { members: Member[] }) {
                   <div className="flex flex-col items-center space-y-6 w-full pt-4 pb-8 bg-pbpages">
                     <div
                       className={`grid justify-items-center gap-y-12 gap-x-6 md:gap-x-8 lg:gap-x-10 w-full max-w-7xl mx-auto ${
-                        heading.toLowerCase().includes("alumni")
+                        !heading.toLowerCase().includes("current leads")
                           ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
                           : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                       }`}
@@ -327,6 +342,8 @@ export default function Members(props: { members: Member[] }) {
                             isAdmin={authenticated}
                             onEdit={() => openEdit(profile)}
                             onDelete={() => setDeleteTarget(profile)}
+                            isFlipped={flippedId === profile._id}
+                            onFlip={() => handleFlip(profile._id)}
                           />
                         ))}
                     </div>

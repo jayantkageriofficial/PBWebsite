@@ -13,6 +13,8 @@ interface CardProps {
   isAdmin?: boolean;
   onEdit?: () => void;
   onDelete?: () => void;
+  isFlipped?:boolean;
+  onFlip?:()=>void;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -25,8 +27,9 @@ const Card: React.FC<CardProps> = ({
   isAdmin,
   onEdit,
   onDelete,
+  isFlipped,
+  onFlip
 }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
 
   const isFlipEnabled = !!imageUrl;
 
@@ -35,8 +38,7 @@ const Card: React.FC<CardProps> = ({
       className={`relative touch-manipulation w-full ${
         isFlipEnabled ? "perspective-[1000px] cursor-pointer" : ""
       }`}
-      onClick={() => isFlipEnabled && setIsFlipped(!isFlipped)}
-    >
+     onClick={() => isFlipEnabled && onFlip?.()}>
       {isAdmin && (
         <div className="absolute top-2 right-2 z-10 flex gap-1.5">
           <button
@@ -105,7 +107,7 @@ const Card: React.FC<CardProps> = ({
                 src={imageUrl}
                 alt={name}
                 fill
-                className="rounded-2xl object-cover object-center grayscale"
+                className="rounded-2xl object-cover object-center grayscale-[70]"
               />
             </div>
           )}
