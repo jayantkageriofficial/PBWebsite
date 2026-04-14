@@ -111,7 +111,7 @@ const StickyCard = ({
           filter: blur,
           top: `calc(-5vh + ${i * 24}px)`,
         }}
-        className="relative w-full max-w-5xl mx-4 sm:mx-8 bg-pbcard rounded-3xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-5xl mx-4 sm:mx-8 bg-pbgray rounded-3xl overflow-hidden shadow-2xl"
       >
         <div
           className={`flex flex-col ${

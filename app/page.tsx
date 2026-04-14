@@ -281,7 +281,7 @@ export default function Home() {
             },
           ].map(({ title, tag, img, description }, i) => (
             <FadeIn key={i} delay={(i % 3) * 0.1}>
-              <div className="bg-pbdarkgray rounded-3xl overflow-hidden border border-white/16 flex flex-col transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)]">
+              <div className="bg-pbdarkgray min-h-100 bg-cover bg-center rounded-3xl overflow-hidden border border-white/16 flex flex-col transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)]">
                 <div className="relative h-44 overflow-hidden">
                   <Image
                     src={img}
@@ -292,9 +292,9 @@ export default function Home() {
                 </div>
 
                 <div className="flex flex-col gap-2 flex-1 p-5">
-                  <div className="flex items-baseline gap-2 flex-wrap">
+                  <div className="flex mb-3 mt-2 items-center gap-2 flex-wrap ">
                     <h3 className="font-bold text-white text-base">{title}</h3>
-                    <span className="text-pbgreen text-xs border border-pbgreen/20 p-2 rounded-xl">
+                    <span className="text-pbgreen h-7 flex items-center text-xs border-2 border-pbborder p-2 rounded-2xl">
                       {tag}
                     </span>
                   </div>
