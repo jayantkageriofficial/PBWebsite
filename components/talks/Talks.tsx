@@ -340,7 +340,7 @@ export default function Talks(props: { talks: Talk[] }) {
                     </p>
                   </div>
 
-                  <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-3 md:px-2">
+                  <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-3 ">
                     <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
                       {talk.name}
                     </span>
@@ -352,7 +352,7 @@ export default function Talks(props: { talks: Talk[] }) {
                         })}
                       </span>
                       <button
-                        className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl cursor-pointer"
+                        className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl cursor-pointer border border-pbgreen"
                         onClick={() =>
                           setExpanded(
                             expanded === String(talk._id)
