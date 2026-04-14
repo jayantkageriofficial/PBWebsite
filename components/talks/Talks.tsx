@@ -71,6 +71,8 @@ export default function Talks(props: { talks: Talk[] }) {
   const [activeTab, setActiveTab] = useState<TabType>("all");
   const { authenticated, token } = useAuthStore();
 
+  const [expanded, setExpanded] = useState<string | null>(null);
+
   const [modalOpen, setModalOpen] = useState(false);
   const [editTalk, setEditTalk] = useState<Talk | null>(null);
   const [form, setForm] = useState<TalkForm>(blankForm);
@@ -330,22 +332,40 @@ export default function Talks(props: { talks: Talk[] }) {
                       {talk.title}
                     </h2>
                     <p className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
-                      {talk.description}
+                      {expanded === String(talk._id)
+                        ? talk.description
+                        : talk.description.length > 140
+                          ? talk.description.slice(0, 140) + "..."
+                          : talk.description}
                     </p>
                   </div>
 
                   <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-3 md:px-2">
-                    <div className="flex gap-3">
-                      <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
-                        {talk.name}
-                      </span>
-                    </div>
                     <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
-                      {new Date(talk.date).toLocaleDateString("en-US", {
-                        month: "long",
-                        year: "numeric",
-                      })}
+                      {talk.name}
                     </span>
+                    <div className="flex gap-2 items-center self-start md:self-auto">
+                      <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl">
+                        {new Date(talk.date).toLocaleDateString("en-US", {
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </span>
+                      <button
+                        className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl cursor-pointer"
+                        onClick={() =>
+                          setExpanded(
+                            expanded === String(talk._id)
+                              ? null
+                              : String(talk._id),
+                          )
+                        }
+                      >
+                        {expanded === String(talk._id)
+                          ? "Read Less"
+                          : "Read More"}
+                      </button>
+                    </div>
                   </div>
 
                   {authenticated && (
