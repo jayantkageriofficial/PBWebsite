@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Lexend_Tera } from "next/font/google";
 import ThreeBackground from "@/components/ui/ThreeBackground";
 import { CardStack } from "@/components/ui/CardStack";
-import { Lightbulb, Share2, BookOpen, FileText, Play, Code2, NotebookText } from "lucide-react";
+import {  Share2, NotebookText } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import FoundingMemberCard from "@/components/FoundingMemberCard";
 
@@ -286,7 +286,7 @@ export default function Home() {
                   <Image
                     src={img}
                     alt={title}
-                    className="w-full h-full object-cover grayscale"
+                    className="w-full h-full object-cover grayscale-70"
                     draggable={false}
                   />
                 </div>
