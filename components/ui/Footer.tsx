@@ -14,6 +14,7 @@ const footerLinks = [
   { name: "Achievements", href: "/achievements" },
   { name: "Lore", href: "/lore" },
   { name: "Talks", href: "/talks" },
+  { name: "Blog", href: "https://blog.pointblank.club", ext: true },
   { name: "Hustle Results", href: "/hustle" },
 ];
 
@@ -61,6 +62,8 @@ export default function Footer() {
               key={link.name}
               href={link.href}
               className="hover:text-white transition-colors"
+              target={link.ext ? "_blank" : undefined}
+              rel={link.ext ? "noopener noreferrer" : undefined}
             >
               {link.name}
             </Link>

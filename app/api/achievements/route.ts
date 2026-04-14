@@ -16,7 +16,7 @@ import connectDB from "@/lib/db/connection";
  *   searchParams: { id?: string }
  */
 export async function GET(request: Request) {
-  await connectDB()
+  await connectDB();
   const { searchParams } = new URL(request.url);
 
   if (searchParams.has("id")) {
@@ -41,7 +41,7 @@ export async function GET(request: Request) {
  *   Body { Achievements }
  */
 export async function POST(request: Request) {
-  await connectDB()
+  await connectDB();
   const authHeader = request.headers.get("Authorization");
   const token = authHeader?.split(" ")[1];
   if (!token)
@@ -58,9 +58,9 @@ export async function POST(request: Request) {
     );
 
   const body = await request.json();
-  const { name, imageUrl, achivements }: Achievements = body;
+  const { name, achivements }: Achievements = body;
 
-  if (!name || !imageUrl || !achivements)
+  if (!name || !achivements)
     return NextResponse.json(
       { success: false, error: "Missing required fields" },
       { status: 400 },
@@ -85,7 +85,7 @@ export async function POST(request: Request) {
  *   Body { Achievements } (must include _id)
  */
 export async function PUT(request: Request) {
-  await connectDB()
+  await connectDB();
   const authHeader = request.headers.get("Authorization");
   const token = authHeader?.split(" ")[1];
   if (!token)
@@ -102,10 +102,9 @@ export async function PUT(request: Request) {
     );
 
   const body = await request.json();
-  const { _id, name, imageUrl, achivements }: Achievements & { _id: string } =
-    body;
+  const { _id, name, achivements }: Achievements & { _id: string } = body;
 
-  if (!_id || !name || !imageUrl || !achivements)
+  if (!_id || !name || !achivements)
     return NextResponse.json(
       { success: false, error: "Missing required fields" },
       { status: 400 },
@@ -137,7 +136,7 @@ export async function PUT(request: Request) {
  *   searchParams: { id: string }
  */
 export async function DELETE(request: Request) {
-  await connectDB()
+  await connectDB();
   const authHeader = request.headers.get("Authorization");
   const token = authHeader?.split(" ")[1];
   if (!token)
