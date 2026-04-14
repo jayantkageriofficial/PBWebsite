@@ -102,23 +102,6 @@ const StickyCard = ({
       ref={container}
       className="sticky top-0 flex items-center justify-center h-screen"
     >
-      <div
-        className="absolute top-4 right-4 w-16 h-16 opacity-30 pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, #4ade80 1px, transparent 1px)",
-          backgroundSize: "6px 6px",
-        }}
-      />
-
-      <div
-        className="absolute bottom-4 left-4 w-16 h-16 opacity-30 pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, #4ade80 1px, transparent 1px)",
-          backgroundSize: "6px 6px",
-        }}
-      />
 
       <motion.div
         style={{
