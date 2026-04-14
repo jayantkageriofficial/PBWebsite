@@ -305,10 +305,14 @@ export default function Talks(props: { talks: Talk[] }) {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.55,
+                delay: 2.0,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="bg-pbgray rounded-xl max-w-7xl mx-auto flex justify-center mb-6 px-2 md:px-6 lg:px-8"
             >
-              <div className="flex flex-col lg:flex-row items-center py-4 w-full">
+              <div className="flex flex-col lg:flex-row items-start py-4 w-full">
                 <div className="flex flex-col items-center">
                   {talk.images[0] && (
                     <div className="w-full max-w-full lg:w-150 aspect-3/2 overflow-hidden rounded-xl">
@@ -344,7 +348,7 @@ export default function Talks(props: { talks: Talk[] }) {
                     <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
                       {talk.name}
                     </span>
-                    <div className="flex gap-2 items-center self-start md:self-auto">
+                    <div className="flex gap-2 items-center self-center md:self-auto">
                       <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl">
                         {new Date(talk.date).toLocaleDateString("en-US", {
                           month: "long",
