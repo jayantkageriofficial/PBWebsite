@@ -7,7 +7,7 @@ interface Achievement {
 
 export interface Achievements extends mongoose.Document {
   name: string;
-  imageUrl: string;
+  imageUrl?: string;
 
   achivements: {
     GSoC?: Achievement[];
@@ -22,7 +22,7 @@ export interface Achievements extends mongoose.Document {
 
 const AchievementsSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  imageUrl: { type: String, required: true },
+  imageUrl: { type: String, required: false },
   achivements: {
     GSoC: [
       {

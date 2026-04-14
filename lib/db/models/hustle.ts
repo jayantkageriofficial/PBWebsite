@@ -108,8 +108,9 @@ const leaderboardSchema = new Schema<Leaderboard>(
  * Models for "latest" and "leaderboard"
  */
 export const LatestModel: Model<Latest> =
-  mongoose.models.latests || mongoose.model<Latest>("latests", latestSchema);
+  mongoose.models.HustleLatest ||
+  mongoose.model<Latest>("HustleLatest", latestSchema);
 
 export const LeaderboardModel: Model<Leaderboard> =
-  mongoose.models.leaderboards ||
-  mongoose.model<Leaderboard>("leaderboards", leaderboardSchema);
+  mongoose.models.HustleLeaderboard ||
+  mongoose.model<Leaderboard>("HustleLeaderboard", leaderboardSchema);
