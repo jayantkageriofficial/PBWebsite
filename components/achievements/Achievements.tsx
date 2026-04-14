@@ -30,7 +30,7 @@ type AchievementEntry = { title: string; description?: string };
 type AchievementsDoc = {
   _id: string;
   name: string;
-  imageUrl: string;
+  imageUrl?: string;
   achivements: {
     GSoC?: AchievementEntry[];
     LFX?: AchievementEntry[];
@@ -331,18 +331,30 @@ export default function Achievements({
     }
   };
 
-  const filteredDocs = docs.filter((doc) => {
-    const member = docToDisplayMember(doc);
-    const matchesCategory =
-      activeCategory === "ALL" ||
-      member.achievements.some((row) =>
-        row.some((item) => item.category === activeCategory),
-      );
-    const matchesSearch =
-      searchQuery.trim() === "" ||
-      doc.name.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const countAchievements = (doc: AchievementsDoc) =>
+    DB_CATEGORIES.reduce(
+      (sum, cat) => sum + (doc.achivements[cat]?.length ?? 0),
+      0,
+    );
+
+  const filteredDocs = docs
+    .filter((doc) => {
+      const member = docToDisplayMember(doc);
+      const matchesCategory =
+        activeCategory === "ALL" ||
+        member.achievements.some((row) =>
+          row.some((item) => item.category === activeCategory),
+        );
+      const matchesSearch =
+        searchQuery.trim() === "" ||
+        doc.name.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    })
+    .sort((a, b) => {
+      const diff = countAchievements(b) - countAchievements(a);
+      if (diff !== 0) return diff;
+      return a.name.localeCompare(b.name);
+    });
 
   const filteredMemberOptions = allMembers.filter((m) =>
     m.name.toLowerCase().includes(memberSearch.toLowerCase()),
@@ -439,7 +451,12 @@ export default function Achievements({
       </div>
 
       {/* Achievement Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-8 lg:px-15 pb-8 sm:pb-12 lg:pb-15">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 2, ease: [0.16, 1, 0.3, 1] }}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-8 lg:px-15 pb-8 sm:pb-12 lg:pb-15"
+      >
         {filteredDocs.length > 0 ? (
           filteredDocs.map((doc, i) => (
             <motion.div
@@ -479,7 +496,7 @@ export default function Achievements({
             No members found{searchQuery ? ` for "${searchQuery}"` : ""}.
           </p>
         )}
-      </div>
+      </motion.div>
 
       <Dialog open={addOpen} onOpenChange={setAddOpen}>
         <DialogContent className="dark bg-pbpages border-pbborder text-white max-w-md max-h-[90vh] overflow-y-auto">
