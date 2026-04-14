@@ -88,7 +88,10 @@ export default function Home() {
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.15} className="w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-l-2 border-pbgreen pt-6 lg:pt-0 lg:pl-12">
+          <FadeIn
+            delay={0.15}
+            className="w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-l-2 border-pbgreen pt-6 lg:pt-0 lg:pl-12"
+          >
             <h3 className="text-3xl sm:text-4xl mb-4 sm:mb-6">Mission</h3>
             <p className="text-white/70 text-sm sm:text-base leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
@@ -180,15 +183,14 @@ export default function Home() {
                     sm:not-nth-[4n]:border-r
                     border-b nth-last-[-n+2]:border-b-0 sm:nth-last-[-n+2]:border-b sm:nth-last-[-n+4]:border-b-0`}
                 >
-                  <div
-                    className="relative w-24 h-24 rounded-full flex items-center justify-center"
-                    style={{
-                      background:
-                        "radial-gradient(circle, rgba(55,255,0,0.22) 0%, rgba(55,255,0,0.08) 45%, transparent 70%)",
-                    }}
-                  >
-                    <div className="w-14 h-14 rounded-full bg-pbdark border border-pbgreen/20 flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-white" strokeWidth={1.5} />
+                  <div className="flex justify-center w-18 h-18 rounded-full items-center bg-green-800/20">
+                    <div className="relative w-15 h-15 rounded-full flex items-center justify-center">
+                      <div className="w-14 h-14 rounded-full bg-green-800/10 border border-pbgreen/20 flex items-center justify-center">
+                        <Icon
+                          className="w-7 h-7 text-white"
+                          strokeWidth={1.5}
+                        />
+                      </div>
                     </div>
                   </div>
                   <span className="text-sm text-white text-center leading-tight">
@@ -288,7 +290,10 @@ export default function Home() {
               Our <span className="text-pbgreen">Founding</span> Members
             </h2>
           </FadeIn>
-          <FadeIn delay={0.1} className="text-center text-white/70 text-sm max-w-xl mx-auto mb-12">
+          <FadeIn
+            delay={0.1}
+            className="text-center text-white/70 text-sm max-w-xl mx-auto mb-12"
+          >
             <p>
               Point Blank is a passion project, born from a shared excitement to
               build and lead a platform for like-minded, driven students to come
@@ -391,7 +396,7 @@ export default function Home() {
             ].map(({ Icon, title, description, link }, i) => (
               <FadeIn key={i} delay={(i % 3) * 0.1}>
                 <Link
-                  className="bg-pbcard rounded-2xl border border-white/16 p-5 flex flex-col gap-3 cursor-pointer hover:border-pbgreen/30 transition-colors h-full"
+                  className="bg-gray rounded-2xl border border-white/16 p-5 flex flex-col gap-3 cursor-pointer hover:border-pbgreen/30 transition-colors h-full"
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
