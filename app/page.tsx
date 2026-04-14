@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Lexend_Tera } from "next/font/google";
 import ThreeBackground from "@/components/ui/ThreeBackground";
 import { CardStack } from "@/components/ui/CardStack";
-import { Users, Share2, BookOpen, FileText, Play, Code2 } from "lucide-react";
+import { Lightbulb, Share2, BookOpen, FileText, Play, Code2, NotebookText } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import FoundingMemberCard from "@/components/FoundingMemberCard";
 
@@ -23,14 +23,18 @@ import soumyaImg from "@/public/images/soumya.webp";
 import ashutoshImg from "@/public/images/ashutosh.webp";
 
 import {
+  Bulb,
   DevOps,
   Flutter,
+  GitHub,
+  HireUs,
   ICPC,
   IOT,
   Kaggle,
   ML,
   OpenSource,
   ReactIcon,
+  YouTube,
 } from "@/components/Icons";
 import Link from "next/link";
 
@@ -371,10 +375,10 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               {
-                Icon: Users,
-                title: "Join Us",
+                Icon: HireUs,
+                title: "Hire Us",
                 description:
-                  "Come join us as a member, we will ensure you always stay connected and grow with our expertise.",
+                  "Let's discuss how we can bring your ideas to life and help your business succeed with our expertise.",
                 link: "https://whatsapp.com",
               },
               {
@@ -385,28 +389,28 @@ export default function Home() {
                 link: "https://linktr.ee/",
               },
               {
-                Icon: BookOpen,
+                Icon: Bulb,
                 title: "Read Our Blog",
                 description:
                   "Point Blank has a active blog channel. Get the latest tech articles and community adventures.",
                 link: "https://blog.pointblank.club",
               },
               {
-                Icon: FileText,
+                Icon: NotebookText,
                 title: "Brochure",
                 description:
                   "Want to know more about Point Blank? Download our official brochure to get a quick overview.",
                 link: "/brochure.pdf",
               },
               {
-                Icon: Play,
+                Icon: YouTube,
                 title: "Join Us on YouTube",
                 description:
                   "Never miss an update from our channel. We post recorded talks, sessions, and event highlights.",
                 link: "https://youtube.com/@pointblank_club",
               },
               {
-                Icon: Code2,
+                Icon: GitHub,
                 title: "GitHub",
                 description:
                   "Want to contribute to this project with the codebase and network of open source contributors.",
@@ -420,17 +424,34 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-pbgreen/10 border border-pbgreen/20 flex items-center justify-center">
-                    <Icon className="w-4 h-4 text-pbgreen" strokeWidth={1.5} />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white text-sm mb-1">
+                  <div className="flex items-center">
+                    <div
+                      className="w-17.5 h-17.5 rounded-full p-2 flex"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(55, 255, 0, 0.05) 0%, rgba(55, 255, 0, 0) 100%)",
+                      }}
+                    >
+                      <div
+                        className="w-13.5 h-13.5 rounded-full p-3 flex items-center justify-center"
+                        style={{
+                          background:
+                            "linear-gradient(180deg, rgba(55, 255, 0, 0.1) -66.22%, rgba(55, 255, 0, 0) 85.46%)",
+                        }}
+                      >
+                        <Icon
+                          className="w-7.5 h-7.5 text-pbgreen"
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                    </div>
+                    <h3 className="text-white text-sm mb-1 px-4">
                       {title}
                     </h3>
-                    <p className="text-white/70 text-xs leading-relaxed">
-                      {description}
-                    </p>
                   </div>
+                  <p className="px-3 text-white/70 text-xs leading-relaxed">
+                    {description}
+                  </p>
                 </Link>
               </FadeIn>
             ))}
