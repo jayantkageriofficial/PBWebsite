@@ -1,9 +1,13 @@
+"use client";
+
+import React from "react";
 import Image from "next/image";
 import { Lexend_Tera } from "next/font/google";
 import ThreeBackground from "@/components/ui/ThreeBackground";
 import { CardStack } from "@/components/ui/CardStack";
 import { Users, Share2, BookOpen, FileText, Play, Code2 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
+import FoundingMemberCard from "@/components/FoundingMemberCard";
 
 // Images
 import mission from "@/public/images/mission.webp";
@@ -36,6 +40,12 @@ export const lexendTera = Lexend_Tera({
 });
 
 export default function Home() {
+  const [flippedIndex, setFlippedIndex] = React.useState<number | null>(null);
+
+  const handleFlip = (i: number) => {
+    setFlippedIndex(flippedIndex === i ? null : i);
+  };
+
   return (
     <>
       <section
@@ -56,6 +66,8 @@ export default function Home() {
             </p>
           </h1>
         </div>
+        {/* Fade transition to mission section
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-linear-to-b from-transparent to-pbgray pointer-events-none" /> */}
       </section>
 
       <section
@@ -89,7 +101,7 @@ export default function Home() {
           </FadeIn>
 
           <FadeIn
-            delay={0.15}
+            delay={1}
             className="w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-l-2 border-pbgreen pt-6 lg:pt-0 lg:pl-12"
           >
             <h3 className="text-3xl sm:text-4xl mb-4 sm:mb-6">Mission</h3>
@@ -253,7 +265,7 @@ export default function Home() {
             },
           ].map(({ title, tag, img, description }, i) => (
             <FadeIn key={i} delay={(i % 3) * 0.1}>
-              <div className="bg-pbcard rounded-3xl overflow-hidden border border-white/16 flex flex-col h-full">
+              <div className="bg-pbcard rounded-3xl overflow-hidden border border-white/16 flex flex-col h-full transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)]">
                 <div className="relative h-44 overflow-hidden">
                   <Image
                     src={img}
@@ -306,35 +318,30 @@ export default function Home() {
                 name: "Mohit Agarwal",
                 bio: "Mohit, SDE2 at Glance, is the driving force behind Point Blank's Competitive Programming culture. He has won several contests, including the Nokia Collegiate Code Rally, and qualified for ACM-ICPC Regionals.",
                 img: mohitImg,
+                linkedin: "https://linkedin.com/in/mohit-agarwal1",
               },
               {
                 name: "Soumya Pattanayak",
                 bio: "A top coder at Point Blank, Soumya has worked at Amazon and Verse Innovation. He's an ACM-ICPC regionalist known for his problem-solving skills and innovative projects.",
                 img: soumyaImg,
+                linkedin: "https://linkedin.com/in/soumya713",
               },
               {
                 name: "Ashutosh Pandey",
                 bio: "Ashutosh, Compiler Engineer at AMD, excelled in Open Source and Hackathons. As a student, he did GSoC with Arduino, won the Smart India Hackathon, and mentored students for prestigious programs.",
                 img: ashutoshImg,
+                linkedin: "https://linkedin.com/in/ashpdsce",
               },
-            ].map(({ name, bio, img }, i) => (
-              <FadeIn key={i} delay={i * 0.12}>
-                <div className="bg-pbcard border border-white/16 rounded-3xl p-5 flex flex-col items-center text-center gap-4 h-full">
-                  <div className="relative w-full aspect-square rounded-4xl overflow-hidden">
-                    <Image
-                      src={img}
-                      alt={name}
-                      className="w-full h-full object-cover object-top grayscale"
-                      draggable={false}
-                    />
-                  </div>
-                  <span className="px-4 py-1 rounded-full border border-gray-900 bg-pbsurface text-pbgreen text-sm font-medium">
-                    {name}
-                  </span>
-                  <p className="text-white/70 text-xs leading-relaxed pb-2">
-                    {bio}
-                  </p>
-                </div>
+            ].map(({ name, bio, img, linkedin }, i) => (
+              <FadeIn key={i} delay={i * 0.12} className="h-full">
+                <FoundingMemberCard
+                  name={name}
+                  bio={bio}
+                  img={img}
+                  linkedin={linkedin}
+                  isFlipped={flippedIndex === i}
+                  onFlip={() => handleFlip(i)}
+                />
               </FadeIn>
             ))}
           </div>
