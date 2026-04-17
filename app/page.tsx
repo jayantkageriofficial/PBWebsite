@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Lexend_Tera } from "next/font/google";
 import ThreeBackground from "@/components/ui/ThreeBackground";
 import { CardStack } from "@/components/ui/CardStack";
-import {  Share2, NotebookText } from "lucide-react";
+import { Share2, NotebookText } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import FoundingMemberCard from "@/components/FoundingMemberCard";
 
@@ -79,7 +79,7 @@ export default function Home() {
         className="bg-pbpages text-white overflow-hidden px-3"
       >
         <div className="max-w-5xl mx-auto">
-          <FadeIn className="pt-14 px-6">
+          <FadeIn className="pt-14">
             <h2 className="text-3xl sm:text-4xl font-semibold text-pbgreen">
               Our Mission, together.
             </h2>
@@ -92,7 +92,7 @@ export default function Home() {
           </FadeIn>
 
           {/* Mission - Image Left */}
-          <div className="flex flex-col lg:flex-row items-start lg:items-center py-14 sm:py-20 px-6 sm:px-10 lg:px-20">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center py-14 sm:py-20">
             <FadeIn className="relative w-full lg:w-1/2 shrink-0">
               <div className="relative w-full max-w-140 mx-auto lg:mx-0 aspect-4/3 sm:aspect-16/10 lg:aspect-5/4 rounded-4xl overflow-hidden">
                 <Image
@@ -123,7 +123,7 @@ export default function Home() {
           </div>
 
           {/* Vision - Image Right */}
-          <div className="flex flex-col lg:flex-row items-start lg:items-center md:py-14 sm:py-20 px-6 sm:px-10 lg:px-20">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center md:py-14 sm:py-20">
             <FadeIn className="w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-r-2 border-pbgreen pt-6 lg:pt-0 lg:pr-12">
               <h3 className="text-3xl sm:text-4xl mb-4 sm:mb-6">Vision</h3>
               <p className="text-white/70 text-sm sm:text-base leading-relaxed">
@@ -156,7 +156,7 @@ export default function Home() {
         <CardStack />
       </section>
 
-      <section id="domains" className="bg-pbpages text-white py-20 px-6">
+      <section id="domains" className="bg-pbpages text-white py-20 px-20">
         <FadeIn className="text-center mb-12">
           <h2 className="text-4xl font-bold text-pbgreen mb-3">
             Domains we Love
@@ -230,7 +230,7 @@ export default function Home() {
         </FadeIn>
       </section>
 
-      <section id="activities" className="bg-pbpages text-white py-20 px-6">
+      <section id="activities" className="bg-pbpages text-white py-20 px-20">
         <FadeIn className="text-center mb-12">
           <h2 className="text-4xl font-bold text-pbgreen">Activities</h2>
         </FadeIn>
@@ -310,7 +310,7 @@ export default function Home() {
 
       <section
         id="founding-members"
-        className="bg-pbpages text-white py-20 px-6"
+        className="bg-pbpages text-white py-20 px-20"
       >
         <div className="max-w-5xl mx-auto">
           <FadeIn className="text-center mb-4">
@@ -365,96 +365,245 @@ export default function Home() {
       </section>
 
       {/* Stay Connected */}
-      <section id="stay-connected" className="bg-pbpages text-white py-20 px-6">
+      <section
+        id="stay-connected"
+        className="bg-pbpages text-white py-20 px-20"
+      >
         <div className="max-w-5xl mx-auto">
           <FadeIn className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white">
               Stay <span className="text-pbgreen">Connected</span>
             </h2>
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              {
-                Icon: HireUs,
-                title: "Hire Us",
-                description:
-                  "Let's discuss how we can bring your ideas to life and help your business succeed with our expertise.",
-                link: "https://whatsapp.com",
-              },
-              {
-                Icon: Share2,
-                title: "Connect with Us",
-                description:
-                  "Follow us on our social platforms to get notified on Events, Blogs, and the community highlights.",
-                link: "https://linktr.ee/",
-              },
-              {
-                Icon: Bulb,
-                title: "Read Our Blog",
-                description:
-                  "Point Blank has a active blog channel. Get the latest tech articles and community adventures.",
-                link: "https://blog.pointblank.club",
-              },
-              {
-                Icon: NotebookText,
-                title: "Brochure",
-                description:
-                  "Want to know more about Point Blank? Download our official brochure to get a quick overview.",
-                link: "/brochure.pdf",
-              },
-              {
-                Icon: YouTube,
-                title: "Join Us on YouTube",
-                description:
-                  "Never miss an update from our channel. We post recorded talks, sessions, and event highlights.",
-                link: "https://youtube.com/@pointblank_club",
-              },
-              {
-                Icon: GitHub,
-                title: "GitHub",
-                description:
-                  "Want to contribute to this project with the codebase and network of open source contributors.",
-                link: "https://github.com/pointblank-club",
-              },
-            ].map(({ Icon, title, description, link }, i) => (
-              <FadeIn key={i} delay={(i % 3) * 0.1}>
+
+          <div
+            className="flex flex-col p-7.5"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='28' ry='28' stroke='%23505050' stroke-width='1.5' stroke-dasharray='8%2c12' stroke-linecap='butt'/%3e%3c/svg%3e\")",
+            }}
+          >
+            <div className="flex items-stretch">
+              {/* Hire Us */}
+              <FadeIn className="flex-1 flex flex-col min-w-0">
                 <Link
-                  className="bg-pbgray rounded-2xl border border-white/16 p-5 flex flex-col gap-3 cursor-pointer hover:border-pbgreen/30 transition-colors h-full"
-                  href={link}
+                  href="https://careers.pointblank.club"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="flex flex-col items-center p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[40px] rounded-tr-[14px] rounded-br-[40px] rounded-bl-[14px]"
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-3.5 w-full">
                     <div
-                      className="w-17.5 h-17.5 rounded-full p-2 flex"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(55, 255, 0, 0.05) 0%, rgba(55, 255, 0, 0) 100%)",
-                      }}
+                      className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]"
                     >
                       <div
-                        className="w-13.5 h-13.5 rounded-full p-3 flex items-center justify-center"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, rgba(55, 255, 0, 0.1) -66.22%, rgba(55, 255, 0, 0) 85.46%)",
-                        }}
+                        className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]"
                       >
-                        <Icon
-                          className="w-7.5 h-7.5 text-pbgreen"
+                        <HireUs
+                          className="w-6 h-6 text-pbgreen"
                           strokeWidth={1.5}
                         />
                       </div>
                     </div>
-                    <h3 className="text-white text-sm mb-1 px-4">
-                      {title}
+                    <h3 className="text-white text-xl font-semibold leading-[150%] flex-1">
+                      Hire Us
                     </h3>
                   </div>
-                  <p className="px-3 text-white/70 text-xs leading-relaxed">
-                    {description}
+                  <p className="text-pbtext text-sm font-light leading-[150%] text-center">
+                    Let&apos;s discuss how we can bring your ideas to life and
+                    help your business succeed with our expertise.
                   </p>
                 </Link>
               </FadeIn>
-            ))}
+
+              {/* Vertical dashed separator */}
+              <div
+                className="w-px mx-3.75 self-stretch shrink-0 bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]"
+              />
+
+              {/* Connect with Us */}
+              <FadeIn delay={0.1} className="flex-1 flex flex-col min-w-0">
+                <Link
+                  href="https://linktr.ee/pointblank_club"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-[14px]"
+                >
+                  <div className="flex items-center gap-3.5 w-full">
+                    <div
+                      className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]"
+                    >
+                      <div
+                        className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]"
+                      >
+                        <Share2
+                          className="w-6 h-6 text-pbgreen"
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                    </div>
+                    <h3 className="text-white text-xl font-semibold leading-[150%] flex-1">
+                      Connect With Us
+                    </h3>
+                  </div>
+                  <p className="text-pbtext text-sm font-light leading-[150%] text-center">
+                    Follow us across all our social platforms to stay updated
+                    with events, releases and community highlights.
+                  </p>
+                </Link>
+              </FadeIn>
+
+              {/* Vertical dashed separator */}
+              <div
+                className="w-px mx-3.75 self-stretch shrink-0 bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]"
+              />
+
+              {/* Read Blog */}
+              <FadeIn delay={0.2} className="flex-1 flex flex-col min-w-0">
+                <Link
+                  href="https://blog.pointblank.club"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[14px] rounded-tr-[40px] rounded-br-[14px] rounded-bl-[40px]"
+                >
+                  <div className="flex items-center gap-3.5 w-full">
+                    <div
+                      className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]"
+                    >
+                      <div
+                        className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]"
+                      >
+                        <Bulb
+                          className="w-6 h-6 text-pbgreen"
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                    </div>
+                    <h3 className="text-white text-xl font-semibold leading-[150%] flex-1">
+                      Read Our Blog
+                    </h3>
+                  </div>
+                  <p className="text-pbtext text-sm font-light leading-[150%] text-center">
+                    Explore stories and experiences shared by our members on
+                    their tech journey and community adventures.
+                  </p>
+                </Link>
+              </FadeIn>
+            </div>
+
+            {/* Horizontal dashed separator between rows */}
+            <div
+              className="h-px w-full my-3.75 shrink-0 bg-[repeating-linear-gradient(to_right,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]"
+            />
+
+            {/* Row 2 */}
+            <div className="flex items-stretch">
+              {/* Brochure */}
+              <FadeIn delay={0.1} className="flex-1 flex flex-col min-w-0">
+                <Link
+                  href="/brochure.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[14px] rounded-tr-[40px] rounded-br-[14px] rounded-bl-[40px]"
+                >
+                  <div className="flex items-center gap-3.5 w-full">
+                    <div
+                      className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]"
+                    >
+                      <div
+                        className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]"
+                      >
+                        <NotebookText
+                          className="w-6 h-6 text-pbgreen"
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                    </div>
+                    <h3 className="text-white text-xl font-semibold leading-[150%] flex-1">
+                      Brochure
+                    </h3>
+                  </div>
+                  <p className="text-pbtext text-sm font-light leading-[150%] text-center">
+                    We have listed all of recent events, activities, and other
+                    stats in our brochure.
+                  </p>
+                </Link>
+              </FadeIn>
+
+              {/* Vertical dashed separator */}
+              <div
+                className="w-px mx-3.75 self-stretch shrink-0 bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]"
+              />
+
+              {/* Join Us on YouTube */}
+              <FadeIn delay={0.2} className="flex-1 flex flex-col min-w-0">
+                <Link
+                  href="https://youtube.com/@pointblank_club"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-[14px]"
+                >
+                  <div className="flex items-center gap-3.5 w-full">
+                    <div
+                      className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]"
+                    >
+                      <div
+                        className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]"
+                      >
+                        <YouTube
+                          className="w-6 h-6 text-pbgreen"
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                    </div>
+                    <h3 className="text-white text-xl font-semibold leading-[150%] flex-1">
+                      Join Us on YouTube
+                    </h3>
+                  </div>
+                  <p className="text-pbtext text-sm font-light leading-[150%] text-center">
+                    We upload event recaps, fun activities and vibes of mixtapes
+                    on YouTube. Check it out now!
+                  </p>
+                </Link>
+              </FadeIn>
+
+              {/* Vertical dashed separator */}
+              <div
+                className="w-px mx-3.75 self-stretch shrink-0 bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]"
+              />
+
+              {/* GitHub */}
+              <FadeIn delay={0.3} className="flex-1 flex flex-col min-w-0">
+                <Link
+                  href="https://github.com/pointblank-club"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[40px] rounded-tr-[14px] rounded-br-[40px] rounded-bl-[14px]"
+                >
+                  <div className="flex items-center gap-3.5 w-full">
+                    <div
+                      className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]"
+                    >
+                      <div
+                        className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]"
+                      >
+                        <GitHub
+                          className="w-6 h-6 text-pbgreen"
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                    </div>
+                    <h3 className="text-white text-xl font-semibold leading-[150%] flex-1">
+                      GitHub
+                    </h3>
+                  </div>
+                  <p className="text-pbtext text-sm font-light leading-[150%] text-center">
+                    Meet the amazing contributors who have helped shape this
+                    project with their dedication and hard work.
+                  </p>
+                </Link>
+              </FadeIn>
+            </div>
           </div>
         </div>
       </section>

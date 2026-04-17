@@ -4,8 +4,6 @@ import { serializeId } from "@/lib/utils";
 
 export const metadata = {
   title: "Lore",
-  description:
-    "The many lores of Point Blank <. >",
 };
 
 export default async function LorePage() {
@@ -16,9 +14,7 @@ export default async function LorePage() {
 
   const lores = res
     .map((lore) => serializeId(lore) as unknown as LoreType)
-    .sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-    );
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <section className="bg-pbpages w-full h-full">

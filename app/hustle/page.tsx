@@ -3,7 +3,6 @@ import { type Latest, type Leaderboard } from "@/lib/db/models/hustle";
 
 export const metadata = {
   title: "PB Hustle",
-  description: "Track latest results and overall rankings in real-time",
 };
 
 export default async function HustlePage() {
