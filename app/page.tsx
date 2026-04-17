@@ -156,7 +156,10 @@ export default function Home() {
         <CardStack />
       </section>
 
-      <section id="domains" className="bg-pbpages text-white py-20 px-20">
+      <section
+        id="domains"
+        className="bg-pbpages text-white py-20 px-4 sm:px-10 lg:px-20"
+      >
         <FadeIn className="text-center mb-12">
           <h2 className="text-4xl font-bold text-pbgreen mb-3">
             Domains we Love
@@ -367,7 +370,7 @@ export default function Home() {
       {/* Stay Connected */}
       <section
         id="stay-connected"
-        className="bg-pbpages text-white py-20 px-20"
+        className="bg-pbpages text-white py-20 px-4 sm:px-10 lg:px-20"
       >
         <div className="max-w-5xl mx-auto">
           <FadeIn className="text-center mb-12">
@@ -376,29 +379,37 @@ export default function Home() {
             </h2>
           </FadeIn>
 
-          <div
-            className="flex flex-col p-7.5"
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='28' ry='28' stroke='%23505050' stroke-width='1.5' stroke-dasharray='8%2c12' stroke-linecap='butt'/%3e%3c/svg%3e\")",
-            }}
-          >
-            <div className="flex items-stretch">
+          <div className="relative flex flex-col p-4 lg:p-7.5">
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="0.75"
+                y="0.75"
+                width="calc(100% - 1.5px)"
+                height="calc(100% - 1.5px)"
+                stroke="#505050"
+                strokeWidth="1.5"
+                strokeDasharray="8 12"
+                strokeLinecap="butt"
+              />
+            </svg>
+
+            {/* Row 1 */}
+            <div className="flex flex-col lg:flex-row items-stretch">
               {/* Hire Us */}
               <FadeIn className="flex-1 flex flex-col min-w-0">
                 <Link
                   href="https://careers.pointblank.club"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[40px] rounded-tr-[14px] rounded-br-[40px] rounded-bl-[14px]"
+                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[40px] rounded-tr-[14px] rounded-br-[40px] rounded-bl-[14px]"
                 >
                   <div className="flex items-center gap-3.5 w-full">
-                    <div
-                      className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]"
-                    >
-                      <div
-                        className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]"
-                      >
+                    <div className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]">
+                      <div className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]">
                         <HireUs
                           className="w-6 h-6 text-pbgreen"
                           strokeWidth={1.5}
@@ -416,10 +427,8 @@ export default function Home() {
                 </Link>
               </FadeIn>
 
-              {/* Vertical dashed separator */}
-              <div
-                className="w-px mx-3.75 self-stretch shrink-0 bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]"
-              />
+              <div className="lg:hidden h-px w-full my-3.75 bg-[repeating-linear-gradient(to_right,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]" />
+              <div className="hidden lg:block w-px mx-3.75 self-stretch shrink-0 bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]" />
 
               {/* Connect with Us */}
               <FadeIn delay={0.1} className="flex-1 flex flex-col min-w-0">
@@ -427,15 +436,11 @@ export default function Home() {
                   href="https://linktr.ee/pointblank_club"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-[14px]"
+                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-[14px]"
                 >
                   <div className="flex items-center gap-3.5 w-full">
-                    <div
-                      className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]"
-                    >
-                      <div
-                        className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]"
-                      >
+                    <div className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]">
+                      <div className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]">
                         <Share2
                           className="w-6 h-6 text-pbgreen"
                           strokeWidth={1.5}
@@ -453,10 +458,8 @@ export default function Home() {
                 </Link>
               </FadeIn>
 
-              {/* Vertical dashed separator */}
-              <div
-                className="w-px mx-3.75 self-stretch shrink-0 bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]"
-              />
+              <div className="lg:hidden h-px w-full my-3.75 bg-[repeating-linear-gradient(to_right,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]" />
+              <div className="hidden lg:block w-px mx-3.75 self-stretch shrink-0 bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]" />
 
               {/* Read Blog */}
               <FadeIn delay={0.2} className="flex-1 flex flex-col min-w-0">
@@ -464,15 +467,11 @@ export default function Home() {
                   href="https://blog.pointblank.club"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[14px] rounded-tr-[40px] rounded-br-[14px] rounded-bl-[40px]"
+                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[14px] rounded-tr-[40px] rounded-br-[14px] rounded-bl-[40px]"
                 >
                   <div className="flex items-center gap-3.5 w-full">
-                    <div
-                      className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]"
-                    >
-                      <div
-                        className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]"
-                      >
+                    <div className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]">
+                      <div className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]">
                         <Bulb
                           className="w-6 h-6 text-pbgreen"
                           strokeWidth={1.5}
@@ -491,28 +490,21 @@ export default function Home() {
               </FadeIn>
             </div>
 
-            {/* Horizontal dashed separator between rows */}
-            <div
-              className="h-px w-full my-3.75 shrink-0 bg-[repeating-linear-gradient(to_right,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]"
-            />
+            <div className="h-px w-full my-3.75 shrink-0 bg-[repeating-linear-gradient(to_right,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]" />
 
             {/* Row 2 */}
-            <div className="flex items-stretch">
+            <div className="flex flex-col lg:flex-row items-stretch">
               {/* Brochure */}
               <FadeIn delay={0.1} className="flex-1 flex flex-col min-w-0">
                 <Link
                   href="/brochure.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[14px] rounded-tr-[40px] rounded-br-[14px] rounded-bl-[40px]"
+                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[14px] rounded-tr-[40px] rounded-br-[14px] rounded-bl-[40px]"
                 >
                   <div className="flex items-center gap-3.5 w-full">
-                    <div
-                      className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]"
-                    >
-                      <div
-                        className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]"
-                      >
+                    <div className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]">
+                      <div className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]">
                         <NotebookText
                           className="w-6 h-6 text-pbgreen"
                           strokeWidth={1.5}
@@ -530,10 +522,8 @@ export default function Home() {
                 </Link>
               </FadeIn>
 
-              {/* Vertical dashed separator */}
-              <div
-                className="w-px mx-3.75 self-stretch shrink-0 bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]"
-              />
+              <div className="lg:hidden h-px w-full my-3.75 bg-[repeating-linear-gradient(to_right,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]" />
+              <div className="hidden lg:block w-px mx-3.75 self-stretch shrink-0 bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]" />
 
               {/* Join Us on YouTube */}
               <FadeIn delay={0.2} className="flex-1 flex flex-col min-w-0">
@@ -541,15 +531,11 @@ export default function Home() {
                   href="https://youtube.com/@pointblank_club"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-[14px]"
+                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-[14px]"
                 >
                   <div className="flex items-center gap-3.5 w-full">
-                    <div
-                      className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]"
-                    >
-                      <div
-                        className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]"
-                      >
+                    <div className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]">
+                      <div className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]">
                         <YouTube
                           className="w-6 h-6 text-pbgreen"
                           strokeWidth={1.5}
@@ -567,10 +553,9 @@ export default function Home() {
                 </Link>
               </FadeIn>
 
-              {/* Vertical dashed separator */}
-              <div
-                className="w-px mx-3.75 self-stretch shrink-0 bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]"
-              />
+              {/* Separator: horizontal on mobile, vertical on desktop */}
+              <div className="lg:hidden h-px w-full my-3.75 bg-[repeating-linear-gradient(to_right,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]" />
+              <div className="hidden lg:block w-px mx-3.75 self-stretch shrink-0 bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]" />
 
               {/* GitHub */}
               <FadeIn delay={0.3} className="flex-1 flex flex-col min-w-0">
@@ -578,15 +563,11 @@ export default function Home() {
                   href="https://github.com/pointblank-club"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[40px] rounded-tr-[14px] rounded-br-[40px] rounded-bl-[14px]"
+                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[40px] rounded-tr-[14px] rounded-br-[40px] rounded-bl-[14px]"
                 >
                   <div className="flex items-center gap-3.5 w-full">
-                    <div
-                      className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]"
-                    >
-                      <div
-                        className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]"
-                      >
+                    <div className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]">
+                      <div className="w-14 h-14 rounded-full p-4 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]">
                         <GitHub
                           className="w-6 h-6 text-pbgreen"
                           strokeWidth={1.5}
