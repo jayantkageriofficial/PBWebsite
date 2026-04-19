@@ -78,7 +78,7 @@ export default function Home() {
         id="mission-vision"
         className="bg-pbpages text-white overflow-hidden px-3"
       >
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-8xl mx-auto">
           <FadeIn className="pt-14">
             <h2 className="text-3xl sm:text-4xl font-semibold text-pbgreen">
               Our Mission, together.
@@ -170,7 +170,7 @@ export default function Home() {
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="relative max-w-5xl mx-auto  rounded-3xl overflow-hidden">
+          <div className="relative max-w-8xl mx-auto  rounded-3xl overflow-hidden">
             {/* Corner dot gradients */}
             {[
               "top-0 left-0 [mask-image:radial-gradient(ellipse_at_top_left,black_30%,transparent_70%)]",
@@ -238,7 +238,7 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-pbgreen">Activities</h2>
         </FadeIn>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="max-w-8xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
             {
               title: "CP Contests",
@@ -315,7 +315,7 @@ export default function Home() {
         id="founding-members"
         className="bg-pbpages text-white py-20 px-4 sm:px-10 lg:px-20"
       >
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-8xl mx-auto">
           <FadeIn className="text-center mb-4">
             <h2 className="text-4xl font-bold text-white">
               Our <span className="text-pbgreen">Founding</span> Members
@@ -372,7 +372,7 @@ export default function Home() {
         id="stay-connected"
         className="bg-pbpages text-white py-20 px-4 sm:px-10 lg:px-20"
       >
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-8xl mx-auto">
           <FadeIn className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white">
               Stay <span className="text-pbgreen">Connected</span>
