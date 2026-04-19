@@ -233,7 +233,7 @@ export default function Home() {
         </FadeIn>
       </section>
 
-      <section id="activities" className="bg-pbpages text-white py-20 px-20">
+      <section id="activities" className="bg-pbpages text-white py-20 px-4 sm:px-10 lg:px-20">
         <FadeIn className="text-center mb-12">
           <h2 className="text-4xl font-bold text-pbgreen">Activities</h2>
         </FadeIn>
@@ -313,7 +313,7 @@ export default function Home() {
 
       <section
         id="founding-members"
-        className="bg-pbpages text-white py-20 px-20"
+        className="bg-pbpages text-white py-20 px-4 sm:px-10 lg:px-20"
       >
         <div className="max-w-5xl mx-auto">
           <FadeIn className="text-center mb-4">
