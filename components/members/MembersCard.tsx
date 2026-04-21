@@ -13,7 +13,7 @@ interface CardProps {
   onEdit?: () => void;
   onDelete?: () => void;
   isFlipped?:boolean;
-  onFlip?: ()=>void;
+  onFlip?:()=>void;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = ({
   onEdit,
   onDelete,
   isFlipped,
-  onFlip,
+  onFlip
 }) => {
   const isFlipEnabled = !!imageUrl;
 
