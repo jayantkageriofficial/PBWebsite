@@ -12,8 +12,8 @@ interface CardProps {
   isAdmin?: boolean;
   onEdit?: () => void;
   onDelete?: () => void;
-  isFlipped?: boolean;
-  onFlip?: () => void;
+  isFlipped?:boolean;
+  onFlip?: ()=>void;
 }
 
 const Card: React.FC<CardProps> = ({
