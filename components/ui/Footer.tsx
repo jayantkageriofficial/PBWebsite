@@ -14,6 +14,7 @@ const footerLinks = [
   { name: "Achievements", href: "/achievements" },
   { name: "Lore", href: "/lore" },
   { name: "Talks", href: "/talks" },
+  { name: "Blog", href: "https://blog.pointblank.club", ext: true },
   { name: "Hustle Results", href: "/hustle" },
 ];
 
@@ -38,7 +39,7 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="bg-pbgray text-white pt-14 pb-8 px-6">
-      <div className="max-w-5xl mx-auto flex flex-col items-center gap-7">
+      <div className="max-w-8xl mx-auto flex flex-col items-center gap-7">
         {/* Logo */}
         <Link
           href="/"
@@ -61,6 +62,8 @@ export default function Footer() {
               key={link.name}
               href={link.href}
               className="hover:text-white transition-colors"
+              target={link.ext ? "_blank" : undefined}
+              rel={link.ext ? "noopener noreferrer" : undefined}
             >
               {link.name}
             </Link>

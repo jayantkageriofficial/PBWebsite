@@ -6,36 +6,24 @@ if (!MONGODB_URI) {
   console.error("MONGODB_URI environment variable is not defined");
 }
 
-const cached = global as typeof global & {
-  mongoose?: {
-    conn: typeof mongoose | null;
-    promise: Promise<typeof mongoose> | null;
-  };
+type ConnectionObject = {
+  isConnected?: number;
 };
 
-if (!cached.mongoose) {
-  cached.mongoose = { conn: null, promise: null };
-}
+const connection: ConnectionObject = {};
 
-async function connectDB() {
-  if (cached.mongoose!.conn) {
-    console.info("Using cached MongoDB connection");
-    return cached.mongoose!.conn;
+async function connectDB(): Promise<void> {
+  if (connection.isConnected) {
+    console.log("Using existing Database Connection");
+    return;
   }
-
-  if (!cached.mongoose!.promise)
-    cached.mongoose!.promise = mongoose.connect(MONGODB_URI).then((m) => m);
-
-  cached.mongoose!.conn = await cached.mongoose!.promise;
-
-  console.info("Established new MongoDB connection");
-  return cached.mongoose!.conn;
-}
-
-if (process.env.NEXT_RUNTIME === "nodejs") {
-  connectDB().catch((err) => {
-    console.error("Failed to connect to MongoDB:", err);
-  });
+  try {
+    const db = await mongoose.connect(MONGODB_URI || "");
+    connection.isConnected = db.connections[0].readyState;
+    console.log("Established new Database Connection");
+  } catch (error) {
+    console.log("Database Connection Failed", error);
+  }
 }
 
 export default connectDB;

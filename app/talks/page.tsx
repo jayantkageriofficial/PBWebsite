@@ -4,7 +4,6 @@ import { serializeId } from "@/lib/utils";
 
 export const metadata = {
   title: "Talks",
-  description: "Talks and conferences by Point Blank members",
 };
 
 export default async function TalksPage() {

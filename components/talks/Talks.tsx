@@ -71,6 +71,8 @@ export default function Talks(props: { talks: Talk[] }) {
   const [activeTab, setActiveTab] = useState<TabType>("all");
   const { authenticated, token } = useAuthStore();
 
+  const [expanded, setExpanded] = useState<string | null>(null);
+
   const [modalOpen, setModalOpen] = useState(false);
   const [editTalk, setEditTalk] = useState<Talk | null>(null);
   const [form, setForm] = useState<TalkForm>(blankForm);
@@ -303,10 +305,14 @@ export default function Talks(props: { talks: Talk[] }) {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.55,
+                delay: 2.0,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="bg-pbgray rounded-xl max-w-7xl mx-auto flex justify-center mb-6 px-2 md:px-6 lg:px-8"
             >
-              <div className="flex flex-col lg:flex-row items-center py-4 w-full">
+              <div className="flex flex-col lg:flex-row items-start py-4 w-full">
                 <div className="flex flex-col items-center">
                   {talk.images[0] && (
                     <div className="w-full max-w-full lg:w-150 aspect-3/2 overflow-hidden rounded-xl">
@@ -315,7 +321,7 @@ export default function Talks(props: { talks: Talk[] }) {
                         alt={talk.title}
                         width={600}
                         height={400}
-                        className="object-cover rounded-xl w-full h-full grayscale"
+                        className="object-cover rounded-xl w-full h-full grayscale-70"
                       />
                     </div>
                   )}
@@ -330,22 +336,40 @@ export default function Talks(props: { talks: Talk[] }) {
                       {talk.title}
                     </h2>
                     <p className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
-                      {talk.description}
+                      {expanded === String(talk._id)
+                        ? talk.description
+                        : talk.description.length > 140
+                          ? talk.description.slice(0, 140) + "..."
+                          : talk.description}
                     </p>
                   </div>
 
-                  <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-3 md:px-2">
-                    <div className="flex gap-3">
-                      <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
-                        {talk.name}
-                      </span>
-                    </div>
+                  <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-3 ">
                     <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
-                      {new Date(talk.date).toLocaleDateString("en-US", {
-                        month: "long",
-                        year: "numeric",
-                      })}
+                      {talk.name}
                     </span>
+                    <div className="flex gap-2 items-center self-center md:self-auto">
+                      <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl">
+                        {new Date(talk.date).toLocaleDateString("en-US", {
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </span>
+                      <button
+                        className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl cursor-pointer border border-pbgreen"
+                        onClick={() =>
+                          setExpanded(
+                            expanded === String(talk._id)
+                              ? null
+                              : String(talk._id),
+                          )
+                        }
+                      >
+                        {expanded === String(talk._id)
+                          ? "Read Less"
+                          : "Read More"}
+                      </button>
+                    </div>
                   </div>
 
                   {authenticated && (

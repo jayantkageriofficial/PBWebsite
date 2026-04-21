@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import Events from "@/components/events/Events";
 import ReviewMarquee from "@/components/events/ReviewMarquee";
+
+export const metadata: Metadata = {
+  title: "Members",
+};
 
 export default async function EventsPage() {
   const req = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/events`);

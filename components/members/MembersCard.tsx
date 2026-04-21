@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
 import { LinkedIn } from "@/components/Icons";
 
 interface CardProps {
@@ -107,7 +106,7 @@ const Card: React.FC<CardProps> = ({
                 src={imageUrl}
                 alt={name}
                 fill
-                className="rounded-2xl object-cover object-center grayscale-[70]"
+                className="rounded-2xl object-cover object-center grayscale-70"
               />
             </div>
           )}

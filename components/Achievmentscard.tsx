@@ -13,103 +13,9 @@ export type AchievementRow = AchievementItem[];
 
 export type Member = {
   name: string;
-  avatar: string;
+  avatar?: string;
   achievements: AchievementRow[];
 };
-
-// add/edit members here
-export const members: Member[] = [
-  {
-    name: "Akash Singh",
-    avatar: "",
-    achievements: [
-      [
-        { event: "GSoC '24", result: "@Keploy", category: "GSOC" },
-        { event: "LFX '25", result: "@LitmusChaos", category: "LFX" },
-      ],
-      [
-        { event: "SIH '25", result: "Winner", category: "SIH" },
-        { event: "LIFT '25", result: "xyz", category: "LIFT" },
-      ],
-      [
-        {
-          event: "HackGlobal Singapore",
-          result: "Finalists",
-          category: "HACKATHONS",
-        },
-        { event: "NITK '25", result: "Grand Winner", category: "HACKATHONS" },
-      ],
-      [
-        { event: "Warpspeed", result: "Grand Winner", category: "HACKATHONS" },
-        {
-          event: "Hackbangalore '25",
-          result: "Winner",
-          category: "HACKATHONS",
-        },
-      ],
-      [
-        { event: "JIT Hack '23", result: "Runner up", category: "HACKATHONS" },
-        {
-          event: "ACM Winter School '24",
-          result: "AVV, Coimbatore",
-          category: "ACM",
-        },
-      ],
-    ],
-  },
-  {
-    name: "Priya Sharma",
-    avatar: "",
-    achievements: [
-      [
-        { event: "GSoC '25", result: "@Mozilla", category: "GSOC" },
-        { event: "GSoC '24", result: "@TensorFlow", category: "GSOC" },
-      ],
-      [
-        { event: "SIH '24", result: "Winner", category: "SIH" },
-        { event: "ACM ICPC '24", result: "Regionalist", category: "ACM" },
-      ],
-    ],
-  },
-  {
-    name: "Rohan Mehta",
-    avatar: "",
-    achievements: [
-      [
-        { event: "LFX '24", result: "@CNCF", category: "LFX" },
-        { event: "LFX '25", result: "@Kubernetes", category: "LFX" },
-      ],
-      [
-        { event: "Codeforces", result: "Expert (1600+)", category: "CP" },
-        { event: "Leetcode", result: "Top 5%", category: "CP" },
-      ],
-      [
-        { event: "Smart India Hack", result: "Finalist", category: "SIH" },
-        { event: "HackBVP '24", result: "Winner", category: "HACKATHONS" },
-      ],
-    ],
-  },
-  {
-    name: "Sneha Patel",
-    avatar: "",
-    achievements: [
-      [
-        { event: "HackMIT '24", result: "Top 10", category: "HACKATHONS" },
-        { event: "DevFest Hack", result: "Winner", category: "HACKATHONS" },
-      ],
-      [
-        { event: "ACM-W '25", result: "Scholar", category: "ACM" },
-        { event: "GSoC '25", result: "@NumFOCUS", category: "GSOC" },
-      ],
-      [
-        { event: "CP Sheet", result: "500 solved", category: "CP" },
-        { event: "ICPC '24", result: "Regionalist", category: "ACM" },
-      ],
-    ],
-  },
-
-  // { name: "...", avatar: "", achievements: [...] },
-];
 
 // CARD LAYOUT
 export function AchievementCard({
@@ -125,7 +31,7 @@ export function AchievementCard({
     .join("");
 
   return (
-    <div className="w-full h-full rounded-xl border border-pbborder bg-pbgray flex flex-col overflow-hidden">
+    <div className="w-full h-full rounded-xl border border-pbborder bg-pbgray flex flex-col hover:shadow-[0_0_7px_rgba(55,255,0,0.55)]">
       {/* profile */}
       <div className="flex items-center gap-4 px-6 py-5">
         <div className="relative shrink-0">
@@ -143,7 +49,7 @@ export function AchievementCard({
             )}
           </div>
 
-          <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-[#FFB413] flex items-center justify-center text-xs border-2 border-pbgray">
+          <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-[#FFB413] flex items-center justify-center text-xs border-2 border-pbgray p-0.5">
             <Image src="/badge.svg" alt="badge" width={20} height={20} />
           </div>
         </div>
