@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Search, X, Pencil, Trash2, Plus, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
-import { AchievementCard } from "@/components/Achievmentscard";
+import { AchievementCard } from "@/components/achievements/AchievementsCard";
 import { useAuthStore } from "@/lib/store/auth";
 import {
   Dialog,
@@ -464,7 +464,11 @@ export default function Achievements({
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.55, delay: (i % 3) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.55,
+                delay: (i % 3) * 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="relative group"
             >
               <AchievementCard

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import badge from "@/public/images/icons/badge.svg";
 
 export type AchievementItem = {
   event: string;
@@ -50,7 +51,7 @@ export function AchievementCard({
           </div>
 
           <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-[#FFB413] flex items-center justify-center text-xs border-2 border-pbgray p-0.5">
-            <Image src="/badge.svg" alt="badge" width={20} height={20} />
+            <Image src={badge} alt="badge" width={20} height={20} />
           </div>
         </div>
 

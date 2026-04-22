@@ -25,7 +25,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] overflow-hidden cursor-grab text-white"
+      className="relative min-h-[90vh] overflow-hidden cursor-grab text-white bg-black"
     >
       <ThreeBackground />
       <div className="flex justify-center items-center absolute inset-0 flex-col">
