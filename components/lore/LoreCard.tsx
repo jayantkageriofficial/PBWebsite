@@ -41,7 +41,7 @@ export default function LoreCard({
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2 w-full pl-5 md:pl-12.5">
-                <div className="bg-pbdarkgray py-1.5 mr-6 border border-pbborder rounded-4xl px-3 flex items-center ">
+                <div className="bg-pbdarkgray py-1.5 mr-3 border border-pbborder rounded-4xl px-3 flex items-center ">
                   <CalendarDays
                     className="mr-2 h-4 w-4 text-pbgreen"
                     aria-hidden="true"
