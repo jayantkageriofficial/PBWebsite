@@ -283,9 +283,9 @@ export default function Home() {
                 "From hardware prototypes to published research, we foster a culture of experimentation and innovation beyond the classroom.",
             },
           ].map(({ title, tag, img, description }, i) => (
-            <FadeIn key={i} delay={(i % 3) * 0.1}>
-              <div className="bg-pbdarkgray min-h-100 bg-cover bg-center rounded-3xl overflow-hidden border border-white/16 flex flex-col transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)]">
-                <div className="relative h-44 overflow-hidden">
+            <FadeIn key={i} delay={(i % 3) * 0.1} className="h-full">
+              <div className="h-full bg-pbdarkgray bg-cover bg-center rounded-3xl overflow-hidden border border-white/16 flex flex-col transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)]">
+                <div className="relative h-72 overflow-hidden">
                   <Image
                     src={img}
                     alt={title}
