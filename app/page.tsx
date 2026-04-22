@@ -8,6 +8,7 @@ import { CardStack } from "@/components/ui/CardStack";
 import { Share2, NotebookText } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import FoundingMemberCard from "@/components/FoundingMemberCard";
+import {motion} from "framer-motion";
 
 // Images
 import mission from "@/public/images/mission.webp";
@@ -38,6 +39,14 @@ import {
 } from "@/components/Icons";
 import Link from "next/link";
 
+const headingParts = [
+  { text: "We are", className: "text-white" },
+  { br: true },
+  { text: "<. >", className: "text-pbgreen font-mono" },
+  { text: " Point Blank", className: "text-pbgreen" },
+  { text: "Student run Open Source Community from India", className: "text-base text-white italic pt-2", block: true },
+];
+
 export const lexendTera = Lexend_Tera({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -61,13 +70,25 @@ export default function Home() {
           <h1
             className={`text-7xl text-center tracking-[-22%] text-white p-5 rounded-4xl select-none ${lexendTera.className}`}
           >
-            We are
-            <br />
-            <span className="text-pbgreen">&lt;. &gt;</span>{" "}
-            <span className="text-pbgreen">Point</span> Blank
-            <p className="text-base text-white italic pt-2">
-              Student run Open Source Community from India
-            </p>
+            {headingParts.map((part, idx) =>
+    part.br ? (
+      <br key={idx} />
+    ) : (
+      <motion.span
+        key={idx}
+        className={part.className}
+        initial={{ opacity: 0, y: 6, filter: "blur(8px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        transition={{
+          duration: 1,
+          delay: idx * 0.42,
+        }}
+        style={{ display: part.block ? "block" : "inline" }}
+      >
+        {part.text}
+      </motion.span>
+    )
+  )}
           </h1>
         </div>
         {/* Fade transition to mission section
