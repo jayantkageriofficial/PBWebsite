@@ -8,7 +8,7 @@ import { CardStack } from "@/components/ui/CardStack";
 import { Share2, NotebookText } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import FoundingMemberCard from "@/components/FoundingMemberCard";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 
 // Images
 import mission from "@/public/images/mission.webp";
@@ -44,7 +44,11 @@ const headingParts = [
   { br: true },
   { text: "<. >", className: "text-pbgreen font-mono" },
   { text: " Point Blank", className: "text-pbgreen" },
-  { text: "Student run Open Source Community from India", className: "text-base text-white italic pt-2", block: true },
+  {
+    text: "Student run Open Source Community from India",
+    className: "text-base text-white italic pt-2",
+    block: true,
+  },
 ];
 
 export const lexendTera = Lexend_Tera({
@@ -71,24 +75,24 @@ export default function Home() {
             className={`text-7xl text-center tracking-[-22%] text-white p-5 rounded-4xl select-none ${lexendTera.className}`}
           >
             {headingParts.map((part, idx) =>
-    part.br ? (
-      <br key={idx} />
-    ) : (
-      <motion.span
-        key={idx}
-        className={part.className}
-        initial={{ opacity: 0, y: 6, filter: "blur(8px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{
-          duration: 1,
-          delay: idx * 0.42,
-        }}
-        style={{ display: part.block ? "block" : "inline" }}
-      >
-        {part.text}
-      </motion.span>
-    )
-  )}
+              part.br ? (
+                <br key={idx} />
+              ) : (
+                <motion.span
+                  key={idx}
+                  className={part.className}
+                  initial={{ opacity: 0, y: 6, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{
+                    duration: 1,
+                    delay: idx * 0.42,
+                  }}
+                  style={{ display: part.block ? "block" : "inline" }}
+                >
+                  {part.text}
+                </motion.span>
+              ),
+            )}
           </h1>
         </div>
         {/* Fade transition to mission section
@@ -254,7 +258,10 @@ export default function Home() {
         </FadeIn>
       </section>
 
-      <section id="activities" className="bg-pbpages text-white py-20 px-4 sm:px-10 lg:px-20">
+      <section
+        id="activities"
+        className="bg-pbpages text-white py-20 px-4 sm:px-10 lg:px-20"
+      >
         <FadeIn className="text-center mb-12">
           <h2 className="text-4xl font-bold text-pbgreen">Activities</h2>
         </FadeIn>
