@@ -25,10 +25,10 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] overflow-hidden cursor-grab text-white bg-black"
+      className="relative min-h-[90vh] overflow-hidden cursor-grab text-white"
     >
       <ThreeBackground />
-      <div className="flex justify-center items-center absolute inset-0 flex-col">
+      <div className="flex justify-center items-center absolute inset-0 flex-col ">
         <h1
           className={`text-7xl text-center tracking-[-22%] text-white p-5 rounded-4xl select-none ${lexendTera.className}`}
         >
