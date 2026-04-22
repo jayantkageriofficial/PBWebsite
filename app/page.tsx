@@ -169,39 +169,36 @@ export default function Home() {
           </p>
         </FadeIn>
 
-        <FadeIn delay={0.1}>
-          <div className="relative max-w-8xl mx-auto  rounded-3xl overflow-hidden">
-            {/* Corner dot gradients */}
-            {[
-              "top-0 left-0 [mask-image:radial-gradient(ellipse_at_top_left,black_30%,transparent_70%)]",
-              "bottom-0 right-0 [mask-image:radial-gradient(ellipse_at_bottom_right,black_30%,transparent_70%)]",
-            ].map((pos, i) => (
-              <div
-                key={i}
-                className={`absolute ${pos} w-40 h-40 opacity-40 pointer-events-none`}
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle, var(--color-pbgreen) 1px, transparent 1px)",
-                  backgroundSize: "8px 8px",
-                }}
-              />
-            ))}
-            <div className="bg-pbdarkgray p-8">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {[
-                  { name: "DevOps", Icon: DevOps },
-                  { name: "IOT-ML", Icon: IOT },
-                  { name: "Kaggle", Icon: Kaggle },
-                  { name: "ML-Research", Icon: ML },
-                  { name: "Open Source Hackathon", Icon: OpenSource },
-                  { name: "React Development", Icon: ReactIcon },
-                  { name: "ACM - ICPC", Icon: ICPC },
-                  { name: "Flutter Development", Icon: Flutter },
-                ].map(({ name, Icon }, i) => (
-                  <div
-                    key={i}
-                    className={`flex flex-col items-center justify-center py-8 px-6 gap-3 z-10 w-full/4 bg-pbcard border-white/16 border rounded-2xl transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)]`}
-                  >
+        <div className="relative max-w-8xl mx-auto rounded-3xl overflow-hidden">
+          {/* Corner dot gradients */}
+          {[
+            "top-0 left-0 [mask-image:radial-gradient(ellipse_at_top_left,black_30%,transparent_70%)]",
+            "bottom-0 right-0 [mask-image:radial-gradient(ellipse_at_bottom_right,black_30%,transparent_70%)]",
+          ].map((pos, i) => (
+            <div
+              key={i}
+              className={`absolute ${pos} w-40 h-40 opacity-40 pointer-events-none`}
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle, var(--color-pbgreen) 1px, transparent 1px)",
+                backgroundSize: "8px 8px",
+              }}
+            />
+          ))}
+          <div className="bg-pbdarkgray p-8">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {[
+                { name: "DevOps", Icon: DevOps },
+                { name: "IOT-ML", Icon: IOT },
+                { name: "Kaggle", Icon: Kaggle },
+                { name: "ML-Research", Icon: ML },
+                { name: "Open Source Hackathon", Icon: OpenSource },
+                { name: "React Development", Icon: ReactIcon },
+                { name: "ACM - ICPC", Icon: ICPC },
+                { name: "Flutter Development", Icon: Flutter },
+              ].map(({ name, Icon }, i) => (
+                <FadeIn key={i} delay={(i % 4) * 0.1} className="flex">
+                  <div className="flex flex-col items-center justify-center py-8 px-6 gap-3 z-10 w-full bg-pbcard border-white/16 border rounded-2xl transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.15)]">
                     <div
                       className="w-17.5 h-17.5 rounded-full p-2 flex"
                       style={{
@@ -226,14 +223,17 @@ export default function Home() {
                       {name}
                     </span>
                   </div>
-                ))}
-              </div>
+                </FadeIn>
+              ))}
             </div>
           </div>
-        </FadeIn>
+        </div>
       </section>
 
-      <section id="activities" className="bg-pbpages text-white py-20 px-4 sm:px-10 lg:px-20">
+      <section
+        id="activities"
+        className="bg-pbpages text-white py-20 px-4 sm:px-10 lg:px-20"
+      >
         <FadeIn className="text-center mb-12">
           <h2 className="text-4xl font-bold text-pbgreen">Activities</h2>
         </FadeIn>
@@ -283,13 +283,13 @@ export default function Home() {
                 "From hardware prototypes to published research, we foster a culture of experimentation and innovation beyond the classroom.",
             },
           ].map(({ title, tag, img, description }, i) => (
-            <FadeIn key={i} delay={(i % 3) * 0.1}>
-              <div className="bg-pbdarkgray min-h-100 bg-cover bg-center rounded-3xl overflow-hidden border border-white/16 flex flex-col transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)]">
-                <div className="relative h-44 overflow-hidden">
+            <FadeIn key={i} delay={(i % 3) * 0.1} className="h-full">
+              <div className="h-full bg-pbdarkgray bg-cover bg-center rounded-3xl overflow-hidden border border-white/16 flex flex-col transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)]">
+                <div className="relative h-72 overflow-hidden">
                   <Image
                     src={img}
                     alt={title}
-                    className="w-full h-full object-cover grayscale-70"
+                    className="w-full h-full object-cover"
                     draggable={false}
                   />
                 </div>
@@ -405,7 +405,7 @@ export default function Home() {
                   href="https://careers.pointblank.club"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[40px] rounded-tr-[14px] rounded-br-[40px] rounded-bl-[14px]"
+                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 border border-transparent hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[40px] rounded-tr-[14px] rounded-br-[40px] rounded-bl-[14px]"
                 >
                   <div className="flex items-center gap-3.5 w-full">
                     <div className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]">
@@ -436,7 +436,7 @@ export default function Home() {
                   href="https://linktr.ee/pointblank_club"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-[14px]"
+                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 border border-transparent hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-[14px]"
                 >
                   <div className="flex items-center gap-3.5 w-full">
                     <div className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]">
@@ -467,7 +467,7 @@ export default function Home() {
                   href="https://blog.pointblank.club"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[14px] rounded-tr-[40px] rounded-br-[14px] rounded-bl-[40px]"
+                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 border border-transparent hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[14px] rounded-tr-[40px] rounded-br-[14px] rounded-bl-[40px]"
                 >
                   <div className="flex items-center gap-3.5 w-full">
                     <div className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]">
@@ -500,7 +500,7 @@ export default function Home() {
                   href="/brochure.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[14px] rounded-tr-[40px] rounded-br-[14px] rounded-bl-[40px]"
+                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 border border-transparent hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[14px] rounded-tr-[40px] rounded-br-[14px] rounded-bl-[40px]"
                 >
                   <div className="flex items-center gap-3.5 w-full">
                     <div className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]">
@@ -531,7 +531,7 @@ export default function Home() {
                   href="https://youtube.com/@pointblank_club"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-[14px]"
+                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 border border-transparent hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-[14px]"
                 >
                   <div className="flex items-center gap-3.5 w-full">
                     <div className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]">
@@ -563,7 +563,7 @@ export default function Home() {
                   href="https://github.com/pointblank-club"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[40px] rounded-tr-[14px] rounded-br-[40px] rounded-bl-[14px]"
+                  className="flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer transition-all duration-300 border border-transparent hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)] bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)] rounded-tl-[40px] rounded-tr-[14px] rounded-br-[40px] rounded-bl-[14px]"
                 >
                   <div className="flex items-center gap-3.5 w-full">
                     <div className="w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]">
