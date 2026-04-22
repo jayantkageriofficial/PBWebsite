@@ -51,6 +51,14 @@ const blankForm: MemberForm = {
   leadDesc: "",
 };
 
+const yearOrder: Record<string, number> = {
+  fourth: 0,
+  third: 1,
+  second: 2,
+  first: 3,
+  alumni: 4,
+};
+
 const headings = [
   "Current Leads",
   "Alumni Leads",
@@ -317,11 +325,17 @@ export default function Members(props: { members: Member[] }) {
                     >
                       {grouped[heading]
                         ?.slice()
-                        .sort((a, b) =>
-                          a.name.localeCompare(b.name, undefined, {
+                        .sort((a, b) => {
+                          if (heading === "Current Leads") {
+                            const yearDiff =
+                              (yearOrder[a.year] ?? 99) -
+                              (yearOrder[b.year] ?? 99);
+                            if (yearDiff !== 0) return yearDiff;
+                          }
+                          return a.name.localeCompare(b.name, undefined, {
                             sensitivity: "base",
-                          }),
-                        )
+                          });
+                        })
                         .map((profile) => (
                           <Card
                             key={profile._id}

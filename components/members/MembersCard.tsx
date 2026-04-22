@@ -12,8 +12,8 @@ interface CardProps {
   isAdmin?: boolean;
   onEdit?: () => void;
   onDelete?: () => void;
-  isFlipped?:boolean;
-  onFlip?:()=>void;
+  isFlipped?: boolean;
+  onFlip?: () => void;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = ({
   onEdit,
   onDelete,
   isFlipped,
-  onFlip
+  onFlip,
 }) => {
   const isFlipEnabled = !!imageUrl;
 
@@ -92,7 +92,7 @@ const Card: React.FC<CardProps> = ({
         className={`
           relative transition-all duration-700 transform-3d w-full
           ${isFlipEnabled && isFlipped ? "rotate-y-180" : ""}
-          hover:shadow-[0_0_20px_theme('colors.pbgreen')] 
+          hover:shadow-[0_0_20px_var(--color-pbgreen)] 
           hover:border-pbgreen/40 rounded-3xl
         `}
       >
@@ -109,7 +109,7 @@ const Card: React.FC<CardProps> = ({
                 src={imageUrl}
                 alt={name}
                 fill
-                className="rounded-2xl object-cover object-center grayscale-70"
+                className="rounded-2xl object-cover object-center"
               />
             </div>
           )}
