@@ -6,6 +6,7 @@ import { Lexend } from "next/font/google";
 import Footer from "@/components/ui/Footer";
 import { cookies } from "next/headers";
 import verifyAuth from "@/lib/verifyAuth";
+import ico from "@/public/favicon.ico";
 
 const lexand = Lexend({
   subsets: ["latin"],
@@ -16,6 +17,9 @@ export const metadata: Metadata = {
   title: "Point Blank",
   description:
     "Point Blank is a student-run tech community. We are a group of tech enthusiasts who love to learn and grow together.",
+  icons: {
+    icon: ico.src,
+  },
 };
 
 export default async function RootLayout({

@@ -39,7 +39,7 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="bg-pbgray text-white pt-14 pb-8 px-6">
-      <div className="max-w-5xl mx-auto flex flex-col items-center gap-7">
+      <div className="max-w-8xl mx-auto flex flex-col items-center gap-7">
         {/* Logo */}
         <Link
           href="/"

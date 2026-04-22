@@ -69,7 +69,10 @@ const StickyCard = ({
   const container = useRef<HTMLDivElement>(null);
   const scale = useTransform(progress, range, [1, targetScale]);
   const blurRange: [number, number] = [range[0] + 1 / cards.length, 1];
-  const blurAmount = useTransform(progress, isLast ? range : blurRange, [0, isLast ? 0 : 5]);
+  const blurAmount = useTransform(progress, isLast ? range : blurRange, [
+    0,
+    isLast ? 0 : 5,
+  ]);
   const blur = useTransform(blurAmount, (v) => `blur(${v}px)`);
 
   const isLCP = card.image === bored;
@@ -79,7 +82,7 @@ const StickyCard = ({
       <Image
         src={card.image}
         alt=""
-        className="inset-0 w-full h-full object-cover grayscale"
+        className="inset-0 w-full h-full object-cover grayscale-70"
         loading={isLCP ? "eager" : "lazy"}
         draggable={false}
       />
@@ -102,31 +105,13 @@ const StickyCard = ({
       ref={container}
       className="sticky top-0 flex items-center justify-center h-screen"
     >
-      <div
-        className="absolute top-4 right-4 w-16 h-16 opacity-30 pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, #4ade80 1px, transparent 1px)",
-          backgroundSize: "6px 6px",
-        }}
-      />
-
-      <div
-        className="absolute bottom-4 left-4 w-16 h-16 opacity-30 pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, #4ade80 1px, transparent 1px)",
-          backgroundSize: "6px 6px",
-        }}
-      />
-
       <motion.div
         style={{
           scale,
           filter: blur,
           top: `calc(-5vh + ${i * 24}px)`,
         }}
-        className="relative w-full max-w-5xl mx-4 sm:mx-8 bg-pbcard rounded-3xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-8xl mx-4 sm:mx-8 bg-pbgray rounded-3xl overflow-hidden shadow-2xl"
       >
         <div
           className={`flex flex-col ${
@@ -156,7 +141,7 @@ export const CardStack = () => {
       <div
         ref={container}
         style={{ height: `${(cards.length + 1) * 100}vh` }}
-        className="relative w-full bg-pbgray"
+        className="relative w-full bg-pbpages"
       >
         {cards.map((card, i) => {
           const targetScale = Math.max(0.75, 1 - (cards.length - i - 1) * 0.08);

@@ -5,15 +5,16 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --max-width-8xl: 1440px;
   --color-pbgreen: #37ff00;
   --color-pbgray: #1c1c1c;
   --color-pbdark: #0d0d0d;
   --color-pbcard: #141414;
   --color-pbsurface: #191919;
   --color-pbpages: #111111;
-  --color-pbtext: #B3B3B3;
+  --color-pbtext: #b3b3b3;
   --color-pbmuted: #8e8e93;
-  --color-pbdarkgray: #1A1A1A;
+  --color-pbdarkgray: #1a1a1a;
   --color-pbborder: #262626;
 }
 

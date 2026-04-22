@@ -4,7 +4,6 @@ import { serializeId } from "@/lib/utils";
 
 export const metadata = {
   title: "Members",
-  description: "Members page",
 };
 export default async function Events() {
   const req = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/members`);

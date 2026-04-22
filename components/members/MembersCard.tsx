@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
 import { LinkedIn } from "@/components/Icons";
 
 interface CardProps {
@@ -30,17 +29,17 @@ const Card: React.FC<CardProps> = ({
   isFlipped,
   onFlip
 }) => {
-
   const isFlipEnabled = !!imageUrl;
 
   return (
     <div
-      className={`relative touch-manipulation w-full ${
+      className={`relative touch-manipulation w-full group ${
         isFlipEnabled ? "perspective-[1000px] cursor-pointer" : ""
       }`}
-     onClick={() => isFlipEnabled && onFlip?.()}>
+      onClick={() => isFlipEnabled && onFlip?.()}
+    >
       {isAdmin && (
-        <div className="absolute top-2 right-2 z-10 flex gap-1.5">
+        <div className="absolute top-2 right-2 z-30 flex gap-1.5">
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -90,15 +89,18 @@ const Card: React.FC<CardProps> = ({
         </div>
       )}
       <div
-        className={`relative transition-all duration-700 transform-3d ${
-          isFlipEnabled && isFlipped ? "transform-[rotateY(180deg)]" : ""
-        }`}
+        className={`
+          relative transition-all duration-700 transform-3d w-full
+          ${isFlipEnabled && isFlipped ? "rotate-y-180" : ""}
+          hover:shadow-[0_0_20px_theme('colors.pbgreen')] 
+          hover:border-pbgreen/40 rounded-3xl
+        `}
       >
         <div
           className={`
-            ${isFlipEnabled ? "backface-hidden" : ""}
-            flex flex-col items-center
+            relative flex flex-col items-center backface-hidden
             w-full rounded-3xl border border-pbborder bg-pbpages p-3
+            z-2
           `}
         >
           {imageUrl && (
@@ -107,7 +109,7 @@ const Card: React.FC<CardProps> = ({
                 src={imageUrl}
                 alt={name}
                 fill
-                className="rounded-2xl object-cover object-center grayscale-[70]"
+                className="rounded-2xl object-cover object-center grayscale-70"
               />
             </div>
           )}
@@ -117,9 +119,7 @@ const Card: React.FC<CardProps> = ({
                 {name}
               </span>
               {!isFlipEnabled && (
-                <p
-                  className={`text-pbtext text-lexend font-light text-center text-lg sm:text-lg leading-[1.4] h-7`}
-                >
+                <p className="text-pbtext text-lexend font-light text-center text-lg sm:text-lg leading-[1.4] h-7">
                   {role}
                 </p>
               )}
@@ -130,11 +130,9 @@ const Card: React.FC<CardProps> = ({
         {isFlipEnabled && (
           <div
             className={`
-              absolute inset-0 w-full h-full backface-hidden transform-[rotateY(180deg)]  
-              max-w-75 sm:max-w-85 md:max-w-90 lg:max-w-95 xl:max-w-103.25
-              mx-auto
-              rounded-[40px] border border-pbgreen bg-pbpages p-4 sm:p-5 md:p-6
-              flex flex-col items-center justify-center text-center
+              absolute inset-0 w-full h-full backface-hidden rotate-y-180
+              rounded-3xl border border-pbgreen bg-pbpages p-4 sm:p-5 md:p-6
+              flex flex-col items-center justify-center text-center z-1
             `}
           >
             <h3 className="text-pbgreen text-xl sm:text-2xl font-medium mb-2">
