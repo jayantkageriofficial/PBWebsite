@@ -1,24 +1,24 @@
+import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
-import {
-  DevOps,
-  Flutter,
-  ICPC,
-  IOT,
-  Kaggle,
-  ML,
-  OpenSource,
-  ReactIcon,
-} from "@/components/Icons";
+
+import devopsIcon from "@/public/images/icons/devops.webp";
+import iotIcon from "@/public/images/icons/iot.webp";
+import kaggleIcon from "@/public/images/icons/kaggle.webp";
+import aimlIcon from "@/public/images/icons/aiml.webp";
+import opensourceIcon from "@/public/images/icons/opensource.webp";
+import reactIcon from "@/public/images/icons/react.webp";
+import acmIcon from "@/public/images/icons/acm-icpc.webp";
+import flutterIcon from "@/public/images/icons/flutter.webp";
 
 const domains = [
-  { name: "DevOps", Icon: DevOps },
-  { name: "IOT-ML", Icon: IOT },
-  { name: "Kaggle", Icon: Kaggle },
-  { name: "ML-Research", Icon: ML },
-  { name: "Open Source Hackathon", Icon: OpenSource },
-  { name: "React Development", Icon: ReactIcon },
-  { name: "ACM - ICPC", Icon: ICPC },
-  { name: "Flutter Development", Icon: Flutter },
+  { name: "DevOps", icon: devopsIcon },
+  { name: "IOT-ML", icon: iotIcon },
+  { name: "Kaggle", icon: kaggleIcon },
+  { name: "ML-Research", icon: aimlIcon },
+  { name: "Open Source Hackathon", icon: opensourceIcon },
+  { name: "React Development", icon: reactIcon },
+  { name: "ACM - ICPC", icon: acmIcon },
+  { name: "Flutter Development", icon: flutterIcon },
 ];
 
 export default function DomainsSection() {
@@ -54,14 +54,15 @@ export default function DomainsSection() {
 
         <div className="bg-pbdarkgray p-8">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {domains.map(({ name, Icon }, i) => (
+            {domains.map(({ name, icon }, i) => (
               <FadeIn key={i} delay={(i % 4) * 0.1} className="flex">
                 <div className="flex flex-col items-center justify-center py-8 px-6 gap-3 z-10 w-full bg-pbcard border-white/16 border rounded-2xl transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.15)]">
                   <div className="w-17.5 h-17.5 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(55,255,0,0.05)_0%,rgba(55,255,0,0)_100%)]">
                     <div className="w-13.5 h-13.5 rounded-full p-3 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]">
-                      <Icon
-                        className="w-7.5 h-7.5 text-white"
-                        strokeWidth={1.5}
+                      <Image
+                        src={icon}
+                        alt={name}
+                        className="w-7.5 h-7.5 object-contain rounded-full"
                       />
                     </div>
                   </div>
