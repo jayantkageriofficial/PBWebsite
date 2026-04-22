@@ -170,21 +170,23 @@ export default function Home() {
         </FadeIn>
 
         <div className="relative max-w-8xl mx-auto rounded-3xl overflow-hidden">
-          {/* Corner dot gradients */}
-          {[
-            "top-0 left-0 [mask-image:radial-gradient(ellipse_at_top_left,black_30%,transparent_70%)]",
-            "bottom-0 right-0 [mask-image:radial-gradient(ellipse_at_bottom_right,black_30%,transparent_70%)]",
-          ].map((pos, i) => (
-            <div
-              key={i}
-              className={`absolute ${pos} w-40 h-40 opacity-40 pointer-events-none`}
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle, var(--color-pbgreen) 1px, transparent 1px)",
-                backgroundSize: "8px 8px",
-              }}
-            />
-          ))}
+          {/* Dotted Background */}
+          <div
+            className="absolute translate-y-[50%] translate-x-[50%] right-0 bottom-0 w-170 h-200 z-0 pointer-events-none
+            bg-[radial-gradient(circle,rgba(55,255,0,0.6)_1px,transparent_2px)]
+            bg-size-[11px_11px]
+            mask-[radial-gradient(circle,transparent_15%,black_30%,transparent_50%)]
+            [-webkit-mask-image:radial-gradient(circle,transparent_15%,black_30%,transparent_50%)]"
+          />
+
+          <div
+            className="absolute translate-y-[-50%] translate-x-[-50%] left-0 top-0 w-170 h-200 z-0 pointer-events-none
+            bg-[radial-gradient(circle,rgba(55,255,0,0.6)_1px,transparent_2px)]
+            bg-size-[11px_11px]
+            mask-[radial-gradient(circle,transparent_15%,black_30%,transparent_50%)]
+            [-webkit-mask-image:radial-gradient(circle,transparent_15%,black_30%,transparent_50%)]"
+          />
+
           <div className="bg-pbdarkgray p-8">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
