@@ -129,7 +129,7 @@ const StickyCard = ({
   );
 };
 
-export const CardStack = () => {
+export default function CardStack() {
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -137,27 +137,32 @@ export const CardStack = () => {
   });
 
   return (
-    <ReactLenis root>
-      <div
-        ref={container}
-        style={{ height: `${(cards.length + 1) * 100}vh` }}
-        className="relative w-full bg-pbpages"
-      >
-        {cards.map((card, i) => {
-          const targetScale = Math.max(0.75, 1 - (cards.length - i - 1) * 0.08);
-          return (
-            <StickyCard
-              key={i}
-              i={i}
-              card={card}
-              progress={scrollYProgress}
-              range={[i / cards.length, 1]}
-              targetScale={targetScale}
-              isLast={i === cards.length - 1}
-            />
-          );
-        })}
-      </div>
-    </ReactLenis>
+    <section id="cards">
+      <ReactLenis root>
+        <div
+          ref={container}
+          style={{ height: `${(cards.length + 1) * 100}vh` }}
+          className="relative w-full bg-pbpages"
+        >
+          {cards.map((card, i) => {
+            const targetScale = Math.max(
+              0.75,
+              1 - (cards.length - i - 1) * 0.08,
+            );
+            return (
+              <StickyCard
+                key={i}
+                i={i}
+                card={card}
+                progress={scrollYProgress}
+                range={[i / cards.length, 1]}
+                targetScale={targetScale}
+                isLast={i === cards.length - 1}
+              />
+            );
+          })}
+        </div>
+      </ReactLenis>
+    </section>
   );
-};
+}

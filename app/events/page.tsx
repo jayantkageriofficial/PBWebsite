@@ -3,7 +3,7 @@ import Events from "@/components/events/Events";
 import ReviewMarquee from "@/components/events/ReviewMarquee";
 
 export const metadata: Metadata = {
-  title: "Members",
+  title: "Events",
 };
 
 export default async function EventsPage() {
