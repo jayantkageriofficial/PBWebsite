@@ -313,11 +313,7 @@ export default function Members(props: { members: Member[] }) {
                 content={
                   <div className="flex flex-col items-center space-y-6 w-full pt-4 pb-8 bg-pbpages">
                     <div
-                      className={`grid justify-items-center gap-y-12 gap-x-6 md:gap-x-8 lg:gap-x-10 w-full max-w-7xl mx-auto ${
-                        !heading.toLowerCase().includes("current leads")
-                          ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-                          : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-                      }`}
+                      className={`grid justify-items-center gap-y-12 gap-x-6 md:gap-x-8 lg:gap-x-10 w-full max-w-7xl mx-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`}
                     >
                       {grouped[heading]
                         ?.slice()
