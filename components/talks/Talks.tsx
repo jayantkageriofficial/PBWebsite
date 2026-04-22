@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useAuthStore } from "@/lib/store/auth";
 import {
   Dialog,
@@ -54,12 +54,12 @@ const TEXT_FIELDS: {
   type: string;
   required?: boolean;
 }[] = [
-  { label: "Title", key: "title", type: "text", required: true },
-  { label: "Description", key: "description", type: "text", required: true },
-  { label: "Venue / Event Name", key: "name", type: "text", required: true },
-  { label: "Speakers", key: "speakers", type: "text", required: true },
-  { label: "Date", key: "date", type: "date", required: true },
-];
+    { label: "Title", key: "title", type: "text", required: true },
+    { label: "Description", key: "description", type: "text", required: true },
+    { label: "Venue / Event Name", key: "name", type: "text", required: true },
+    { label: "Speakers", key: "speakers", type: "text", required: true },
+    { label: "Date", key: "date", type: "date", required: true },
+  ];
 
 const TABS: TabType[] = ["all", "conference", "talks", "other"];
 
@@ -282,11 +282,10 @@ export default function Talks(props: { talks: Talk[] }) {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-sm md:text-base uppercase cursor-pointer ${
-                activeTab === tab
-                  ? "bg-pbgreen text-black"
-                  : "bg-white/5 text-white/60"
-              }`}
+              className={`px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-sm md:text-base uppercase cursor-pointer ${activeTab === tab
+                ? "bg-pbgreen text-black"
+                : "bg-white/5 text-white/60"
+                }`}
             >
               {tab === "all" ? "All" : tab}
             </button>
@@ -335,13 +334,41 @@ export default function Talks(props: { talks: Talk[] }) {
                     <h2 className="text-pbgreen font-medium text-2xl md:text-3xl lg:text-3xl leading-snug mb-2 max-w-2xl text-left wrap-break-word">
                       {talk.title}
                     </h2>
-                    <p className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
-                      {expanded === String(talk._id)
-                        ? talk.description
-                        : talk.description.length > 140
-                          ? talk.description.slice(0, 140) + "..."
-                          : talk.description}
-                    </p>
+                    <div className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
+                      <p>
+                        {talk.description.slice(0, 140)}
+
+                        <AnimatePresence>
+                          {expanded === String(talk._id) && (
+                            <motion.span
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.4 }}
+                            >
+                              {talk.description.slice(140)}
+                            </motion.span>
+                          )}
+                        </AnimatePresence>
+
+                        {expanded !== String(talk._id) && "..."}
+                      </p>
+
+                      <button
+                        className="mt-3 bg-pbsurface py-1.5 px-3 md:px-3 md:py-2 text-xs md:text-sm text-white rounded-xl cursor-pointer border border-pbgreen"
+                        onClick={() =>
+                          setExpanded(
+                            expanded === String(talk._id)
+                              ? null
+                              : String(talk._id)
+                          )
+                        }
+                      >
+                        {expanded === String(talk._id)
+                          ? "Read Less"
+                          : "Read More"}
+                      </button>
+                    </div>
                   </div>
 
                   <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-3 ">
@@ -355,20 +382,7 @@ export default function Talks(props: { talks: Talk[] }) {
                           year: "numeric",
                         })}
                       </span>
-                      <button
-                        className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl cursor-pointer border border-pbgreen"
-                        onClick={() =>
-                          setExpanded(
-                            expanded === String(talk._id)
-                              ? null
-                              : String(talk._id),
-                          )
-                        }
-                      >
-                        {expanded === String(talk._id)
-                          ? "Read Less"
-                          : "Read More"}
-                      </button>
+
                     </div>
                   </div>
 
