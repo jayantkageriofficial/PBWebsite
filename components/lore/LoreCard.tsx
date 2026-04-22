@@ -152,7 +152,7 @@ export default function LoreCard({
                   src={src}
                   alt={`${location} ${idx + 1}`}
                   fill
-                  className={`w-full h-full object-cover grayscale-70 transition-opacity duration-700 ease-in-out ${
+                  className={`w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
                     idx === currentImg ? "opacity-100" : "opacity-0"
                   }`}
                   priority={idx === 0}

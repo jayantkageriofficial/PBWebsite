@@ -320,7 +320,7 @@ export default function Talks(props: { talks: Talk[] }) {
                         alt={talk.title}
                         width={600}
                         height={400}
-                        className="object-cover rounded-xl w-full h-full grayscale-70"
+                        className="object-cover rounded-xl w-full h-full "
                       />
                     </div>
                   )}
