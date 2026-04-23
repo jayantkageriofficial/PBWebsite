@@ -154,7 +154,7 @@ export default function EventCard({
           <div className="text-xs md:text-sm text-white/80">
             <strong>Location:</strong> {location || "TBA"}
           </div>
-          <p className="mt-2 text-xs md:text-sm leading-relaxed text-white/60 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-pbborder [&::-webkit-scrollbar-thumb]:bg-pbgreen [&::-webkit-scrollbar-thumb]:rounded-full">
+          <p className="mt-2 text-xs md:text-sm leading-relaxed text-white/60 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-pbtext/5 [&::-webkit-scrollbar-track]:rounded-3xl [&::-webkit-scrollbar-thumb]:bg-pbtext/25 [&::-webkit-scrollbar-thumb]:rounded-full">
             {description}
           </p>
 
