@@ -4,63 +4,53 @@ import ReviewCard from "@/components/events/ReviewCard";
 
 const reviews = [
   {
-    name: "Arjun Mehta",
-    review:
-      "PBCTF 4.0 was an absolute blast! The Jeopardy style challenges were perfectly balanced for both beginners and experienced players. Learned so much in just one day.",
+    name: "Arjun",
+    review: "PBCTF 4.0 was an absolute blast! The challenges were perfectly balanced for beginners and pros alike.",
     rating: 5,
   },
   {
-    name: "Sneha Kulkarni",
-    review:
-      "Attended the IICT 2025 workshop and it genuinely changed how I think about compilers. The speakers were top notch and the hands on sessions were incredibly well organized.",
+    name: "Sneha",
+    review: "IICT 2025 genuinely changed how I think about compilers. Super well organized and insightful.",
     rating: 5,
   },
   {
-    name: "Rahul Nair",
-    review:
-      "PB Hustle is the best thing that happened to our college coding culture. Weekly contests keep you sharp and the problems are always thoughtfully curated. Highly recommend.",
+    name: "Rahul",
+    review: "PB Hustle keeps you sharp every week. Best thing to happen to our college coding culture.",
     rating: 5,
   },
   {
-    name: "Divya Ramesh",
-    review:
-      "The SIH Internal Round was intense but so well managed by the Point Blank team. The problem statements were challenging and the mentors were always available to guide us.",
-    rating: 4,
-  },
-  {
-    name: "Karthik Subramaniam",
-    review:
-      "Zenith was unlike any event I have attended before. The energy in the room was electric and the competitive atmosphere pushed me to perform beyond what I thought I was capable of.",
+    name: "Divya",
+    review: "SIH Internal Round was brilliantly managed. Mentors were always there to guide and support us.",
     rating: 5,
   },
   {
-    name: "Ananya Iyer",
-    review:
-      "PB CTF 3.0 was my first ever CTF and Point Blank made it so welcoming for newcomers. The cryptography and steganography challenges were mind bending in the best way possible.",
+    name: "Karthik",
+    review: "Zenith had an electric atmosphere. It pushed me beyond what I thought I was capable of.",
     rating: 5,
   },
   {
-    name: "Vikram Bhat",
-    review:
-      "IICT 2024 had some of the most insightful talks on compiler technology I have ever seen at a college level event. Point Blank clearly puts in a lot of effort into quality.",
+    name: "Ananya",
+    review: "PB CTF 3.0 was my first CTF and Point Blank made it so welcoming. Mind bending challenges!",
     rating: 5,
   },
   {
-    name: "Pooja Venkatesh",
-    review:
-      "The Recruitment Registration session was informative but felt a bit rushed. Would have loved more time for Q&A. Overall still a good initiative by the club.",
-    rating: 3,
-  },
-  {
-    name: "Rohan Desai",
-    review:
-      "PB CTF 2.0 at Bangalore was phenomenal. The web exploitation challenges were brutal and the prize pool made the competition even more exciting. Cannot wait for the next one.",
+    name: "Vikram",
+    review: "IICT 2024 had the best compiler tech talks I have seen at any college event. Truly impressive.",
     rating: 5,
   },
   {
-    name: "Lakshmi Prasad",
-    review:
-      "Point Blank consistently delivers world class events for a college club. PBCTF and PB Hustle have genuinely improved my problem solving skills over the past year. Truly grateful.",
+    name: "Pooja",
+    review: "The Recruitment session was super helpful and well structured. Great initiative by Point Blank!",
+    rating: 5,
+  },
+  {
+    name: "Rohan",
+    review: "PB CTF 2.0 in Bangalore was phenomenal. The web exploitation rounds were brutal and exciting.",
+    rating: 5,
+  },
+  {
+    name: "Lakshmi",
+    review: "Point Blank consistently delivers. PBCTF and PB Hustle have genuinely leveled up my skills.",
     rating: 5,
   },
 ];
