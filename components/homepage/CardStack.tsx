@@ -86,6 +86,16 @@ const StickyCard = ({
         loading={isLCP ? "eager" : "lazy"}
         draggable={false}
       />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: "url('/images/paperBack.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          mixBlendMode: "multiply",
+          opacity: 0.3,
+        }}
+      />
     </div>
   );
 
