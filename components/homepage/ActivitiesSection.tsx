@@ -70,7 +70,7 @@ export default function ActivitiesSection() {
                 <Image
                   src={img}
                   alt={title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover grayscale-[70]"
                   draggable={false}
                 />
               </div>
