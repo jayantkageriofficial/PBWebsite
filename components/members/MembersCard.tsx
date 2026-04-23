@@ -90,10 +90,9 @@ const Card: React.FC<CardProps> = ({
       )}
       <div
         className={`
-          relative transition-all duration-700 transform-3d w-full
-          ${isFlipEnabled && isFlipped ? "rotate-y-180" : ""}
-          hover:shadow-[0_0_20px_var(--color-pbgreen)] 
-          hover:border-pbgreen/40 rounded-3xl
+          relative transition-transform duration-700 transform-3d w-full
+          ${isFlipEnabled && isFlipped ? "rotate-y-180" : ""} 
+          hover:border-pbgreen hover:border rounded-3xl
         `}
       >
         <div
@@ -101,7 +100,7 @@ const Card: React.FC<CardProps> = ({
             relative flex flex-col items-center backface-hidden
             w-full rounded-3xl border border-pbborder bg-pbpages p-3
             z-2
-          `}
+          `}  
         >
           {imageUrl && (
             <div className="relative w-full aspect-square rounded-2xl overflow-hidden shrink-0">
