@@ -457,6 +457,7 @@ export default function Members(props: { members: Member[] }) {
                     fill
                     style={{ objectFit: "cover" }}
                     className="rounded-xl"
+                    draggable={false}
                   />
                   <button
                     type="button"

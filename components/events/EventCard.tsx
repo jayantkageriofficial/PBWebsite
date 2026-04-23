@@ -104,6 +104,7 @@ export default function EventCard({
                 alt={title}
                 fill
                 className="object-cover select-none"
+                draggable={false}
               />
             )}
           </div>

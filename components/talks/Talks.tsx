@@ -322,6 +322,7 @@ export default function Talks(props: { talks: Talk[] }) {
                         width={600}
                         height={400}
                         className="object-cover rounded-xl w-full h-full "
+                        draggable={false}
                       />
                     </div>
                   )}
@@ -493,6 +494,7 @@ export default function Talks(props: { talks: Talk[] }) {
                         fill
                         style={{ objectFit: "cover" }}
                         className="rounded-xl"
+                        draggable={false}
                       />
                       <button
                         type="button"

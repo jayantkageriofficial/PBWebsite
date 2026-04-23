@@ -110,6 +110,7 @@ const Card: React.FC<CardProps> = ({
                 alt={name}
                 fill
                 className="rounded-2xl object-cover object-center"
+                draggable={false}
               />
             </div>
           )}
