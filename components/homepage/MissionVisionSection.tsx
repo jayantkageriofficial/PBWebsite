@@ -45,9 +45,9 @@ export default function MissionVisionSection() {
   return (
     <section
       id="mission-vision"
-      className="bg-pbpages text-white overflow-hidden px-3"
+      className="bg-pbpages text-white overflow-hidden px-4 sm:px-10 lg:px-20"
     >
-      <div className="max-w-8xl mx-auto">
+      <div>
         <FadeIn className="pt-14">
           <h2 className="text-3xl sm:text-4xl font-semibold text-pbgreen">
             Our Mission, together.
