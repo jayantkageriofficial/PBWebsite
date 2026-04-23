@@ -67,7 +67,7 @@ export default function MissionVisionSection() {
           </FadeIn>
 
           <FadeIn
-            delay={1}
+            delay={0.25}
             className="w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-l-2 border-pbgreen pt-6 lg:pt-0 lg:pl-12"
           >
             <h3 className="text-3xl sm:text-4xl mb-4 sm:mb-6">Mission</h3>
