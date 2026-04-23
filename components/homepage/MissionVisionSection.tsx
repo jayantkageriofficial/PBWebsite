@@ -61,7 +61,7 @@ export default function MissionVisionSection() {
         </FadeIn>
 
         {/* Mission - Image Left */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center py-14 sm:pb-15 sm:pt-20">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center py-14 xl:pb-0 sm:pb-15 sm:pt-20">
           <FadeIn delay={0.10} className="w-full sm:w-auto shrink-0 mx-auto lg:mx-0">
             <ImageCard alt="Mission" src={missionImg} />
           </FadeIn>
@@ -84,7 +84,7 @@ export default function MissionVisionSection() {
         </div>
 
         {/* Vision - Image Right */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center pb-14 sm:pb-20">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center pb-14 sm:pb-20 xl:-mt-12">
           <FadeIn className="order-2 lg:order-1 w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-r-2 border-pbgreen pt-6 lg:pt-0 lg:pr-12">
             <h3 className="text-3xl sm:text-4xl mb-4 sm:mb-6">Vision</h3>
             <p className="text-white/70 text-sm sm:text-base leading-relaxed">
