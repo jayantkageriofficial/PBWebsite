@@ -25,7 +25,7 @@ export default function DomainsSection() {
   return (
     <section
       id="domains"
-      className="bg-pbpages text-white py-20 px-4 sm:px-10 lg:px-20"
+      className="bg-pbpages text-white pt-20 px-4 sm:px-10 lg:px-20"
     >
       <FadeIn className="text-center mb-12">
         <h2 className="text-4xl font-bold text-pbgreen mb-3">

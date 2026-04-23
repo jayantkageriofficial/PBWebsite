@@ -4,63 +4,63 @@ import ReviewCard from "@/components/events/ReviewCard";
 
 const reviews = [
   {
-    name: "First name",
+    name: "Arjun Mehta",
     review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "PBCTF 4.0 was an absolute blast! The Jeopardy style challenges were perfectly balanced for both beginners and experienced players. Learned so much in just one day.",
     rating: 5,
   },
   {
-    name: "First name",
+    name: "Sneha Kulkarni",
     review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Attended the IICT 2025 workshop and it genuinely changed how I think about compilers. The speakers were top notch and the hands on sessions were incredibly well organized.",
     rating: 5,
   },
   {
-    name: "First name",
+    name: "Rahul Nair",
     review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "PB Hustle is the best thing that happened to our college coding culture. Weekly contests keep you sharp and the problems are always thoughtfully curated. Highly recommend.",
     rating: 5,
   },
   {
-    name: "First name",
+    name: "Divya Ramesh",
     review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    rating: 5,
-  },
-  {
-    name: "First name",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "The SIH Internal Round was intense but so well managed by the Point Blank team. The problem statements were challenging and the mentors were always available to guide us.",
     rating: 4,
   },
   {
-    name: "First name",
+    name: "Karthik Subramaniam",
     review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Zenith was unlike any event I have attended before. The energy in the room was electric and the competitive atmosphere pushed me to perform beyond what I thought I was capable of.",
     rating: 5,
   },
   {
-    name: "First name",
+    name: "Ananya Iyer",
     review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "PB CTF 3.0 was my first ever CTF and Point Blank made it so welcoming for newcomers. The cryptography and steganography challenges were mind bending in the best way possible.",
     rating: 5,
   },
   {
-    name: "First name",
+    name: "Vikram Bhat",
     review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "IICT 2024 had some of the most insightful talks on compiler technology I have ever seen at a college level event. Point Blank clearly puts in a lot of effort into quality.",
     rating: 5,
   },
   {
-    name: "First name",
+    name: "Pooja Venkatesh",
     review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "The Recruitment Registration session was informative but felt a bit rushed. Would have loved more time for Q&A. Overall still a good initiative by the club.",
     rating: 3,
   },
   {
-    name: "First name",
+    name: "Rohan Desai",
     review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "PB CTF 2.0 at Bangalore was phenomenal. The web exploitation challenges were brutal and the prize pool made the competition even more exciting. Cannot wait for the next one.",
+    rating: 5,
+  },
+  {
+    name: "Lakshmi Prasad",
+    review:
+      "Point Blank consistently delivers world class events for a college club. PBCTF and PB Hustle have genuinely improved my problem solving skills over the past year. Truly grateful.",
     rating: 5,
   },
 ];

@@ -123,9 +123,6 @@ const StickyCard = ({
         }}
         className="relative w-full max-w-8xl mx-4 sm:mx-8 bg-pbgray rounded-3xl overflow-hidden shadow-2xl"
       >
-        <div className="absolute translate-y-[-50%] translate-x-[-50%] left-0 top-0 w-170 h-200 z-0 pointer-events-none bg-[radial-gradient(circle,rgba(55,255,0,0.6)_1px,transparent_2px)] bg-size-[11px_11px] mask-[radial-gradient(circle,transparent_15%,black_30%,transparent_50%)] [-webkit-mask-image:radial-gradient(circle,transparent_15%,black_30%,transparent_50%)]"></div>
-
-        <div className="absolute translate-y-[-50%] translate-x-[50%] right-0 top-0 w-170 h-200 z-0 pointer-events-none bg-[radial-gradient(circle,rgba(55,255,0,0.6)_1px,transparent_2px)] bg-size-[11px_11px] mask-[radial-gradient(circle,transparent_15%,black_30%,transparent_50%)] [-webkit-mask-image:radial-gradient(circle,transparent_15%,black_30%,transparent_50%)]"></div>
         <div
           className={`flex flex-col ${
             card.imagePosition === "left"
