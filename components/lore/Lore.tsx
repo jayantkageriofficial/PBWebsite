@@ -383,6 +383,7 @@ export default function Lore(props: { lores: LoreType[] }) {
                         fill
                         style={{ objectFit: "cover" }}
                         className="rounded-xl"
+                        draggable={false}
                       />
                       <button
                         type="button"

@@ -44,6 +44,7 @@ export function AchievementCard({
                 className="w-full h-full object-cover"
                 width={60}
                 height={60}
+                draggable={false}
               />
             ) : (
               initials
@@ -51,7 +52,7 @@ export function AchievementCard({
           </div>
 
           <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-[#FFB413] flex items-center justify-center text-xs border-2 border-pbgray p-0.5">
-            <Image src={badge} alt="badge" width={20} height={20} />
+            <Image src={badge} alt="badge" width={20} height={20} draggable={false} />
           </div>
         </div>
 

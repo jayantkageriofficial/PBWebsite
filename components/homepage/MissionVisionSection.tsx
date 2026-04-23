@@ -1,39 +1,69 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import FadeIn from "@/components/FadeIn";
-import mission from "@/public/images/mission.webp";
-import vision from "@/public/images/vision.webp";
+import missionImg from "@/public/images/mission.webp";
+import visionImg from "@/public/images/vision.webp";
+import asphaltImg from "@/public/images/asphalt.png";
+import abstractDesignImg from "@/public/images/abstract-design.svg";
+
+function ImageCard({ alt, src }: { alt: string; src: StaticImageData }) {
+  return (
+    <div className="relative isolate overflow-hidden w-full sm:w-md lg:w-136.25 h-64 sm:h-96 lg:h-125 border border-pbborder rounded-[50px_50px_20px_20px]">
+      <Image
+        src={asphaltImg}
+        alt=""
+        aria-hidden
+        fill
+        className="object-cover pointer-events-none mix-blend-screen"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%)]" />
+      <Image
+        src={abstractDesignImg}
+        alt=""
+        aria-hidden
+        width={526}
+        height={500}
+        unoptimized
+        draggable={false}
+        className="absolute pointer-events-none opacity-30 left-[calc(50%-249.5px)] top-[calc(50%-264px)] transform-[matrix(0,-1,-1,0,0,0)]"
+      />
+      <div className="absolute inset-x-8 sm:inset-x-10 lg:inset-x-15 top-8 sm:top-10 lg:top-15 bottom-0 rounded-[50px_50px_0px_0px] overflow-hidden">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover object-center"
+          loading="eager"
+          draggable={false}
+        />
+      </div>
+    </div>
+  );
+}
 
 export default function MissionVisionSection() {
   return (
     <section
       id="mission-vision"
-      className="bg-pbpages text-white overflow-hidden px-3"
+      className="bg-pbpages text-white overflow-hidden px-4 sm:px-10 lg:px-20"
     >
-      <div className="max-w-8xl mx-auto">
+      <div>
         <FadeIn className="pt-14">
           <h2 className="text-3xl sm:text-4xl font-semibold text-pbgreen">
             Our Mission, together.
           </h2>
           <p className="pt-3 text-white/70 max-w-3xl text-sm sm:text-base leading-relaxed">
             In Point Blank, we believe in the concept of no spoon-feeding. We
-            are here to help you learn and grow together. We are a community
-            of coders, hackers, developers, and tech enthusiasts passionate
-            about technology and learning.
+            are here to help you learn and grow together. We are a community of
+            coders, hackers, developers, and tech enthusiasts passionate about
+            technology and learning.
           </p>
         </FadeIn>
 
         {/* Mission - Image Left */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center py-14 sm:py-20">
-          <FadeIn className="relative w-full lg:w-1/2 shrink-0">
-            <div className="relative w-full max-w-140 mx-auto lg:mx-0 aspect-4/3 sm:aspect-16/10 lg:aspect-5/4 rounded-4xl overflow-hidden">
-              <Image
-                src={mission}
-                alt="Mission"
-                className="absolute inset-0 w-full h-full object-cover"
-                loading="eager"
-                draggable={false}
-              />
-            </div>
+          <FadeIn className="w-full sm:w-auto shrink-0 mx-auto lg:mx-0">
+            <ImageCard alt="Mission" src={missionImg} />
           </FadeIn>
 
           <FadeIn
@@ -54,8 +84,8 @@ export default function MissionVisionSection() {
         </div>
 
         {/* Vision - Image Right */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center md:py-14 sm:py-20">
-          <FadeIn className="w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-r-2 border-pbgreen pt-6 lg:pt-0 lg:pr-12">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center py-14 sm:py-20">
+          <FadeIn className="order-2 lg:order-1 w-full lg:w-1/2 border-t-2 lg:border-t-0 lg:border-r-2 border-pbgreen pt-6 lg:pt-0 lg:pr-12">
             <h3 className="text-3xl sm:text-4xl mb-4 sm:mb-6">Vision</h3>
             <p className="text-white/70 text-sm sm:text-base leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
@@ -68,16 +98,11 @@ export default function MissionVisionSection() {
             </p>
           </FadeIn>
 
-          <FadeIn delay={0.15} className="relative w-full lg:w-1/2 shrink-0">
-            <div className="relative w-full max-w-140 mx-auto lg:ml-auto aspect-4/3 sm:aspect-16/10 lg:aspect-5/4 rounded-4xl overflow-hidden">
-              <Image
-                src={vision}
-                alt="Vision"
-                className="absolute inset-0 w-full h-full object-cover"
-                loading="eager"
-                draggable={false}
-              />
-            </div>
+          <FadeIn
+            delay={0.15}
+            className="order-1 lg:order-2 w-full sm:w-auto shrink-0 mx-auto lg:mx-0"
+          >
+            <ImageCard alt="Vision" src={visionImg} />
           </FadeIn>
         </div>
       </div>

@@ -161,6 +161,7 @@ export default function LoreCard({
                     }`}
                     priority={idx === 0}
                     sizes="w-full"
+                    draggable={false}
                   />
                 ))}
               </div>
