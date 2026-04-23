@@ -299,15 +299,15 @@ export default function Talks(props: { talks: Talk[] }) {
             <p className="text-gray-400 text-lg mt-8">No talks found.</p>
           )}
 
-          {filteredTalks.map((talk) => (
+          {filteredTalks.map((talk,idx) => (
             <motion.div
               key={String(talk._id)}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
-                duration: 0.55,
-                delay: 2.0,
+                duration: 0.25,
+                delay: idx === 0 ? 2 : 0.25,
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="bg-pbgray rounded-xl max-w-7xl mx-auto flex justify-center mb-6 px-2 md:px-6 lg:px-8"
