@@ -87,13 +87,13 @@ const StickyCard = ({
         draggable={false}
       />
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none grayscale-100"
         style={{
-          backgroundImage: "url('/images/paperBack.jpg')",
+          backgroundImage: "url('/images/paperBack.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          mixBlendMode: "multiply",
-          opacity: 0.3,
+          mixBlendMode: "overlay",
+          opacity: 1,
         }}
       />
     </div>
