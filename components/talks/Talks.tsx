@@ -54,12 +54,12 @@ const TEXT_FIELDS: {
   type: string;
   required?: boolean;
 }[] = [
-    { label: "Title", key: "title", type: "text", required: true },
-    { label: "Description", key: "description", type: "text", required: true },
-    { label: "Venue / Event Name", key: "name", type: "text", required: true },
-    { label: "Speakers", key: "speakers", type: "text", required: true },
-    { label: "Date", key: "date", type: "date", required: true },
-  ];
+  { label: "Title", key: "title", type: "text", required: true },
+  { label: "Description", key: "description", type: "text", required: true },
+  { label: "Venue / Event Name", key: "name", type: "text", required: true },
+  { label: "Speakers", key: "speakers", type: "text", required: true },
+  { label: "Date", key: "date", type: "date", required: true },
+];
 
 const TABS: TabType[] = ["all", "conference", "talks", "other"];
 
@@ -282,10 +282,11 @@ export default function Talks(props: { talks: Talk[] }) {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-sm md:text-base uppercase cursor-pointer ${activeTab === tab
-                ? "bg-pbgreen text-black"
-                : "bg-white/5 text-white/60"
-                }`}
+              className={`px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-sm md:text-base uppercase cursor-pointer ${
+                activeTab === tab
+                  ? "bg-pbgreen text-black"
+                  : "bg-white/5 text-white/60"
+              }`}
             >
               {tab === "all" ? "All" : tab}
             </button>
@@ -335,32 +336,41 @@ export default function Talks(props: { talks: Talk[] }) {
                       {talk.title}
                     </h2>
                     <div className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
-                      <p>
-                        {talk.description.slice(0, 140)}
+                      <span>{talk.description.slice(0, 140)}</span>
 
-                        <AnimatePresence>
-                          {expanded === String(talk._id) && (
-                            <motion.span
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: "auto" }}
-                              exit={{ opacity: 0, height: 0 }}
-                              transition={{ duration: 0.4 }}
-                            >
-                              {talk.description.slice(140)}
-                            </motion.span>
-                          )}
-                        </AnimatePresence>
+                      <AnimatePresence mode="wait">
+                        {expanded === String(talk._id) ? (
+                          <motion.div
+                            key="expanded"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.37, ease: "easeInOut" }}
+                            style={{ overflow: "hidden" }}
+                          >
+                            <p>{talk.description.slice(140)}</p>
+                          </motion.div>
+                        ) : (
+                          <motion.span
+                            key="collapsed"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            {talk.description.length > 140 && "..."}
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
 
-                        {expanded !== String(talk._id) && "..."}
-                      </p>
-
+                      <br />
                       <button
                         className="mt-3 bg-pbsurface py-1.5 px-3 md:px-3 md:py-2 text-xs md:text-sm text-white rounded-xl cursor-pointer border border-pbgreen"
                         onClick={() =>
                           setExpanded(
                             expanded === String(talk._id)
                               ? null
-                              : String(talk._id)
+                              : String(talk._id),
                           )
                         }
                       >
@@ -382,7 +392,6 @@ export default function Talks(props: { talks: Talk[] }) {
                           year: "numeric",
                         })}
                       </span>
-
                     </div>
                   </div>
 
