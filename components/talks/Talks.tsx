@@ -337,34 +337,15 @@ export default function Talks(props: { talks: Talk[] }) {
                       {talk.title}
                     </h2>
                     <div className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
-                      <span>{talk.description.slice(0, 140)}</span>
-
-                      <AnimatePresence mode="wait">
-                        {expanded === String(talk._id) ? (
-                          <motion.div
-                            key="expanded"
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.37, ease: "easeInOut" }}
-                            style={{ overflow: "hidden" }}
-                          >
-                            <p>{talk.description.slice(140)}</p>
-                          </motion.div>
-                        ) : (
-                          <motion.span
-                            key="collapsed"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            {talk.description.length > 140 && "..."}
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
-
-                      <br />
+                      <motion.div
+                        animate={{
+                          maxHeight: expanded === String(talk._id) ? 500 : 72,
+                        }}
+                        transition={{ duration: 0.53, ease: "easeInOut" }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        <p>{talk.description}</p>
+                      </motion.div>
                       <button
                         className="mt-3 bg-pbsurface py-1.5 px-3 md:px-3 md:py-2 text-xs md:text-sm text-white rounded-xl cursor-pointer border border-pbgreen"
                         onClick={() =>
