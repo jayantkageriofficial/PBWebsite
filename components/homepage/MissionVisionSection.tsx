@@ -62,7 +62,7 @@ export default function MissionVisionSection() {
 
         {/* Mission - Image Left */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center py-14 sm:py-20">
-          <FadeIn className="w-full sm:w-auto shrink-0 mx-auto lg:mx-0">
+          <FadeIn delay={0.10} className="w-full sm:w-auto shrink-0 mx-auto lg:mx-0">
             <ImageCard alt="Mission" src={missionImg} />
           </FadeIn>
 
