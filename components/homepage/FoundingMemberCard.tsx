@@ -37,7 +37,7 @@ export default function FoundingMemberCard({
               src={img}
               alt={name}
               fill
-              className="rounded-4xl object-cover object-top grayscale-[70]"
+              className="rounded-4xl object-cover object-top"
               draggable={false}
             />
           </div>

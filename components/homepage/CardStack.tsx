@@ -82,7 +82,7 @@ const StickyCard = ({
       <Image
         src={card.image}
         alt=""
-        className="inset-0 w-full h-full object-cover grayscale-[70]"
+        className="inset-0 w-full h-full object-cover"
         loading={isLCP ? "eager" : "lazy"}
         draggable={false}
       />

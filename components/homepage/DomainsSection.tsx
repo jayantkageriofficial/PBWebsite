@@ -62,7 +62,7 @@ export default function DomainsSection() {
                       <Image
                         src={icon}
                         alt={name}
-                        className="w-7.5 h-7.5 object-contain rounded-full grayscale-[70]"
+                        className="w-7.5 h-7.5 object-contain rounded-full"
                       />
                     </div>
                   </div>

@@ -32,7 +32,7 @@ function ImageCard({ alt, src }: { alt: string; src: StaticImageData }) {
           src={src}
           alt={alt}
           fill
-          className="object-cover object-center grayscale-[70]"
+          className="object-cover object-center"
           loading="eager"
           draggable={false}
         />
