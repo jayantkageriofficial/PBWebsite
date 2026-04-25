@@ -11,7 +11,7 @@ const DASHED_V =
 const CARD_BG =
   "bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)]";
 const CARD_HOVER =
-  "transition-all duration-300 border border-transparent hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)]";
+  "transition-all duration-300 border border-transparent hover:border-pbgreen";
 const ICON_OUTER =
   "w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]";
 const ICON_INNER =
