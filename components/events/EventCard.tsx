@@ -28,7 +28,7 @@ export default function EventCard({
 }) {
   return (
     <div
-      className="group relative w-full cursor-pointer"
+      className="group relative w-full h-full cursor-pointer"
       style={{ perspective: "1000px" }}
       onClick={onToggle}
     >
