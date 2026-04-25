@@ -340,7 +340,7 @@ export default function Talks(props: { talks: Talk[] }) {
                         animate={{
                           maxHeight: expanded === String(talk._id) ? 500 : 72,
                         }}
-                        transition={{ duration: 0.53, ease: "easeInOut" }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
                         style={{ overflow: "hidden" }}
                       >
                         <p>{talk.description}</p>
