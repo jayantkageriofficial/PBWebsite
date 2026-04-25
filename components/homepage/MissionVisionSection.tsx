@@ -55,7 +55,7 @@ export default function MissionVisionSection() {
             </h2>
           </FadeIn>
           <FadeIn x={-50} y={0} delay={0.1}>
-            <p className="pt-3 text-white/70 max-w-4xl text-sm sm:text-base leading-relaxed">
+            <p className="pt-3 text-white/70 max-w-270 text-sm sm:text-base leading-relaxed">
               In Point Blank, we believe in the concept of no spoon-feeding. We
               are here to help you learn and grow together. We are a community
               of coders, hackers, developers, and tech enthusiasts passionate
@@ -65,7 +65,7 @@ export default function MissionVisionSection() {
         </div>
 
         {/* Mission - Image Left */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center py-14 xl:pb-0 sm:pb-15 sm:pt-20">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center py-14 xl:pb-0 sm:pb-15 sm:pt-17">
           <FadeIn
             x={-50}
             y={0}
