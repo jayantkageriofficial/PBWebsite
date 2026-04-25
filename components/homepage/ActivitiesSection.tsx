@@ -58,15 +58,15 @@ export default function ActivitiesSection() {
       id="activities"
       className="bg-pbpages text-white px-4 sm:px-10 lg:px-20"
     >
-      <FadeIn className="text-center mt-12 mb-12">
+      <FadeIn className="text-center mt-22 mb-22">
         <h2 className="text-4xl font-bold text-pbgreen">Activities</h2>
       </FadeIn>
 
-      <div className="max-w-8xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {activities.map(({ title, tag, img, description }, i) => (
           <FadeIn key={i} delay={(i % 3) * 0.1} className="h-full">
-            <div className="h-full bg-pbdarkgray bg-cover bg-center rounded-3xl overflow-hidden border border-white/16 flex flex-col transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)]">
-              <div className="relative h-72 overflow-hidden">
+            <div className="h-full bg-pbdarkgray bg-cover bg-center rounded-b-2xl rounded-t-4xl overflow-hidden border border-white/16 flex flex-col transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)]">
+              <div className="relative h-72 overflow-hidden m-7 mb-3.1 rounded-b-2xl rounded-t-4xl">
                 <Image
                   src={img}
                   alt={title}
@@ -74,14 +74,14 @@ export default function ActivitiesSection() {
                   draggable={false}
                 />
               </div>
-              <div className="flex flex-col gap-2 flex-1 p-5">
+              <div className="flex flex-col gap-2 flex-1 p-5 pt-1 pl-11">
                 <div className="flex mb-3 mt-2 items-center gap-2 flex-wrap">
                   <h3 className="font-bold text-white text-base">{title}</h3>
                   <span className="text-pbgreen h-7 flex items-center text-xs border-2 border-pbborder p-2 rounded-2xl">
                     {tag}
                   </span>
                 </div>
-                <p className="text-white/70 text-sm leading-relaxed">
+                <p className="text-white/70 text-sm leading-relaxed ">
                   {description}
                 </p>
               </div>
