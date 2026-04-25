@@ -122,10 +122,8 @@ export default function EventCard({
             >
               {title}
             </span>
-            <span className="text-sm font-normal leading-normal text-white/65">
-              {description.length > 50
-                ? description.substring(0, 50) + "..."
-                : description}
+            <span className="text-sm font-normal leading-normal text-white/65 line-clamp-2">
+              {description}
             </span>
           </div>
         </div>
