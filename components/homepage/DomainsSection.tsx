@@ -25,7 +25,7 @@ export default function DomainsSection() {
   return (
     <section
       id="domains"
-      className="bg-pbpages text-white pt-20 px-4 sm:px-10 lg:px-20"
+      className="bg-pbpages text-white  px-4 sm:px-10 lg:px-20"
     >
       <FadeIn className="text-center mb-12">
         <h2 className="text-4xl font-bold text-pbgreen mb-3">
@@ -56,7 +56,7 @@ export default function DomainsSection() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {domains.map(({ name, icon }, i) => (
               <FadeIn key={i} delay={(i % 4) * 0.1} className="flex">
-                <div className="flex flex-col items-center justify-center py-8 px-6 gap-3 z-10 w-full bg-pbcard border-white/16 border rounded-2xl transition-all duration-300 hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.15)]">
+                <div className="flex flex-col items-center justify-center py-8 px-6 gap-3 z-10 w-full bg-pbcard border-white/16 border rounded-2xl transition-all duration-300 hover:border-pbgreen">
                   <div className="w-17.5 h-17.5 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(55,255,0,0.05)_0%,rgba(55,255,0,0)_100%)]">
                     <div className="w-13.5 h-13.5 rounded-full p-3 flex items-center justify-center bg-[linear-gradient(180deg,rgba(55,255,0,0.1)_-66.22%,rgba(55,255,0,0)_85.46%)]">
                       <Image
