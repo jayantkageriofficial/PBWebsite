@@ -224,7 +224,7 @@ export default function Talks(props: { talks: Talk[] }) {
 
   return (
     <section className="bg-pbblack rounded-xl text-white py-8 md:py-12 text-lexend-300 min-h-xl">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-12 text-center">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-10 lg:px-20 py-12 text-center">
         {/* Heading */}
         <div className="text-3xl md:text-5xl lg:text-6xl font-medium mb-6 px-4 md:px-10 flex flex-wrap justify-center gap-2">
           {phrases.map((phrase, idx) => (
@@ -309,12 +309,12 @@ export default function Talks(props: { talks: Talk[] }) {
                 delay: idx === 0 ? 2 : 0.25,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="bg-pbgray rounded-xl max-w-7xl mx-auto flex justify-center mb-6 px-2 md:px-6 lg:px-8"
+              className="bg-pbgray rounded-xl max-w-screen-2xl mx-auto flex justify-center mb-6 px-4 md:px-10 lg:px-6"
             >
               <div className="flex flex-col lg:flex-row items-start py-4 w-full">
                 <div className="flex flex-col items-center">
                   {talk.images[0] && (
-                    <div className="w-full max-w-full lg:w-150 aspect-3/2 overflow-hidden rounded-xl">
+                    <div className="w-full max-w-full lg:w-125 xl:w-150 aspect-3/2 overflow-hidden rounded-xl">
                       <Image
                         src={talk.images[0]}
                         alt={talk.title}
@@ -325,17 +325,17 @@ export default function Talks(props: { talks: Talk[] }) {
                       />
                     </div>
                   )}
-                  <span className="text-pbgreen text-light font-lexend-300 mt-3 bg-black/40 rounded-full px-3 p-3">
+                  <span className="text-pbgreen text-light font-lexend-300 mt-4 bg-black/40 rounded-full px-3 p-3">
                     {talk.speakers}
                   </span>
                 </div>
 
-                <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-12 py-6 lg:py-8">
+                <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-8 py-6 lg:py-10">
                   <div className="mb-4">
-                    <h2 className="text-pbgreen font-medium text-2xl md:text-3xl lg:text-3xl leading-snug mb-2 max-w-2xl text-left wrap-break-word">
+                    <h2 className="text-pbgreen font-medium text-2xl md:text-3xl lg:text-4xl leading-snug mb-4 max-w-4xl text-left wrap-break-word">
                       {talk.title}
                     </h2>
-                    <div className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal   text-left wrap-break-word">
+                    <div className="text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl text-left wrap-break-word">
                       <motion.div
                         animate={{
                           maxHeight: expanded === String(talk._id) ? 500 : 72,
@@ -345,9 +345,9 @@ export default function Talks(props: { talks: Talk[] }) {
                       >
                         <p>{talk.description}</p>
                       </motion.div>
-                      <div className="mt-3 flex items-center justify-between w-full gap-4">
+                      <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4">
                         <button
-                          className="mt-3 bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-light rounded-2xl cursor-pointer  hover:border border-pbgreen"
+                          className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-light rounded-2xl cursor-pointer  hover:border border-pbgreen"
                           onClick={() =>
                             setExpanded(
                               expanded === String(talk._id)
@@ -363,7 +363,7 @@ export default function Talks(props: { talks: Talk[] }) {
 
 
 
-                        <span className="mt-3 bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-light  rounded-2xl self-start">
+                        <span className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-light rounded-2xl">
                           {talk.name} | {new Date(talk.date).toLocaleDateString("en-US", {
                             month: "short",
                             year: "numeric",
