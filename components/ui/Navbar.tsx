@@ -219,11 +219,12 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
+  const isHero = pathname === "/" && !pastHero;
   return (
     <>
       <nav
         ref={navRef}
-        className={`sticky top-0 z-30 pt-5 px-5 ${lexend.className} ${pathname === "/" && !pastHero ? "bg-black" : "bg-transparent"}`}
+        className={`sticky top-0 z-30 pt-5 px-5 ${lexend.className} ${isHero ? "bg-black" : "bg-pbpages"}`}
       >
         <div className="relative bg-pbgray rounded-4xl text-white">
           <div className="mx-auto pl-12 pr-5">
