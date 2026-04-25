@@ -32,7 +32,7 @@ export default function LoreCard({
         <div
           className={`w-full flex justify-center min-h-93 px-4 sm:px-6 bg-pbpages`}
         >
-          <div className="w-full max-w-280 flex flex-col-reverse md:flex-row bg-[#1C1C1C] min-h-93a  overflow-hidden">
+          <div className="w-full max-w-280 flex flex-col-reverse md:flex-row bg-[#1C1C1C] min-h-93  overflow-hidden">
             <div className="w-full md:w-[50%]">
               <div className="min-h-18 w-full pt-8 pl-5 md:pl-12.5 ">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl text-[#37FF00] font-medium">
@@ -63,13 +63,13 @@ export default function LoreCard({
                 </div>
               </div>
 
-              <div className="min-h-18 w-full pl-6 md:pl-12.5 pt-4">
+              <div className="min-h-25 w-full pl-6 md:pl-12.5 pt-4">
                 <p className="text-[1.1rem] min-h-18 max-w-full md:max-w-116 text-pbtext font-light">
                   {preview}
                 </p>
               </div>
 
-              <div className="md:pl-12.5 sm:pl-6 p-0 h-14 w-full mt-11 mb-5 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
+              <div className="md:pl-12.5 sm:pl-6 p-0 h-14 w-full mt-7 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
                 <button
                   className="bg-pbsurface border border-[#37ff0014] cursor-pointer h-14 w-49.5 hover:border-pbgreen/70  ease-in-out duration-200 rounded-2xl text-center select-none text-white text-[1.1rem]"
                   onClick={() => setExpanded((prev) => !prev)}
