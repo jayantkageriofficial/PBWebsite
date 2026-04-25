@@ -159,7 +159,17 @@ export default function Navbar() {
   const { authenticated, email, name } = useAuthStore();
   const [isOpen, setIsOpen] = React.useState(false);
   const [isAdminOpen, setIsAdminOpen] = React.useState(false);
+  const [pastHero, setPastHero] = React.useState(false);
   const navRef = React.useRef<HTMLElement>(null);
+
+  React.useEffect(() => {
+    if (pathname !== "/") return;
+    const onScroll = () =>
+      setPastHero(window.scrollY > window.innerHeight * 0.8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [pathname]);
 
   const pages: { name: string; href: string; ext?: boolean }[] = [
     {
@@ -213,9 +223,9 @@ export default function Navbar() {
     <>
       <nav
         ref={navRef}
-        className={`${pathname === "/" ? "bg-black" : "bg-pbpages"} pt-5 px-5 ${lexend.className}`}
+        className={`sticky top-0 z-30 pt-5 px-5 ${lexend.className} ${pathname === "/" && !pastHero ? "bg-black" : "bg-transparent"}`}
       >
-        <div className="relative bg-pbgray rounded-4xl text-white z-30">
+        <div className="relative bg-pbgray rounded-4xl text-white">
           <div className="mx-auto pl-12 pr-5">
             <div className="flex items-center justify-between h-16">
               <Link href={"/"} className="flex items-center">

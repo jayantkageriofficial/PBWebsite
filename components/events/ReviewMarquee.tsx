@@ -4,63 +4,53 @@ import ReviewCard from "@/components/events/ReviewCard";
 
 const reviews = [
   {
-    name: "First name",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    name: "Arjun",
+    review: "PBCTF 4.0 was an absolute blast! The challenges were perfectly balanced for beginners and pros alike.",
     rating: 5,
   },
   {
-    name: "First name",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    name: "Sneha",
+    review: "IICT 2025 genuinely changed how I think about compilers. Super well organized and insightful.",
     rating: 5,
   },
   {
-    name: "First name",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    name: "Rahul",
+    review: "PB Hustle keeps you sharp every week. Best thing to happen to our college coding culture.",
     rating: 5,
   },
   {
-    name: "First name",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    name: "Divya",
+    review: "SIH Internal Round was brilliantly managed. Mentors were always there to guide and support us.",
     rating: 5,
   },
   {
-    name: "First name",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    rating: 4,
-  },
-  {
-    name: "First name",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    name: "Karthik",
+    review: "Zenith had an electric atmosphere. It pushed me beyond what I thought I was capable of.",
     rating: 5,
   },
   {
-    name: "First name",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    name: "Ananya",
+    review: "PB CTF 3.0 was my first CTF and Point Blank made it so welcoming. Mind bending challenges!",
     rating: 5,
   },
   {
-    name: "First name",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    name: "Vikram",
+    review: "IICT 2024 had the best compiler tech talks I have seen at any college event. Truly impressive.",
     rating: 5,
   },
   {
-    name: "First name",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    rating: 3,
+    name: "Pooja",
+    review: "The Recruitment session was super helpful and well structured. Great initiative by Point Blank!",
+    rating: 5,
   },
   {
-    name: "First name",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    name: "Rohan",
+    review: "PB CTF 2.0 in Bangalore was phenomenal. The web exploitation rounds were brutal and exciting.",
+    rating: 5,
+  },
+  {
+    name: "Lakshmi",
+    review: "Point Blank consistently delivers. PBCTF and PB Hustle have genuinely leveled up my skills.",
     rating: 5,
   },
 ];

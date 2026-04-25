@@ -325,5 +325,7 @@ export default function ThreeBackground() {
     };
   }, []);
 
-  return <div ref={ref} className="absolute inset-0 -z-50 cursor-grab" />;
+  return (
+    <div ref={ref} className="absolute inset-0 -z-50 cursor-grab bg-black" />
+  );
 }

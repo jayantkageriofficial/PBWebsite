@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useAuthStore } from "@/lib/store/auth";
 import {
   Dialog,
@@ -299,15 +299,15 @@ export default function Talks(props: { talks: Talk[] }) {
             <p className="text-gray-400 text-lg mt-8">No talks found.</p>
           )}
 
-          {filteredTalks.map((talk) => (
+          {filteredTalks.map((talk,idx) => (
             <motion.div
               key={String(talk._id)}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
-                duration: 0.55,
-                delay: 2.0,
+                duration: 0.25,
+                delay: idx === 0 ? 2 : 0.25,
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="bg-pbgray rounded-xl max-w-7xl mx-auto flex justify-center mb-6 px-2 md:px-6 lg:px-8"
@@ -321,7 +321,8 @@ export default function Talks(props: { talks: Talk[] }) {
                         alt={talk.title}
                         width={600}
                         height={400}
-                        className="object-cover rounded-xl w-full h-full grayscale-70"
+                        className="object-cover rounded-xl w-full h-full "
+                        draggable={false}
                       />
                     </div>
                   )}
@@ -335,13 +336,31 @@ export default function Talks(props: { talks: Talk[] }) {
                     <h2 className="text-pbgreen font-medium text-2xl md:text-3xl lg:text-3xl leading-snug mb-2 max-w-2xl text-left wrap-break-word">
                       {talk.title}
                     </h2>
-                    <p className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
-                      {expanded === String(talk._id)
-                        ? talk.description
-                        : talk.description.length > 140
-                          ? talk.description.slice(0, 140) + "..."
-                          : talk.description}
-                    </p>
+                    <div className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
+                      <motion.div
+                        animate={{
+                          maxHeight: expanded === String(talk._id) ? 500 : 72,
+                        }}
+                        transition={{ duration: 0.53, ease: "easeInOut" }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        <p>{talk.description}</p>
+                      </motion.div>
+                      <button
+                        className="mt-3 bg-pbsurface py-1.5 px-3 md:px-3 md:py-2 text-xs md:text-sm text-white rounded-xl cursor-pointer border border-pbgreen"
+                        onClick={() =>
+                          setExpanded(
+                            expanded === String(talk._id)
+                              ? null
+                              : String(talk._id),
+                          )
+                        }
+                      >
+                        {expanded === String(talk._id)
+                          ? "Read Less"
+                          : "Read More"}
+                      </button>
+                    </div>
                   </div>
 
                   <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-3 ">
@@ -355,20 +374,6 @@ export default function Talks(props: { talks: Talk[] }) {
                           year: "numeric",
                         })}
                       </span>
-                      <button
-                        className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl cursor-pointer border border-pbgreen"
-                        onClick={() =>
-                          setExpanded(
-                            expanded === String(talk._id)
-                              ? null
-                              : String(talk._id),
-                          )
-                        }
-                      >
-                        {expanded === String(talk._id)
-                          ? "Read Less"
-                          : "Read More"}
-                      </button>
                     </div>
                   </div>
 
@@ -470,6 +475,7 @@ export default function Talks(props: { talks: Talk[] }) {
                         fill
                         style={{ objectFit: "cover" }}
                         className="rounded-xl"
+                        draggable={false}
                       />
                       <button
                         type="button"

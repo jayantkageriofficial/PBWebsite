@@ -31,13 +31,13 @@ export default function FoundingMemberCard({
         }`}
       >
         {/* Front */}
-        <div className="backface-hidden flex flex-col items-center w-full h-full rounded-3xl border border-pbborder hover:border-pbgreen transition-all bg-pbpages p-3">
+        <div className="backface-hidden flex flex-col items-center w-full h-full rounded-t-4xl rounded-b-xl border border-pbborder hover:border-pbgreen transition-all bg-pbpages p-6">
           <div className="relative w-full aspect-square rounded-4xl overflow-hidden shrink-0">
             <Image
               src={img}
               alt={name}
               fill
-              className="rounded-4xl object-cover object-top grayscale-[70]"
+              className="rounded-4xl object-cover object-top"
               draggable={false}
             />
           </div>

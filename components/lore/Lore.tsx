@@ -227,7 +227,7 @@ export default function Lore(props: { lores: LoreType[] }) {
   return (
     <>
       {/* Header */}
-      <div className="flex justify-center mt-10 items-end pb-10 w-full h-55 p-5 text-5xl md:text-6xl bg-pbpages text-white">
+      <div className="flex justify-center items-end pb-10 w-full h-55 p-5 text-5xl md:text-6xl bg-pbpages text-white">
         <motion.span
           initial={{ opacity: 0, y: 6, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -383,6 +383,7 @@ export default function Lore(props: { lores: LoreType[] }) {
                         fill
                         style={{ objectFit: "cover" }}
                         className="rounded-xl"
+                        draggable={false}
                       />
                       <button
                         type="button"
