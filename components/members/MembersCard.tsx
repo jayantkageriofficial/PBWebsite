@@ -135,71 +135,37 @@ const Card: React.FC<CardProps> = ({
       flex flex-col items-center justify-center text-center z-1
     `}
           >
-            {!imageUrl ? (
-              <div className="flex flex-col items-center gap-1">
+            {linkedInUrl && (
+              <div className="mt-4 pt-4  w-2/3 flex justify-center">
                 <a
-                      href={linkedInUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="hover:scale-110 transition-transform"
-                    >
-                      <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
-                    </a>
-                {company && (
-                  <p className="text-gray-400 text-sm sm:text-base font-light italic">
-                    @{company}
-                  </p>
-                )}
-                {linkedInUrl && (
-                  <div className="mt-6 pt-4 border-t border-pbborder w-full flex justify-center">
-                    <a
-                      href={linkedInUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="hover:scale-110 transition-transform"
-                    >
-                      <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
-                    </a>
-                  </div>
-                )}
+                  href={linkedInUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="hover:scale-110 transition-transform"
+                >
+                  <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
+                </a>
               </div>
-            ) : (
-              <div>
-                <h3 className="text-pbgreen text-xl sm:text-2xl font-medium mb-2">
-                  {name}
-                </h3>
+            )}
+            {imageUrl && (
+              <>
                 {leadDesc ? (
                   <p className="text-white text-base sm:text-lg font-light mb-1">
                     {leadDesc}
                   </p>
                 ) : (
-                  <div>
-                    <p className="text-white text-base sm:text-lg font-light mb-1">
-                      {role}
-                    </p>
-                    {company && (
-                      <p className="text-gray-400 text-xs sm:text-sm font-light mb-4 italic">
-                        @{company}
-                      </p>
-                    )}
-                  </div>
+                  <p className="text-white text-base sm:text-lg font-light mb-1">
+                    {role}
+                  </p>
                 )}
-                {linkedInUrl && (
-                  <div className="mt-6 sm:mt-8 pt-4 border-t border-pbborder w-full flex justify-center">
-                    <a
-                      href={linkedInUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="hover:scale-110 transition-transform"
-                    >
-                      <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
-                    </a>
-                  </div>
-                )}
-              </div>
+              </>
+            )}
+
+            {company && (
+              <p className="text-gray-400 text-sm font-light italic mb-4">
+                @{company}
+              </p>
             )}
           </div>
         )}

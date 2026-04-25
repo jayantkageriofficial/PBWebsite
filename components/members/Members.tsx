@@ -305,7 +305,11 @@ export default function Members(props: { members: Member[] }) {
                 delay: index * 0.06,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className={`transition-colors duration-500 border-b last:border-b-0 border-pbtext`}
+              className={`transition-colors duration-500 border-b last:border-b-0 border-pbtext ${
+                index === headings.length - 1 || openIndex === index
+                  ? "border-b-0"
+                  : "border-b border-pbtext"
+              }`}
             >
               <CollapsibleSection
                 heading={heading}

@@ -43,7 +43,7 @@ const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
         <div
           onClick={() => onToggle()}
           className={`flex items-center justify-between p-6 cursor-pointer transition-all duration-300 select-none  ${
-            isOpen ? "bg-pbpages" : "bg-pbgray"
+            isOpen ? "bg-pbpages border-0" : "bg-pbgray"
           }`}
         >
           <h2
