@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
 import { Lexend_Tera } from "next/font/google";
 import ThreeBackground from "@/components/ui/ThreeBackground";
 import { motion } from "framer-motion";
-import { useLoadingStore } from "@/lib/store/loading";
 
 const lexendTera = Lexend_Tera({
   subsets: ["latin"],
@@ -25,11 +23,6 @@ const headingParts = [
 ];
 
 export default function HeroSection() {
-  const setLoading = useLoadingStore((s) => s.setLoading);
-  useEffect(() => {
-    setLoading(false);
-  }, [setLoading]);
-
   return (
     <section
       id="home"
