@@ -29,9 +29,9 @@ export default function HeroSection() {
       className="relative min-h-[90vh] overflow-hidden cursor-grab text-white"
     >
       <ThreeBackground />
-      <div className="flex justify-center items-center absolute inset-0 flex-col ">
+      <div className="flex justify-center items-center absolute inset-0 flex-col px-4 sm:px-10 lg:px-20">
         <h1
-          className={`text-7xl text-center tracking-[-22%] text-white p-5 rounded-4xl select-none ${lexendTera.className}`}
+          className={`text-5xl sm:text-7xl text-center tracking-[-22%] text-white p-5 rounded-4xl select-none ${lexendTera.className}`}
         >
           {headingParts.map((part, idx) =>
             part.br ? (

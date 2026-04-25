@@ -223,7 +223,7 @@ export default function Navbar() {
     <>
       <nav
         ref={navRef}
-        className={`sticky top-0 z-30 pt-5 px-5 ${lexend.className} ${pathname === "/" && !pastHero ? "bg-black" : "bg-transparent"}`}
+        className={`sticky top-0 z-30 pt-5 px-4 sm:px-10 lg:px-20 ${lexend.className} ${pathname === "/" && !pastHero ? "bg-black" : "bg-transparent"}`}
       >
         <div className="relative bg-pbgray rounded-4xl text-white">
           <div className="mx-auto pl-12 pr-5">

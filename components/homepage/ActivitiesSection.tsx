@@ -62,7 +62,7 @@ export default function ActivitiesSection() {
         <h2 className="text-4xl font-bold text-pbgreen">Activities</h2>
       </FadeIn>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="max-w-8xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {activities.map(({ title, tag, img, description }, i) => (
           <FadeIn key={i} delay={(i % 3) * 0.1} className="h-full">
             <div className="h-full bg-pbdarkgray bg-cover bg-center rounded-b-2xl rounded-t-4xl overflow-hidden border border-white/16 flex flex-col transition-all duration-300 hover:border-pbgreen">
