@@ -90,10 +90,9 @@ const Card: React.FC<CardProps> = ({
       )}
       <div
         className={`
-          relative transition-all duration-700 transform-3d w-full
-          ${isFlipEnabled && isFlipped ? "rotate-y-180" : ""}
-          hover:shadow-[0_0_20px_var(--color-pbgreen)] 
-          hover:border-pbgreen/40 rounded-3xl
+          relative transition-transform duration-700 transform-3d w-full
+          ${isFlipEnabled && isFlipped ? "rotate-y-180" : ""} 
+          hover:border-pbgreen hover:border rounded-3xl
         `}
       >
         <div
