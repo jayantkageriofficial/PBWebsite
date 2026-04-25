@@ -22,17 +22,16 @@ export default function FoundingMemberCard({
 }: Props) {
   return (
     <div
-      className="relative touch-manipulation w-full perspective-[1000px] cursor-pointer h-full"
+      className={`flex flex-col items-center w-full h-full rounded-t-4xl rounded-b-xl border border-pbborder hover:border-pbgreen transition-all bg-pbpages p-6 cursor-pointer touch-manipulation ${isFlipped ? "border-pbgreen" : ""}`}
       onClick={() => onFlip?.()}
     >
-      <div
-        className={`relative transition-all duration-700 transform-3d h-full ${
-          isFlipped ? "transform-[rotateY(180deg)]" : ""
-        }`}
-      >
-        {/* Front */}
-        <div className="backface-hidden flex flex-col items-center w-full h-full rounded-t-4xl rounded-b-xl border border-pbborder hover:border-pbgreen transition-all bg-pbpages p-6">
-          <div className="relative w-full aspect-square rounded-4xl overflow-hidden shrink-0">
+      <div className="relative w-full aspect-square perspective-[1000px] shrink-0">
+        <div
+          className={`relative w-full h-full transition-all duration-700 transform-3d ${
+            isFlipped ? "transform-[rotateY(180deg)]" : ""
+          }`}
+        >
+          <div className="absolute inset-0 backface-hidden w-full h-full">
             <Image
               src={img}
               alt={name}
@@ -41,37 +40,15 @@ export default function FoundingMemberCard({
               draggable={false}
             />
           </div>
-          <div className="flex justify-center mt-3 mb-1 w-full">
-            <div className="flex flex-col items-center justify-center gap-1.5 w-full">
-              <span className="text-pbgreen font-light whitespace-nowrap bg-pbdarkgray w-fit text-center rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base border border-pbborder capitalize">
-                {name}
-              </span>
-              <p className="text-pbtext font-light text-center text-sm leading-relaxed px-1 pb-1">
-                {bio}
-              </p>
-            </div>
-          </div>
-        </div>
 
-        {/* Back */}
-        <div
-          className="
-            absolute inset-0 w-full h-full backface-hidden transform-[rotateY(180deg)]
-            rounded-3xl border border-pbgreen bg-pbpages p-4 sm:p-5 md:p-6
-            flex flex-col items-center justify-center text-center
-          "
-        >
-          <h3 className="text-pbgreen text-xl sm:text-2xl font-medium mb-2">
-            {name}
-          </h3>
-          <p className="text-white/50 text-xs sm:text-sm italic mb-3">
-            Founding Member
-          </p>
-          <p className="text-white text-sm sm:text-base font-light leading-relaxed">
-            {bio}
-          </p>
-          {linkedin && (
-            <div className="mt-6 sm:mt-8 pt-4 border-t border-pbborder w-full flex justify-center">
+          <div
+            className="
+              absolute inset-0 w-full h-full backface-hidden transform-[rotateY(180deg)]
+              rounded-4xl border border-pbgreen bg-pbpages
+              flex items-center justify-center
+            "
+          >
+            {linkedin && (
               <a
                 href={linkedin}
                 target="_blank"
@@ -79,10 +56,21 @@ export default function FoundingMemberCard({
                 onClick={(e) => e.stopPropagation()}
                 className="hover:scale-110 transition-transform"
               >
-                <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
+                <LinkedIn className="h-16 w-16 text-pbgreen" />
               </a>
-            </div>
-          )}
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-center mt-3 mb-1 w-full">
+        <div className="flex flex-col items-center justify-center gap-1.5 w-full">
+          <span className="text-pbgreen font-light whitespace-nowrap bg-pbdarkgray w-fit text-center rounded-full px-4 sm:px-6 py-1.5 sm:py-1 sm:mb-1.5 mb-1.5 text-sm sm:text-base border border-pbborder capitalize">
+            {name}
+          </span>
+          <p className="text-pbtext font-light text-center text-sm leading-relaxed px-1 pb-1">
+            {bio}
+          </p>
         </div>
       </div>
     </div>
