@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useLoadingStore } from "@/lib/store/loading";
 import { Lexend } from "next/font/google";
 import logo from "@/public/logo.svg";
 import { useAuthStore } from "@/lib/store/auth";
@@ -160,6 +161,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isAdminOpen, setIsAdminOpen] = React.useState(false);
   const [pastHero, setPastHero] = React.useState(false);
+  const { isLoading } = useLoadingStore();
   const navRef = React.useRef<HTMLElement>(null);
 
   React.useEffect(() => {
@@ -223,7 +225,7 @@ export default function Navbar() {
     <>
       <nav
         ref={navRef}
-        className={`sticky top-0 z-30 pt-5 px-5 ${lexend.className} ${pathname === "/" && !pastHero ? "bg-black" : "bg-transparent"}`}
+        className={`sticky top-0 z-30 pt-5 px-5 ${lexend.className} ${pathname === "/" && (!pastHero || isLoading) ? "bg-black" : "bg-transparent"}`}
       >
         <div className="relative bg-pbgray rounded-4xl text-white">
           <div className="mx-auto pl-12 pr-5">

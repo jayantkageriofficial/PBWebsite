@@ -24,7 +24,7 @@ img {
 
 ::selection {
   color: #37ff00;
-  background-color: #3390ff ;
+  background-color: var(--color-gray-900);
 }
 
 @theme inline {
