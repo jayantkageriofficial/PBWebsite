@@ -142,7 +142,7 @@ export default function EventCard({
             {title}
           </span>
           <div className="text-xs md:text-sm text-white/80">
-            <strong>Date:</strong>{" "}
+            <strong className="text-pbgreen">Date:</strong>{" "}
             {date
               ? new Date(date).toLocaleDateString("en-GB", {
                   day: "2-digit",
@@ -152,7 +152,7 @@ export default function EventCard({
               : "TBA"}
           </div>
           <div className="text-xs md:text-sm text-white/80">
-            <strong>Location:</strong> {location || "TBA"}
+            <strong className="text-pbgreen">Location:</strong> {location || "TBA"}
           </div>
           <p className="mt-2 text-xs md:text-sm leading-relaxed text-white/60 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-pbtext/5 [&::-webkit-scrollbar-track]:rounded-3xl [&::-webkit-scrollbar-thumb]:bg-pbtext/25 [&::-webkit-scrollbar-thumb]:rounded-full">
             {description}
@@ -160,7 +160,7 @@ export default function EventCard({
 
           {registrationLink && (
             <div className="text-xs md:text-sm text-white/80">
-              <strong>Registration Link:</strong>{" "}
+              <strong className="text-pbgreen">Registration Link:</strong>{" "}
               <a
                 href={registrationLink || "#"}
                 target="_blank"
