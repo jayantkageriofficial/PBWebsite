@@ -39,16 +39,16 @@ const CollapsibleSection = forwardRef<HTMLDivElement, CollapsibleSectionProps>(
     }, [isOpen]);
 
     return (
-      <div className="w-full" ref={localRef}>
+      <div className="w-full border-b border-pbtext last:border-b-0" ref={localRef}>
         <div
           onClick={() => onToggle()}
-          className={`flex items-center justify-between p-6 cursor-pointer transition-all duration-300 select-none ${
-            isAnySectionOpen ? "bg-pbpages" : "bg-[#1C1C1C]"
+          className={`flex items-center justify-between p-6 cursor-pointer transition-all duration-300 select-none  ${
+            isOpen ? "bg-pbpages border-0" : "bg-pbgray"
           }`}
         >
           <h2
             className={`font-normal md:text-[38px] text-[24px] transition-colors duration-300 ${
-              isOpen ? "text-pbgreen" : "text-white"
+              isOpen ? "text-pbgreen " : "text-white"
             } text-lexend`}
           >
             {heading}
