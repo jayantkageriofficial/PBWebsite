@@ -121,7 +121,7 @@ const StickyCard = ({
           filter: blur,
           top: `calc(-5vh + ${i * 24}px)`,
         }}
-        className="relative w-full max-w-8xl mx-4 sm:mx-8 bg-pbgray rounded-3xl overflow-hidden shadow-2xl hover:border hover:border-pbgreen"
+        className="relative w-full max-w-8xl mx-auto bg-pbgray rounded-3xl overflow-hidden shadow-2xl hover:border hover:border-pbgreen"
       >
         <div
           className={`flex flex-col ${
@@ -152,7 +152,7 @@ export default function CardStack() {
         <div
           ref={container}
           style={{ height: `${(cards.length + 1) * 100}vh` }}
-          className="relative w-full bg-pbpages"
+          className="relative w-full bg-pbpages px-4 sm:px-10 lg:px-20"
         >
           {cards.map((card, i) => {
             const targetScale = Math.max(

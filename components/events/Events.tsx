@@ -296,9 +296,11 @@ export default function Events(props: { events: Event[] }) {
         )}
 
         {past.length == 0 && upcoming.length == 0 && (
-          <span className="text-white items-center text-xl px-12">
-            No Upcoming Events
-          </span>
+          <div className="px-4 sm:px-10 lg:px-20">
+            <span className="text-white text-xl max-w-8xl mx-auto block">
+              No Upcoming Events
+            </span>
+          </div>
         )}
       </>
 
