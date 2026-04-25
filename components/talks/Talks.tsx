@@ -54,12 +54,12 @@ const TEXT_FIELDS: {
   type: string;
   required?: boolean;
 }[] = [
-  { label: "Title", key: "title", type: "text", required: true },
-  { label: "Description", key: "description", type: "text", required: true },
-  { label: "Venue / Event Name", key: "name", type: "text", required: true },
-  { label: "Speakers", key: "speakers", type: "text", required: true },
-  { label: "Date", key: "date", type: "date", required: true },
-];
+    { label: "Title", key: "title", type: "text", required: true },
+    { label: "Description", key: "description", type: "text", required: true },
+    { label: "Venue / Event Name", key: "name", type: "text", required: true },
+    { label: "Speakers", key: "speakers", type: "text", required: true },
+    { label: "Date", key: "date", type: "date", required: true },
+  ];
 
 const TABS: TabType[] = ["all", "conference", "talks", "other"];
 
@@ -282,11 +282,10 @@ export default function Talks(props: { talks: Talk[] }) {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-sm md:text-base uppercase cursor-pointer ${
-                activeTab === tab
-                  ? "bg-pbgreen text-black"
-                  : "bg-white/5 text-white/60"
-              }`}
+              className={`px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-sm md:text-base uppercase cursor-pointer ${activeTab === tab
+                ? "bg-pbgreen text-black"
+                : "bg-white/5 text-white/60"
+                }`}
             >
               {tab === "all" ? "All" : tab}
             </button>
@@ -299,7 +298,7 @@ export default function Talks(props: { talks: Talk[] }) {
             <p className="text-gray-400 text-lg mt-8">No talks found.</p>
           )}
 
-          {filteredTalks.map((talk,idx) => (
+          {filteredTalks.map((talk, idx) => (
             <motion.div
               key={String(talk._id)}
               initial={{ opacity: 0, y: 24 }}
@@ -336,7 +335,7 @@ export default function Talks(props: { talks: Talk[] }) {
                     <h2 className="text-pbgreen font-medium text-2xl md:text-3xl lg:text-3xl leading-snug mb-2 max-w-2xl text-left wrap-break-word">
                       {talk.title}
                     </h2>
-                    <div className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
+                    <div className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal   text-left wrap-break-word">
                       <motion.div
                         animate={{
                           maxHeight: expanded === String(talk._id) ? 500 : 72,
@@ -346,36 +345,35 @@ export default function Talks(props: { talks: Talk[] }) {
                       >
                         <p>{talk.description}</p>
                       </motion.div>
-                      <button
-                        className="mt-3 bg-pbsurface py-1.5 px-3 md:px-3 md:py-2 text-xs md:text-sm text-white rounded-xl cursor-pointer border border-pbgreen"
-                        onClick={() =>
-                          setExpanded(
-                            expanded === String(talk._id)
-                              ? null
-                              : String(talk._id),
-                          )
-                        }
-                      >
-                        {expanded === String(talk._id)
-                          ? "Read Less"
-                          : "Read More"}
-                      </button>
+                      <div className="mt-3 flex items-center justify-between w-full gap-4">
+                        <button
+                          className="mt-3 bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-light rounded-2xl cursor-pointer  hover:border border-pbgreen"
+                          onClick={() =>
+                            setExpanded(
+                              expanded === String(talk._id)
+                                ? null
+                                : String(talk._id),
+                            )
+                          }
+                        >
+                          {expanded === String(talk._id)
+                            ? "Read Less"
+                            : "Read More"}
+                        </button>
+
+
+
+                        <span className="mt-3 bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-light  rounded-2xl self-start">
+                          {talk.name} | {new Date(talk.date).toLocaleDateString("en-US", {
+                            month: "short",
+                            year: "numeric",
+                          })}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-3 ">
-                    <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
-                      {talk.name}
-                    </span>
-                    <div className="flex gap-2 items-center self-center md:self-auto">
-                      <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl">
-                        {new Date(talk.date).toLocaleDateString("en-US", {
-                          month: "long",
-                          year: "numeric",
-                        })}
-                      </span>
-                    </div>
-                  </div>
+
 
                   {authenticated && (
                     <div className="flex gap-2 mt-2">
