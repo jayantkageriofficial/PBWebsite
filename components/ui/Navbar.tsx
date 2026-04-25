@@ -158,11 +158,17 @@ function AdminSidebar({
 export default function Navbar() {
   const pathname = usePathname();
   const { authenticated, email, name } = useAuthStore();
+  const { isLoading, setLoading } = useLoadingStore();
   const [isOpen, setIsOpen] = React.useState(false);
   const [isAdminOpen, setIsAdminOpen] = React.useState(false);
   const [pastHero, setPastHero] = React.useState(false);
-  const { isLoading } = useLoadingStore();
   const navRef = React.useRef<HTMLElement>(null);
+  const prevPathnameRef = React.useRef(pathname);
+
+  React.useLayoutEffect(() => {
+    if (pathname === "/" && prevPathnameRef.current !== "/") setLoading(true);
+    prevPathnameRef.current = pathname;
+  }, [pathname, setLoading]);
 
   React.useEffect(() => {
     if (pathname !== "/") return;
@@ -225,7 +231,7 @@ export default function Navbar() {
     <>
       <nav
         ref={navRef}
-        className={`sticky top-0 z-30 pt-5 px-5 ${lexend.className} ${pathname === "/" && (!pastHero || isLoading) ? "bg-black" : "bg-transparent"}`}
+        className={`sticky top-0 z-30 pt-5 px-5 ${lexend.className} ${pathname === "/" && !pastHero && !isLoading ? "bg-black" : "bg-transparent"}`}
       >
         <div className="relative bg-pbgray rounded-4xl text-white">
           <div className="mx-auto pl-12 pr-5">

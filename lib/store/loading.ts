@@ -6,6 +6,6 @@ type LoadingStore = {
 };
 
 export const useLoadingStore = create<LoadingStore>((set) => ({
-  isLoading: true,
+  isLoading: false,
   setLoading: (loading) => set({ isLoading: loading }),
 }));

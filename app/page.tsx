@@ -15,7 +15,6 @@ export default function Home() {
 
   useEffect(() => {
     setLoading(false);
-    return () => setLoading(true);
   }, [setLoading]);
 
   return (
