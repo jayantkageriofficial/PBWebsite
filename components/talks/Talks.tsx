@@ -309,7 +309,7 @@ export default function Talks(props: { talks: Talk[] }) {
                 delay: idx === 0 ? 2 : 0.25,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="bg-pbgray rounded-xl max-w-screen-2xl mx-auto flex justify-center mb-6 px-4 md:px-10 lg:px-6"
+              className="bg-pbgray rounded-xl max-w-screen-2xl mx-auto flex justify-center mb-6 px-4 md:px-10 lg:px-4"
             >
               <div className="flex flex-col lg:flex-row items-start py-4 w-full">
                 <div className="flex flex-col items-center">
