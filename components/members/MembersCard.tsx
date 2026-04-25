@@ -12,8 +12,8 @@ interface CardProps {
   isAdmin?: boolean;
   onEdit?: () => void;
   onDelete?: () => void;
-  isFlipped?:boolean;
-  onFlip?:()=>void;
+  isFlipped?: boolean;
+  onFlip?: () => void;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -27,9 +27,9 @@ const Card: React.FC<CardProps> = ({
   onEdit,
   onDelete,
   isFlipped,
-  onFlip
+  onFlip,
 }) => {
-  const isFlipEnabled = !!imageUrl;
+  const isFlipEnabled = true;
 
   return (
     <div
@@ -92,7 +92,7 @@ const Card: React.FC<CardProps> = ({
         className={`
           relative transition-all duration-700 transform-3d w-full
           ${isFlipEnabled && isFlipped ? "rotate-y-180" : ""}
-          hover:shadow-[0_0_20px_theme('colors.pbgreen')] 
+          hover:shadow-[0_0_20px_var(--color-pbgreen)] 
           hover:border-pbgreen/40 rounded-3xl
         `}
       >
@@ -115,11 +115,10 @@ const Card: React.FC<CardProps> = ({
           )}
           <div className="flex justify-center mt-3 mb-1">
             <div className="flex flex-col items-center justify-center gap-1.5 w-full h-fit">
-              <span className="text-pbgreen font-light whitespace-nowrap bg-pbdarkgray w-fit h-fit text-center rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base border border-pbborder capitalize">
-                {name}
-              </span>
-              {!isFlipEnabled && (
-                <p className="text-pbtext text-lexend font-light text-center text-lg sm:text-lg leading-[1.4] h-7">
+              <span className="text-pbgreen font-light ...">{name}</span>
+
+              {!imageUrl && (
+                <p className="text-pbtext text-lexend font-light text-center text-lg leading-[1.4] h-7">
                   {role}
                 </p>
               )}
@@ -130,42 +129,75 @@ const Card: React.FC<CardProps> = ({
         {isFlipEnabled && (
           <div
             className={`
-              absolute inset-0 w-full h-full backface-hidden rotate-y-180
-              rounded-3xl border border-pbgreen bg-pbpages p-4 sm:p-5 md:p-6
-              flex flex-col items-center justify-center text-center z-1
-            `}
+      absolute inset-0 w-full h-full backface-hidden rotate-y-180
+      rounded-3xl border border-pbgreen bg-pbpages p-4 sm:p-5 md:p-6
+      flex flex-col items-center justify-center text-center z-1
+    `}
           >
-            <h3 className="text-pbgreen text-xl sm:text-2xl font-medium mb-2">
-              {name}
-            </h3>
-            {leadDesc ? (
-              <p className="text-white text-base sm:text-lg font-light mb-1">
-                {leadDesc}
-              </p>
-            ) : (
-              <>
-                <p className="text-white text-base sm:text-lg font-light mb-1">
-                  {role}
-                </p>
+            {!imageUrl ? (
+              <div className="flex flex-col items-center gap-1">
+                <a
+                      href={linkedInUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="hover:scale-110 transition-transform"
+                    >
+                      <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
+                    </a>
                 {company && (
-                  <p className="text-gray-400 text-xs sm:text-sm font-light mb-4 italic">
+                  <p className="text-gray-400 text-sm sm:text-base font-light italic">
                     @{company}
                   </p>
                 )}
-              </>
-            )}
-
-            {linkedInUrl && (
-              <div className="mt-6 sm:mt-8 pt-4 border-t border-pbborder w-full flex justify-center">
-                <a
-                  href={linkedInUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="hover:scale-110 transition-transform"
-                >
-                  <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
-                </a>
+                {linkedInUrl && (
+                  <div className="mt-6 pt-4 border-t border-pbborder w-full flex justify-center">
+                    <a
+                      href={linkedInUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="hover:scale-110 transition-transform"
+                    >
+                      <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
+                    </a>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div>
+                <h3 className="text-pbgreen text-xl sm:text-2xl font-medium mb-2">
+                  {name}
+                </h3>
+                {leadDesc ? (
+                  <p className="text-white text-base sm:text-lg font-light mb-1">
+                    {leadDesc}
+                  </p>
+                ) : (
+                  <div>
+                    <p className="text-white text-base sm:text-lg font-light mb-1">
+                      {role}
+                    </p>
+                    {company && (
+                      <p className="text-gray-400 text-xs sm:text-sm font-light mb-4 italic">
+                        @{company}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {linkedInUrl && (
+                  <div className="mt-6 sm:mt-8 pt-4 border-t border-pbborder w-full flex justify-center">
+                    <a
+                      href={linkedInUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="hover:scale-110 transition-transform"
+                    >
+                      <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
+                    </a>
+                  </div>
+                )}
               </div>
             )}
           </div>
