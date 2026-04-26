@@ -330,7 +330,7 @@ export default function Talks(props: { talks: Talk[] }) {
                   </span>
                 </div>
 
-                <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-8 py-6 lg:py-10">
+                <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-8 pb-6 lg:pb-6 pt-2">
                   <div className="mb-4">
                     <h2 className="text-pbgreen font-medium text-2xl md:text-3xl lg:text-4xl leading-snug mb-4 max-w-4xl text-left wrap-break-word">
                       {talk.title}
