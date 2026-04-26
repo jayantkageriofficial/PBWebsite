@@ -83,7 +83,7 @@ export default function EventCard({
         </div>
       )}
       <div
-        className={`flex flex-col gap-2 rounded-2xl bg-[#111] p-2 h-full transition-all duration-300 ease-in-out
+        className={`flex flex-col gap-2 rounded-2xl bg-pbsurface p-3 h-full transition-all duration-300 ease-in-out
                 ${isFlipped ? "rotate-y-180 border border-pbgreen" : "rotate-y-0 shadow-none border border-white/10"}
                 ${!isFlipped ? "group-hover:border-pbgreen hover:border-pbgreen" : ""} `}
         style={{
@@ -110,19 +110,14 @@ export default function EventCard({
           </div>
 
           {/* Text */}
-          <div className="flex flex-col gap-1 p-1">
+          <div className="flex flex-col gap-1 p-1 pl-2">
             <span
-              className="text-xl lg:text-2xl font-medium leading-normal align-middle"
-              style={{
-                background: "linear-gradient(135deg, #37FF00, #37FF00)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
+              className="text-xl lg:text-3xl font-medium leading-normal align-middle bg-linear-to-b from-[#37FF00] to-[#219900] bg-clip-text text-transparent"
+
             >
               {title}
             </span>
-            <span className="text-sm font-normal leading-normal text-white/65 line-clamp-2">
+            <span className="text-sm font-normal leading-normal text-white/65 line-clamp-1">
               {description}
             </span>
           </div>
@@ -130,7 +125,7 @@ export default function EventCard({
 
         {/* Back */}
         <div
-          className="absolute inset-0 flex flex-col gap-3 rounded-2xl bg-[#111] p-6"
+          className="absolute inset-0 flex flex-col gap-3 rounded-2xl bg-pbsurface p-6"
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
