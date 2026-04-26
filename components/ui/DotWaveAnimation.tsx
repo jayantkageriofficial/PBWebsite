@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import './DotWaveAnimation.css';
 
 const SETTINGS = {
@@ -76,18 +76,16 @@ class Dot {
 
 const DotWaveAnimation = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const mouse = useRef({ x: -1000, y: -1000 });
   const dots = useRef<Dot[]>([]);
   const rafId = useRef<number | null>(null);
 
   const init = () => {
     const canvas = canvasRef.current;
-    const container = containerRef.current;
-    if (!canvas || !container) return;
+    if (!canvas) return;
 
-    const w = container.offsetWidth;
-    const h = container.offsetHeight;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
     const dpr = window.devicePixelRatio || 1;
 
     canvas.width = w * dpr;
@@ -111,7 +109,18 @@ const DotWaveAnimation = () => {
 
   useEffect(() => {
     init();
-    window.addEventListener('resize', init);
+
+    const onResize = () => init();
+    const onMouseMove = (e: MouseEvent) => {
+      mouse.current = { x: e.clientX, y: e.clientY };
+    };
+    const onMouseLeave = () => {
+      mouse.current = { x: -1000, y: -1000 };
+    };
+
+    window.addEventListener('resize', onResize);
+    window.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseleave', onMouseLeave);
 
     const animate = (time: number) => {
       const canvas = canvasRef.current;
@@ -137,28 +146,15 @@ const DotWaveAnimation = () => {
     rafId.current = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener('resize', init);
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseleave', onMouseLeave);
       if (rafId.current) cancelAnimationFrame(rafId.current);
     };
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = containerRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    mouse.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-  };
-
-  const handleMouseLeave = () => {
-    mouse.current = { x: -1000, y: -1000 };
-  };
-
   return (
-    <div
-      ref={containerRef}
-      className="dot-container"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="dot-container">
       <canvas ref={canvasRef} />
     </div>
   );
