@@ -62,10 +62,10 @@ export default function StayConnectedSection() {
   return (
     <section
       id="stay-connected"
-      className="bg-pbpages text-white pt-12 pb-20 px-4 sm:px-10 lg:px-20"
+      className="bg-pbpages text-white pt-20 pb-20 px-4 sm:px-10 lg:px-20"
     >
       <div className="max-w-8xl mx-auto">
-        <FadeIn className="text-center mb-12">
+        <FadeIn className="text-center mb-20">
           <h2 className="text-4xl font-bold text-white">
             Stay <span className="text-pbgreen">Connected</span>
           </h2>

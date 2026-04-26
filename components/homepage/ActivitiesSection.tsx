@@ -58,7 +58,7 @@ export default function ActivitiesSection() {
       id="activities"
       className="bg-pbpages text-white px-4 sm:px-10 lg:px-20"
     >
-      <FadeIn className="text-center mt-22 mb-22">
+      <FadeIn className="text-center my-20">
         <h2 className="text-4xl font-bold text-pbgreen">Activities</h2>
       </FadeIn>
 

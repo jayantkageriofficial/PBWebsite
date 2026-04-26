@@ -48,7 +48,7 @@ export default function FoundingMembersSection() {
         </FadeIn>
         <FadeIn
           delay={0.1}
-          className="text-center text-white/70 text-sm max-w-xl mx-auto mb-12"
+          className="text-center text-white/70 text-sm max-w-xl mx-auto mb-20"
         >
           <p>
             Point Blank is a passion project, born from a shared excitement to
