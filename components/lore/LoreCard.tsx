@@ -64,7 +64,7 @@ export default function LoreCard({
               </div>
 
               <div className="min-h-25 w-full pl-6 md:pl-12.5 pt-4">
-                <p className="text-[1.1rem] min-h-18 max-w-full md:max-w-116 text-pbtext font-light">
+                <p className="text-[1.1rem] min-h-18 max-w-full md:max-w-127 text-pbtext font-light">
                   {preview}
                 </p>
               </div>
