@@ -7,7 +7,7 @@ import connectDB from "@/lib/db/connection";
  *   body: { email: string }
  */
 export async function POST(request: Request) {
-  await connectDB()
+  await connectDB();
   const { email } = await request.json();
   if (!email)
     return NextResponse.json(
@@ -15,6 +15,6 @@ export async function POST(request: Request) {
       { status: 401 },
     );
 
-  await sendVerificationEmail(email);
-  return NextResponse.json({ success: true });
+  const res = await sendVerificationEmail(email);
+  return NextResponse.json({ success: true, valid: res });
 }

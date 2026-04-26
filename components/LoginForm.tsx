@@ -27,7 +27,7 @@ export default function LoginForm({ error }: { error?: string }) {
         body: JSON.stringify({ email }),
       });
       const data = await res.json();
-      if (res.ok && data.success) setState("success");
+      if (res.ok && data.success && data.valid) setState("success");
       else {
         setState("error");
         setErrorMsg(
