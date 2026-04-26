@@ -325,7 +325,7 @@ export default function Talks(props: { talks: Talk[] }) {
                       />
                     </div>
                   )}
-                  <span className="text-pbgreen text-light font-lexend-300 mt-4 bg-black/40 rounded-full px-3 p-3">
+                  <span className="text-pbgreen font-light font-lexend-300 mt-4 bg-black/40 rounded-full px-3 p-3">
                     {talk.speakers}
                   </span>
                 </div>
