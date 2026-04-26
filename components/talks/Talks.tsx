@@ -332,7 +332,7 @@ export default function Talks(props: { talks: Talk[] }) {
 
                 <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-8 pb-6 lg:pb-6 pt-2">
                   <div className="mb-4">
-                    <h2 className="text-pbgreen font-medium text-2xl md:text-3xl lg:text-4xl leading-snug mb-4 max-w-4xl text-left wrap-break-word h-40">
+                    <h2 className="text-pbgreen font-light text-2xl md:text-3xl lg:text-4xl leading-snug mb-4 max-w-4xl text-left wrap-break-word h-40">
                       {talk.title}
                     </h2>
                     <div className="text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl text-left wrap-break-word">
@@ -347,7 +347,7 @@ export default function Talks(props: { talks: Talk[] }) {
                       </motion.div>
                       <div className="mt-24 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4">
                         <button
-                          className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-light rounded-2xl cursor-pointer  hover:border border-pbgreen"
+                          className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl cursor-pointer  hover:border border-pbgreen"
                           onClick={() =>
                             setExpanded(
                               expanded === String(talk._id)
@@ -363,7 +363,7 @@ export default function Talks(props: { talks: Talk[] }) {
 
 
 
-                        <span className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-light rounded-2xl">
+                        <span className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl">
                           {talk.name} | {new Date(talk.date).toLocaleDateString("en-US", {
                             month: "short",
                             year: "numeric",
