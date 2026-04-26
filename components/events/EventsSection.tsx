@@ -53,6 +53,7 @@ export default function EventsSection({
             return (
               <motion.div
                 key={id}
+                className="h-full"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}

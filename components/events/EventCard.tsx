@@ -28,7 +28,7 @@ export default function EventCard({
 }) {
   return (
     <div
-      className="group relative w-full cursor-pointer"
+      className="group relative w-full h-full cursor-pointer"
       style={{ perspective: "1000px" }}
       onClick={onToggle}
     >
@@ -122,10 +122,8 @@ export default function EventCard({
             >
               {title}
             </span>
-            <span className="text-sm font-normal leading-normal text-white/65">
-              {description.length > 50
-                ? description.substring(0, 50) + "..."
-                : description}
+            <span className="text-sm font-normal leading-normal text-white/65 line-clamp-2">
+              {description}
             </span>
           </div>
         </div>

@@ -69,7 +69,7 @@ export default function LoreCard({
                 </p>
               </div>
 
-              <div className="md:pl-12.5 sm:pl-6 p-0 h-14 w-full mt-7 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
+              <div className="md:pl-12.5 lg:mb-0 md:mb-2 mb-4 sm:pl-6 p-0 h-14 w-full mt-7 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
                 <button
                   className="bg-pbsurface border border-[#37ff0014] cursor-pointer h-14 w-49.5 hover:border-pbgreen/70  ease-in-out duration-200 rounded-2xl text-center select-none text-white text-[1.1rem]"
                   onClick={() => setExpanded((prev) => !prev)}
