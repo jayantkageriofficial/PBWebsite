@@ -152,7 +152,7 @@ export default function CardStack() {
         <div
           ref={container}
           style={{ height: `${(cards.length + 1) * 100}vh` }}
-          className="relative w-full bg-pbpages px-4 sm:px-10 lg:px-20"
+          className="relative w-full px-4 sm:px-10 lg:px-20"
         >
           {cards.map((card, i) => {
             const targetScale = Math.max(

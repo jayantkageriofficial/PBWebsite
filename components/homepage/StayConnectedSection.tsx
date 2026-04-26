@@ -9,7 +9,7 @@ const DASHED_V =
   "bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]";
 
 const CARD_BG =
-  "bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)]";
+  "bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,#1C1C1C_99.81%)]";
 const CARD_HOVER =
   "transition-all duration-300 border border-transparent hover:border-pbgreen";
 const ICON_OUTER =
@@ -38,7 +38,7 @@ function ConnectCard({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer ${CARD_HOVER} ${CARD_BG} ${rounded}`}
+        className={`relative z-10 flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer ${CARD_HOVER} ${CARD_BG} ${rounded}`}
       >
         <div className="flex items-center gap-3.5 w-full">
           <div className={ICON_OUTER}>
