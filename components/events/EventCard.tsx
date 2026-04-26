@@ -83,7 +83,7 @@ export default function EventCard({
         </div>
       )}
       <div
-        className={`flex flex-col gap-2 rounded-2xl bg-[#111] p-2 h-full transition-all duration-300 ease-in-out
+        className={`flex flex-col gap-2 rounded-2xl bg-[#111] p-3 h-full transition-all duration-300 ease-in-out
                 ${isFlipped ? "rotate-y-180 border border-pbgreen" : "rotate-y-0 shadow-none border border-white/10"}
                 ${!isFlipped ? "group-hover:border-pbgreen hover:border-pbgreen" : ""} `}
         style={{
@@ -110,7 +110,7 @@ export default function EventCard({
           </div>
 
           {/* Text */}
-          <div className="flex flex-col gap-1 p-1">
+          <div className="flex flex-col gap-1 p-1 pl-2">
             <span
               className="text-xl lg:text-2xl font-medium leading-normal align-middle"
               style={{
