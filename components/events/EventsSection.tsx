@@ -36,7 +36,7 @@ export default function EventsSection({
   onDelete,
 }: EventsSectionProps) {
   return (
-    <section className="bg-pbpages text-white px-4 sm:px-10 lg:px-20 py-6">
+    <section className="text-white px-4 sm:px-10 lg:px-20 py-6">
       <div className="mx-auto max-w-8xl">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

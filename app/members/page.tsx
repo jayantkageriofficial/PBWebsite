@@ -12,7 +12,7 @@ export default async function Events() {
   const members = res.members.map((member: MemberType) => serializeId(member));
 
   return (
-    <section className="bg-pbpages w-full h-full" id="members">
+    <section className="w-full h-full" id="members">
       <Members members={members} />
     </section>
   );

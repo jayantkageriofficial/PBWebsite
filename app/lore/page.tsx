@@ -17,7 +17,7 @@ export default async function LorePage() {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
-    <section className="bg-pbpages w-full h-full">
+    <section className="w-full h-full">
       <Lore lores={lores} />
     </section>
   );

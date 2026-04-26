@@ -26,7 +26,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] overflow-hidden cursor-grab text-white"
+      className="relative z-10 min-h-[90vh] overflow-hidden cursor-grab text-white bg-pbpages"
     >
       <ThreeBackground />
       <div className="flex justify-center items-center absolute inset-0 flex-col px-4 sm:px-10 lg:px-20">

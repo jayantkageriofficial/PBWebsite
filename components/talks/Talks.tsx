@@ -223,7 +223,7 @@ export default function Talks(props: { talks: Talk[] }) {
     form.images.length === 0;
 
   return (
-    <section className="bg-pbblack rounded-xl text-white py-8 md:py-12 text-lexend-300 min-h-xl">
+    <section className="rounded-xl text-white py-8 md:py-12 text-lexend-300 min-h-xl">
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-10 lg:px-20 py-12 text-center">
         {/* Heading */}
         <div className="text-3xl md:text-5xl lg:text-6xl font-medium mb-6 px-4 md:px-10 flex flex-wrap justify-center gap-2">

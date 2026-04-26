@@ -45,7 +45,7 @@ export default function MissionVisionSection() {
   return (
     <section
       id="mission-vision"
-      className="bg-pbpages text-white overflow-hidden px-4 sm:px-10 lg:px-20"
+      className="text-white overflow-hidden px-4 sm:px-10 lg:px-20"
     >
       <div className="max-w-8xl mx-auto">
         <div className="pt-14">

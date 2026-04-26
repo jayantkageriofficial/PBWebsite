@@ -13,7 +13,7 @@ export default async function HustlePage() {
   const leaderboard: Leaderboard | null = res.data?.leaderboard ?? null;
 
   return (
-    <section className="bg-pbpages w-full h-full" id="hustle">
+    <section className="w-full h-full" id="hustle">
       <Hustle latest={latest} leaderboard={leaderboard} />
     </section>
   );
