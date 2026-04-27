@@ -23,10 +23,7 @@ const domains = [
 
 export default function DomainsSection() {
   return (
-    <section
-      id="domains"
-      className="text-white px-4 sm:px-10 lg:px-20"
-    >
+    <section id="domains" className="text-white px-4 sm:px-10 lg:px-20">
       <FadeIn className="text-center mb-20">
         <h2 className="text-4xl font-bold text-pbgreen mb-3">
           Domains we Love
@@ -37,20 +34,20 @@ export default function DomainsSection() {
       </FadeIn>
 
       <div className="relative max-w-8xl mx-auto rounded-3xl overflow-hidden">
-        <div
-          className="absolute translate-y-[50%] translate-x-[50%] right-0 bottom-0 w-170 h-200 z-0 pointer-events-none
-          bg-[radial-gradient(circle,rgba(55,255,0,0.6)_1px,transparent_2px)]
-          bg-size-[11px_11px]
-          mask-[radial-gradient(circle,transparent_15%,black_30%,transparent_50%)]
-          [-webkit-mask-image:radial-gradient(circle,transparent_15%,black_30%,transparent_50%)]"
+        <Image
+          width={224}
+          className="absolute"
+          height={213}
+          src={"/top-left-dot.svg"}
+          alt="dotted-BG"
         />
-        <div
-          className="absolute translate-y-[-50%] translate-x-[-50%] left-0 top-0 w-170 h-200 z-0 pointer-events-none
-          bg-[radial-gradient(circle,rgba(55,255,0,0.6)_1px,transparent_2px)]
-          bg-size-[11px_11px]
-          mask-[radial-gradient(circle,transparent_15%,black_30%,transparent_50%)]
-          [-webkit-mask-image:radial-gradient(circle,transparent_15%,black_30%,transparent_50%)]"
-        />
+        <Image
+          width={224}
+          className="absolute right-0 bottom-0"
+          height={213}
+          src={"/right-bottom-dot.svg"}
+          alt="dotted-BG"
+        /> 
 
         <div className="bg-pbdarkgray p-8">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

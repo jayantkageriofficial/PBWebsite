@@ -82,7 +82,7 @@ export default function StayConnectedSection() {
               y="0.75"
               width="calc(100% - 1.5px)"
               height="calc(100% - 1.5px)"
-              stroke="#505050"
+              stroke="#262626"
               strokeWidth="1.5"
               strokeDasharray="8 12"
               strokeLinecap="butt"
