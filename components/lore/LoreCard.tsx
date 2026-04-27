@@ -98,12 +98,12 @@ export default function LoreCard({
 
             <div className="flex justify-center mt-4 md:mt-0 overflow-hidden items-center md:p-3 lg:p-5 p-1 relative min-h-64 md:h-full w-full md:w-[50%]">
               {/* Dotted Background */}
-              <div
-                className="absolute top-0 translate-y-[-50%] translate-x-[50%] right-0 w-170 h-200 z-0 pointer-events-none
-            bg-[radial-gradient(circle,rgba(55,255,0,0.6)_1px,transparent_2px)]
-            bg-size-[11px_11px]
-            mask-[radial-gradient(circle,transparent_15%,black_40%,transparent_50%)]
-            [-webkit-mask-image:radial-gradient(circle,transparent_15%,black_40%,transparent_60%)]"
+              <Image
+                width={334}
+                className="absolute top-0 right-0"
+                height={317}
+                src={"/top-right-dot.svg"}
+                alt="dotted-BG"
               />
 
               <div className="h-64 md:h-full w-[95%] md:w-full overflow-hidden relative rounded-[5px] bg-cover bg-pbgray bg-center">
@@ -182,7 +182,6 @@ export default function LoreCard({
             </motion.div>
           )}
         </AnimatePresence>
-        
       </div>
     </>
   );
