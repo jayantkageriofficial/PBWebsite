@@ -121,7 +121,7 @@ const StickyCard = ({
           filter: blur,
           top: `calc(-5vh + ${i * 24}px)`,
         }}
-        className="relative w-full max-w-8xl mx-auto bg-pbgray rounded-3xl overflow-hidden shadow-2xl hover:border hover:border-pbgreen"
+        className="relative w-full mt-12 max-w-8xl mx-auto bg-pbgray rounded-3xl overflow-hidden shadow-2xl hover:border hover:border-pbgreen"
       >
         <div
           className={`flex flex-col ${
@@ -132,7 +132,7 @@ const StickyCard = ({
         >
           <div className="flex-1 p-8 sm:p-10 lg:p-14">{textEl}</div>
 
-          <div className="flex-1 relative min-h-64 md:min-h-80">{imageEl}</div>
+          <div className="flex-1 relative min-h-54 md:min-h-80">{imageEl}</div>
         </div>
       </motion.div>
     </div>
