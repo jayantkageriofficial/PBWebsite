@@ -42,16 +42,48 @@ const Card: React.FC<CardProps> = ({
       {isAdmin && (
         <div className="absolute top-2 right-2 z-50 flex gap-1.5">
           <button
-            onClick={(e) => { e.stopPropagation(); onEdit?.(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit?.();
+            }}
             className="p-1.5 rounded-full bg-pbgray border border-pbborder hover:border-pbgreen transition-colors"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-pbtext hover:text-pbgreen" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-3.5 w-3.5 text-pbtext hover:text-pbgreen"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
           </button>
           <button
-            onClick={(e) => { e.stopPropagation(); onDelete?.(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete?.();
+            }}
             className="p-1.5 rounded-full bg-pbgray border border-pbborder hover:border-red-500 transition-colors"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-pbtext hover:text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" /><path d="M10 11v6M14 11v6" /><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" /></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-3.5 w-3.5 text-pbtext hover:text-red-500"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="3 6 5 6 21 6" />
+              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+              <path d="M10 11v6M14 11v6" />
+              <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+            </svg>
           </button>
         </div>
       )}
@@ -65,7 +97,10 @@ const Card: React.FC<CardProps> = ({
           className={`relative flex flex-col w-full rounded-3xl border border-pbborder hover:border-pbgreen bg-pbpages p-3 backface-hidden ${
             isFlipped && !hasImage ? "border-pbgreen" : ""
           }`}
-          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+          style={{
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+          }}
         >
           {hasImage && (
             <div className="relative w-full aspect-square perspective-[1000px] shrink-0">
@@ -76,7 +111,10 @@ const Card: React.FC<CardProps> = ({
               >
                 <div
                   className="absolute inset-0 z-10 overflow-hidden rounded-2xl backface-hidden"
-                  style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+                  style={{
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
+                  }}
                 >
                   <Image
                     src={imageUrl}
@@ -89,7 +127,10 @@ const Card: React.FC<CardProps> = ({
 
                 <div
                   className="absolute inset-0 w-full h-full backface-hidden transform-[rotateY(180deg)] rounded-2xl border border-pbborder bg-pbpages p-4 flex flex-col items-center justify-center text-center z-20"
-                  style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+                  style={{
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
+                  }}
                 >
                   {linkedInUrl && (
                     <div className="hover:scale-110 transition-transform mb-2">
@@ -99,7 +140,9 @@ const Card: React.FC<CardProps> = ({
                   <p className="text-white text-sm font-light mb-1">
                     {leadDesc || role}
                   </p>
-                  {company && <p className="text-pbgreen text-xs">@{company}</p>}
+                  {company && (
+                    <p className="text-pbgreen text-xs">@{company}</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -125,7 +168,10 @@ const Card: React.FC<CardProps> = ({
         {!hasImage && (
           <div
             className="absolute inset-0 w-full h-full backface-hidden transform-[rotateY(180deg)] rounded-3xl border border-pbgreen bg-pbpages p-6 flex flex-col items-center justify-center text-center"
-            style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+            style={{
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+            }}
           >
             {linkedInUrl && (
               <div className="hover:scale-110 transition-transform mb-4">
