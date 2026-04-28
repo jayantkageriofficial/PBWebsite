@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import Image from "next/image";
 import { LinkedIn } from "@/components/Icons";
 
@@ -88,31 +89,28 @@ const Card: React.FC<CardProps> = ({
       )}
 
       <div
-        className="relative w-full h-full transition-transform duration-700"
-        style={{
-          transformStyle: "preserve-3d",
-          transform:
-            !hasImage && isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-        }}
+        className={`relative w-full h-full transition-all duration-700 transform-3d ${
+          !hasImage && isFlipped ? "transform-[rotateY(180deg)]" : ""
+        }`}
       >
         <div
-          className="relative flex flex-col w-full rounded-3xl border border-pbborder hover:border-pbgreen bg-pbpages p-3"
+          className={`relative flex flex-col w-full rounded-3xl border border-pbborder hover:border-pbgreen bg-pbpages p-3 backface-hidden ${
+            isFlipped && !hasImage ? "border-pbgreen" : ""
+          }`}
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
           }}
         >
           {hasImage && (
-            <div className="relative w-full aspect-square">
+            <div className="relative w-full aspect-square perspective-[1000px] shrink-0">
               <div
-                className="relative w-full h-full transition-transform duration-700"
-                style={{
-                  transformStyle: "preserve-3d",
-                  transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-                }}
+                className={`relative w-full h-full transition-all duration-700 transform-3d ${
+                  isFlipped ? "transform-[rotateY(180deg)]" : ""
+                }`}
               >
                 <div
-                  className="absolute inset-0 z-10 overflow-hidden rounded-2xl"
+                  className="absolute inset-0 z-10 overflow-hidden rounded-2xl backface-hidden"
                   style={{
                     backfaceVisibility: "hidden",
                     WebkitBackfaceVisibility: "hidden",
@@ -128,15 +126,14 @@ const Card: React.FC<CardProps> = ({
                 </div>
 
                 <div
-                  className="absolute inset-0 w-full h-full rounded-2xl border border-pbborder bg-pbpages p-4 flex flex-col items-center justify-center text-center z-20"
+                  className="absolute inset-0 w-full h-full backface-hidden transform-[rotateY(180deg)] rounded-2xl border border-pbborder bg-pbpages p-4 flex flex-col items-center justify-center text-center z-20"
                   style={{
                     backfaceVisibility: "hidden",
                     WebkitBackfaceVisibility: "hidden",
-                    transform: "rotateY(180deg)",
                   }}
                 >
                   {linkedInUrl && (
-                    <div className="mb-2">
+                    <div className="hover:scale-110 transition-transform mb-2">
                       <LinkedIn className="h-8 w-8 text-pbgreen" />
                     </div>
                   )}
@@ -152,7 +149,9 @@ const Card: React.FC<CardProps> = ({
           )}
 
           <div
-            className={`flex flex-col items-center justify-center gap-1.5 w-full mb-1 ${hasImage ? "mt-3" : "mt-2"}`}
+            className={`flex flex-col items-center justify-center gap-1.5 w-full mb-1 ${
+              hasImage ? "mt-3" : "mt-2"
+            }`}
           >
             <span className="text-pbgreen font-light whitespace-nowrap bg-pbdarkgray w-fit h-fit text-center rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base border border-pbborder capitalize">
               {name}
@@ -168,15 +167,14 @@ const Card: React.FC<CardProps> = ({
 
         {!hasImage && (
           <div
-            className="absolute inset-0 w-full h-full rounded-3xl border border-pbgreen bg-pbpages p-6 flex flex-col items-center justify-center text-center"
+            className="absolute inset-0 w-full h-full backface-hidden transform-[rotateY(180deg)] rounded-3xl border border-pbgreen bg-pbpages p-6 flex flex-col items-center justify-center text-center"
             style={{
               backfaceVisibility: "hidden",
               WebkitBackfaceVisibility: "hidden",
-              transform: "rotateY(180deg)",
             }}
           >
             {linkedInUrl && (
-              <div className="mb-4">
+              <div className="hover:scale-110 transition-transform mb-4">
                 <LinkedIn className="h-10 w-10 text-pbgreen" />
               </div>
             )}
