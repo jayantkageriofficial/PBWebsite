@@ -143,7 +143,7 @@ const Card: React.FC<CardProps> = ({
                   onClick={(e) => e.stopPropagation()}
                   className="hover:scale-110 transition-transform"
                 >
-                  <LinkedIn className="h-10 w-10 text-white hover:text-pbgreen" />
+                  <LinkedIn className="h-10 w-10 text-pbgreen" />
                 </a>
               </div>
             )}
@@ -154,7 +154,7 @@ const Card: React.FC<CardProps> = ({
                     {leadDesc}
                   </p>
                 ) : (
-                  <p className="text-white text-base sm:text-lg font-light mb-1">
+                  <p className="text-white text-base sm:text-lg font-light">
                     {role}
                   </p>
                 )}
@@ -162,7 +162,7 @@ const Card: React.FC<CardProps> = ({
             )}
 
             {company && (
-              <p className="text-gray-400 text-sm font-light italic mb-4">
+              <p className="text-pbgreen text-sm font-normal mb-4">
                 @{company}
               </p>
             )}
