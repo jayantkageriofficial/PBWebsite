@@ -31,7 +31,6 @@ const Card: React.FC<CardProps> = ({
   onFlip,
 }) => {
   const hasImage = imageUrl;
-
   return (
     <div
       className={`relative touch-manipulation w-full group cursor-pointer ${
