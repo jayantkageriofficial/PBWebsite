@@ -95,8 +95,8 @@ const Card: React.FC<CardProps> = ({
       >
         <div
           className={`relative flex flex-col w-full rounded-3xl border border-pbborder hover:border-pbgreen bg-pbpages p-3 backface-hidden ${
-            isFlipped && !hasImage ? "border-pbgreen" : ""
-          }`}
+            isFlipped  ? "border-pbgreen" : ""
+          } `}
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
