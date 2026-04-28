@@ -84,7 +84,7 @@ export default function Hustle({ latest, leaderboard }: HustleProps) {
     "grid grid-cols-[70px_minmax(0,1fr)_100px] md:grid-cols-[200px_minmax(0,1fr)_150px]";
 
   return (
-    <div className="bg-pbpages text-white min-h-screen flex flex-col">
+    <div className="text-white min-h-screen flex flex-col">
       <div className="grow">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

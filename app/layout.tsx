@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/ui/Navbar";
+import DotWaveAnimation from "@/components/ui/DotWaveAnimation";
 import AuthInitializer from "@/components/AuthInitializer";
 import { Lexend } from "next/font/google";
 import Footer from "@/components/ui/Footer";
@@ -40,9 +41,12 @@ export default async function RootLayout({
           name={user?.name ?? null}
           token={sessionCookie?.value ?? null}
         />
-        <Navbar />
-        {children}
-        <Footer />
+        <DotWaveAnimation />
+        <div className="relative">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

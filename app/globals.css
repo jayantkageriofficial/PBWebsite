@@ -22,6 +22,11 @@ img {
   @apply select-none;
 }
 
+::selection {
+  color: #37ff00;
+  background-color: var(--color-gray-900);
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);

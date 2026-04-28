@@ -38,7 +38,7 @@ export default function FoundingMembersSection() {
   return (
     <section
       id="founding-members"
-      className="bg-pbpages text-white pt-20 px-4 sm:px-10 lg:px-20"
+      className="text-white pt-20 px-4 sm:px-10 lg:px-20"
     >
       <div className="max-w-8xl mx-auto">
         <FadeIn className="text-center mb-4">
@@ -48,7 +48,7 @@ export default function FoundingMembersSection() {
         </FadeIn>
         <FadeIn
           delay={0.1}
-          className="text-center text-white/70 text-sm max-w-xl mx-auto mb-12"
+          className="text-center text-white/70 text-sm max-w-xl mx-auto mb-16"
         >
           <p>
             Point Blank is a passion project, born from a shared excitement to

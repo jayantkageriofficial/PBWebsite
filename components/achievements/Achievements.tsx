@@ -361,7 +361,7 @@ export default function Achievements({
   );
 
   return (
-    <main className="min-h-screen bg-pbpages text-white">
+    <main className="min-h-screen text-white">
       {/* Heading */}
       <div className="flex flex-col items-center justify-center pt-20 pb-12 px-4 text-center">
         <div className="text-3xl md:text-5xl lg:text-6xl font-medium mb-6 px-4 md:px-10 flex flex-wrap justify-center gap-2">
@@ -418,7 +418,7 @@ export default function Achievements({
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-sm md:text-base uppercase cursor-pointer transition-colors duration-200
-                ${activeCategory === cat ? "bg-pbgreen text-black" : "bg-white/5 text-white/60"}`}
+                ${activeCategory === cat ? "bg-pbgreen text-black" : "bg-pbgray text-white/60"}`}
             >
               {cat}
             </button>
@@ -426,7 +426,7 @@ export default function Achievements({
 
           <div className="flex items-center gap-2">
             <div
-              className={`flex items-center overflow-hidden transition-all duration-300 ease-in-out bg-white/5 rounded-full ${
+              className={`flex items-center overflow-hidden transition-all duration-300 ease-in-out bg-pbgray rounded-full ${
                 searchOpen ? "w-48 px-3" : "w-0 px-0"
               }`}
             >
@@ -441,7 +441,7 @@ export default function Achievements({
             </div>
             <button
               onClick={handleSearchToggle}
-              className="flex items-center justify-center w-9 h-9 rounded-full bg-white/5 text-white/60 hover:bg-pbgreen hover:text-black transition-all duration-200 cursor-pointer shrink-0"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-pbgray text-white/60 hover:bg-pbgreen hover:text-black transition-all duration-200 cursor-pointer shrink-0"
               aria-label={searchOpen ? "Close search" : "Open search"}
             >
               {searchOpen ? <X size={16} /> : <Search size={16} />}

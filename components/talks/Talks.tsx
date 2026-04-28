@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useAuthStore } from "@/lib/store/auth";
 import {
   Dialog,
@@ -54,12 +54,12 @@ const TEXT_FIELDS: {
   type: string;
   required?: boolean;
 }[] = [
-  { label: "Title", key: "title", type: "text", required: true },
-  { label: "Description", key: "description", type: "text", required: true },
-  { label: "Venue / Event Name", key: "name", type: "text", required: true },
-  { label: "Speakers", key: "speakers", type: "text", required: true },
-  { label: "Date", key: "date", type: "date", required: true },
-];
+    { label: "Title", key: "title", type: "text", required: true },
+    { label: "Description", key: "description", type: "text", required: true },
+    { label: "Venue / Event Name", key: "name", type: "text", required: true },
+    { label: "Speakers", key: "speakers", type: "text", required: true },
+    { label: "Date", key: "date", type: "date", required: true },
+  ];
 
 const TABS: TabType[] = ["all", "conference", "talks", "other"];
 
@@ -223,8 +223,8 @@ export default function Talks(props: { talks: Talk[] }) {
     form.images.length === 0;
 
   return (
-    <section className="bg-pbblack rounded-xl text-white py-8 md:py-12 text-lexend-300 min-h-xl">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-12 text-center">
+    <section className="rounded-xl text-white py-8 md:py-12 text-lexend-300 min-h-xl">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-10 lg:px-20 py-12 text-center">
         {/* Heading */}
         <div className="text-3xl md:text-5xl lg:text-6xl font-medium mb-6 px-4 md:px-10 flex flex-wrap justify-center gap-2">
           {phrases.map((phrase, idx) => (
@@ -282,11 +282,10 @@ export default function Talks(props: { talks: Talk[] }) {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-sm md:text-base uppercase cursor-pointer ${
-                activeTab === tab
-                  ? "bg-pbgreen text-black"
-                  : "bg-white/5 text-white/60"
-              }`}
+              className={`px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-sm md:text-base uppercase cursor-pointer ${activeTab === tab
+                ? "bg-pbgreen text-black"
+                : "bg-white/5 text-white/60"
+                }`}
             >
               {tab === "all" ? "All" : tab}
             </button>
@@ -299,7 +298,7 @@ export default function Talks(props: { talks: Talk[] }) {
             <p className="text-gray-400 text-lg mt-8">No talks found.</p>
           )}
 
-          {filteredTalks.map((talk,idx) => (
+          {filteredTalks.map((talk, idx) => (
             <motion.div
               key={String(talk._id)}
               initial={{ opacity: 0, y: 24 }}
@@ -310,12 +309,12 @@ export default function Talks(props: { talks: Talk[] }) {
                 delay: idx === 0 ? 2 : 0.25,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="bg-pbgray rounded-xl max-w-7xl mx-auto flex justify-center mb-6 px-2 md:px-6 lg:px-8"
+              className="bg-pbgray rounded-xl max-w-screen-2xl mx-auto flex justify-center mb-6 px-4 md:px-10 lg:px-4"
             >
               <div className="flex flex-col lg:flex-row items-start py-4 w-full">
                 <div className="flex flex-col items-center">
                   {talk.images[0] && (
-                    <div className="w-full max-w-full lg:w-150 aspect-3/2 overflow-hidden rounded-xl">
+                    <div className="w-full max-w-full lg:w-125 xl:w-150 aspect-3/2 overflow-hidden rounded-xl">
                       <Image
                         src={talk.images[0]}
                         alt={talk.title}
@@ -326,56 +325,55 @@ export default function Talks(props: { talks: Talk[] }) {
                       />
                     </div>
                   )}
-                  <span className="text-pbgreen text-light font-lexend-300 mt-3 bg-black/40 rounded-full px-3 p-3">
+                  <span className="text-pbgreen font-light font-lexend-300 mt-4 bg-black/40 rounded-full px-3 p-3">
                     {talk.speakers}
                   </span>
                 </div>
 
-                <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-12 py-6 lg:py-8">
+                <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-8 pb-6 lg:pb-6 pt-2">
                   <div className="mb-4">
-                    <h2 className="text-pbgreen font-medium text-2xl md:text-3xl lg:text-3xl leading-snug mb-2 max-w-2xl text-left wrap-break-word">
+                    <h2 className="text-pbgreen font-light text-2xl md:text-3xl lg:text-4xl leading-snug mb-4 max-w-4xl text-left wrap-break-word xl:h-40">
                       {talk.title}
                     </h2>
-                    <div className="text-gray-400 text-sm md:text-base leading-snug max-w-xl md:leading-normal text-left wrap-break-word">
+                    <div className="text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl text-left wrap-break-word">
                       <motion.div
                         animate={{
                           maxHeight: expanded === String(talk._id) ? 500 : 72,
                         }}
-                        transition={{ duration: 0.53, ease: "easeInOut" }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
                         style={{ overflow: "hidden" }}
                       >
                         <p>{talk.description}</p>
                       </motion.div>
-                      <button
-                        className="mt-3 bg-pbsurface py-1.5 px-3 md:px-3 md:py-2 text-xs md:text-sm text-white rounded-xl cursor-pointer border border-pbgreen"
-                        onClick={() =>
-                          setExpanded(
-                            expanded === String(talk._id)
-                              ? null
-                              : String(talk._id),
-                          )
-                        }
-                      >
-                        {expanded === String(talk._id)
-                          ? "Read Less"
-                          : "Read More"}
-                      </button>
+                      <div className="mt-6 xl:mt-24 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4">
+                        <button
+                          className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl cursor-pointer  hover:border border-pbgreen"
+                          onClick={() =>
+                            setExpanded(
+                              expanded === String(talk._id)
+                                ? null
+                                : String(talk._id),
+                            )
+                          }
+                        >
+                          {expanded === String(talk._id)
+                            ? "Read Less"
+                            : "Read More"}
+                        </button>
+
+
+
+                        <span className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl">
+                          {talk.name} | {new Date(talk.date).toLocaleDateString("en-US", {
+                            month: "short",
+                            year: "numeric",
+                          })}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between py-2 md:py-3 ">
-                    <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl self-start">
-                      {talk.name}
-                    </span>
-                    <div className="flex gap-2 items-center self-center md:self-auto">
-                      <span className="bg-pbsurface py-1.5 px-2 md:px-3 md:py-2 text-xs md:text-sm text-light rounded-2xl">
-                        {new Date(talk.date).toLocaleDateString("en-US", {
-                          month: "long",
-                          year: "numeric",
-                        })}
-                      </span>
-                    </div>
-                  </div>
+
 
                   {authenticated && (
                     <div className="flex gap-2 mt-2">

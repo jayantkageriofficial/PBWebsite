@@ -30,12 +30,12 @@ export default function LoreCard({
     <>
       <div className="mb-6 md:mb-9">
         <div
-          className={`w-full flex justify-center min-h-93 px-4 sm:px-6 bg-pbpages`}
+          className={`w-full flex justify-center min-h-100 px-4 sm:px-6 bg-pbpages`}
         >
-          <div className="w-full max-w-280 flex flex-col-reverse md:flex-row bg-[#1C1C1C] min-h-93a  overflow-hidden">
+          <div className="w-full max-w-7xl flex flex-col-reverse md:flex-row bg-[#1C1C1C] min-h-93  overflow-hidden">
             <div className="w-full md:w-[50%]">
               <div className="min-h-18 w-full pt-8 pl-5 md:pl-12.5 ">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl text-[#37FF00] font-medium">
+                <h1 className="text-3xl sm:text-5xl md:text-5xl text-[#37FF00] font-medium">
                   {title}
                 </h1>
               </div>
@@ -63,13 +63,13 @@ export default function LoreCard({
                 </div>
               </div>
 
-              <div className="min-h-18 w-full pl-6 md:pl-12.5 pt-4">
-                <p className="text-[1.1rem] min-h-18 max-w-full md:max-w-116 text-pbtext font-light">
+              <div className="min-h-25 w-full pl-6 md:pl-12.5 pt-4">
+                <p className="text-[1.1rem] min-h-18 max-w-full md:max-w-127 text-pbtext font-light">
                   {preview}
                 </p>
               </div>
 
-              <div className="md:pl-12.5 sm:pl-6 p-0 h-14 w-full mt-11 mb-5 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
+              <div className="md:pl-12.5 lg:mb-0 md:mb-2 mb-4 sm:pl-6 p-0 h-14 w-full mt-7 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
                 <button
                   className="bg-pbsurface border border-[#37ff0014] cursor-pointer h-14 w-49.5 hover:border-pbgreen/70  ease-in-out duration-200 rounded-2xl text-center select-none text-white text-[1.1rem]"
                   onClick={() => setExpanded((prev) => !prev)}
@@ -96,17 +96,17 @@ export default function LoreCard({
               </div>
             </div>
 
-            <div className="flex justify-center mt-4 md:mt-0 overflow-hidden items-center relative min-h-64 md:h-full w-full md:w-[50%]">
+            <div className="flex justify-center mt-4 md:mt-0 overflow-hidden items-center md:p-3 lg:p-5 p-1 relative min-h-64 md:h-full w-full md:w-[50%]">
               {/* Dotted Background */}
-              <div
-                className="absolute top-0 translate-y-[-50%] translate-x-[50%] right-0 w-170 h-200 z-0 pointer-events-none
-            bg-[radial-gradient(circle,rgba(55,255,0,0.6)_1px,transparent_2px)]
-            bg-size-[11px_11px]
-            mask-[radial-gradient(circle,transparent_15%,black_40%,transparent_50%)]
-            [-webkit-mask-image:radial-gradient(circle,transparent_15%,black_40%,transparent_60%)]"
+              <Image
+                width={334}
+                className="absolute top-0 right-0"
+                height={317}
+                src={"/top-right-dot.svg"}
+                alt="dotted-BG"
               />
 
-              <div className="h-64 md:h-83 w-[90%] md:w-lg overflow-hidden relative rounded-[5px] bg-cover bg-pbgray bg-center">
+              <div className="h-64 md:h-full w-[95%] md:w-full overflow-hidden relative rounded-[5px] bg-cover bg-pbgray bg-center">
                 {/* Image nav prev */}
                 {images.length > 1 && (
                   <button
@@ -182,7 +182,6 @@ export default function LoreCard({
             </motion.div>
           )}
         </AnimatePresence>
-        
       </div>
     </>
   );

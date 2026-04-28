@@ -28,7 +28,7 @@ export default function EventCard({
 }) {
   return (
     <div
-      className="group relative w-full cursor-pointer"
+      className="group relative w-full h-full cursor-pointer"
       style={{ perspective: "1000px" }}
       onClick={onToggle}
     >
@@ -83,9 +83,9 @@ export default function EventCard({
         </div>
       )}
       <div
-        className={`flex flex-col gap-2 rounded-2xl bg-[#111] p-2 h-full transition-all duration-300 ease-in-out
-                ${isFlipped ? "rotate-y-180 border border-pbgreen shadow-[0_0_15px_rgba(55,255,0,0.25)]" : "rotate-y-0 shadow-none border border-white/10"}
-                ${!isFlipped ? "group-hover:border-[rgba(55,255,0,0.5)] group-hover:shadow-[0_0_15px_rgba(55,255,0,0.25),0_0_30px_rgba(55,255,0,0.10),inset_0_0_15px_rgba(55,255,0,0.05)]" : ""} `}
+        className={`flex flex-col gap-2 rounded-2xl bg-pbsurface p-3 h-full transition-all duration-300 ease-in-out
+                ${isFlipped ? "rotate-y-180 border border-pbgreen" : "rotate-y-0 shadow-none border border-white/10"}
+                ${!isFlipped ? "group-hover:border-pbgreen hover:border-pbgreen" : ""} `}
         style={{
           transformStyle: "preserve-3d",
           transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
@@ -110,29 +110,22 @@ export default function EventCard({
           </div>
 
           {/* Text */}
-          <div className="flex flex-col gap-1 p-1">
+          <div className="flex flex-col gap-1 p-1 pl-2">
             <span
-              className="text-xl lg:text-2xl font-medium leading-normal align-middle"
-              style={{
-                background: "linear-gradient(135deg, #37FF00, #37FF00)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
+              className="text-xl lg:text-3xl font-medium leading-normal align-middle bg-linear-to-b from-[#37FF00] to-[#219900] bg-clip-text text-transparent"
+
             >
               {title}
             </span>
-            <span className="text-sm font-normal leading-normal text-white/65">
-              {description.length > 50
-                ? description.substring(0, 50) + "..."
-                : description}
+            <span className="text-sm font-normal leading-normal text-white/65 line-clamp-1">
+              {description}
             </span>
           </div>
         </div>
 
         {/* Back */}
         <div
-          className="absolute inset-0 flex flex-col gap-3 rounded-2xl bg-[#111] p-6"
+          className="absolute inset-0 flex flex-col gap-3 rounded-2xl bg-pbsurface p-6"
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
@@ -142,7 +135,7 @@ export default function EventCard({
             {title}
           </span>
           <div className="text-xs md:text-sm text-white/80">
-            <strong>Date:</strong>{" "}
+            <strong className="text-pbgreen">Date:</strong>{" "}
             {date
               ? new Date(date).toLocaleDateString("en-GB", {
                   day: "2-digit",
@@ -152,7 +145,7 @@ export default function EventCard({
               : "TBA"}
           </div>
           <div className="text-xs md:text-sm text-white/80">
-            <strong>Location:</strong> {location || "TBA"}
+            <strong className="text-pbgreen">Location:</strong> {location || "TBA"}
           </div>
           <p className="mt-2 text-xs md:text-sm leading-relaxed text-white/60 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-pbtext/5 [&::-webkit-scrollbar-track]:rounded-3xl [&::-webkit-scrollbar-thumb]:bg-pbtext/25 [&::-webkit-scrollbar-thumb]:rounded-full">
             {description}
@@ -160,7 +153,7 @@ export default function EventCard({
 
           {registrationLink && (
             <div className="text-xs md:text-sm text-white/80">
-              <strong>Registration Link:</strong>{" "}
+              <strong className="text-pbgreen">Registration Link:</strong>{" "}
               <a
                 href={registrationLink || "#"}
                 target="_blank"

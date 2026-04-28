@@ -15,7 +15,7 @@ export default async function TalksPage() {
   );
 
   return (
-    <section className="bg-pbpages w-full h-full" id="talks">
+    <section className="w-full h-full" id="talks">
       <Talks talks={talks} />
     </section>
   );

@@ -32,7 +32,7 @@ export function AchievementCard({
     .join("");
 
   return (
-    <div className="w-full h-full rounded-xl border overflow-hidden border-pbborder bg-pbgray flex flex-col hover:shadow-[0_0_7px_rgba(55,255,0,0.55)]">
+    <div className="w-full h-full rounded-xl border overflow-hidden border-pbborder bg-pbgray flex flex-col hover:border hover:border-pbgreen">
       {/* profile */}
       <div className="flex items-center gap-4 px-6 py-5">
         <div className="relative shrink-0">

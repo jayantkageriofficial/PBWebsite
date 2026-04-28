@@ -268,7 +268,7 @@ export default function Members(props: { members: Member[] }) {
   const isAnyOpen = openIndex !== -1;
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-full space-y-4 mt-24 bg-pbpages">
+    <div className="flex flex-col justify-center items-center w-full h-full space-y-4 mt-24">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -317,7 +317,7 @@ export default function Members(props: { members: Member[] }) {
                 isAnySectionOpen={isAnyOpen}
                 onToggle={() => handleToggle(index)}
                 content={
-                  <div className="flex flex-col items-center space-y-6 w-full pt-4 pb-8 bg-pbpages">
+                  <div className="flex flex-col items-center space-y-6 w-full pt-4 pb-8">
                     <div
                       className={`grid justify-items-center gap-y-12 gap-x-6 md:gap-x-8 lg:gap-x-10 w-full max-w-7xl mx-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`}
                     >
@@ -363,7 +363,7 @@ export default function Members(props: { members: Member[] }) {
         </div>
       </div>
 
-      <div className="h-24 w-full shrink-0"></div>
+      <div className="h-24 w-full shrink-0" />
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
         <DialogContent className="dark bg-pbpages border-pbborder text-white max-w-md max-h-[90vh] overflow-y-auto">

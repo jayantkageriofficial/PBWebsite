@@ -36,8 +36,8 @@ export default function EventsSection({
   onDelete,
 }: EventsSectionProps) {
   return (
-    <section className="bg-pbpages text-white px-6 py-6">
-      <div className="mx-auto max-w-310">
+    <section className="text-white px-4 sm:px-10 lg:px-20 py-6">
+      <div className="mx-auto max-w-8xl">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,12 +47,13 @@ export default function EventsSection({
         >
           {title}
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((ev, i) => {
             const id = `${title}-${i}`;
             return (
               <motion.div
                 key={id}
+                className="h-full"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}

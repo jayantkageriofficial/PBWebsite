@@ -9,9 +9,9 @@ const DASHED_V =
   "bg-[repeating-linear-gradient(to_bottom,#262626_0px,#262626_8px,transparent_8px,transparent_20px)]";
 
 const CARD_BG =
-  "bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)]";
+  "bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%),linear-gradient(267.5deg,#1C1C1C_40.67%,#1C1C1C_99.81%)]";
 const CARD_HOVER =
-  "transition-all duration-300 border border-transparent hover:border-pbgreen/50 hover:shadow-[0_0_20px_rgba(55,255,0,0.12)]";
+  "transition-all duration-300 border border-transparent hover:border-pbgreen";
 const ICON_OUTER =
   "w-18 h-18 shrink-0 rounded-full p-2 flex bg-[linear-gradient(180deg,rgba(202,255,51,0.05)_0%,rgba(202,255,51,0)_100%)]";
 const ICON_INNER =
@@ -38,7 +38,7 @@ function ConnectCard({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer ${CARD_HOVER} ${CARD_BG} ${rounded}`}
+        className={`relative z-10 flex flex-col items-center p-6 lg:p-10 gap-6 flex-1 cursor-pointer ${CARD_HOVER} ${CARD_BG} ${rounded}`}
       >
         <div className="flex items-center gap-3.5 w-full">
           <div className={ICON_OUTER}>
@@ -46,7 +46,7 @@ function ConnectCard({
               <Icon className="w-6 h-6 text-pbgreen" strokeWidth={1.5} />
             </div>
           </div>
-          <h3 className="text-white text-xl font-semibold leading-[150%] flex-1">
+          <h3 className="text-white text-xl font-normal leading-[150%] flex-1">
             {title}
           </h3>
         </div>
@@ -62,16 +62,16 @@ export default function StayConnectedSection() {
   return (
     <section
       id="stay-connected"
-      className="bg-pbpages text-white pt-12 pb-20 px-4 sm:px-10 lg:px-20"
+      className="text-white pt-20 pb-20 px-4 sm:px-10 lg:px-20"
     >
       <div className="max-w-8xl mx-auto">
-        <FadeIn className="text-center mb-12">
+        <FadeIn className="text-center mb-20">
           <h2 className="text-4xl font-bold text-white">
             Stay <span className="text-pbgreen">Connected</span>
           </h2>
         </FadeIn>
 
-        <div className="relative flex flex-col p-4 lg:p-7.5">
+        <div className="relative flex flex-col p-4 lg:p-7">
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none"
             fill="none"
@@ -82,7 +82,7 @@ export default function StayConnectedSection() {
               y="0.75"
               width="calc(100% - 1.5px)"
               height="calc(100% - 1.5px)"
-              stroke="#505050"
+              stroke="#262626"
               strokeWidth="1.5"
               strokeDasharray="8 12"
               strokeLinecap="butt"
@@ -99,9 +99,9 @@ export default function StayConnectedSection() {
               rounded="rounded-tl-[40px] rounded-tr-[14px] rounded-br-[40px] rounded-bl-[14px]"
             />
 
-            <div className={`lg:hidden h-px w-full my-3.75 ${DASHED_H}`} />
+            <div className={`lg:hidden h-px w-full my-4 ${DASHED_H}`} />
             <div
-              className={`hidden lg:block w-px mx-3.75 self-stretch shrink-0 ${DASHED_V}`}
+              className={`hidden lg:block w-px mx-8 self-stretch shrink-0 ${DASHED_V}`}
             />
 
             <ConnectCard
@@ -113,9 +113,9 @@ export default function StayConnectedSection() {
               delay={0.1}
             />
 
-            <div className={`lg:hidden h-px w-full my-3.75 ${DASHED_H}`} />
+            <div className={`lg:hidden h-px w-full my-4 ${DASHED_H}`} />
             <div
-              className={`hidden lg:block w-px mx-3.75 self-stretch shrink-0 ${DASHED_V}`}
+              className={`hidden lg:block w-px mx-8 self-stretch shrink-0 ${DASHED_V}`}
             />
 
             <ConnectCard
@@ -128,7 +128,7 @@ export default function StayConnectedSection() {
             />
           </div>
 
-          <div className={`h-px w-full my-3.75 shrink-0 ${DASHED_H}`} />
+          <div className={`h-px w-full my-4 lg:my-8 shrink-0 ${DASHED_H}`} />
 
           {/* Row 2 */}
           <div className="flex flex-col lg:flex-row items-stretch">
@@ -141,9 +141,9 @@ export default function StayConnectedSection() {
               delay={0.1}
             />
 
-            <div className={`lg:hidden h-px w-full my-3.75 ${DASHED_H}`} />
+            <div className={`lg:hidden h-px w-full my-4 ${DASHED_H}`} />
             <div
-              className={`hidden lg:block w-px mx-3.75 self-stretch shrink-0 ${DASHED_V}`}
+              className={`hidden lg:block w-px mx-8 self-stretch shrink-0 ${DASHED_V}`}
             />
 
             <ConnectCard
@@ -155,9 +155,9 @@ export default function StayConnectedSection() {
               delay={0.2}
             />
 
-            <div className={`lg:hidden h-px w-full my-3.75 ${DASHED_H}`} />
+            <div className={`lg:hidden h-px w-full my-4 ${DASHED_H}`} />
             <div
-              className={`hidden lg:block w-px mx-3.75 self-stretch shrink-0 ${DASHED_V}`}
+              className={`hidden lg:block w-px mx-8 self-stretch shrink-0 ${DASHED_V}`}
             />
 
             <ConnectCard
