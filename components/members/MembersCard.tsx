@@ -88,17 +88,20 @@ const Card: React.FC<CardProps> = ({
           </button>
         </div>
       )}
+
+
+      
       <div
         className={`
           relative transition-transform duration-700 transform-3d w-full
           ${isFlipEnabled && isFlipped ? "rotate-y-180" : ""} 
-          hover:border-pbgreen hover:border rounded-3xl
+            rounded-3xl
         `}
       >
         <div
           className={`
             relative flex flex-col items-center backface-hidden
-            w-full rounded-3xl border border-pbborder bg-pbpages p-3
+            w-full rounded-3xl border border-pbborder hover:border hover:border-pbgreen bg-pbpages p-3
             z-2
           `}
         >
@@ -141,7 +144,7 @@ const Card: React.FC<CardProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="hover:scale-110 transition-transform"
+                  className="transition-transform"
                 >
                   <LinkedIn className="h-10 w-10 text-pbgreen" />
                 </a>
