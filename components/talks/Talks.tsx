@@ -364,7 +364,7 @@ export default function Talks(props: { talks: Talk[] }) {
                 ref={(el) => {
                   cardsRef.current[idx] = el;
                 }}
-                className="bg-pbgray rounded-xl max-w-screen-2xl mx-auto flex justify-center mb-6 px-4 md:px-10 lg:px-4"
+                className="bg-pbgray rounded-xl max-w-screen-2xl mx-auto flex justify-center mb-16 px-4 md:px-10 lg:px-4"
               >
                 <div className="flex flex-col lg:flex-row items-start py-4 w-full">
                   <div className="flex flex-col items-center">
