@@ -29,24 +29,23 @@ const Card: React.FC<CardProps> = ({
   isFlipped,
   onFlip,
 }) => {
-  const isFlipEnabled = true;
-
+  const hasImage = imageUrl;
   return (
     <div
-      className={`relative touch-manipulation w-full group ${
-        isFlipEnabled ? "perspective-[1000px] cursor-pointer" : ""
+      className={`relative touch-manipulation w-full group cursor-pointer ${
+        !hasImage ? "h-fit" : ""
       }`}
-      onClick={() => isFlipEnabled && onFlip?.()}
+      style={{ perspective: "1000px" }}
+      onClick={() => onFlip?.()}
     >
       {isAdmin && (
-        <div className="absolute top-2 right-2 z-30 flex gap-1.5">
+        <div className="absolute top-2 right-2 z-50 flex gap-1.5">
           <button
             onClick={(e) => {
               e.stopPropagation();
               onEdit?.();
             }}
             className="p-1.5 rounded-full bg-pbgray border border-pbborder hover:border-pbgreen transition-colors"
-            title="Edit"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +67,6 @@ const Card: React.FC<CardProps> = ({
               onDelete?.();
             }}
             className="p-1.5 rounded-full bg-pbgray border border-pbborder hover:border-red-500 transition-colors"
-            title="Delete"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -89,86 +87,100 @@ const Card: React.FC<CardProps> = ({
         </div>
       )}
 
-
-      
       <div
-        className={`
-          relative transition-transform duration-700 transform-3d w-full
-          ${isFlipEnabled && isFlipped ? "rotate-y-180" : ""} 
-            rounded-3xl
-        `}
+        className="relative w-full h-full transition-transform duration-700"
+        style={{
+          transformStyle: "preserve-3d",
+          transform:
+            !hasImage && isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+        }}
       >
         <div
-          className={`
-            relative flex flex-col items-center backface-hidden
-            w-full rounded-3xl border border-pbborder hover:border hover:border-pbgreen bg-pbpages p-3
-            z-2
-          `}
+          className="relative flex flex-col w-full rounded-3xl border border-pbborder hover:border-pbgreen bg-pbpages p-3"
+          style={{
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+          }}
         >
-          {imageUrl && (
-            <div className="relative w-full aspect-square rounded-2xl overflow-hidden shrink-0">
-              <Image
-                src={imageUrl}
-                alt={name}
-                fill
-                className="rounded-2xl object-cover object-center"
-                draggable={false}
-              />
+          {hasImage && (
+            <div className="relative w-full aspect-square">
+              <div
+                className="relative w-full h-full transition-transform duration-700"
+                style={{
+                  transformStyle: "preserve-3d",
+                  transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+                }}
+              >
+                <div
+                  className="absolute inset-0 z-10 overflow-hidden rounded-2xl"
+                  style={{
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
+                  }}
+                >
+                  <Image
+                    src={imageUrl}
+                    alt={name}
+                    fill
+                    className="object-cover object-center"
+                    draggable={false}
+                  />
+                </div>
+
+                <div
+                  className="absolute inset-0 w-full h-full rounded-2xl border border-pbborder bg-pbpages p-4 flex flex-col items-center justify-center text-center z-20"
+                  style={{
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
+                    transform: "rotateY(180deg)",
+                  }}
+                >
+                  {linkedInUrl && (
+                    <div className="mb-2">
+                      <LinkedIn className="h-8 w-8 text-pbgreen" />
+                    </div>
+                  )}
+                  <p className="text-white text-sm font-light mb-1">
+                    {leadDesc || role}
+                  </p>
+                  {company && (
+                    <p className="text-pbgreen text-xs">@{company}</p>
+                  )}
+                </div>
+              </div>
             </div>
           )}
-          <div className="flex justify-center mt-3 mb-1">
-            <div className="flex flex-col items-center justify-center gap-1.5 w-full h-fit">
-              <span className="text-pbgreen font-light ...">{name}</span>
 
-              {!imageUrl && (
-                <p className="text-pbtext text-lexend font-light text-center text-lg leading-[1.4] h-7">
-                  {role}
-                </p>
-              )}
-            </div>
+          <div
+            className={`flex flex-col items-center justify-center gap-1.5 w-full mb-1 ${hasImage ? "mt-3" : "mt-2"}`}
+          >
+            <span className="text-pbgreen font-light whitespace-nowrap bg-pbdarkgray w-fit h-fit text-center rounded-full px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base border border-pbborder capitalize">
+              {name}
+            </span>
+
+            {!hasImage && (
+              <p className="text-pbtext font-light text-center text-sm mt-1">
+                {role}
+              </p>
+            )}
           </div>
         </div>
 
-        {isFlipEnabled && (
+        {!hasImage && (
           <div
-            className={`
-      absolute inset-0 w-full h-full backface-hidden rotate-y-180
-      rounded-3xl border border-pbgreen bg-pbpages p-4 sm:p-5 md:p-6
-      flex flex-col items-center justify-center text-center z-1
-    `}
+            className="absolute inset-0 w-full h-full rounded-3xl border border-pbgreen bg-pbpages p-6 flex flex-col items-center justify-center text-center"
+            style={{
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              transform: "rotateY(180deg)",
+            }}
           >
             {linkedInUrl && (
-              <div className="mt-4 pt-4  w-2/3 flex justify-center">
-                <a
-                  href={linkedInUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="transition-transform"
-                >
-                  <LinkedIn className="h-10 w-10 text-pbgreen" />
-                </a>
+              <div className="mb-4">
+                <LinkedIn className="h-10 w-10 text-pbgreen" />
               </div>
             )}
-            {imageUrl && (
-              <>
-                {leadDesc ? (
-                  <p className="text-white text-base sm:text-lg font-light mb-1">
-                    {leadDesc}
-                  </p>
-                ) : (
-                  <p className="text-white text-base sm:text-lg font-light">
-                    {role}
-                  </p>
-                )}
-              </>
-            )}
-
-            {company && (
-              <p className="text-pbgreen text-sm font-normal mb-4">
-                @{company}
-              </p>
-            )}
+            {company && <p className="text-pbgreen text-[17px]">@{company}</p>}
           </div>
         )}
       </div>
