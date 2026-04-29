@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useAuthStore } from "@/lib/store/auth";
@@ -66,6 +66,7 @@ const TABS: TabType[] = ["all", "conference", "talks", "other"];
 const headingText = "We Speak. We Share. We Lead.";
 const phrases = headingText.split(". ");
 
+
 export default function Talks(props: { talks: Talk[] }) {
   const [talks, setTalks] = useState<Talk[]>(props.talks);
   const [activeTab, setActiveTab] = useState<TabType>("all");
@@ -84,6 +85,8 @@ export default function Talks(props: { talks: Talk[] }) {
 
   const [deleteTarget, setDeleteTarget] = useState<Talk | null>(null);
   const [deleting, setDeleting] = useState(false);
+
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const filteredTalks =
     activeTab === "all" ? talks : talks.filter((t) => t.type === activeTab);
@@ -222,6 +225,61 @@ export default function Talks(props: { talks: Talk[] }) {
     !form.speakers ||
     form.images.length === 0;
 
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+
+
+      requestAnimationFrame(() => {
+        const windowHeight = window.innerHeight;
+        const centerY = windowHeight / 2;
+
+
+
+        cardsRef.current.forEach((card, index) => {
+          if (!card) return;
+
+          const rect = card.getBoundingClientRect();
+          const cardCenterY = rect.top + rect.height / 2;
+
+          let targetCenter = centerY;
+
+          if (index === 0 && window.scrollY < 100) {
+            targetCenter = cardCenterY;
+          }
+
+          const distance = cardCenterY - targetCenter;
+          const normalized = distance / windowHeight;
+          const clamped = Math.max(-1.5, Math.min(1.5, normalized));
+
+          const rotation = clamped * 35;
+          const z = Math.max(-200, Math.min(0, Math.abs(clamped) * -200));
+          const opacity = 1 - Math.min(Math.abs(clamped) * 0.8, 1);
+
+          const isFirstCard = index === 0;
+          const isLastCard = index === cardsRef.current.length - 1;
+          const shouldBeFlat = (isFirstCard && clamped > 0) || (isLastCard && clamped < 0);
+          const finalRotation = shouldBeFlat ? 0 : -rotation;
+          const finalZ = shouldBeFlat ? 0 : z;
+          const finalOpacity = shouldBeFlat ? 1 : opacity;
+
+          card.style.transform = `perspective(1000px) rotateX(${-finalRotation}deg) translate3d(0,0,${finalZ}px)`;
+          card.style.opacity = String(finalOpacity);
+        });
+
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section className="rounded-xl text-white py-8 md:py-12 text-lexend-300 min-h-xl">
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-10 lg:px-20 py-12 text-center">
@@ -301,96 +359,104 @@ export default function Talks(props: { talks: Talk[] }) {
           {filteredTalks.map((talk, idx) => (
             <motion.div
               key={String(talk._id)}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
                 duration: 0.25,
                 delay: idx === 0 ? 2 : 0.25,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="bg-pbgray rounded-xl max-w-screen-2xl mx-auto flex justify-center mb-6 px-4 md:px-10 lg:px-4"
+
             >
-              <div className="flex flex-col lg:flex-row items-start py-4 w-full">
-                <div className="flex flex-col items-center">
-                  {talk.images[0] && (
-                    <div className="w-full max-w-full lg:w-125 xl:w-150 aspect-3/2 overflow-hidden rounded-xl">
-                      <Image
-                        src={talk.images[0]}
-                        alt={talk.title}
-                        width={600}
-                        height={400}
-                        className="object-cover rounded-xl w-full h-full "
-                        draggable={false}
-                      />
-                    </div>
-                  )}
-                  <span className="text-pbgreen font-light font-lexend-300 mt-4 bg-black/40 rounded-full px-3 p-3">
-                    {talk.speakers}
-                  </span>
-                </div>
-
-                <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-8 pb-6 lg:pb-6 pt-2">
-                  <div className="mb-4">
-                    <h2 className="text-pbgreen font-light text-2xl md:text-3xl lg:text-4xl leading-snug mb-4 max-w-4xl text-left wrap-break-word xl:h-40">
-                      {talk.title}
-                    </h2>
-                    <div className="text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl text-left wrap-break-word">
-                      <motion.div
-                        animate={{
-                          maxHeight: expanded === String(talk._id) ? 500 : 72,
-                        }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        style={{ overflow: "hidden" }}
-                      >
-                        <p>{talk.description}</p>
-                      </motion.div>
-                      <div className="mt-6 xl:mt-24 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4">
-                        <button
-                          className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl cursor-pointer  hover:border border-pbgreen"
-                          onClick={() =>
-                            setExpanded(
-                              expanded === String(talk._id)
-                                ? null
-                                : String(talk._id),
-                            )
-                          }
-                        >
-                          {expanded === String(talk._id)
-                            ? "Read Less"
-                            : "Read More"}
-                        </button>
-
-
-
-                        <span className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl">
-                          {talk.name} | {new Date(talk.date).toLocaleDateString("en-US", {
-                            month: "short",
-                            year: "numeric",
-                          })}
-                        </span>
+              <div
+                key={String(talk._id)}
+                ref={(el) => {
+                  cardsRef.current[idx] = el;
+                }}
+                className="bg-pbgray rounded-xl max-w-screen-2xl mx-auto flex justify-center mb-16 px-4 md:px-10 lg:px-4"
+              >
+                <div className="flex flex-col lg:flex-row items-start py-4 w-full">
+                  <div className="flex flex-col items-center">
+                    {talk.images[0] && (
+                      <div className="w-full max-w-full lg:w-125 xl:w-150 aspect-3/2 overflow-hidden rounded-xl">
+                        <Image
+                          src={talk.images[0]}
+                          alt={talk.title}
+                          width={600}
+                          height={400}
+                          className="object-cover rounded-xl w-full h-full "
+                          draggable={false}
+                        />
                       </div>
-                    </div>
+                    )}
+                    <span className="text-pbgreen font-light font-lexend-300 mt-4 bg-black/40 rounded-full px-3 p-3">
+                      {talk.speakers}
+                    </span>
                   </div>
 
+                  <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-8 pb-6 lg:pb-6 pt-2">
+                    <div className="mb-4">
+                      <h2 className="text-pbgreen font-light text-2xl md:text-3xl lg:text-4xl leading-snug mb-4 max-w-4xl text-left wrap-break-word xl:h-40">
+                        {talk.title}
+                      </h2>
+                      <div className="text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl text-left wrap-break-word">
+                        <motion.div
+                          animate={{
+                            maxHeight: expanded === String(talk._id) ? 500 : 72,
+                          }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          style={{ overflow: "hidden" }}
+                        >
+                          <p>{talk.description}</p>
+                        </motion.div>
+                        <div className="mt-6 xl:mt-24 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4">
+                          <button
+                            className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl cursor-pointer  hover:border border-pbgreen"
+                            onClick={() =>
+                              setExpanded(
+                                expanded === String(talk._id)
+                                  ? null
+                                  : String(talk._id),
+                              )
+                            }
+                          >
+                            {expanded === String(talk._id)
+                              ? "Read Less"
+                              : "Read More"}
+                          </button>
 
 
-                  {authenticated && (
-                    <div className="flex gap-2 mt-2">
-                      <button
-                        onClick={() => openEdit(talk)}
-                        className="px-3 py-1 text-xs bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors cursor-pointer"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => setDeleteTarget(talk)}
-                        className="px-3 py-1 text-xs bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-full transition-colors cursor-pointer"
-                      >
-                        Delete
-                      </button>
+
+                          <span className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl">
+                            {talk.name} | {new Date(talk.date).toLocaleDateString("en-US", {
+                              month: "short",
+                              year: "numeric",
+                            })}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                  )}
+
+
+
+                    {authenticated && (
+                      <div className="flex gap-2 mt-2">
+                        <button
+                          onClick={() => openEdit(talk)}
+                          className="px-3 py-1 text-xs bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors cursor-pointer"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => setDeleteTarget(talk)}
+                          className="px-3 py-1 text-xs bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-full transition-colors cursor-pointer"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>
