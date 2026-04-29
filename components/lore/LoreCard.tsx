@@ -3,7 +3,7 @@
 import { useState } from "react";
 import LoreType from "@/types/lore/loreType";
 import Image from "next/image";
-import LoreStoryCard from "@/components/lore/LoreStoryCard";
+import LoreStoryComp from "./LoreStoryComp";
 import { CalendarDays, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -27,12 +27,10 @@ export default function LoreCard({
   const [expanded, setExpanded] = useState<boolean>(false);
 
   return (
-    <>
-      <div className="mb-6 md:mb-9">
-        <div
-          className={`w-full flex justify-center min-h-100 px-4 sm:px-6 bg-pbpages`}
-        >
-          <div className="w-full max-w-7xl flex flex-col-reverse md:flex-row bg-[#1C1C1C] min-h-93  overflow-hidden">
+    <div className="mb-6 md:mb-9">
+      <div className="w-full flex justify-center px-4 sm:px-6">
+        <div className="w-full max-w-7xl bg-[#1C1C1C] rounded-2xl overflow-hidden flex flex-col">
+          <div className="w-full flex flex-col-reverse md:flex-row min-h-100">
             <div className="w-full md:w-[50%]">
               <div className="min-h-18 w-full pt-8 pl-5 md:pl-12.5 ">
                 <h1 className="text-3xl sm:text-5xl md:text-5xl text-[#37FF00] font-medium">
@@ -63,8 +61,8 @@ export default function LoreCard({
                 </div>
               </div>
 
-              <div className="min-h-25 w-full pl-6 md:pl-12.5 pt-4">
-                <p className="text-[1.1rem] min-h-18 max-w-full md:max-w-127 text-pbtext font-light">
+              <div className="min-h-25 w-full pl-6 md:pl-12.5 pt-5">
+                <p className="text-[1.1rem] min-h-18 max-w-full md:max-w-136 text-pbtext font-light">
                   {preview}
                 </p>
               </div>
@@ -167,22 +165,26 @@ export default function LoreCard({
               </div>
             </div>
           </div>
-        </div>
 
-        <AnimatePresence>
-          {expanded && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              style={{ overflow: "hidden" }}
-            >
-              <LoreStoryCard key={_id} stories={story} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+          <AnimatePresence>
+            {expanded && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                style={{ overflow: "hidden" }}
+              >
+                <div className="pt-4 pb-10 flex flex-col items-center">
+                  {story.map((s, idx) => (
+                    <LoreStoryComp key={idx} story={s} />
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

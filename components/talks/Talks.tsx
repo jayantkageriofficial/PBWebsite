@@ -237,8 +237,6 @@ export default function Talks(props: { talks: Talk[] }) {
         const windowHeight = window.innerHeight;
         const centerY = windowHeight / 2;
 
-
-
         cardsRef.current.forEach((card, index) => {
           if (!card) return;
 
