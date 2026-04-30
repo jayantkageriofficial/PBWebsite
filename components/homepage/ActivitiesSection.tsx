@@ -65,7 +65,7 @@ export default function ActivitiesSection() {
       <div className="max-w-8xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {activities.map(({ title, tag, img, description }, i) => (
           <FadeIn key={i} delay={(i % 3) * 0.1} className="h-full">
-            <div className="relative z-10 h-full bg-pbdarkgray bg-cover bg-center rounded-b-[16px] rounded-t-[40px] overflow-hidden border border-white/16 flex flex-col transition-all duration-300 hover:border-pbgreen">
+            <div className="relative z-10 h-full bg-pbdarkgray bg-cover bg-center rounded-b-[16px] rounded-t-[54px] overflow-hidden border border-white/16 flex flex-col transition-all duration-300 hover:border-pbgreen">
               <div className="relative h-72 overflow-hidden m-7 mb-3.1 rounded-b-[12px] rounded-t-[30px]">
                 <Image
                   src={img}
