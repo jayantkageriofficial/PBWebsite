@@ -7,7 +7,7 @@ import abstractDesignImg from "@/public/images/abstract-design.svg";
 
 function ImageCard({ alt, src }: { alt: string; src: StaticImageData }) {
   return (
-    <div className="relative isolate overflow-hidden w-full sm:w-md lg:w-136.25 h-64 sm:h-96 lg:h-125 border border-pbborder rounded-[50px_50px_20px_20px]">
+    <div className="relative isolate overflow-hidden w-full sm:w-md lg:w-136.25 h-64 sm:h-96 lg:h-125 border border-pbborder rounded-[110px_110px_20px_20px]">
       <Image
         src={asphaltImg}
         alt=""
