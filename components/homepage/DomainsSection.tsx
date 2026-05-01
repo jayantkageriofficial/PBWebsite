@@ -29,7 +29,7 @@ export default function DomainsSection() {
           Domains we Love
         </h2>
         <p className="text-white/70 text-sm">
-          we will write some sub heading here
+          Our club covers a wide range of interests and fields, bringing unique perspectives and expertise to every project!
         </p>
       </FadeIn>
 
