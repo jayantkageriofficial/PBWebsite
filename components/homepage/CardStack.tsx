@@ -34,7 +34,7 @@ const cards: Card[] = [
       </>
     ),
     description:
-      "Learning here isn’t about following step by step guides or memorizing solutions. It’s about exploring ideas, asking better questions, and figuring things out with people who are on the same path as you. Whether you’re just getting started or trying to level up, there’s always someone around to nudge you in the right direction We don’t just tell you how to do something,we help you understand why it works. Share your doubts, build projects, break things, and learn by doing. That’s how real growth happens.",
+      "Learning here isn’t about following step by step guides or memorizing solutions. It’s about exploring ideas, asking better questions, and figuring things out with people who are on the same path as you. Whether you’re just getting started or trying to level up, there’s always someone around to nudge you in the right direction.",
     image: learn,
     imagePosition: "left",
   },
