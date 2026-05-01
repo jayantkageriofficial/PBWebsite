@@ -23,7 +23,7 @@ const cards: Card[] = [
       </>
     ),
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque nisl, non nonummy felis. Sed scelerisque nisl, non nonummy felis. Praesent sapien aliquis fermentum, at pulvinar. Cras vehicula, sapien cun commodo tristique, arcu erat suscipit massa, et adipisalin pula lorem quis elit. Vivamus tempor neque ut ant.",
+      "Stuck on something and tired of staring at the same error for hours? Just ask. Someone here has probably been through the same thing and can point you in the right direction.Or maybe you just want a second opinion on your code, your project, or an idea you are working on. Share it. Talk it out. You will find people who are figuring things out just like you.",
     image: connect,
     imagePosition: "right",
   },
@@ -34,7 +34,7 @@ const cards: Card[] = [
       </>
     ),
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque nisl, non nonummy felis. Sed scelerisque nisl, non nonummy felis. Praesent sapien aliquis fermentum, at pulvinar. Cras vehicula, sapien cun commodo tristique, arcu erat suscipit massa, et adipisalin pula lorem quis elit.",
+      "Learning here isn’t about following step by step guides or memorizing solutions. It’s about exploring ideas, asking better questions, and figuring things out with people who are on the same path as you. Whether you’re just getting started or trying to level up, there’s always someone around to nudge you in the right direction We don’t just tell you how to do something,we help you understand why it works. Share your doubts, build projects, break things, and learn by doing. That’s how real growth happens.",
     image: learn,
     imagePosition: "left",
   },
@@ -45,7 +45,7 @@ const cards: Card[] = [
       </>
     ),
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque nisl, non nonummy felis. Sed scelerisque nisl, non nonummy felis. Praesent sapien aliquis fermentum, at pulvinar. Cras vehicula, sapien cun commodo tristique, arcu erat suscipit massa, et adipisalin pula lorem quis elit.",
+      "Hop into a chat, talk random stuff, share memes, or just see what others are up to. You’ll find people planning side projects, playing games, or just hanging out after a long day. It’s more than just code here .It’s a space where you can chill, reset, and enjoy being part of something.",
     image: bored,
     imagePosition: "right",
   },
@@ -124,11 +124,10 @@ const StickyCard = ({
         className="relative w-full mt-18 max-w-8xl mx-auto bg-pbgray rounded-3xl overflow-hidden shadow-2xl hover:border hover:border-pbgreen"
       >
         <div
-          className={`flex flex-col ${
-            card.imagePosition === "left"
-              ? "md:flex-row-reverse"
-              : "md:flex-row"
-          } gap-0`}
+          className={`flex flex-col ${card.imagePosition === "left"
+            ? "md:flex-row-reverse"
+            : "md:flex-row"
+            } gap-0`}
         >
           <div className="flex-1 p-8 sm:p-10 lg:p-14">{textEl}</div>
 

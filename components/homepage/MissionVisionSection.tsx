@@ -7,7 +7,7 @@ import abstractDesignImg from "@/public/images/abstract-design.svg";
 
 function ImageCard({ alt, src }: { alt: string; src: StaticImageData }) {
   return (
-    <div className="relative isolate overflow-hidden w-full sm:w-md lg:w-136.25 h-64 sm:h-96 lg:h-125 border border-pbborder rounded-[110px_110px_20px_20px]">
+    <div className="relative isolate overflow-hidden w-full sm:w-md lg:w-136.25 h-64 sm:h-96 lg:h-125 border border-pbborder rounded-[50px_50px_20px_20px]">
       <Image
         src={asphaltImg}
         alt=""
@@ -83,13 +83,9 @@ export default function MissionVisionSection() {
           >
             <h3 className="text-3xl sm:text-4xl mb-4 sm:mb-6">Mission</h3>
             <p className="text-white/70 text-sm sm:text-base leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-              vehicula, nunc id varius fermentum, justo erat facilisis nunc, a
-              dictum sapien lorem at elit. Sed tincidunt, nisl at convallis
-              cursus, metus erat posuere arcu, vitae ultrices magna turpis in
-              nibh. Curabitur non urna vitae odio tempor hendrerit. Vivamus
-              efficitur, sapien non tristique luctus, eros libero gravida
-              tortor, at facilisis augue est vel metus. Proin at turpis.
+              We want to create a place where people actually learn instead of just following steps. No shortcuts, no spoon feeding. Just curiosity, effort, and people helping each other grow.
+
+              If you are stuck, ask. If you are learning, share. If you are building something, show it. The idea is simple. Learn by doing, make mistakes, and figure things out together. That is how real progress happens.
             </p>
           </FadeIn>
         </div>
@@ -103,13 +99,9 @@ export default function MissionVisionSection() {
           >
             <h3 className="text-3xl sm:text-4xl mb-4 sm:mb-6">Vision</h3>
             <p className="text-white/70 text-sm sm:text-base leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-              vehicula, nunc id varius fermentum, justo erat facilisis nunc, a
-              dictum sapien lorem at elit. Sed tincidunt, nisl at convallis
-              cursus, metus erat posuere arcu, vitae ultrices magna turpis in
-              nibh. Curabitur non urna vitae odio tempor hendrerit. Vivamus
-              efficitur, sapien non tristique luctus, eros libero gravida
-              tortor, at facilisis augue est vel metus. Proin at turpis.
+              We see a community where learning feels normal and not forced. A place where beginners can start without hesitation and experienced people still find new challenges.
+
+              Over time, this should become more than just a coding space. A group of people who build things, share ideas, and keep pushing each other forward. Not just better developers, but better thinkers.
             </p>
           </FadeIn>
 
