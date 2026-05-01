@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { useState } from "react";
 import { LinkedIn } from "@/components/Icons";
 
 interface CardProps {
@@ -30,6 +31,7 @@ const Card: React.FC<CardProps> = ({
   isFlipped,
   onFlip,
 }) => {
+  const [imageLoaded, setImageLoaded] = useState(false)
   const hasImage = imageUrl;
   return (
     <div
@@ -95,8 +97,8 @@ const Card: React.FC<CardProps> = ({
       >
         <div
           className={`relative flex flex-col w-full rounded-3xl border border-pbborder hover:border-pbgreen bg-pbpages p-3 backface-hidden ${
-            isFlipped  ? "border-pbgreen" : ""
-          } `}
+            isFlipped && !hasImage ? "border-pbgreen" : ""
+          }`}
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
@@ -116,12 +118,18 @@ const Card: React.FC<CardProps> = ({
                     WebkitBackfaceVisibility: "hidden",
                   }}
                 >
+                  {!imageLoaded && (
+                    <div className="absolute inset-0 z-20 bg-pbdarkgray overflow-hidden">
+                      <div className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-pbgreen/10 to-transparent animate-shimmer" />
+                    </div>
+                  )}
                   <Image
                     src={imageUrl}
                     alt={name}
                     fill
                     className="object-cover object-center"
                     draggable={false}
+                    onLoadingComplete={()=>setImageLoaded(true)}
                   />
                 </div>
 
