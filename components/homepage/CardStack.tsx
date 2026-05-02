@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
-import ReactLenis from "lenis/react";
 import Image, { StaticImageData } from "next/image";
 import React, { useRef } from "react";
 import connect from "@/public/images/connect.webp";
@@ -147,7 +146,6 @@ export default function CardStack() {
 
   return (
     <section id="cards">
-      <ReactLenis root>
         <div
           ref={container}
           style={{ height: `${(cards.length + 1) * 100}vh` }}
@@ -171,7 +169,6 @@ export default function CardStack() {
             );
           })}
         </div>
-      </ReactLenis>
     </section>
   );
 }
