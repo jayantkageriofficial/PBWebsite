@@ -34,7 +34,7 @@ const GSoCCard = () => {
             particleCount: 60,
             spread: 70,
             origin: { x, y },
-            colors: ['#00FF66', '#FFB800', '#7CFFB2', '#FFFFFF'],
+            colors: ["#EFBF04"],
             zIndex: 100
         });
     };
@@ -65,9 +65,10 @@ const GSoCCard = () => {
                         width={width}
                         height={height}
                         recycle={true}
-                        numberOfPieces={80}
-                        colors={['#00FF66', '#FFB800', '#7CFFB2', '#FFFFFF']}
-                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10, pointerEvents: 'none' }}
+                        numberOfPieces={120}
+                        colors={["#EFBF04", "#F5D547", "#C9A000", "#FFE566"]}
+                        gravity={0.025}
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 20, pointerEvents: 'none' }}
                     />
                 )}
             </div>
