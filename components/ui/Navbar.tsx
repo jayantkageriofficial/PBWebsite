@@ -181,11 +181,6 @@ export default function Navbar() {
 
   const pages: { name: string; href: string; ext?: boolean }[] = [
     {
-      name: "GitHub",
-      href: "https://github.com/pointblank-club",
-      ext: true,
-    },
-    {
       name: "Home",
       href: "/",
     },
