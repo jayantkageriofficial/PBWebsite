@@ -40,19 +40,19 @@ const GSoCCard = () => {
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 p-10 sm:p-16 pb-8 text-center">
+            <div className="relative z-10 p-6 sm:p-10 lg:p-16 pb-6 lg:pb-8 text-center">
                 {/* Logo/Header */}
-                <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 mb-10">
-                    <span className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+                <div className="flex flex-wrap items-center justify-center gap-x-2 lg:gap-x-3 gap-y-1 lg:gap-y-2 mb-6 lg:mb-10">
+                    <span className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
                         <span style={{ color: '#00FF66' }}>Point</span>
                         <span className="text-white ml-2">Blank</span>
                     </span>
-                    <span className="italic text-4xl sm:text-5xl font-semibold text-white ml-3">dominates</span>
+                    <span className="italic text-2xl sm:text-4xl lg:text-5xl font-semibold text-white ml-2 lg:ml-3">dominates</span>
                 </div>
 
                 {/* GSoC Branding */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
-                    <div className="relative w-20 h-20 sm:w-24 sm:h-24">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 lg:gap-6 mb-8 lg:mb-12">
+                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24">
                         <div className="absolute inset-0 bg-[#FFB800] blur-2xl opacity-40 rounded-full" />
                         <svg viewBox="0 0 100 100" className="relative w-full h-full drop-shadow-[0_0_15px_rgba(255,184,0,0.8)] z-10">
                             <g fill="#FFB800">
@@ -62,24 +62,24 @@ const GSoCCard = () => {
                             <text x="50" y="59" fontSize="26" fontWeight="900" fill="white" textAnchor="middle" fontFamily="monospace">{"</>"}</text>
                         </svg>
                     </div>
-                    <h2 className="text-5xl sm:text-7xl font-black text-[#FFB800] drop-shadow-[0_0_15px_rgba(255,184,0,0.5)]">
+                    <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-[#FFB800] drop-shadow-[0_0_15px_rgba(255,184,0,0.5)]">
                         GSoC 2026
                     </h2>
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-2 gap-8 max-w-2xl mx-auto mb-10">
+                <div className="grid grid-cols-2 gap-4 lg:gap-8 max-w-2xl mx-auto mb-8 lg:mb-10">
                     <div className="flex flex-col items-center">
-                        <span className="text-8xl sm:text-[10rem] font-black text-[#7CFFB2] drop-shadow-[0_0_30px_rgba(0,255,102,0.4)] leading-none">
+                        <span className="text-6xl sm:text-8xl lg:text-[10rem] font-black text-[#7CFFB2] drop-shadow-[0_0_30px_rgba(0,255,102,0.4)] leading-none">
                             13
                         </span>
-                        <span className="text-[#7CFFB2] font-semibold mt-4 text-2xl sm:text-3xl drop-shadow-[0_0_10px_rgba(0,255,102,0.3)]">Mentees</span>
+                        <span className="text-[#7CFFB2] font-semibold mt-2 lg:mt-4 text-xl sm:text-2xl lg:text-3xl drop-shadow-[0_0_10px_rgba(0,255,102,0.3)]">Mentees</span>
                     </div>
                     <div className="flex flex-col items-center">
-                        <span className="text-8xl sm:text-[10rem] font-black text-[#7CFFB2] drop-shadow-[0_0_30px_rgba(0,255,102,0.4)] leading-none">
+                        <span className="text-6xl sm:text-8xl lg:text-[10rem] font-black text-[#7CFFB2] drop-shadow-[0_0_30px_rgba(0,255,102,0.4)] leading-none">
                             3
                         </span>
-                        <span className="text-[#7CFFB2] font-semibold mt-4 text-2xl sm:text-3xl drop-shadow-[0_0_10px_rgba(0,255,102,0.3)]">Mentors</span>
+                        <span className="text-[#7CFFB2] font-semibold mt-2 lg:mt-4 text-xl sm:text-2xl lg:text-3xl drop-shadow-[0_0_10px_rgba(0,255,102,0.3)]">Mentors</span>
                     </div>
                 </div>
 
