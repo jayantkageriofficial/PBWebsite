@@ -31,7 +31,7 @@ const Card: React.FC<CardProps> = ({
   isFlipped,
   onFlip,
 }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false)
   const hasImage = imageUrl;
   return (
     <div
@@ -129,7 +129,7 @@ const Card: React.FC<CardProps> = ({
                     fill
                     className="object-cover object-center"
                     draggable={false}
-                    onLoadingComplete={() => setImageLoaded(true)}
+                    onLoadingComplete={()=>setImageLoaded(true)}
                   />
                 </div>
 
@@ -191,9 +191,18 @@ const Card: React.FC<CardProps> = ({
             }}
           >
             {linkedInUrl && (
+              <a
+                      href={linkedInUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
               <div className="hover:scale-110 transition-transform mb-4">
                 <LinkedIn className="h-10 w-10 text-pbgreen" />
               </div>
+              </a>
             )}
             {company && <p className="text-pbgreen text-[17px]">@{company}</p>}
           </div>

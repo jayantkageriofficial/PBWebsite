@@ -88,8 +88,6 @@ export default function Talks(props: { talks: Talk[] }) {
 
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const filteredTalks =
-    activeTab === "all" ? talks : talks.filter((t) => t.type === activeTab);
 
   const openAdd = () => {
     setEditTalk(null);
@@ -112,6 +110,11 @@ export default function Talks(props: { talks: Talk[] }) {
     setUploadError(null);
     setModalOpen(true);
   };
+
+
+  const filteredTalks = (activeTab === "all" ? talks : talks.filter((t) => t.type === activeTab))
+    .slice()
+    .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -227,48 +230,60 @@ export default function Talks(props: { talks: Talk[] }) {
 
   useEffect(() => {
     let ticking = false;
+    const totalCards = filteredTalks.length;
 
     const handleScroll = () => {
-      if (ticking) return;
-      ticking = true;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const windowHeight = window.innerHeight;
+          const centerY = windowHeight / 2;
 
-      requestAnimationFrame(() => {
-        const windowHeight = window.innerHeight;
-        const centerY = windowHeight / 2;
+          cardsRef.current.forEach((card, index) => {
+            if (!card) return;
+            const rect = card.getBoundingClientRect();
+            const targetCenter = centerY + window.scrollY;
+            const distanceFromCenter =
+              rect.top + window.scrollY + rect.height / 2 - targetCenter;
 
-        cardsRef.current.forEach((card, index) => {
-          if (!card) return;
+            const normalizedDistance = distanceFromCenter / windowHeight;
 
-          const rect = card.getBoundingClientRect();
-          const cardCenterY = rect.top + rect.height / 2;
+            const clampedDistance = Math.max(
+              -1.5,
+              Math.min(1.5, normalizedDistance),
+            );
 
-          let targetCenter = centerY;
+            const rotation = clampedDistance * 35;
+            const zTranslation = Math.max(
+              -200,
+              Math.min(0, Math.abs(clampedDistance) * -200),
+            );
 
-          if (index === 0 && window.scrollY < 100) {
-            targetCenter = cardCenterY;
-          }
+            const opacity =
+              1 - Math.min(Math.abs(clampedDistance) * 0.8, 1);
 
-          const distance = cardCenterY - targetCenter;
-          const normalized = distance / windowHeight;
-          const clamped = Math.max(-1.5, Math.min(1.5, normalized));
+            const isFirstCard = index === 0;
+            const isLastCard = index === totalCards - 1;
+            const shouldBeFlat =
+              (isFirstCard && clampedDistance > 0) ||
+              (isLastCard && clampedDistance < 0);
+            const finalRotation = shouldBeFlat ? 0 : -rotation;
+            const finalZ = shouldBeFlat ? 0 : zTranslation;
+            const finalOpacity = shouldBeFlat ? 1 : opacity;
 
-          const rotation = clamped * 35;
-          const z = Math.max(-200, Math.min(0, Math.abs(clamped) * -200));
-          const opacity = 1 - Math.min(Math.abs(clamped) * 0.8, 1);
-
-          card.style.transform = `perspective(1000px) rotateX(${-rotation}deg) translate3d(0,0,${z}px)`;
-          card.style.opacity = String(opacity);
+            card.style.transform = `perspective(1000px) rotateX(${finalRotation}deg) translate3d(0, 0, ${finalZ}px)`;
+            card.style.opacity = String(finalOpacity);
+          });
+          ticking = false;
         });
-
-        ticking = false;
-      });
+        ticking = true;
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [filteredTalks.length]);
 
   return (
     <section className="rounded-xl text-white py-8 md:py-12 text-lexend-300 min-h-xl">
@@ -341,7 +356,7 @@ export default function Talks(props: { talks: Talk[] }) {
         </motion.div>
 
         {/* Talks list */}
-        <div>
+        <div style={{ perspective: '2000px', perspectiveOrigin: 'center' }}>
           {filteredTalks.length === 0 && (
             <p className="text-gray-400 text-lg mt-8">No talks found.</p>
           )}
@@ -365,6 +380,12 @@ export default function Talks(props: { talks: Talk[] }) {
                   cardsRef.current[idx] = el;
                 }}
                 className="bg-pbgray rounded-xl max-w-screen-2xl mx-auto flex justify-center mb-16 px-4 md:px-10 lg:px-4"
+                style={{
+                  transformStyle: 'preserve-3d',
+                  willChange: 'transform, opacity',
+                  backfaceVisibility: 'hidden',
+                  WebkitBackfaceVisibility: 'hidden',
+                }}
               >
                 <div className="flex flex-col lg:flex-row items-start py-4 w-full">
                   <div className="flex flex-col items-center">
