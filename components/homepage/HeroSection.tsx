@@ -30,9 +30,9 @@ export default function HeroSection() {
       className="relative z-10 min-h-[90vh] overflow-hidden cursor-grab text-white bg-pbpages"
     >
       <ThreeBackground />
-      <div className="relative flex justify-center lg:justify-between items-center min-h-[90vh] flex-col lg:flex-row gap-12 lg:gap-10 px-4 sm:px-10 lg:pl-24 lg:pr-10 xl:pr-16 py-32 lg:py-20 max-w-[105rem] mx-auto w-full z-10">
+      <div className="relative flex justify-center lg:justify-between items-center min-h-[90vh] flex-col lg:flex-row gap-12 lg:gap-10 px-4 sm:px-10 lg:pl-24 lg:pr-10 xl:pr-16 py-32 lg:py-20 max-w-420 mx-auto w-full z-10">
         <h1
-          className={`text-4xl sm:text-5xl md:text-6xl xl:text-7xl text-center lg:text-left tracking-[-22%] text-white p-5 rounded-4xl select-none ${lexendTera.className}`}
+          className={`text-4xl sm:text-5xl md:text-6xl xl:text-7xl text-center tracking-[-22%] text-white p-5 rounded-4xl select-none ${lexendTera.className}`}
         >
           {headingParts.map((part, idx) =>
             part.br ? (
@@ -54,7 +54,7 @@ export default function HeroSection() {
             ),
           )}
         </h1>
-        <div className="w-full max-w-[22rem] sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl z-20">
+        <div className="w-full max-w-88 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl z-20">
           <GsocCard />
         </div>
       </div>
