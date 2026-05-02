@@ -88,8 +88,6 @@ export default function Talks(props: { talks: Talk[] }) {
 
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const filteredTalks =
-    activeTab === "all" ? talks : talks.filter((t) => t.type === activeTab);
 
   const openAdd = () => {
     setEditTalk(null);
@@ -112,6 +110,11 @@ export default function Talks(props: { talks: Talk[] }) {
     setUploadError(null);
     setModalOpen(true);
   };
+
+
+  const filteredTalks = (activeTab === "all" ? talks : talks.filter((t) => t.type === activeTab))
+    .slice()
+    .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
