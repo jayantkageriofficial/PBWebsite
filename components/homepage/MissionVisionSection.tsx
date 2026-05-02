@@ -7,7 +7,7 @@ import abstractDesignImg from "@/public/images/abstract-design.svg";
 
 function ImageCard({ alt, src }: { alt: string; src: StaticImageData }) {
   return (
-    <div className="relative isolate overflow-hidden w-full sm:w-md lg:w-136.25 h-64 sm:h-96 lg:h-125 border border-pbborder rounded-[50px_50px_20px_20px]">
+    <div className="relative isolate overflow-hidden w-full sm:w-md lg:w-136.25 h-64 sm:h-96 lg:h-125 border border-pbborder rounded-t-[70px] sm:rounded-t-[110px] rounded-bl-[20px] rounded-br-[20px]">
       <Image
         src={asphaltImg}
         alt=""
@@ -17,17 +17,7 @@ function ImageCard({ alt, src }: { alt: string; src: StaticImageData }) {
       />
       <div className="absolute inset-0 bg-[linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(106.06deg,rgba(55,255,0,0.05)_-29.45%,rgba(55,255,0,0)_27.86%)]" />
-      <Image
-        src={abstractDesignImg}
-        alt=""
-        aria-hidden
-        width={526}
-        height={500}
-        unoptimized
-        draggable={false}
-        className="absolute pointer-events-none opacity-30 left-[calc(50%-249.5px)] top-[calc(50%-264px)] transform-[matrix(0,-1,-1,0,0,0)]"
-      />
-      <div className="absolute inset-x-8 sm:inset-x-10 lg:inset-x-15 top-8 sm:top-10 lg:top-15 bottom-0 rounded-[50px_50px_0px_0px] overflow-hidden">
+      <div className="absolute inset-x-6 sm:inset-x-10 lg:inset-x-15 top-6 sm:top-10 lg:top-15 bottom-0 rounded-t-[40px] sm:rounded-t-[50px] overflow-hidden">
         <Image
           src={src}
           alt={alt}
