@@ -411,17 +411,17 @@ export default function Talks(props: { talks: Talk[] }) {
                       <h2 className="text-pbgreen font-light text-2xl md:text-3xl lg:text-4xl leading-snug mb-4 max-w-4xl text-left wrap-break-word xl:h-40">
                         {talk.title}
                       </h2>
-                      <div className="text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl text-left wrap-break-word">
+                      <div className=" text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl text-left wrap-break-word">
                         <motion.div
                           animate={{
-                            maxHeight: expanded === String(talk._id) ? 500 : 72,
+                            maxHeight: expanded === String(talk._id) ? 500 : 100,
                           }}
                           transition={{ duration: 0.3, ease: "easeInOut" }}
                           style={{ overflow: "hidden" }}
                         >
                           <p>{talk.description}</p>
                         </motion.div>
-                        <div className="mt-6 xl:mt-24 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4">
+                        <div className="md:mt-16 sm:max-md:py-8  flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4">
                           <button
                             className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl cursor-pointer  hover:border border-pbgreen"
                             onClick={() =>
