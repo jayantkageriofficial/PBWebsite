@@ -9,6 +9,7 @@ import { cookies } from "next/headers";
 import verifyAuth from "@/lib/verifyAuth";
 import ico from "@/public/favicon.ico";
 import ReactLenis from "lenis/react";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 const lexand = Lexend({
   subsets: ["latin"],
@@ -43,6 +44,7 @@ export default async function RootLayout({
           token={sessionCookie?.value ?? null}
         />
         <ReactLenis root>
+           <ScrollToTop />
           <DotWaveAnimation />
           <div className="relative">
             <Navbar />
