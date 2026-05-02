@@ -54,7 +54,7 @@ export default function HeroSection() {
             ),
           )}
         </h1>
-        <div className="w-full max-w-lg md:max-w-xl xl:max-w-2xl 2xl:max-w-3xl z-20">
+        <div className="w-full max-w-[22rem] sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl z-20">
           <GsocCard />
         </div>
       </div>
