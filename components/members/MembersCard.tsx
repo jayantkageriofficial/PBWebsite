@@ -141,9 +141,18 @@ const Card: React.FC<CardProps> = ({
                   }}
                 >
                   {linkedInUrl && (
-                    <div className="hover:scale-110 transition-transform mb-2">
-                      <LinkedIn className="h-8 w-8 text-pbgreen" />
-                    </div>
+                    <a
+                      href={linkedInUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      <div className="hover:scale-110 transition-transform mb-2">
+                        <LinkedIn className="h-8 w-8 text-pbgreen" />
+                      </div>
+                    </a>
                   )}
                   <p className="text-white text-sm font-light mb-1">
                     {leadDesc || role}
@@ -182,9 +191,18 @@ const Card: React.FC<CardProps> = ({
             }}
           >
             {linkedInUrl && (
+              <a
+                      href={linkedInUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
               <div className="hover:scale-110 transition-transform mb-4">
                 <LinkedIn className="h-10 w-10 text-pbgreen" />
               </div>
+              </a>
             )}
             {company && <p className="text-pbgreen text-[17px]">@{company}</p>}
           </div>
