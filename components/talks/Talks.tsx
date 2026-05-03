@@ -270,7 +270,7 @@ export default function Talks(props: { talks: Talk[] }) {
             const finalZ = shouldBeFlat ? 0 : zTranslation;
             const finalOpacity = shouldBeFlat ? 1 : opacity;
 
-            card.style.transform = `rotateX(${finalRotation}deg) translate3d(0, 0, ${finalZ}px)`;
+            card.style.transform = `perspective(1000px) rotateX(${finalRotation}deg) translate3d(0, 0, ${finalZ}px)`;
             card.style.opacity = String(finalOpacity);
           });
           ticking = false;
@@ -382,6 +382,9 @@ export default function Talks(props: { talks: Talk[] }) {
                 className="bg-pbgray rounded-xl max-w-screen-2xl mx-auto flex justify-center mb-16 px-4 md:px-10 lg:px-4"
                 style={{
                   willChange: 'transform, opacity',
+                  transformStyle: 'preserve-3d',
+                  backfaceVisibility: 'hidden',
+                  WebkitBackfaceVisibility: 'hidden',
                 }}
               >
                 <div className="flex flex-col lg:flex-row items-start py-4 w-full">
