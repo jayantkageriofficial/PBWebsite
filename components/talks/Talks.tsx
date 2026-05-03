@@ -34,6 +34,7 @@ type TalkForm = {
   name: string;
   date: string;
   speakers: string;
+  link?: string;
 };
 
 type TabType = "all" | "conference" | "talks" | "other";
@@ -46,6 +47,7 @@ const blankForm: TalkForm = {
   name: "",
   date: "",
   speakers: "",
+  link: "",
 };
 
 const TEXT_FIELDS: {
@@ -59,6 +61,7 @@ const TEXT_FIELDS: {
     { label: "Venue / Event Name", key: "name", type: "text", required: true },
     { label: "Speakers", key: "speakers", type: "text", required: true },
     { label: "Date", key: "date", type: "date", required: true },
+    { label: "Link (Optional)", key: "link", type: "text", required: false },
   ];
 
 const TABS: TabType[] = ["all", "conference", "talks", "other"];
@@ -106,6 +109,7 @@ export default function Talks(props: { talks: Talk[] }) {
       name: talk.name,
       date: talk.date ? new Date(talk.date).toISOString().slice(0, 10) : "",
       speakers: talk.speakers,
+      link: talk.link || "",
     });
     setUploadError(null);
     setModalOpen(true);
@@ -443,12 +447,23 @@ export default function Talks(props: { talks: Talk[] }) {
                             : "Read More"}
                         </button>
 
-                        <span className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl">
-                          {talk.name} | {new Date(talk.date).toLocaleDateString("en-US", {
-                            month: "short",
-                            year: "numeric",
-                          })}
-                        </span>
+                        {expanded === String(talk._id) && talk.link ? (
+                          <a
+                            href={talk.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-pbgreen rounded-2xl font-medium hover:opacity-90 transition-opacity"
+                          >
+                            Watch here
+                          </a>
+                        ) : (
+                          <span className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl">
+                            {talk.name} | {new Date(talk.date).toLocaleDateString("en-US", {
+                              month: "short",
+                              year: "numeric",
+                            })}
+                          </span>
+                        )}
                       </div>
 
                       {authenticated && (
