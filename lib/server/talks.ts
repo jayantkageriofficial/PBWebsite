@@ -8,6 +8,8 @@ type TalkInput = {
   name: string;
   date: Date | string;
   speakers: string;
+  speakerLinkedins?: string;
+  link?: string;
 };
 
 export const getAllTalks = async (): Promise<Talk[]> => {

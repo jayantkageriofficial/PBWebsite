@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
-import ReactLenis from "lenis/react";
 import Image, { StaticImageData } from "next/image";
 import React, { useRef } from "react";
 import connect from "@/public/images/connect.webp";
@@ -68,12 +67,11 @@ const StickyCard = ({
 }) => {
   const container = useRef<HTMLDivElement>(null);
   const scale = useTransform(progress, range, [1, targetScale]);
-  const blurRange: [number, number] = [range[0] + 1 / cards.length, 1];
-  const blurAmount = useTransform(progress, isLast ? range : blurRange, [
-    0,
-    isLast ? 0 : 5,
-  ]);
-  const blur = useTransform(blurAmount, (v) => `blur(${v}px)`);
+  const cardOpacity = useTransform(
+    progress,
+    isLast ? range : [range[0] + 1 / cards.length, 1],
+    [1, isLast ? 1 : 0.4],
+  );
 
   const isLCP = card.image === bored;
 
@@ -86,14 +84,16 @@ const StickyCard = ({
         loading={isLCP ? "eager" : "lazy"}
         draggable={false}
       />
-      <div
-        className="absolute inset-0 pointer-events-none grayscale-100"
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/paperBack.png"
+        alt=""
+        aria-hidden
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none grayscale"
         style={{
-          backgroundImage: "url('/images/paperBack.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
           mixBlendMode: "overlay",
-          opacity: 1,
+          opacity: 0.6,
         }}
       />
     </div>
@@ -118,10 +118,10 @@ const StickyCard = ({
       <motion.div
         style={{
           scale,
-          filter: blur,
+          opacity: cardOpacity,
           top: `calc(-5vh + ${i * 24}px)`,
         }}
-        className="relative w-full mt-18 max-w-8xl mx-auto bg-pbgray rounded-3xl overflow-hidden shadow-2xl hover:border hover:border-pbgreen"
+        className="relative w-full mt-18 max-w-8xl mx-auto bg-pbgray rounded-3xl overflow-hidden shadow-2xl border border-transparent hover:border-pbgreen transition-colors duration-200"
       >
         <div
           className={`flex flex-col ${card.imagePosition === "left"
@@ -147,7 +147,6 @@ export default function CardStack() {
 
   return (
     <section id="cards">
-      <ReactLenis root>
         <div
           ref={container}
           style={{ height: `${(cards.length + 1) * 100}vh` }}
@@ -171,7 +170,6 @@ export default function CardStack() {
             );
           })}
         </div>
-      </ReactLenis>
     </section>
   );
 }

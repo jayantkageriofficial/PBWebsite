@@ -172,19 +172,22 @@ export default function Navbar() {
 
   React.useEffect(() => {
     if (pathname !== "/") return;
-    const onScroll = () =>
-      setPastHero(window.scrollY > window.innerHeight * 0.8);
+    let rafId: number;
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        setPastHero(window.scrollY > window.innerHeight * 0.8);
+      });
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, [pathname]);
 
   const pages: { name: string; href: string; ext?: boolean }[] = [
-    {
-      name: "GitHub",
-      href: "https://github.com/pointblank-club",
-      ext: true,
-    },
     {
       name: "Home",
       href: "/",

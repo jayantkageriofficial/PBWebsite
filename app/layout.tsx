@@ -8,6 +8,8 @@ import Footer from "@/components/ui/Footer";
 import { cookies } from "next/headers";
 import verifyAuth from "@/lib/verifyAuth";
 import ico from "@/public/favicon.ico";
+import ReactLenis from "lenis/react";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 const lexand = Lexend({
   subsets: ["latin"],
@@ -41,12 +43,15 @@ export default async function RootLayout({
           name={user?.name ?? null}
           token={sessionCookie?.value ?? null}
         />
-        <DotWaveAnimation />
-        <div className="relative">
-          <Navbar />
-          {children}
-          <Footer />
-        </div>
+        <ReactLenis root>
+           <ScrollToTop />
+          {/* <DotWaveAnimation /> */}
+          <div className="relative">
+            <Navbar />
+            {children}
+            <Footer />
+          </div>
+        </ReactLenis>
       </body>
     </html>
   );

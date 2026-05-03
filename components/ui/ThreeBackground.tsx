@@ -209,7 +209,7 @@ export default function ThreeBackground() {
     // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(W0, H0);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     const el = renderer.domElement;
     el.style.position = "absolute";
     el.style.top = "0";
@@ -291,6 +291,8 @@ export default function ThreeBackground() {
     const animate = () => {
       raf = requestAnimationFrame(animate);
 
+      if (!isVisible) return;
+
       raycaster.setFromCamera(mouse, camera);
       const hits = raycaster.intersectObject(hitPlane, false);
       const newHov = hits.length ? hitPointToKey(hits[0].point) : null;
@@ -301,16 +303,29 @@ export default function ThreeBackground() {
       }
 
       keys.forEach((k) => {
-        const ps = k.targetY > k.y ? 0.14 : 0.09;
-        k.y += (k.targetY - k.y) * ps;
-        k.group.position.y = k.y;
+        const yDelta = k.targetY - k.y;
+        const opDelta = k.targetOpacity - k.opacity;
 
-        k.opacity += (k.targetOpacity - k.opacity) * 0.11;
-        k.edgeMat.opacity = k.opacity;
+        if (Math.abs(yDelta) > 0.1 || Math.abs(opDelta) > 0.001) {
+          const ps = k.targetY > k.y ? 0.14 : 0.09;
+          k.y += yDelta * ps;
+          k.group.position.y = k.y;
+
+          k.opacity += opDelta * 0.11;
+          k.edgeMat.opacity = k.opacity;
+        }
       });
 
       renderer.render(scene, camera);
     };
+
+    // Visibility tracking — pause when off-screen
+    let isVisible = true;
+    const visObs = new IntersectionObserver(
+      ([entry]) => { isVisible = entry.isIntersecting; },
+      { threshold: 0 },
+    );
+    visObs.observe(container);
 
     animate();
 
@@ -318,6 +333,7 @@ export default function ThreeBackground() {
       cancelAnimationFrame(raf);
       window.removeEventListener("mousemove", onMove);
       resizeObs.disconnect();
+      visObs.disconnect();
       renderer.dispose();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -326,6 +342,6 @@ export default function ThreeBackground() {
   }, []);
 
   return (
-    <div ref={ref} className="absolute inset-0 -z-50 cursor-grab bg-black" />
+    <div ref={ref} className="absolute inset-0 -z-50  bg-black" />
   );
 }
