@@ -6,10 +6,10 @@ import confetti from 'canvas-confetti';
 import { animate } from 'framer-motion';
 
 const CountUpNumber = ({ value }: { value: number }) => {
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
-        const controls = animate(1, value, {
+        const controls = animate(0, value, {
             duration: 0.8,
             ease: "easeOut",
             onUpdate(latest) {
@@ -22,7 +22,12 @@ const CountUpNumber = ({ value }: { value: number }) => {
     return <>{count}</>;
 };
 
-const GSoCCard = () => {
+interface GSoCCardProps {
+    mentees?: number;
+    mentors?: number;
+}
+
+const GSoCCard = ({ mentees = 13, mentors = 3 }: GSoCCardProps) => {
     const [ref, { width, height }] = useMeasure<HTMLDivElement>();
 
     const triggerConfetti = (e: React.MouseEvent) => {
@@ -107,9 +112,11 @@ const GSoCCard = () => {
                             className="text-6xl sm:text-8xl lg:text-8xl xl:text-[10rem] font-black text-[#7CFFB2] leading-none cursor-pointer hover:scale-105 transition-transform active:scale-95 select-none"
                             title="Click for a surprise!"
                         >
-                            <CountUpNumber value={13} />
+                            <CountUpNumber value={mentees} />
                         </span>
-                        <span className="text-[#7CFFB2] font-semibold mt-1 lg:mt-2 text-xl sm:text-2xl lg:text-2xl xl:text-3xl">Mentees</span>
+                        <span className="text-[#7CFFB2] font-semibold mt-1 lg:mt-2 text-xl sm:text-2xl lg:text-2xl xl:text-3xl">
+                            {mentees === 1 ? "Mentee" : "Mentees"}
+                        </span>
                     </div>
                     <div className="flex flex-col items-center">
                         <span 
@@ -117,15 +124,17 @@ const GSoCCard = () => {
                             className="text-6xl sm:text-8xl lg:text-8xl xl:text-[10rem] font-black text-[#7CFFB2] leading-none cursor-pointer hover:scale-105 transition-transform active:scale-95 select-none"
                             title="Click for a surprise!"
                         >
-                            <CountUpNumber value={3} />
+                            <CountUpNumber value={mentors} />
                         </span>
-                        <span className="text-[#7CFFB2] font-semibold mt-1 lg:mt-2 text-xl sm:text-2xl lg:text-2xl xl:text-3xl">Mentors</span>
+                        <span className="text-[#7CFFB2] font-semibold mt-1 lg:mt-2 text-xl sm:text-2xl lg:text-2xl xl:text-3xl">
+                            {mentors === 1 ? "Mentor" : "Mentors"}
+                        </span>
                     </div>
                 </div>
 
                 {/* Footer Text */}
                 <p className="mt-2 lg:mt-4 text-[#a1a1aa] text-sm sm:text-base pb-1">
-                    Hearty congratulations to all <span className="text-[#FFB800]">13 mentees</span> and <span className="text-[#FFB800]">3 mentors</span> who made history this year.
+                    Hearty congratulations to all <span className="text-[#FFB800]">{mentees} {mentees === 1 ? "mentee" : "mentees"}</span> and <span className="text-[#FFB800]">{mentors} {mentors === 1 ? "mentor" : "mentors"}</span> who made history this year.
                 </p>
             </div>
         </div>
