@@ -22,7 +22,7 @@ const cards: Card[] = [
       </>
     ),
     description:
-      "Stuck on something and tired of staring at the same error for hours? Just ask. Someone here has probably been through the same thing and can point you in the right direction.Or maybe you just want a second opinion on your code, your project, or an idea you are working on. Share it. Talk it out. You will find people who are figuring things out just like you.",
+      "Stuck on something and tired of staring at the same error for hours? Just ask. Someone here has probably been through the same thing and can point you in the right direction. Or maybe you just want a second opinion on your code, your project, or an idea you are working on. Share it. Talk it out. You will find people who are figuring things out just like you.",
     image: connect,
     imagePosition: "right",
   },
@@ -44,7 +44,7 @@ const cards: Card[] = [
       </>
     ),
     description:
-      "Hop into a chat, talk random stuff, share memes, or just see what others are up to. You’ll find people planning side projects, playing games, or just hanging out after a long day. It’s more than just code here .It’s a space where you can chill, reset, and enjoy being part of something.",
+      "Hop into a chat, talk random stuff, share memes, or just see what others are up to. You’ll find people planning side projects, playing games, or just hanging out after a long day. It’s more than just code here . It’s a space where you can chill, reset, and enjoy being part of something.",
     image: bored,
     imagePosition: "right",
   },
