@@ -55,17 +55,15 @@ const GSoCCard = () => {
                     className="absolute inset-0"
                     style={{ background: 'radial-gradient(50% 50% at 50% 50%, transparent 0%, rgba(0,0,0,0.8) 100%)' }}
                 />
-                {/* Green and Yellow glow */}
-                <div
-                    className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#00C853]/10 to-transparent blur-3xl"
-                />
+
                 {/* Confetti Animation */}
                 {width > 0 && height > 0 && (
                     <Confetti
                         width={width}
                         height={height}
                         recycle={true}
-                        numberOfPieces={100}
+                        numberOfPieces={30}
+                        frameRate={30}
                         colors={["#EFBF04", "#F5D547", "#C9A000", "#FFE566"]}
                         gravity={0.025}
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 20, pointerEvents: 'none' }}
@@ -88,7 +86,7 @@ const GSoCCard = () => {
                 <div className="flex flex-col items-center justify-center gap-1 lg:gap-2 mb-4 lg:mb-6 xl:mb-8">
                     <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-20 lg:h-20 xl:w-24 xl:h-24">
                         <div className="absolute inset-0 bg-[#FFB800] blur-2xl opacity-40 rounded-full" />
-                        <svg viewBox="0 0 100 100" className="relative w-full h-full drop-shadow-[0_0_15px_rgba(255,184,0,0.8)] z-10">
+                        <svg viewBox="0 0 100 100" className="relative w-full h-full z-10">
                             <g fill="#FFB800">
                                 <rect x="22" y="22" width="56" height="56" />
                                 <rect x="22" y="22" width="56" height="56" transform="rotate(45 50 50)" />
@@ -96,7 +94,7 @@ const GSoCCard = () => {
                             <text x="50" y="59" fontSize="26" fontWeight="900" fill="white" textAnchor="middle" fontFamily="monospace">{"</>"}</text>
                         </svg>
                     </div>
-                    <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-[#FFB800] drop-shadow-[0_0_15px_rgba(255,184,0,0.5)]">
+                    <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-[#FFB800]" style={{ textShadow: '0 0 15px rgba(255,184,0,0.5)' }}>
                         GSoC 2026
                     </h2>
                 </div>
@@ -106,22 +104,22 @@ const GSoCCard = () => {
                     <div className="flex flex-col items-center">
                         <span 
                             onClick={triggerConfetti}
-                            className="text-6xl sm:text-8xl lg:text-8xl xl:text-[10rem] font-black text-[#7CFFB2] drop-shadow-[0_0_30px_rgba(0,255,102,0.4)] leading-none cursor-pointer hover:scale-110 transition-transform active:scale-95 select-none"
+                            className="text-6xl sm:text-8xl lg:text-8xl xl:text-[10rem] font-black text-[#7CFFB2] leading-none cursor-pointer hover:scale-105 transition-transform active:scale-95 select-none"
                             title="Click for a surprise!"
                         >
                             <CountUpNumber value={13} />
                         </span>
-                        <span className="text-[#7CFFB2] font-semibold mt-1 lg:mt-2 text-xl sm:text-2xl lg:text-2xl xl:text-3xl drop-shadow-[0_0_10px_rgba(0,255,102,0.3)]">Mentees</span>
+                        <span className="text-[#7CFFB2] font-semibold mt-1 lg:mt-2 text-xl sm:text-2xl lg:text-2xl xl:text-3xl">Mentees</span>
                     </div>
                     <div className="flex flex-col items-center">
                         <span 
                             onClick={triggerConfetti}
-                            className="text-6xl sm:text-8xl lg:text-8xl xl:text-[10rem] font-black text-[#7CFFB2] drop-shadow-[0_0_30px_rgba(0,255,102,0.4)] leading-none cursor-pointer hover:scale-110 transition-transform active:scale-95 select-none"
+                            className="text-6xl sm:text-8xl lg:text-8xl xl:text-[10rem] font-black text-[#7CFFB2] leading-none cursor-pointer hover:scale-105 transition-transform active:scale-95 select-none"
                             title="Click for a surprise!"
                         >
                             <CountUpNumber value={3} />
                         </span>
-                        <span className="text-[#7CFFB2] font-semibold mt-1 lg:mt-2 text-xl sm:text-2xl lg:text-2xl xl:text-3xl drop-shadow-[0_0_10px_rgba(0,255,102,0.3)]">Mentors</span>
+                        <span className="text-[#7CFFB2] font-semibold mt-1 lg:mt-2 text-xl sm:text-2xl lg:text-2xl xl:text-3xl">Mentors</span>
                     </div>
                 </div>
 

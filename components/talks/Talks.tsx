@@ -270,7 +270,7 @@ export default function Talks(props: { talks: Talk[] }) {
             const finalZ = shouldBeFlat ? 0 : zTranslation;
             const finalOpacity = shouldBeFlat ? 1 : opacity;
 
-            card.style.transform = `perspective(1000px) rotateX(${finalRotation}deg) translate3d(0, 0, ${finalZ}px)`;
+            card.style.transform = `rotateX(${finalRotation}deg) translate3d(0, 0, ${finalZ}px)`;
             card.style.opacity = String(finalOpacity);
           });
           ticking = false;
@@ -372,7 +372,7 @@ export default function Talks(props: { talks: Talk[] }) {
                 delay: idx === 0 ? 2 : 0.25,
                 ease: [0.22, 1, 0.36, 1],
               }}
-
+              className="relative"
             >
               <div
                 key={String(talk._id)}
@@ -381,10 +381,7 @@ export default function Talks(props: { talks: Talk[] }) {
                 }}
                 className="bg-pbgray rounded-xl max-w-screen-2xl mx-auto flex justify-center mb-16 px-4 md:px-10 lg:px-4"
                 style={{
-                  transformStyle: 'preserve-3d',
                   willChange: 'transform, opacity',
-                  backfaceVisibility: 'hidden',
-                  WebkitBackfaceVisibility: 'hidden',
                 }}
               >
                 <div className="flex flex-col lg:flex-row items-start py-4 w-full">
@@ -406,12 +403,12 @@ export default function Talks(props: { talks: Talk[] }) {
                     </span>
                   </div>
 
-                  <div className="flex flex-col items-start w-full px-4 md:px-8 lg:px-8 pb-6 lg:pb-6 pt-2 lg:min-h-[333px] xl:min-h-[400px] justify-between">
+                  <div className="flex flex-col items-start w-full px-4 md:px-8 lg:px-8 lg:min-h-[333px] xl:min-h-[400px] justify-between">
                     <div>
-                      <h2 className="text-pbgreen font-normal text-2xl md:text-3xl lg:text-4xl leading-snug mb-7 max-w-4xl text-left break-words">
+                      <h2 className="text-pbgreen font-normal text-2xl md:text-3xl lg:text-4xl leading-snug mb-4 max-w-4xl text-left break-words">
                         {talk.title}
                       </h2>
-                      <div className="text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl text-left break-words">
+                      <div className="flex-1 text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl text-left break-words">
                         <motion.div
                           animate={{
                             maxHeight: expanded === String(talk._id) ? 1000 : 120,
@@ -427,7 +424,7 @@ export default function Talks(props: { talks: Talk[] }) {
                     </div>
 
                     <div className="w-full">
-                      <div className="mt-6 xl:mt-27 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4">
+                      <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4">
                         <button
                           className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl cursor-pointer hover:border border-pbgreen"
                           onClick={() =>
