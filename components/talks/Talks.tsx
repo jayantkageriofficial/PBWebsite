@@ -25,6 +25,7 @@ import { Progress } from "@/components/ui/progress";
 import { UploadCloudIcon, XIcon } from "lucide-react";
 import { type Talk } from "@/lib/db/models/talks";
 import { serializeId } from "@/lib/utils";
+import { LinkedIn } from "@/components/Icons";
 
 type TalkForm = {
   title: string;
@@ -34,6 +35,7 @@ type TalkForm = {
   name: string;
   date: string;
   speakers: string;
+  speakerLinkedins?: string;
   link?: string;
 };
 
@@ -47,6 +49,7 @@ const blankForm: TalkForm = {
   name: "",
   date: "",
   speakers: "",
+  speakerLinkedins: "",
   link: "",
 };
 
@@ -59,7 +62,8 @@ const TEXT_FIELDS: {
     { label: "Title", key: "title", type: "text", required: true },
     { label: "Description", key: "description", type: "text", required: true },
     { label: "Venue / Event Name", key: "name", type: "text", required: true },
-    { label: "Speakers", key: "speakers", type: "text", required: true },
+    { label: "Speakers (Comma separated)", key: "speakers", type: "text", required: true },
+    { label: "Speaker LinkedIns (Comma separated)", key: "speakerLinkedins", type: "text", required: false },
     { label: "Date", key: "date", type: "date", required: true },
     { label: "Link (Optional)", key: "link", type: "text", required: false },
   ];
@@ -68,6 +72,59 @@ const TABS: TabType[] = ["all", "conference", "talks", "other"];
 
 const headingText = "We Speak. We Share. We Lead.";
 const phrases = headingText.split(". ");
+
+const SpeakerTube = ({ name, linkedin }: { name: string; linkedin?: string }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const sizingText = (
+    <div className="invisible px-3 py-1.5 text-base font-light font-lexend-300 whitespace-nowrap">
+      {name}
+    </div>
+  );
+
+  const front = (
+    <div className="absolute inset-0 flex items-center justify-center text-pbgreen font-light font-lexend-300 bg-black/40 rounded-full px-3 py-1.5 text-base text-center border border-transparent whitespace-nowrap">
+      {name}
+    </div>
+  );
+
+  if (!linkedin) {
+    return (
+      <div className="relative w-fit">
+        {sizingText}
+        {front}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="relative w-fit cursor-pointer"
+      style={{ perspective: "1000px" }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={(e) => { e.stopPropagation(); window.open(linkedin, "_blank"); }}
+    >
+      {sizingText}
+      <motion.div
+        className="w-full h-full absolute inset-0"
+        style={{ transformStyle: "preserve-3d" }}
+        animate={{ rotateX: isHovered ? 180 : 0 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+      >
+        <div style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }} className="absolute inset-0">
+          {front}
+        </div>
+        <div
+          className="absolute inset-0 flex items-center justify-center bg-black/80 rounded-full border border-pbgreen/50 hover:border-pbgreen transition-colors"
+          style={{ transform: "rotateX(180deg)", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+        >
+          <LinkedIn className="h-5 w-5 text-pbgreen" />
+        </div>
+      </motion.div>
+    </div>
+  );
+};
 
 
 export default function Talks(props: { talks: Talk[] }) {
@@ -109,6 +166,7 @@ export default function Talks(props: { talks: Talk[] }) {
       name: talk.name,
       date: talk.date ? new Date(talk.date).toISOString().slice(0, 10) : "",
       speakers: talk.speakers,
+      speakerLinkedins: talk.speakerLinkedins || "",
       link: talk.link || "",
     });
     setUploadError(null);
@@ -405,9 +463,13 @@ export default function Talks(props: { talks: Talk[] }) {
                         />
                       </div>
                     )}
-                    <span className="text-pbgreen font-light font-lexend-300 mt-4 bg-black/40 rounded-full px-3 p-3">
-                      {talk.speakers}
-                    </span>
+                    <div className="flex flex-row flex-wrap justify-center w-full max-w-full lg:w-125 xl:w-150 gap-2 mt-4">
+                      {talk.speakers.split(",").map((speakerName, i) => {
+                        const linkedins = talk.speakerLinkedins ? talk.speakerLinkedins.split(",") : [];
+                        const linkedin = linkedins[i] && linkedins[i].trim() ? linkedins[i].trim() : undefined;
+                        return <SpeakerTube key={i} name={speakerName.trim()} linkedin={linkedin} />;
+                      })}
+                    </div>
                   </div>
 
                   <div className="flex flex-col items-start w-full px-4 md:px-8 lg:px-8 lg:min-h-[333px] xl:min-h-[400px] justify-between">

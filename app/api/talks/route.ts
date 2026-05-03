@@ -58,7 +58,7 @@ export async function POST(request: Request) {
     );
 
   const body = await request.json();
-  const { title, description, images, type, name, date, speakers }: Talk = body;
+  const { title, description, images, type, name, date, speakers, speakerLinkedins, link }: Talk = body;
 
   if (
     !title ||
@@ -83,6 +83,8 @@ export async function POST(request: Request) {
     name,
     date,
     speakers,
+    speakerLinkedins,
+    link,
   });
 
   await createLog({
