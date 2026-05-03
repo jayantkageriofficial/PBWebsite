@@ -8,6 +8,7 @@ export interface Talk extends mongoose.Document {
   name: string;
   date: Date;
   speakers: string;
+  link?: string;
 }
 
 const TalkModel = new mongoose.Schema({
@@ -22,6 +23,7 @@ const TalkModel = new mongoose.Schema({
   name: { type: String, required: true },
   date: { type: Date, required: true },
   speakers: { type: String, required: true },
+  link :{type:String, required:false}
 });
 
 const TalkSchema = mongoose.models.Talk || mongoose.model("Talk", TalkModel);

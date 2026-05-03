@@ -3,7 +3,6 @@ import FadeIn from "@/components/FadeIn";
 import missionImg from "@/public/images/mission.webp";
 import visionImg from "@/public/images/vision.webp";
 import asphaltImg from "@/public/images/asphalt.png";
-import abstractDesignImg from "@/public/images/abstract-design.svg";
 
 function ImageCard({ alt, src }: { alt: string; src: StaticImageData }) {
   return (
@@ -13,6 +12,7 @@ function ImageCard({ alt, src }: { alt: string; src: StaticImageData }) {
         alt=""
         aria-hidden
         fill
+        sizes="(max-width: 1024px) 100vw, 544px"
         className="object-cover pointer-events-none mix-blend-screen bg-pbpages"
       />
       <div className="absolute inset-0 bg-[linear-gradient(267.5deg,#1C1C1C_40.67%,rgba(28,28,28,0)_99.81%)]" />
@@ -22,6 +22,7 @@ function ImageCard({ alt, src }: { alt: string; src: StaticImageData }) {
           src={src}
           alt={alt}
           fill
+          sizes="(max-width: 1024px) 100vw, 544px"
           className="object-cover object-center"
           loading="eager"
           draggable={false}

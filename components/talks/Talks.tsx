@@ -34,6 +34,7 @@ type TalkForm = {
   name: string;
   date: string;
   speakers: string;
+  link?: string;
 };
 
 type TabType = "all" | "conference" | "talks" | "other";
@@ -46,6 +47,7 @@ const blankForm: TalkForm = {
   name: "",
   date: "",
   speakers: "",
+  link: "",
 };
 
 const TEXT_FIELDS: {
@@ -59,6 +61,7 @@ const TEXT_FIELDS: {
     { label: "Venue / Event Name", key: "name", type: "text", required: true },
     { label: "Speakers", key: "speakers", type: "text", required: true },
     { label: "Date", key: "date", type: "date", required: true },
+    { label: "Link (Optional)", key: "link", type: "text", required: false },
   ];
 
 const TABS: TabType[] = ["all", "conference", "talks", "other"];
@@ -106,6 +109,7 @@ export default function Talks(props: { talks: Talk[] }) {
       name: talk.name,
       date: talk.date ? new Date(talk.date).toISOString().slice(0, 10) : "",
       speakers: talk.speakers,
+      link: talk.link || "",
     });
     setUploadError(null);
     setModalOpen(true);
@@ -372,7 +376,7 @@ export default function Talks(props: { talks: Talk[] }) {
                 delay: idx === 0 ? 2 : 0.25,
                 ease: [0.22, 1, 0.36, 1],
               }}
-
+              className="relative"
             >
               <div
                 key={String(talk._id)}
@@ -381,8 +385,8 @@ export default function Talks(props: { talks: Talk[] }) {
                 }}
                 className="bg-pbgray rounded-xl max-w-screen-2xl mx-auto flex justify-center mb-16 px-4 md:px-10 lg:px-4"
                 style={{
-                  transformStyle: 'preserve-3d',
                   willChange: 'transform, opacity',
+                  transformStyle: 'preserve-3d',
                   backfaceVisibility: 'hidden',
                   WebkitBackfaceVisibility: 'hidden',
                 }}
@@ -406,12 +410,12 @@ export default function Talks(props: { talks: Talk[] }) {
                     </span>
                   </div>
 
-                  <div className="flex flex-col items-start w-full h-full px-4 md:px-8 lg:px-8 pb-6 lg:pb-6 pt-2">
-                    <div className="mb-4">
-                      <h2 className="text-pbgreen font-normal text-2xl md:text-3xl lg:text-4xl leading-snug mb-4 max-w-4xl text-left wrap-break-word xl:h-40">
+                  <div className="flex flex-col items-start w-full px-4 md:px-8 lg:px-8 lg:min-h-[333px] xl:min-h-[400px] justify-between">
+                    <div>
+                      <h2 className="text-pbgreen font-normal text-2xl md:text-3xl lg:text-4xl leading-snug mb-4 max-w-4xl text-left break-words">
                         {talk.title}
                       </h2>
-                      <div className="text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl text-left wrap-break-word">
+                      <div className="flex-1 text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl text-left break-words">
                         <motion.div
                           animate={{
                             maxHeight: expanded === String(talk._id) ? 1000 : 120,
@@ -423,52 +427,62 @@ export default function Talks(props: { talks: Talk[] }) {
                             {talk.description}
                           </p>
                         </motion.div>
-                        <div className="mt-6 xl:mt-11 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4">
-                          <button
-                            className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl cursor-pointer  hover:border border-pbgreen"
-                            onClick={() =>
-                              setExpanded(
-                                expanded === String(talk._id)
-                                  ? null
-                                  : String(talk._id),
-                              )
-                            }
+                      </div>
+                    </div>
+
+                    <div className="w-full">
+                      <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4">
+                        <button
+                          className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl cursor-pointer hover:border border-pbgreen"
+                          onClick={() =>
+                            setExpanded(
+                              expanded === String(talk._id)
+                                ? null
+                                : String(talk._id),
+                            )
+                          }
+                        >
+                          {expanded === String(talk._id)
+                            ? "Read Less"
+                            : "Read More"}
+                        </button>
+
+                        {expanded === String(talk._id) && talk.link ? (
+                          <a
+                            href={talk.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-pbgreen rounded-2xl font-medium hover:opacity-90 transition-opacity"
                           >
-                            {expanded === String(talk._id)
-                              ? "Read Less"
-                              : "Read More"}
-                          </button>
-
-
-
+                            Watch here
+                          </a>
+                        ) : (
                           <span className="bg-pbsurface py-1.5 px-3 md:px-8 md:py-4 text-xs md:text-sm text-white rounded-2xl">
                             {talk.name} | {new Date(talk.date).toLocaleDateString("en-US", {
                               month: "short",
                               year: "numeric",
                             })}
                           </span>
+                        )}
+                      </div>
+
+                      {authenticated && (
+                        <div className="flex gap-2 mt-4">
+                          <button
+                            onClick={() => openEdit(talk)}
+                            className="px-3 py-1 text-xs bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors cursor-pointer"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => setDeleteTarget(talk)}
+                            className="px-3 py-1 text-xs bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-full transition-colors cursor-pointer"
+                          >
+                            Delete
+                          </button>
                         </div>
-                      </div>
+                      )}
                     </div>
-
-
-
-                    {authenticated && (
-                      <div className="flex gap-2 mt-2">
-                        <button
-                          onClick={() => openEdit(talk)}
-                          className="px-3 py-1 text-xs bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors cursor-pointer"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => setDeleteTarget(talk)}
-                          className="px-3 py-1 text-xs bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-full transition-colors cursor-pointer"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>

@@ -45,7 +45,7 @@ export default async function RootLayout({
         />
         <ReactLenis root>
            <ScrollToTop />
-          <DotWaveAnimation />
+          {/* <DotWaveAnimation /> */}
           <div className="relative">
             <Navbar />
             {children}

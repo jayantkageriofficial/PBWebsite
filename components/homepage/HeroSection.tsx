@@ -41,8 +41,8 @@ export default function HeroSection() {
               <motion.span
                 key={idx}
                 className={part.className}
-                initial={{ opacity: 0, y: 6, filter: "blur(8px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{
                   duration: 0.6,
                   delay: idx * 0.022,
